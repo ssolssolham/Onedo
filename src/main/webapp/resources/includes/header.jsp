@@ -30,7 +30,10 @@
               </sec:authorize>
               <!-- 로그인한경우 -->
               <sec:authorize access="isAuthenticated()">
-              <li><a href="">로그아웃</a></li>
+              <li><a onclick="logoutFormSubmit()" id="logoutLink">로그아웃</a></li>
+              <form action="/logout" method="post" id="logoutForm">
+              <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+              </form>
               </sec:authorize>
             </ul>
           </nav>

@@ -116,6 +116,12 @@ function beforeSubmit() {
       + $('#emailHost').val();
   $('#memberEmail').val(memberEmail);
 }
-</script>  
+</script> 
+<!-- 로그아웃 -->
+<script type="text/javascript">
+function logoutFormSubmit() {
+	$('#logoutForm').submit();
+}
+</script> 
 </body>
 </html>

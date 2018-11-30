@@ -40,7 +40,7 @@
 
 <!-- 로그아웃처리 필요!!!! -->    
     <li class="t-center">
-    <form>
+    <form action="/logout" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 <!--    <a href="/customLogout" class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">로그아웃</a><br>
  -->    <input type="submit" class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" value="로그아웃">
