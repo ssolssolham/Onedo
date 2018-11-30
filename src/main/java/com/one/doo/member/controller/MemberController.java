@@ -128,9 +128,12 @@ public class MemberController{
 	public @ResponseBody String emailCertify(@PathVariable String useremail) {
 		log.info("이메일인증 컨트롤러");
 		log.info("입력받은 이메일"+useremail);
+		useremail += ".com";
+		log.info(useremail);
 		//비즈니스로직~~
 		
-		String code = "1234";  //비즈니스로직을 통해 생성된 난수 사용
+//		String code = "1234";  //비즈니스로직을 통해 생성된 난수 사용
+		String code = memberService.sendMailCertify(useremail);
 		String result = "{\"code\":"+code+"}";
 		
 		return result;

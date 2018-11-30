@@ -22,18 +22,18 @@ public class mailTest {
 	@Inject
 	private JavaMailSender mailSender;
 
-	//@Test
+	@Test
 	public void test() {
 		SimpleMailMessage message = new SimpleMailMessage();
 		
 		message.setFrom("hi");
 		message.setTo("sw931110@naver.com");
 		message.setSubject("인증메일테스트");
-		message.setText("인증메일 테스트 내용");
+		message.setText("<h3>인증메일 <strong>테스트</strong> 내용</h3>");
 		
 		mailSender.send(message);
 	}
-	@Test
+	//@Test
 	public void mkCodeTest() {
 		StringBuffer key = new StringBuffer();
 		Random rnd = new Random();
