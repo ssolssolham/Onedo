@@ -38,60 +38,41 @@
         <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
          -->
          
-         
-        <!-- 공지관리 -->
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>공지관리</span>
+        <li>
+          <a href="/admin/"><i class="fa fa-dashboard"></i> <span>홈</span>
             <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="#">공지 등록</a></li>
-            <li><a href="#">공지 수정</a></li>
-            <li><a href="#">공지 삭제</a></li>
-          </ul>
+        </li>         
+        <!-- 공지관리 -->
+        <li>
+          <a href="/admin/notice/"><i class="fa fa-edit"></i> <span>공지관리</span>
+            <span class="pull-right-container">
+              </span>
+          </a>
         </li>
         
         <!--  -->
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>회원관리</span>
+        <li>
+          <a href="/admin/member/"><i class="fa fa-book"></i> <span>회원관리</span>
             <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="#">회원 이름 수정</a></li>
-            <li><a href="#">회원 강제 탈퇴</a></li>
-          </ul>
         </li>
         
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>사용자 통계 조회</span>
+          <a href="/admin/stats/"><i class="fa fa-pie-chart"></i> <span>사용자 통계 조회</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="#">분석서비스 이용 횟수</a></li>
-            <li><a href="#">대출 상담 요청 횟수</a></li>
-            <li><a href="#">접속자수</a></li>
-            <li><a href="#">부동산 순위 조회</a></li>
-            <li><a href="#">대출 상품 순위 조회</a></li>
-          </ul>
         </li>
         
-        <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>대출 상품 관리</span>
+        <li>
+          <a href="/admin/loanProduct/"><i class="fa fa-laptop"></i> <span>대출 상품 관리</span>
             <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
               </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="#">대출 상품 등록</a></li>
-            <li><a href="#">대출 상품 수정</a></li>
-            <li><a href="#">대출 상품 삭제</a></li>
-          </ul>
         </li>
       </ul>
       <!-- /.sidebar-menu -->

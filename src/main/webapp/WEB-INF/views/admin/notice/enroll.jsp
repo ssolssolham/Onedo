@@ -34,16 +34,16 @@ desired effect
 <div class="wrapper">
 
   <!-- Main Header -->
-<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/header.jsp"/>
+  <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/header.jsp"/>
   <!-- Left side column. contains the logo and sidebar -->
-<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/left_column.jsp"/>
+	<jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/left_column.jsp"/>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        회원관리
-        <small>회원 이름 바꾸기, 회원 강제 탈퇴</small>
+        공지관리
+        <small>공지 등록, 수정, 삭제</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -59,7 +59,6 @@ desired effect
         -------------------------->
   <div class="box">
             <div class="box-header">
-              <h3 class="box-title">공지관리</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -86,7 +85,11 @@ desired effect
               </table>
             </div>
             <!-- /.box-body -->
+            <div style="text-align:end;"><input type="button" style="margin:10px;" class="btn btn-primary btn-flat" value="공지 등록"/></div>
+            
+            
           </div>
+          
          
     </section>
     <!-- /.content -->
