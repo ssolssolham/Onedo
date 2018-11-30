@@ -58,19 +58,20 @@ desired effect
         | Your Page Content Here |
         -------------------------->
   <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">공지관리</h3>
-            </div>
+
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
+              
                 <thead>
                 <tr>
                   <th>순번</th>
-                  <th>제목</th>
-                  <th>작성자</th>
-                  <th>작성날짜</th>
-                  <th>게시여부</th>
+                  <th>회원이름</th>
+                  <th>이메일</th>
+                  <th>가입날짜</th>
+                  <th>수정날짜</th>
+                  <th>탈퇴여부</th>
+                  <th>수정 / 탈퇴</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -80,7 +81,15 @@ desired effect
                   </td>
                   <td>박호준</td>
                   <td>11.28</td>
+                  <td>11.28</td>
                   <td>X</td>
+                  <td>
+                  <input type="button" style="margin: 0px 0px 0px 10px;"
+              class="btn btn-primary btn-flat" value="이름 수정"  onclick="location.href = '/admin/notice/enrollForm' "/>
+              <input type="button" style="margin:  0px 0px 0px 10px;"
+              class="btn btn-primary btn-warning btn-flat" value="회원 탈퇴"  onclick="location.href = '/admin/notice/enrollForm' "/>
+              <!-- 모달을 부탁함니다 ^^.. -->
+              </td>
                 </tr>
                 </tfoot>
               </table>

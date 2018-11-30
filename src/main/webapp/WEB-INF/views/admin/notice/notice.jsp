@@ -88,7 +88,7 @@ desired effect
           <!-- /.box-body -->
           <div style="text-align: end;">
             <input type="button" style="margin: 10px;"
-              class="btn btn-primary btn-flat" value="공지 등록"  onclick="location.href = '/admin/notice/enroll' "/>
+              class="btn btn-primary btn-flat" value="공지 등록"  onclick="location.href = '/admin/notice/enrollForm' "/>
           </div>
 
 
