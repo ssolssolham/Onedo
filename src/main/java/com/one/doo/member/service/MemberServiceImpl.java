@@ -46,4 +46,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.idcheck(userid);
 	}
 
+	@Override
+	public String sendMailCertify(String mail) {
+		
+		return null;
+	}
+
 }
