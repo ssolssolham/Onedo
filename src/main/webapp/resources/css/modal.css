@@ -1,0 +1,333 @@
+<!-- Modal CSS -->
+
+body {
+	font-family: 'Varela Round', sans-serif;
+}
+
+.modal-login {
+	color: #636363;
+	width: 400px;
+}
+
+.modal-login .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+}
+
+.modal-login .modal-header {
+	border-bottom: none;
+	position: relative;
+	justify-content: center;
+}
+
+.modal-login h4 {
+	text-align: center;
+	font-size: 26px;
+}
+
+.modal-login  .form-group {
+	position: relative;
+}
+
+.modal-login i {
+	position: absolute;
+	left: 13px;
+	top: 11px;
+	font-size: 18px;
+}
+
+.modal-login .form-control {
+	padding-left: 40px;
+}
+
+.modal-login .form-control:focus {
+	border-color: #00ce81;
+}
+
+.modal-login .form-control, .modal-login .btn {
+	min-height: 40px;
+}
+
+.modal-login .hint-text {
+	text-align: center;
+	padding-top: 10px;
+}
+
+.modal-login .close {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+}
+
+.modal-login .btn {
+	background-color: #27B3A6;
+	border: none;
+	line-height: normal;
+}
+
+.modal-login .btn:hover, .modal-login .btn:focus {
+	background-color: #93D9D2;
+	color: white;
+}
+
+.modal-login .modal-footer {
+	background: #ecf0f1;
+	border-color: #dee4e7;
+	text-align: center;
+	margin: 0 -20px -20px;
+	border-radius: 5px;
+	font-size: 13px;
+	justify-content: center;
+}
+
+.modal-login .modal-footer a {
+	color: #999;
+}
+
+.triggerButton {
+	display: inline-block;
+	margin: 100px auto;
+}
+
+.width-100 {
+	width: 100%;
+}
+
+.width-60 {
+	width: 60%;
+}
+
+.width-50 {
+	width: 50%;
+}
+
+.width-40 {
+	width: 40%;
+}
+
+.width-39 {
+	width: 39%;
+}
+
+.width-38 {
+	width: 38%;
+}
+
+.width-37 {
+	width: 37%;
+}
+
+.width-36 {
+	width: 36%;
+}
+
+.width-35 {
+	width: 35%;
+}
+
+.width-34 {
+	width: 34%;
+}
+
+.width-33 {
+	width: 33%;
+}
+
+.width-32 {
+	width: 32%;
+}
+
+.width-31 {
+	width: 31%;
+}
+
+.width-30 {
+	width: 30%;
+}
+
+.width-10 {
+	width: 10%;
+}
+
+.width-8 {
+	width: 8%;
+}
+
+.width-5 {
+	width: 5%;
+}
+
+.display-i {
+	display: inline;
+}
+
+.fsize-16 {
+	font-size: 18px;
+}
+
+.vertical-align-s {
+	vertical-align: super;
+}
+
+.vertical-align-t {
+	vertical-align: top;
+}
+
+.p-l-0 {
+	padding-left: 0;
+}
+
+.height-40 {
+	height: 40px;
+}
+</style>
+<style type="text/css">
+body {
+	font-family: 'Varela Round', sans-serif;
+}
+
+.modal-login {
+	color: #636363;
+	width: 400px;
+}
+
+.modal-login .modal-content {
+	padding: 20px;
+	border-radius: 5px;
+	border: none;
+}
+
+.modal-login .modal-header {
+	border-bottom: none;
+	position: relative;
+	justify-content: center;
+}
+
+.modal-login h4 {
+	text-align: center;
+	font-size: 26px;
+}
+
+.modal-login  .form-group {
+	position: relative;
+}
+
+.modal-login i {
+	position: absolute;
+	left: 13px;
+	top: 11px;
+	font-size: 18px;
+}
+
+.modal-login .form-control {
+	padding-left: 40px;
+}
+
+.modal-login .form-control:focus {
+	border-color: #00ce81;
+}
+
+.modal-login .form-control, .modal-login .btn {
+	min-height: 40px;
+}
+
+.modal-login .hint-text {
+	text-align: center;
+	padding-top: 10px;
+}
+
+.modal-login .close {
+	position: absolute;
+	top: -5px;
+	right: -5px;
+}
+
+.modal-login .btn {
+	background-color: #27B3A6;
+	border: none;
+	line-height: normal;
+}
+
+.modal-login .btn:hover, .modal-login .btn:focus {
+	background-color: #93D9D2;
+	color: white;
+}
+
+.modal-login .modal-footer {
+	background: #ecf0f1;
+	border-color: #dee4e7;
+	text-align: center;
+	margin: 0 -20px -20px;
+	border-radius: 5px;
+	font-size: 13px;
+	justify-content: center;
+}
+
+.modal-login .modal-footer a {
+	color: #999;
+}
+
+.triggerButton {
+	display: inline-block;
+	margin: 100px auto;
+}
+
+<!--
+-->
+.switch {
+	display: inline-block;
+	box-sizing: border-box;
+	width: 64px;
+	height: 28px;
+	border-radius: 999px;
+	background-color: #d8d9db;
+	-webkit-transition: background-color cubic-bezier(.25, .46, .45, .94)
+		.2s;
+	-moz-transition: background-color cubic-bezier(.25, .46, .45, .94) .2s;
+	transition: background-color cubic-bezier(.25, .46, .45, .94) .2s
+}
+
+.switch .helper {
+	margin-top: 2px;
+	margin-left: 2px;
+	border-radius: 100%;
+	width: 30px;
+	height: 24px;
+	display: inline-block;
+	background-color: #fff;
+	-webkit-transition-property: -webkit-transform;
+	-moz-transition-property: -moz-transform;
+	transition-property: transform;
+	-webkit-transition-duration: .2s;
+	-moz-transition-duration: .2s;
+	transition-duration: .2s;
+	-webkit-transition-timing-function: cubic-bezier(.25, .46, .45, .94);
+	-moz-transition-timing-function: cubic-bezier(.25, .46, .45, .94);
+	transition-timing-function: cubic-bezier(.25, .46, .45, .94);
+}
+
+.switch.ui-checked {
+	border-color: #27B3A6;
+	background-color: #27B3A6;
+}
+
+.switch.ui-checked .helper {
+	-webkit-transform: translateX(30px);
+	-moz-transform: translateX(30px);
+	-ms-transform: translateX(30px);
+	-o-transform: translateX(30px);
+	transform: translateX(30px);
+}
+
+.display-i {
+	display: inline;
+}
+
+.fsize-16 {
+	font-size: 18px;
+}
+
+.vertical-align-s {
+	vertical-align: super;
+}

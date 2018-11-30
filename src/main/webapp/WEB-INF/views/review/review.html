@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Home</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/themify/themify-icons.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/slick/slick.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/lightbox2/css/lightbox.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+<link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	body {
+	  font-family: 'Varela Round', sans-serif;
+	}
+	
+	
+	.modal-login {
+	  color: #636363;
+	  width: 400px;
+	}
+	
+	
+	.modal-login .modal-content {
+	  border-radius: 5px;
+	  border: none;
+	}
+	
+	
+	.modal-login .modal-header {
+	  border-bottom: none;
+	  position: relative;
+	  justify-content: center;
+	}
+	
+	
+	.modal-login h4 {
+	  text-align: center;
+	  font-size: 26px;
+	}
+	
+	
+	.modal-login  .form-group {
+	  position: relative;
+	}
+	
+	
+	.modal-login i {
+	  position: absolute;
+	  left: 13px;
+	  top: 11px;
+	  font-size: 18px;
+	}
+	
+	
+	.modal-login .form-control {
+	  padding-left: 40px;
+	}
+	
+	
+	.modal-login .form-control:focus {
+	  border-color: #00ce81;
+	}
+	
+	
+	.modal-login .form-control, .modal-login .btn {
+	  min-height: 40px;
+	}
+	
+	.modal-login .hint-text {
+	  text-align: center;
+	  padding-top: 10px;
+	}
+	
+	.modal-login .close {
+	  position: absolute;
+	  top: -5px;
+	  right: -5px;
+	}
+	
+	.modal-login .btn {
+	  background-color: #27B3A6;
+	  border: none;
+	  line-height: normal;
+	}
+	
+	.modal-login .btn:hover, .modal-login .btn:focus {
+	  background-color: #93D9D2;
+	  color: white;
+	}
+	
+	.modal-login .modal-footer {
+	  background: #ecf0f1;
+	  border-color: #dee4e7;
+	  text-align: center;
+	  margin: 0 -20px -20px;
+	  border-radius: 5px;
+	  font-size: 13px;
+	  justify-content: center;
+	}
+	
+	.modal-login .modal-footer a {
+	  color: #999;
+	}
+	
+	.triggerButton {
+	  display: inline-block;
+	  margin: 100px auto;
+	}
+	
+	
+	.width-100 {
+	  width:100%;
+	}
+	.width-60 {
+	  width: 60%;
+	}
+	.width-50 {
+	  width: 50%;
+	}
+	
+	.width-40 {
+	  width: 40%; 
+	}
+	
+	.width-39 {
+	  width: 39%;
+	}
+	
+	.width-38 {
+	  width: 38%;
+	}
+	
+	.width-37 {
+	  width: 37%;
+	}
+	
+	.width-36 {
+	  width: 36%;
+	}
+	
+	.width-35 {
+	  width: 35%;
+	}
+	
+	.width-34 {
+	  width: 34%;
+	}
+	
+	.width-33 {
+	  width: 33%;
+	}
+	
+	.width-32 {
+	  width: 32%;
+	}
+	
+	.width-31 {
+	  width: 31%;
+	}
+	
+	.width-30 {
+	  width: 30%;
+	}
+	
+	.width-10 {
+	  width: 10%;
+	}
+	
+	.width-8 {
+	  width: 8%;
+	}
+	
+	.width-5 {
+	  width: 5%;
+	}
+	
+	.display-i {
+	  display: inline; 
+	}
+	
+	.fsize-16 {
+	  font-size: 18px;
+	}
+	
+	.vertical-align-s {
+	  vertical-align: super;
+	}
+	
+	.vertical-align-t {
+	  vertical-align: top;
+	}
+	
+	.p-l-0 {
+	  padding-left:0;
+	}
+	
+	
+	.height-40 {
+	  height: 40px; 
+	}
+	
+	
+	</style>
+</head>
+<body class="animsition bg1-pattern">
+
+	<!-- 헤더 Nav 바 -->
+	<header >
+			<!-- 헤더 태그 설정 -->
+			<div class="wrap-menu-header trans-0-4" style="background-color: white;">
+				<div class="container h-full">
+					<div class="wrap_header trans-0-3">
+						<!-- 로고 들어가는 곳 -->
+						<div class="logo">
+							<a href="index.html">
+								<img src="images/icons/logo.png" alt="IMG-LOGO" data-logofixed="images/icons/logo.png">
+							</a>
+						</div>
+	
+						<!-- 상단 Nav 바 Menu -->
+						<div class="wrap_menu p-l-45 p-l-0-xl">
+							<nav class="menu">
+								<ul class="main_menu">
+									<li><a href="index.html">Home</a></li>
+									<li><a href="about.html">티아이 소개</a></li>
+									<li><a href="menu.html">분석하기</a></li>
+									<li><a href="gallery.html">서비스 이용문의</a></li>
+									<li><a href="blog.html">서비스 이용후기</a></li>
+									<li><a href="reserve.html">상담예약</a></li>
+								</ul>
+							</nav>
+						</div>
+	
+						<!-- My 메뉴 보기 버튼 -->
+						<div class="social flex-w flex-l-m p-r-20">
+							<button class="btn-show-sidebar m-l-33 trans-0-4" style="background-color: none; color: black;"><img src="images/icons/btn-all-menu.png" alt="ALL-MENU"></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+	
+		<!-- My 메뉴 Slide 바 -->
+		<aside class="sidebar trans-0-4">
+			<!-- 숨기기 버튼 -->
+			<button class="btn-hide-sidebar ti-close color0-hov trans-0-4"></button>
+	
+			<!-- 두줄짜리 버튼 클릭 시 나타나는 side Bar의 콘텐츠(내 정보 관련) -->
+			<ul class="menu-sidebar p-t-95 p-b-70">
+				<li class="t-center m-b-13"><a href="index.html" class="txt19">내 정보 수정</a></li>
+	
+				<li class="t-center m-b-13"><a href="menu.html" class="txt19">내 분석 결과 확인</a></li>
+	
+				<li class="t-center m-b-13"><a href="gallery.html" class="txt19">Gallery</a></li>
+	
+				<li class="t-center m-b-13"><a href="about.html" class="txt19">About</a></li>
+	
+				<li class="t-center m-b-13"><a href="blog.html" class="txt19">Blog</a></li>
+	
+				<li class="t-center m-b-33"><a href="contact.html" class="txt19">Contact</a></li>
+	
+				<li class="t-center">
+					<!-- 슬라이드 바 로그인, 회원가입 버튼 -->
+					<a href="reservation.html" class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">로그인</a><br>
+					<a href="reservation.html" class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">회원가입</a>
+				</li>
+			</ul>
+		</aside>
+
+		<section class="section-review">
+			<div class= "container">
+
+				<div class="card">
+					<div class="card-body menu-title-div" >
+							<img src="images/icons/KEBLogo.png" style="width: 35px;">&nbsp;&nbsp;<h3 style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">이용후기</h3>
+					</div>
+				<!-- 후기 게시판 상단 Nav 바 (새글 등록, 검색 기능) -->
+					<div class="card-body">
+							<span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">OneDo 서비스를 이용하신 고객님들의 창업 성공 후기를 만나보세요!</span>
+						<br>
+						<br>
+						&nbsp;&nbsp;
+						<select style="height: 35px; text-align: center; width: 15%; display: inline" class="form-control form-control-sm">
+							<option default>전체</option>
+							<option>제목</option>
+							<option>내용</option>
+							<option>작성자</option>
+							<option>제목 or 내용</option>
+							<option>제목 or 작성자</option>
+							<option>제목 or 내용 or 작성자</option>
+						</select>
+
+						<input type="text" style="vertical-align: top; width: 15%; height: 35px; display: inline;" class="form-control" id="searchValue" name="searchValue">
+						<button type="button" style="vertical-align: top; height:35px; width: 10%;" class="" id="reviewSearchBtn" >검색</button>
+						
+						<br>
+						<table>
+							<colgroup>
+								<col width="10%" style="text-align: center;">
+								<col width="50%" >
+								<col width="10%" style="text-align: center;">
+								<col width="20%" style="text-align: center;">
+								<col width="10%" style="text-align: center;">
+							</colgroup>
+							<thead>
+								<tr>
+									<th style="text-align: center;">번호</th>
+									<th style="text-align: center;">제목</th>
+									<th style="text-align: center;">작성자</th>
+									<th style="text-align: center;">작성,수정일</th>
+									<th style="text-align: center;">조회수</th>
+								</tr>
+							</thead>
+							<br>
+							<tbody>
+								<tr>
+									<td style="text-align:center;">1</td>
+									<td style="text-align:left; padding-left: 7px;">테스트</td>
+									<td style="text-align:center;">bangry</td>
+									<td style="text-align:center;">2018.11.25</td>
+									<td style="text-align:center;">1</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;">1</td>
+									<td style="text-align:left; padding-left: 7px;">테스트</td>
+									<td style="text-align:center;">bangry</td>
+									<td style="text-align:center;">2018.11.25</td>
+									<td style="text-align:center;">1</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;">1</td>
+									<td style="text-align:left; padding-left: 7px;">테스트</td>
+									<td style="text-align:center;">bangry</td>
+									<td style="text-align:center;">2018.11.25</td>
+									<td style="text-align:center;">1</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;">1</td>
+									<td style="text-align:left; padding-left: 7px;">테스트</td>
+									<td style="text-align:center;">bangry</td>
+									<td style="text-align:center;">2018.11.25</td>
+									<td style="text-align:center;">1</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;">1</td>
+									<td style="text-align:left; padding-left: 7px;">테스트</td>
+									<td style="text-align:center;">bangry</td>
+									<td style="text-align:center;">2018.11.25</td>
+									<td style="text-align:center;">1</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;">1</td>
+									<td style="text-align:left; padding-left: 7px;">테스트</td>
+									<td style="text-align:center;">bangry</td>
+									<td style="text-align:center;">2018.11.25</td>
+									<td style="text-align:center;">1</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;">1</td>
+									<td style="text-align:left; padding-left: 7px;">테스트</td>
+									<td style="text-align:center;">bangry</td>
+									<td style="text-align:center;">2018.11.25</td>
+									<td style="text-align:center;">1</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;">1</td>
+									<td style="text-align:left; padding-left: 7px;">테스트</td>
+									<td style="text-align:center;">bangry</td>
+									<td style="text-align:center;">2018.11.25</td>
+									<td style="text-align:center;">1</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;">1</td>
+									<td style="text-align:left; padding-left: 7px;">테스트</td>
+									<td style="text-align:center;">bangry</td>
+									<td style="text-align:center;">2018.11.25</td>
+									<td style="text-align:center;">1</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;">1</td>
+									<td style="text-align:left; padding-left: 7px;">테스트</td>
+									<td style="text-align:center;">bangry</td>
+									<td style="text-align:center;">2018.11.25</td>
+									<td style="text-align:center;">1</td>
+								</tr>
+								<tr>
+									<td style="text-align:center;">1</td>
+									<td style="text-align:left; padding-left: 7px;">테스트</td>
+									<td style="text-align:center;">bangry</td>
+									<td style="text-align:center;">2018.11.25</td>
+									<td style="text-align:center;">1</td>
+								</tr>
+							</tbody>
+						</table>
+						<br>
+						<div class="table-nav-bar">
+							<button type="button" class="float-r" id="createReviewBtn" data-toggle="modal" data-target="#createReviewModal">후기작성</button>
+						</div>
+					</div>
+				</div>
+		</div>
+	</section>
+
+		<!-- Modal HTML -->
+<div id="createReviewModal" class="modal fade">
+		<div class="modal-dialog modal-login">
+		  <div class="modal-content">
+			<div class="modal-header">        
+			  <h4 class="modal-title">서비스 이용 후기</h4>
+			</div>
+			<div class="modal-body">
+			  <form action="" method="post">
+				<div class="form-group">
+				  <input type="text" class="form-control " placeholder="제목 입력" required="required" style="padding-left:10px;">
+				</div>
+				
+				<div class="form-group">
+				  <input type="password" class="form-control " placeholder="비밀번호 입력(수정, 삭제 시 이용)" required="required" style="padding-left:10px;">         
+				</div>
+				
+				<div class="form-group">
+					<textarea rows="10" cols="50" class="form-control" placeholder="후기의 내용을 자유롭게 작성해주세요" required="required" style="padding-left:10px;"></textarea>
+				</div>
+						  
+				<div class="form-group" style="display: flex; align-items: center; justify-content: center;">
+				  <input type="submit" class="" value="등록">&nbsp;
+				  <button type="button" class="" value="취소"  data-dismiss="modal">취소</button>
+				</div>
+			  </form>       
+			</div>
+		  </div>
+		</div>
+	  </div>  
+
+
+
+
+	
+
+
+
+	
+<!--===============================================================================================-->
+	<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="vendor/bootstrap/js/popper.js"></script>
+	<script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="vendor/daterangepicker/moment.min.js"></script>
+	<script type="text/javascript" src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="vendor/slick/slick.min.js"></script>
+	<script type="text/javascript" src="js/slick-custom.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="vendor/parallax100/parallax100.js"></script>
+	<script type="text/javascript">
+        $('.parallax100').parallax100();
+	</script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" src="vendor/lightbox2/js/lightbox.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+</body>
+</html>

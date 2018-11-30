@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.one.doo.member.mapper.MemberMapper">
+
+
+  <resultMap type="com.one.doo.member.domain.Member" id="memberMap">
+    <id property="userid" column="userid"/>
+    <result property="userid" column="userid"/>
+    <result property="userpw" column="userpw"/>
+    <result property="userName" column="username"/>
+    <result property="regDate" column="regdate"/>
+    <result property="updateDate" column="updatedate"/>
+    <result property="email" column="email"/>
+    <collection property="authList" resultMap="authMap">
+    </collection> 
+  </resultMap>
+  
+  <resultMap type="com.one.doo.member.domain.Auth" id="authMap">
+    <result property="userid" column="userid"/>
+    <result property="auth" column="auth"/>
+  </resultMap>
+  
+  <select id="read" resultMap="memberMap">
+	SELECT 
+	  mem.userid,  userpw, username, enabled, regdate, updatedate, auth
+	FROM 
+	  users mem LEFT OUTER JOIN userauths auth on mem.userid = auth.userid 
+	WHERE mem.userid = #{userid} 
+  </select>
+
+  <insert id="insert">
+  	INSERT INTO users
+  	(userid, userpw, username, email)
+  	VALUES	(#{userid},
+  			 #{userpw},
+  			 #{userName},
+  			 #{email})
+  </insert>
+
+	<!-- id중복체크 쿼리 -->
+	<select id="idcheck" parameterType="String" resultType="Integer">
+		SELECT COUNT(*) 
+		FROM	users
+		WHERE	userid = #{userid}
+	</select>
+
+</mapper>

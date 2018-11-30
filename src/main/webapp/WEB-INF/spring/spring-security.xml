@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!-- security적용이 필요없는 파일 설정 -->
+<!-- <security:http pattern="/**/*.scss" security="none"/>
+<security:http pattern="/**/*.js" security="none"/>
+<security:http pattern="/**/*.css" security="none"/>
+<security:http pattern="/images/*.jpg" security="none"/>
+<security:http pattern="/images/*.gif" security="none"/>
+<security:http pattern="/../resources/**" security="none"/> -->
+
+<!-- security에 사용되는 handler bean등록 -->
+<bean class="com.one.doo.common.security.CustomAccessDeniedHandler" 
+	  id="customAccessDeniedHandler" />
+<bean class="com.one.doo.common.security.CustomLoginSuccessHandler" 
+	  id="customLoginSuccessHandler" />
+<bean class="com.one.doo.common.security.CustomUserDetailsService" 
+	  id="customUserDetailsService" />
+<bean class="com.one.doo.common.security.CustomLoginFailureHandler" 
+	  id="customLoginFailureHandler" />
+<bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" 
+	  id="bcryptPasswordEncoder"/>
+
+<!-- security제외 매핑 -->
+<!--  <security:http pattern="/login"                 security="none" />-->
+<!-- <security:http pattern="/member/*" 				security="none" /> -->
+<security:http pattern="/resources/**/*"        security="none" />
+<security:http pattern="/member/regist"         security="none" />
+<security:http pattern="/member/idDupCheck/*"   security="none" />
+<security:http pattern="/member/emailCertify/*" security="none" />
+
+
+<security:http>
+	<!-- intercept-url설정순서 중요(구체적->포괄적) -->
+	<!-- 권한에따른 url설정 -->
+	
+	<security:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/admin/**"/>
+<!-- 	<security:intercept-url access="hasRole('ROLE_USER')" pattern="/**"/> -->
+	<security:intercept-url access="permitAll" pattern="/member/**"/>
+ 
+	<security:form-login 
+			login-page="/member/loginForm"
+			authentication-failure-handler-ref="customLoginFailureHandler" 
+			authentication-success-handler-ref="customLoginSuccessHandler"
+	/>
+	
+	<security:access-denied-handler ref="customAccessDeniedHandler"/> 
+	<security:remember-me token-validity-seconds="604800" data-source-ref="dataSource"/>
+	<security:logout logout-success-url="/" delete-cookies="remember-me, JSESSION_ID" invalidate-session="true"/>
+
+</security:http>
+<!-- 
+<security:http auto-config="true" use-expressions="true">
+	<security:intercept-url pattern="/admin/*" access="hasRole('ROLE_ADMIN')"/>
+	<security:intercept-url pattern="/" access="permitAll"/>
+	<security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+
+	<security:form-login
+		login-page="/member/customLogin"
+		login-processing-url="/login"
+		username-parameter="username"
+		password-parameter="password"
+		default-target-url="/"
+		authentication-failure-forward-url="/?fail=true"
+	/>
+</security:http>n
+-->
+<!-- 인정관련정보설정 -->
+<!-- provide는 인정정보제공자 -->
+<security:authentication-manager>
+	<security:authentication-provider user-service-ref="customUserDetailsService">
+		<security:password-encoder ref="bcryptPasswordEncoder"/>
+	</security:authentication-provider>
+</security:authentication-manager>
+<!-- 
+<security:authentication-manager>
+<security:authentication-provider>
+<security:user-service>
+<security:user name="user1" password="{noop}user1pw" authorities="ROLE_USER"/>
+<security:user name="ADMIN1" password="{noop}admin1pw" authorities="ROLE_ADMIN"/>
+</security:user-service>
+</security:authentication-provider>
+</security:authentication-manager>
+-->
+</beans>
