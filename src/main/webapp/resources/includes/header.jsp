@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <header>
   <!-- 헤더 태그 설정 -->
   <div class="wrap-menu-header trans-0-4" style="background-color: white;">
@@ -21,8 +23,15 @@
               <li><a href="/qna/">이용 문의</a></li>
               <li><a href="/review/">이용 후기</a></li>
               <li><a href="/reserve/">상담 예약</a></li>
+              <!-- 로그인 안했을 경우 -->
+              <sec:authorize access="isAnonymous()">
               <li><a href="/member/loginForm">로그인</a></li>
               <li><a href="/member/registForm">회원가입</a></li>
+              </sec:authorize>
+              <!-- 로그인한경우 -->
+              <sec:authorize access="isAuthenticated()">
+              <li><a href="">로그아웃</a></li>
+              </sec:authorize>
             </ul>
           </nav>
         </div>

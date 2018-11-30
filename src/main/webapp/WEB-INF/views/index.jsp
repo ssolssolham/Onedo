@@ -21,14 +21,15 @@
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/asideMenu.jsp"/>
   <!-- asideMenu include 종료 -->
 
-  <!-- 로그인 모달 include 시작 -->
+<%--   <!-- 로그인 모달 include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/modal/loginModal.jsp"/>
   <!-- 로그인 모달 include 종료 -->
 
   <!-- 회원가입 모달 include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/modal/registModal.jsp"/>
   <!-- 회원가입 모달 include 종료 -->
-  
+ --%>
+   
   <!-- 메인페이지 슬라이드쇼 -->
   <section class="section-slide">
     <div class="wrap-slick1">

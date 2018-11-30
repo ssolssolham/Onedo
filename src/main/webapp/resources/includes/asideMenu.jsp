@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <!-- My 메뉴 Slide 바 -->
 <aside class="sidebar trans-0-4">
   <!-- 숨기기 버튼 -->
@@ -29,16 +32,30 @@
     <li class="t-center m-b-13">
       <a href="reserve.html" class="txt19">상담예약</a>
     </li>
-
+<!-- 로그인한 회원만 보이는 메뉴 -->
+<sec:authorize access="isAuthenticated()">
     <li class="t-center m-b-33">
       <a href="mypage.html" class="txt19">마이페이지</a>
     </li>
 
+<!-- 로그아웃처리 필요!!!! -->    
+    <li class="t-center">
+    <form>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+<!--    <a href="/customLogout" class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">로그아웃</a><br>
+ -->    <input type="submit" class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" value="로그아웃">
+    </form>	
+    </li>
+</sec:authorize>
+
+<!-- 비 로그인시 보이는 메뉴 -->
+<sec:authorize access="isAnonymous()">
     <li class="t-center">
       <!-- 슬라이드 바 로그인, 회원가입 버튼 --> 
-      <a href="" class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" data-toggle="modal" data-target="#loginModal">로그인</a><br>
-      <a href="" class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" data-toggle="modal" data-target="#registModal">회원가입</a><br>
+      <a href="/member/loginForm/" class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton">로그인</a><br>
+      <a href="/member/registForm" class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton">회원가입</a><br>
       <a href="" class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">관리자페이지</a><br>
     </li>
+</sec:authorize>
   </ul>
 </aside>
