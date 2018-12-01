@@ -85,90 +85,28 @@
 							  <td>${review.enabled }</td>
 							</tr>
 						</c:forEach>
-<!-- 							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
- -->						</tbody>
+						</tbody>
 					</table>
 					<br>
 					<div class="table-nav-bar">
-						
+						<!-- pagination -->
+						<ul class="pagination">
+							<c:if test="${pageMaker.prev }">
+								<li class="paginate_button"><a href="#">Previous</a>
+								</li>
+							</c:if>
+							
+							<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+								<li class="paginate_button"><a href="#">${num }</a></li>
+							</c:forEach>
+
+							<c:if test="${pageMaker.next }">
+								<li class="paginate_button"><a href="#">Next</a>
+								</li>
+							</c:if>
+						</ul><!-- end pagination -->
 					</div>
-				</div>
+				</div><!-- end card body -->
 			</div>
 	</div>
 </section>
