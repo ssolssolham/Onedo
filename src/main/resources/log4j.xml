@@ -10,6 +10,14 @@
 		</layout>
 	</appender>
 	
+	<appender name="filelog" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="file" value="/LOG/all.log"/>
+		<param name="Append" value="true"/>
+		<param name="DatePattern" value="'.'yyyy-MM-dd-HH-mm"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d %p [%C{10}] %m [%X{userId}]%n"/>
+		</layout>
+	</appender>
 	
 	
 	<!--파일 찍은 appender 추가  -->
@@ -17,6 +25,11 @@
 	<!-- Application Loggers -->
 	<logger name="com.one.doo">
 		<level value="debug" />
+	</logger>
+	
+	<!-- sql문 디버깅을 위한 log 추가 -->
+	<logger name="java.sql">
+		<level value="debug"/>
 	</logger>
 	
 <!-- 	<logger name="jdbc.audit">
@@ -52,6 +65,7 @@
 	<root>
 		<priority value="warn" />
 		<appender-ref ref="console" />
+		<appender-ref ref="filelog"/>
 	</root>
 	
 </log4j:configuration>

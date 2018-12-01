@@ -1,25 +1,41 @@
 package com.one.doo.admin.member.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.one.doo.board.domain.Criteria;
+import com.one.doo.board.domain.Page;
+import com.one.doo.member.service.MemberService;
+
+import lombok.extern.log4j.Log4j;
 
 @Controller
+@Log4j
 @RequestMapping("/admin/member")
 public class AdminMemberController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(AdminMemberController.class);
+	private MemberService service;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	@RequestMapping("/")
+	public String home(Model model) {
+		/*int total = service.getTotalCount();
 		
+		model.addAttribute("userlist", service.getListWithCri(cri));
+		model.addAttribute("pageMaker", new Page(cri, total));*/
+		return "admin/member/member";
+	}
+	
+	@RequestMapping("/list")
+	public String list(Criteria cri, Model model) {
+		log.info("admin member : " + cri);
+		int total = service.getTotalCount();
+		
+		model.addAttribute("userlist",service.getListWithCri(cri));
+		model.addAttribute("pageMaker", new Page(cri, total));
 		return "admin/member/member";
 	}
 	

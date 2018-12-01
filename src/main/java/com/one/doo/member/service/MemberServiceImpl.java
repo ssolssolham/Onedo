@@ -1,5 +1,7 @@
 package com.one.doo.member.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.one.doo.board.domain.Criteria;
 import com.one.doo.member.domain.Auth;
 import com.one.doo.member.domain.Member;
 import com.one.doo.member.mapper.AuthMapper;
@@ -45,5 +48,22 @@ public class MemberServiceImpl implements MemberService {
 	public int idcheck(String userid) {
 		return memberMapper.idcheck(userid);
 	}
+
+	@Override
+	public List<Member> getList() {
+		return memberMapper.getList();
+	}
+
+	@Override
+	public List<Member> getListWithCri(Criteria cri) {
+		return memberMapper.getListWithCri(cri);
+	}
+
+	@Override
+	public int getTotalCount() {
+		return memberMapper.getTotalCount();
+	}
+	
+	
 
 }
