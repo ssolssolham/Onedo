@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.one.doo.article.domain.Criteria;
 import com.one.doo.article.service.ArticleService;
@@ -28,11 +29,12 @@ public class ReviewController {
 	ArticleService service;
 	
 	// 후기 게시판 매핑...
-	// /review/                     : 후기글 전체목록
+	// /review/list                 : 후기글 전체목록
 	// /review/regist               : 후기글 작성
 	// /review/detail{num}          : 후기글상세
 	// /review/modify{article(json)}: 후기수정
 	// /review/remove{num}          : 삭제
+	
 	
 	@GetMapping("/list")
 	public String list(Criteria cri, Model model) {
@@ -47,6 +49,12 @@ public class ReviewController {
 		return "review/review";
 	}
 
+	@GetMapping("/detail")
+	public void get(@RequestParam("article_num") Long article_num, Model model) {
+		log.info("후기게시판 상세보기요청");
+		
+		
+	}
 	
 //	@RequestMapping("/")
 //	public String home() {
