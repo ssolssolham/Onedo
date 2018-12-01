@@ -59,8 +59,11 @@ desired effect
         -------------------------->
   <div class="box">
             <div class="box-header">
-              <h3 class="box-title">공지관리</h3>
+              <h3 class="box-title">분석 서비스 이용통계</h3>
             </div>
+            <!-- 들어가야 할 내용 : 일일,월별,연별 이용통계
+                 우선순위 : 일일 
+             -->
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
