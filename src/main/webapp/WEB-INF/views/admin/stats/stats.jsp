@@ -10,7 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- HEAD -->
 <jsp:include
   page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/head.jsp" />
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
 <!--
 BODY TAG OPTIONS:
 =================
@@ -236,44 +236,41 @@ desired effect
 						{
 							type : 'bar',
 							label : 'Dataset 1',
-							backgroundColor : color(window.chartColors.red)
-									.alpha(0.2).rgbString(),
-							borderColor : window.chartColors.red,
-							data : [ randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor() ]
+							backgroundColor : '#123456',
+							borderColor : '#033321',
+							data : [ 52,
+									255,
+									111,
+									235,
+									432,
+									222,
+									111 ]
 						},
 						{
 							type : 'line',
 							label : 'Dataset 2',
-							backgroundColor : color(window.chartColors.blue)
-									.alpha(0.2).rgbString(),
-							borderColor : window.chartColors.blue,
-							data : [ randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor() ]
+							backgroundColor : '#123456',
+							borderColor : '#033321',
+							data : [ 52,
+									255,
+									111,
+									235,
+									432,
+									222,
+									111 ]
 						},
 						{
 							type : 'bar',
 							label : 'Dataset 3',
-							backgroundColor : color(window.chartColors.green)
-									.alpha(0.2).rgbString(),
-							borderColor : window.chartColors.green,
-							data : [ randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor(),
-									randomScalingFactor() ]
+							backgroundColor : '#123456',
+							borderColor : '#033321',
+							data : [ 52,
+									255,
+									111,
+									235,
+									432,
+									222,
+									111 ]
 						} ]
 			};
 
