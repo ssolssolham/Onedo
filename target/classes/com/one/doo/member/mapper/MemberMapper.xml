@@ -68,12 +68,12 @@
 					FROM 
 	  	users mem LEFT OUTER JOIN userauths auth on mem.userid = auth.userid 
 					WHERE 	]]>
-		<!--  <include refid="criteria"></include>
+		<include refid="criteria"></include>
 					<![CDATA[
 					rownum <= #{pageNum} * #{amount}
 					)
 					WHERE rn > (#{pageNum} -1) * #{amount}
-					]]> -->
+					]]> 
 	</select>
 
 	<select id="getTotalCount" resultType="int">
