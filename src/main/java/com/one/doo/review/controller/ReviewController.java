@@ -29,4 +29,9 @@ public class ReviewController {
 		return "review/review";
 	}
 	
+	@RequestMapping("/detail")
+	public String reviewDetail() {
+		return "review/reviewDetail";
+	}
+	
 }

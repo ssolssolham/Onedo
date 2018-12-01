@@ -22,7 +22,10 @@ public interface MemberService {
 	
 	public void regist(Member member);
 	
+	// 아이디중복체크
 	public int idcheck(String userid);
 	
+	// 이메일인증
+	public String sendMailCertify(String mail);
 	public int getTotalCount();
 }

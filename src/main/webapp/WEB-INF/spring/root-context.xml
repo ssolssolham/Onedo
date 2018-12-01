@@ -16,7 +16,8 @@
 <!-- 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"></property> -->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@192.168.0.125:1521:xe"></property>
+<!-- 		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe"></property>
+ --> 		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@192.168.0.125:1521:xe"></property>
 		<property name="username" value="hr"></property>
 		<property name="password" value="hr"></property>
 	</bean>
@@ -35,6 +36,24 @@
 	</bean>	 
 	
 	<tx:annotation-driven/>
+	
+	<!-- mail인증을 위한 mailSender객체 bean등록 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com"/>
+		<property name="port" value="587"/>
+		<property name="username" value="kostaiceland187@gmail.com"/>
+		<property name="password" value="abcd13579!"/>
+		
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.transport.protocol">smtp</prop>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+				<prop key="mail.debug">true</prop>
+			</props>
+		</property>
+	</bean>
+		
 		
 	<!-- 매퍼등록 -->
 	<mybatis-spring:scan base-package="com.one.doo.member.mapper"/>
@@ -44,6 +63,7 @@
 	
 	<!-- 서비스등록 -->	
 	<context:component-scan base-package="com.one.doo.member.service"/>
+	<context:component-scan base-package="com.one.doo.member.validate"/>
 	<!-- <context:component-scan base-package="com.one.doo.member"></context:component-scan> -->
 	<!--AOP 프록시 설정-->
 	<aop:aspectj-autoproxy/>

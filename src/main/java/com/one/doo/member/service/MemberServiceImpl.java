@@ -14,6 +14,7 @@ import com.one.doo.member.domain.Auth;
 import com.one.doo.member.domain.Member;
 import com.one.doo.member.mapper.AuthMapper;
 import com.one.doo.member.mapper.MemberMapper;
+import com.one.doo.member.validate.MailCertify;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -29,6 +30,8 @@ public class MemberServiceImpl implements MemberService {
 	private AuthMapper authMapper;
 	@Inject
 	private PasswordEncoder pwencoder;
+	@Inject
+	private MailCertify mail;
 	
 	@Transactional
 	@Override
@@ -50,6 +53,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public String sendMailCertify(String mail) {
+		log.info("서비스 "+mail);
+		String code = this.mail.sendMail(mail);
+		log.info("메일보내기작업하고온 멤버서비스"+code);
+		return code;
+	}
+
 	public List<Member> getList() {
 		return memberMapper.getList();
 	}
