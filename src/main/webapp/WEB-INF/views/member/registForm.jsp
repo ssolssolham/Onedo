@@ -231,8 +231,19 @@ $(function(){
             $('#certifyCodeInput').removeAttr('disabled');
             $('#certifyCodeInput').focus();
             $('#emailCertify').text('확인');
-            //$('#emailCertify').attr('id', 'checkCertify');
-            checkEmail();
+            $('#emailCertify').attr('id', 'checkCertify');
+		  	 $('#checkCertify').on('click', function() {
+				var inputCode = $('#certifyCodeInput').val();
+				// 코드값 입력 안했을 경우
+				if(inputCode === ''){
+					alert('메일로 전송된 코드값을 입력해 주세요!');
+				}
+				else if(inputCode == code){
+					alert('인증되었습니다:D');
+					$('#certifyCodeInput').attr('readonly', 'readonly');
+					$('#checkCertify').attr('disabled','disabled');
+				}
+			});
          },
          error : function(request,status,error) {
         	 alert("에러");
@@ -240,23 +251,12 @@ $(function(){
          }
       });
    });
+   
 });
 
 // 이메일인증코드값 확인
-function checkEmail() {
-	$('#emailCertify').on('click', function() {
-		var inputCode = $('#certifyCodeInput').val();
-		// 코드값 입력 안했을 경우
-		if(inputCode === ''){
-			alert('메일로 전송된 코드값을 입력해 주세요!');
-		}
-		else if(inputCode == code){
-			alert('인증되었습니다:D');
-			$('#certifyCodeInput').attr('readonly', 'readonly');
-			$('#emailCertify').attr('disabled','disabled');
-		}
-	});
-};
+
+
 
 </script>  
 <!-- ================================= 자바스크립트(JavaScript) ================================== -->
