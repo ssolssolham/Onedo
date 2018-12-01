@@ -25,7 +25,7 @@ public class mailTest {
 	@Test
 	public void test() {
 		SimpleMailMessage message = new SimpleMailMessage();
-		
+		log.info("!!!"+mailSender);
 		message.setFrom("hi");
 		message.setTo("sw931110@naver.com");
 		message.setSubject("인증메일테스트");

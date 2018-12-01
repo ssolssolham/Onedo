@@ -205,6 +205,7 @@ $(function(){
       // email값 비동기로 전송
       var useremail = $('#email').val()+'@'+$('#emailHost').val();
       console.log("이메일값: "+$('#email').val());
+      console.log("이메일+이메일호스트: "+useremail);
       
       //이메일 입력 안했을경우 return
       if($('#email').val().trim() === ''){
@@ -230,13 +231,33 @@ $(function(){
             $('#certifyCodeInput').removeAttr('disabled');
             $('#certifyCodeInput').focus();
             $('#emailCertify').text('확인');
+            //$('#emailCertify').attr('id', 'checkCertify');
+            checkEmail();
          },
-         error : function(error) {
-            alert("비동기오류");
+         error : function(request,status,error) {
+        	 alert("에러");
+        	 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
          }
       });
    });
 });
+
+// 이메일인증코드값 확인
+function checkEmail() {
+	$('#emailCertify').on('click', function() {
+		var inputCode = $('#certifyCodeInput').val();
+		// 코드값 입력 안했을 경우
+		if(inputCode === ''){
+			alert('메일로 전송된 코드값을 입력해 주세요!');
+		}
+		else if(inputCode == code){
+			alert('인증되었습니다:D');
+			$('#certifyCodeInput').attr('readonly', 'readonly');
+			$('#emailCertify').attr('disabled','disabled');
+		}
+	});
+};
+
 </script>  
 <!-- ================================= 자바스크립트(JavaScript) ================================== -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>

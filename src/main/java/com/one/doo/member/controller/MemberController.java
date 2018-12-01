@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.one.doo.member.domain.Member;
 import com.one.doo.member.service.MemberService;
-import com.one.doo.member.validate.MemberValidator;
 
 import lombok.extern.log4j.Log4j;
 
@@ -98,18 +97,18 @@ public class MemberController{
 		// 유효성 체크
 		//this.validator.validate(member, bindingResult);
 		
-		MemberValidator validator = new MemberValidator();
-		validator.validate(member, bindingResult);
-		if(bindingResult.hasErrors()) {
-			log.info("서버단 유효성 걸림...");
-			model.addAttribute("errors", bindingResult);
-			return "redirect:/regist";
-		}else {
-			log.info("서버단 유효성 통과...");
-			log.info("들어온 값으로 구성된 member객체: "+member);
+//		MemberValidator validator = new MemberValidator();
+//		validator.validate(member, bindingResult);
+//		if(bindingResult.hasErrors()) {
+//			log.info("서버단 유효성 걸림...");
+//			model.addAttribute("errors", bindingResult);
+//			return "redirect:/regist";
+//		}else {
+//			log.info("서버단 유효성 통과...");
+//			log.info("들어온 값으로 구성된 member객체: "+member);
 			memberService.regist(member);
 			return "index";
-		}
+//		}
 	}
 	
 	//아이디 중복체크
@@ -128,13 +127,14 @@ public class MemberController{
 	public @ResponseBody String emailCertify(@PathVariable String useremail) {
 		log.info("이메일인증 컨트롤러");
 		log.info("입력받은 이메일"+useremail);
-		useremail += ".com";
+		String[] mail = useremail.split("@");
+		useremail = (mail[1].equals("daum")) ? (useremail += ".net") : (useremail += ".com");
 		log.info(useremail);
-		//비즈니스로직~~
 		
-//		String code = "1234";  //비즈니스로직을 통해 생성된 난수 사용
 		String code = memberService.sendMailCertify(useremail);
-		String result = "{\"code\":"+code+"}";
+		log.info("멤버컨트롤러도왔음");
+		log.info(code);
+		String result = "{\"code\":\""+code+"\"}";
 		
 		return result;
 	}

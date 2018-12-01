@@ -27,6 +27,8 @@ public class MemberServiceImpl implements MemberService {
 	private AuthMapper authMapper;
 	@Inject
 	private PasswordEncoder pwencoder;
+	@Inject
+	private MailCertify mail;
 	
 	@Transactional
 	@Override
@@ -50,8 +52,9 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String sendMailCertify(String mail) {
 		log.info("서비스 "+mail);
-		MailCertify mailCer = new MailCertify();
-		return mailCer.sendMail(mail);
+		String code = this.mail.sendMail(mail);
+		log.info("메일보내기작업하고온 멤버서비스"+code);
+		return code;
 	}
 
 }

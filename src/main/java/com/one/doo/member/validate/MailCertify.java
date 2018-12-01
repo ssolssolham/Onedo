@@ -11,6 +11,8 @@ import javax.mail.internet.MimeMessage.RecipientType;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
+import org.springframework.test.context.ContextConfiguration;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,10 +27,12 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 @NoArgsConstructor
 @Log4j
+@Service
 public class MailCertify {
 	
 	@Inject
 	private JavaMailSender mailSender;
+	
 
 	// 메일보내는 메소드
 	public String sendMail(String toMail) {
@@ -38,10 +42,11 @@ public class MailCertify {
 			
 			// simpleMsg사용...(html 못보냄)
 			SimpleMailMessage message = new SimpleMailMessage();
-			
+			log.info(mailSender);
 			message.setFrom("ONEDOO");
 			message.setTo(toMail);
 			message.setSubject("이메일 인증 메일입니다");
+			log.info(message);
 			message.setText("인증코드 "+code+"\r\n를 입력해 주세요");
 			
 			mailSender.send(message);
@@ -72,6 +77,7 @@ public class MailCertify {
 //		message.setText("<h2>보내는메시지</h2>", "utf-8", "html");
 //		message.setFrom(new InternetAddress("Onedoo"));
 //		message.setRecipient(RecipientType.TO, toMail);
+		log.info("메일보냈다!!"+code);
 		return code;
 		
 	}
