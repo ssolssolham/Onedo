@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <html lang="en">
 <head>
   <title>이용 후기</title>
@@ -73,7 +76,16 @@
 						</thead>
 						<br>
 						<tbody>
+						<c:forEach items="${list }" var="review">
 							<tr>
+							  <td>${review.article_num }</td>
+							  <td>${review.title }</td>
+							  <td>${review.userid }</td>
+							  <td>${review.regdate }</td>
+							  <td>${review.enabled }</td>
+							</tr>
+						</c:forEach>
+<!-- 							<tr>
 								<td style="text-align:center;">1</td>
 								<td style="text-align:left; padding-left: 7px;">테스트</td>
 								<td style="text-align:center;">bangry</td>
@@ -150,7 +162,7 @@
 								<td style="text-align:center;">2018.11.25</td>
 								<td style="text-align:center;">1</td>
 							</tr>
-						</tbody>
+ -->						</tbody>
 					</table>
 					<br>
 					<div class="table-nav-bar">

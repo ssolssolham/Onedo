@@ -21,7 +21,7 @@
               <li><a href="">티아이 소개</a></li>
               <li><a href="/analysis/">분석하기</a></li>
               <li><a href="/qna/">이용 문의</a></li>
-              <li><a href="/review/">이용 후기</a></li>
+              <li><a href="/review/list">이용 후기</a></li>
               <li><a href="/reserve/">상담 예약</a></li>
               <!-- 로그인 안했을 경우 -->
               <sec:authorize access="isAnonymous()">
