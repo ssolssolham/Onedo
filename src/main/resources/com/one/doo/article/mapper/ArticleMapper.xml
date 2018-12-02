@@ -56,11 +56,11 @@
 		bno = 2
 	</select>
 	
-	<!-- 게시글추가 -->
+	<!-- 후기게시글추가 -->
 	<insert id="insert">
-		INSERT INTO articles (article_num, bno, userid, title, content, regdate, replycnt)
+		INSERT INTO articles (article_num, bno, userid, title, content, regdate, replycnt, article_pw)
 		VALUES(
-		article_seq.nextval, #{bno}, #{userid}, #{title}, #{content}, SYSDATE, 0 
+		article_seq.nextval, #{bno}, #{userid}, #{title}, #{content}, SYSDATE, 0, #{article_pw}
 		)
 	</insert>
 	

@@ -23,18 +23,18 @@
               <li><a href="/qna/">이용 문의</a></li>
               <li><a href="/review/list">이용 후기</a></li>
               <li><a href="/reserve/">상담 예약</a></li>
-              <!-- 로그인 안했을 경우 -->
-              <sec:authorize access="isAnonymous()">
+            <!-- 로그인 안했을 경우 -->
+            <sec:authorize access="isAnonymous()">
               <li><a href="/member/loginForm">로그인</a></li>
               <li><a href="/member/registForm">회원가입</a></li>
-              </sec:authorize>
-              <!-- 로그인한경우 -->
-              <sec:authorize access="isAuthenticated()">
+            </sec:authorize>
+            <!-- 로그인한경우 -->
+            <sec:authorize access="isAuthenticated()">
               <li><a onclick="logoutFormSubmit()" id="logoutLink">로그아웃</a></li>
               <form action="/logout" method="post" id="logoutForm">
               <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
               </form>
-              </sec:authorize>
+            </sec:authorize>
             </ul>
           </nav>
         </div>

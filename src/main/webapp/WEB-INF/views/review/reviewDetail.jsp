@@ -1,4 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <html lang="en">
 <head>
   <title>이용 후기</title>
@@ -48,14 +52,14 @@
                         </td>
                         
                         <td>
-                        <!-- 제목 동적으로 불러오는 부분 -->
+                        ${review.title }
                         </td>
                         <td style="text-align: center; vertical-align: middle; color: #27b2a5;">
                           <b>작성자</b>
                         </td>
                         
                         <td>
-                        <!-- 작성자 동적으로 불러오는 부분 -->
+                        ${review.userid }
                         </td>
                       </tr>
                       
@@ -64,7 +68,7 @@
                           <b>최종수정일</b>
                         </td>
                         <td>
-                        <!-- 최종 수정일 동적으로 불러오는 부분 -->
+                        <fmt:formatDate pattern="yyyy-mm-dd" value="${review.regdate }"/>
                         </td>
                         
                         <td style="text-align: center; vertical-align: middle; color: #27b2a5;">
@@ -79,17 +83,25 @@
                         <td colspan="4">
                           <!-- 게시물 내용 동적으로 불러오는 부분 -->
                           <div id="reviewDetailContent" style="height: 300px;">
-                            해당 게시물 내용 동적으로 불러와야함
+                          ${review.content }
                           </div>
                         </td>
                       </tr>
                     </table>
 					<br>
 					<div>
-                        <button type="button" class="float-r" style="height:35px;" id="historyBackBtn" data-toggle="modal" data-target="#updateReviewModal">목록</button><span class="float-r">&nbsp;&nbsp;</span>
+					<!-- 글쓴이와 보고있는사람 아이디 일치할경우 -->
+					<sec:authentication var="loginId" property="principal.member.userid" /><!-- 로그인한사람 id값 변수로 저장 -->
+					<c:set var="writer" value="${review.userid }"/>
+					<c:if test="${writer eq loginId }">
+					아이디같다고ㅡㅡ
+                        <a class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" href="/review/list">목록</a>
                         <!-- 해당 아이디인 경우에만 확인할 수 있도록 작성 -->
-						<button type="button" class="float-r" style="height:35px;" id="updateReviewBtn" data-toggle="modal" data-target="#updateReviewModal">수정</button><span class="float-r">&nbsp;&nbsp;</span>
+ 						<button type="button" class="float-r" style="height:35px;" id="updateReviewBtn" data-toggle="modal" data-target="#updateReviewModal">수정</button><span class="float-r">&nbsp;&nbsp;</span>
 						<button type="button" class="float-r" style="height:35px;" id="deleteReviewBtn" data-toggle="modal" data-target="#deleteReviewModal">삭제</button>
+					</c:if>
+					<!-- 글쓴이이외의 사람 -->
+                        <a class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" href="/review/list">목록dl</a>
 					</div>
 				</div>
 			</div>
@@ -104,19 +116,22 @@
 			  <h4 class="modal-title">후기 내용 수정</h4>
 			</div>
 			<div class="modal-body">
-			  <form action="" method="post">
+			  <form action="/review/modify" method="get">
 				<div class="form-group">
-				  <input type="text" class="form-control " required="required" style="padding-left:10px;" value="기존 제목 동적으로 불러옴">
+				  <input type="text" name="title" class="form-control " required="required" style="padding-left:10px;" value="${review.title }">
 				</div>
 				
 				<div class="form-group">
-				  <input type="password" class="form-control " placeholder="비밀번호 입력(수정, 삭제 시 이용)" required="required" style="padding-left:10px;">         
+				  <input type="password" name="article_pw" class="form-control " placeholder="비밀번호 입력(수정, 삭제 시 이용)" required="required" style="padding-left:10px;">         
 				</div>
 				
 				<div class="form-group">
-					<textarea rows="10" cols="50" class="form-control" placeholder="후기의 내용을 자유롭게 작성해주세요" required="required" style="padding-left:10px; font-size: 20px;">기존 작성 내용 동적으로 불러와야함</textarea>
+					<textarea rows="10" cols="50" class="form-control" name="content" required="required" style="padding-left:10px; font-size: 20px;">${review.content }</textarea>
 				</div>
-						  
+				
+				<input type="hidden" name="article_num" value="${review.article_num }">		  
+				<input type="hidden" name="bno" value="2">
+				<input type="hidden" name="${review.userid }">		  
 				<div class="form-group" style="display: flex; align-items: center; justify-content: center;">
 				  <input type="submit" class="" value="수정">&nbsp;
 				  <button type="button" class="" value="취소"  data-dismiss="modal">취소</button>
@@ -135,7 +150,7 @@
         <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;후기 수정</h4>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
+        <form action="/review/modify" method="post">
         <div class="form-group">
           <input type="text" class="form-control " required="required" style="padding-left:10px;" value="기존 제목 동적으로 불러옴">
         </div>

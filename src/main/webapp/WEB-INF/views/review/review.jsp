@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <html lang="en">
 <head>
@@ -55,7 +56,9 @@
 
 					<input type="text" style="vertical-align: top; width: 15%; height: 35px; display: inline;" class="form-control" id="searchValue" name="searchValue">
 					<button type="button" style="vertical-align: top; height:35px; width: 10%;" class="" id="reviewSearchBtn" >검색</button>
+				<sec:authorize access="isAuthenticated()">
 					<button type="button" class="float-r" style="height:35px;" id="createReviewBtn" data-toggle="modal" data-target="#createReviewModal">후기작성</button>
+				</sec:authorize>
 					<br>
 					<table>
 						<colgroup>
@@ -76,12 +79,12 @@
 						</thead>
 						<br>
 						<tbody>
-						<c:forEach items="${list }" var="review">
+						<c:forEach items="${list }" var="review" varStatus="status">
 							<tr>
-							  <td>${review.article_num }</td>
-							  <td>${review.title }</td>
+							  <td>${status.index +1 }</td>
+							  <td><a href="/review/detail?article_num=${review.article_num }">${review.title }</a></td>
 							  <td>${review.userid }</td>
-							  <td>${review.regdate }</td>
+							  <td><fmt:formatDate pattern="yyyy-mm-dd" value="${review.regdate }"/></td>
 							  <td>${review.enabled }</td>
 							</tr>
 						</c:forEach>
@@ -119,18 +122,21 @@
 			  <h4 class="modal-title">서비스 이용 후기</h4>
 			</div>
 			<div class="modal-body">
-			  <form action="" method="post">
+			  <form action="/review/register" method="post">
 				<div class="form-group">
-				  <input type="text" class="form-control " placeholder="제목 입력" required="required" style="padding-left:10px;">
+				  <input type="text" name="title" class="form-control " placeholder="제목 입력" required="required" style="padding-left:10px;">
 				</div>
 				
 				<div class="form-group">
-				  <input type="password" class="form-control " placeholder="비밀번호 입력(수정, 삭제 시 이용)" required="required" style="padding-left:10px;">         
+				  <input type="password" name="article_pw" class="form-control " placeholder="비밀번호 입력(수정, 삭제 시 이용)" required="required" style="padding-left:10px;">         
 				</div>
 				
 				<div class="form-group">
-					<textarea rows="10" cols="50" class="form-control" placeholder="후기의 내용을 자유롭게 작성해주세요" required="required" style="padding-left:10px; font-size: 20px;"></textarea>
+					<textarea name="content" rows="10" cols="50" class="form-control" placeholder="후기의 내용을 자유롭게 작성해주세요" required="required" style="padding-left:10px; font-size: 20px;"></textarea>
 				</div>
+				
+				<input type="hidden" name="bno" value="2">
+				<input type="hidden" name="userid" value="<sec:authentication property="principal.member.userid"/>">
 						  
 				<div class="form-group" style="display: flex; align-items: center; justify-content: center;">
 				  <input type="submit" class="" value="등록">&nbsp;
