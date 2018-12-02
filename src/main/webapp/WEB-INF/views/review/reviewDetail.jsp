@@ -181,12 +181,13 @@
         <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;후기 삭제</h4>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
+        <form action="/review/remove?article_num=${review.article_num }" method="get">
         <div class="fs-20 t-center">후기 등록 시, 입력했던 비밀번호를 입력하세요</div><br>
         <div class="fs-20 t-center" style="color: red; font-weight: bold;">&lt;주의&gt; 삭제 시, 복구할 수 없습니다!</div>
         <br>
         <br>
         <div class="form-group">
+          <input type="hidden" name="article_num" value="${review.article_num }">
           <input type="password" class="form-control " placeholder="비밀번호 입력" required="required" style="padding-left:10px;">         
         </div>
         <br>

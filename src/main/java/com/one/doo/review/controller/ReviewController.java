@@ -83,16 +83,19 @@ public class ReviewController {
 //		return "/review/reviewDetail?article_num="+article.getArticle_num();
 	}
 	
+	// 후기삭제
+	@GetMapping("/remove")
+	public String remove(@RequestParam("article_num") Long article_num) {
+		log.info("삭제요청");
+		service.remove(article_num);
+		return "redirect:/review/list";
+	}
+	
 //	@RequestMapping("/")
 //	public String home() {
 //		return "review/review";
 //	}
 	
-	@RequestMapping("/reviewDetail")
-	public String reviewDetail(@RequestParam("article_num") Long article_num, @ModelAttribute("cri")Criteria cri, Model model) {
-		log.info("수정 후, 상세보기요청");
-		model.addAttribute("review", service.get(article_num));
-		return "review/reviewDetail";
-	}
+
 	
 }
