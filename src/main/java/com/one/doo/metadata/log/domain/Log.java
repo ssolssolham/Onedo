@@ -2,6 +2,7 @@ package com.one.doo.metadata.log.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -9,6 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 public class Log {
 	private int url_no;
 	private String log_day;
