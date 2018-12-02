@@ -59,6 +59,8 @@
 	<mybatis-spring:scan base-package="com.one.doo.member.mapper"/>
 	<mybatis-spring:scan base-package="com.one.doo.auth.mapper"/>
 	<mybatis-spring:scan base-package="com.one.doo.article.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.metadata.log.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.metadata.url.mapper"/>
 	<!-- <mybatis-spring:scan base-package="com.one.doo.board.mapper"></mybatis-spring:scan> -->
 	<!-- <mybatis-spring:scan base-package="com.one.doo.auth.mapper"></mybatis-spring:scan> -->
 	
