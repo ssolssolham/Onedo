@@ -13,8 +13,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.one.doo.article.domain.Article;
 import com.one.doo.article.domain.Criteria;
-import com.one.doo.article.service.ArticleService;
 import com.one.doo.article.domain.Page;
+import com.one.doo.article.service.ArticleService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -46,10 +46,10 @@ public class ReviewController {
 		log.info("list: "+cri);
 		
 		model.addAttribute("list", service.getReviewList(cri));
-		model.addAttribute("pageMaker", new Page(cri, 123)); //임의로 123(total값)
+		//model.addAttribute("pageMaker", new Page(cri, 123)); //임의로 123(total값)
 		
 		int total = service.getTotal(cri);
-		//model.addAttribute("pageMaker", new PageDTO(cri, total));
+		model.addAttribute("pageMaker", new Page(cri, total));
 		return "review/review";
 	}
 

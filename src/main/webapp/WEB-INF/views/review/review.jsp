@@ -44,18 +44,19 @@
 					<br>
 					<br>
 					&nbsp;&nbsp;
-					<select style="height: 35px; font-size: 20px; text-align: center; width: 15%; display: inline" class="form-control form-control-sm">
-						<option default>전체</option>
-						<option>제목</option>
-						<option>내용</option>
-						<option>작성자</option>
-						<option>제목 or 내용</option>
-						<option>제목 or 작성자</option>
-						<option>제목 or 내용 or 작성자</option>
+					<form id="searchForm" action="/review/list" method="get"></form>
+					<select name="type" style="height: 35px; font-size: 20px; text-align: center; width: 15%; display: inline" class="form-control form-control-sm">
+					  <option value="" <c:out value="${pageMaker.cri.type == null?'selected':'' }"/>>--</option>
+					  <option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':'' }"/>>제목</option>
+                      <option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':'' }"/>>내용</option>
+                      <option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':'' }"/>>작성자</option>
+                      <option value="TC" <c:out value="${pageMaker.cri.type eq 'TC'?'selected':'' }"/>>제목 or 내용</option>
+                      <option value="TW" <c:out value="${pageMaker.cri.type eq 'TW'?'selected':'' }"/>>제목 or 작성자</option>
+                      <option value="TWC" <c:out value="${pageMaker.cri.type eq 'TWC'?'selected':'' }"/>>제목 or 내용 or 작성자</option>
 					</select>
-
-					<input type="text" style="vertical-align: top; width: 15%; height: 35px; display: inline;" class="form-control" id="searchValue" name="searchValue">
+					<input type="text" name="keyword" style="vertical-align: top; width: 15%; height: 35px; display: inline;" class="form-control" id="searchValue" name="keyword">
 					<button type="button" style="vertical-align: top; height:35px; width: 10%;" class="" id="reviewSearchBtn" >검색</button>
+				
 				<sec:authorize access="isAuthenticated()">
 					<button type="button" class="float-r" style="height:35px;" id="createReviewBtn" data-toggle="modal" data-target="#createReviewModal">후기작성</button>
 				</sec:authorize>
