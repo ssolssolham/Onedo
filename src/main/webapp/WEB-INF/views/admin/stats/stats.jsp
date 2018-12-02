@@ -60,152 +60,22 @@ desired effect
         <!--------------------------
         | Your Page Content Here |
         -------------------------->
-        <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">분석 서비스 이용통계</h3>
-          </div>
-          <!-- 들어가야 할 내용 : 일일,월별,연별 이용통계
-                 우선순위 : 일일 
-             -->
-          <!-- /.box-header -->
-          <div class="box-body">
-            <table id="example2"
-              class="table table-bordered table-hover">
-              <thead>
-                <tr>
-                  <th>순번</th>
-                  <th>제목</th>
-                  <th>작성자</th>
-                  <th>작성날짜</th>
-                  <th>게시여부</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>신상품 출시에 대한 공지</td>
-                  <td>박호준</td>
-                  <td>11.28</td>
-                  <td>X</td>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-          <!-- /.box-body -->
-        </div>
-        <!-- /.box -->
-        <div class="box">
-          <div class="box-header">
-            <h3 class="box-title">Striped Full Width Table</h3>
-          </div>
-          <!-- /.box-header -->
-          <div class="box-body no-padding">
-            <table class="table table-striped">
-              <tr>
-                <th style="width: 10px">#</th>
-                <th>Task</th>
-                <th>Progress</th>
-                <th style="width: 40px">Label</th>
-              </tr>
-              <tr>
-                <td>1.</td>
-                <td>Update software</td>
-                <td>
-                  <div class="progress progress-xs">
-                    <div class="progress-bar progress-bar-danger"
-                      style="width: 55%"></div>
-                  </div>
-                </td>
-                <td><span class="badge bg-red">55%</span></td>
-              </tr>
-              <tr>
-                <td>2.</td>
-                <td>Clean database</td>
-                <td>
-                  <div class="progress progress-xs">
-                    <div class="progress-bar progress-bar-yellow"
-                      style="width: 70%"></div>
-                  </div>
-                </td>
-                <td><span class="badge bg-yellow">70%</span></td>
-              </tr>
-              <tr>
-                <td>3.</td>
-                <td>Cron job running</td>
-                <td>
-                  <div
-                    class="progress progress-xs progress-striped active">
-                    <div class="progress-bar progress-bar-primary"
-                      style="width: 30%"></div>
-                  </div>
-                </td>
-                <td><span class="badge bg-light-blue">30%</span></td>
-              </tr>
-              <tr>
-                <td>4.</td>
-                <td>Fix and squish bugs</td>
-                <td>
-                  <div
-                    class="progress progress-xs progress-striped active">
-                    <div class="progress-bar progress-bar-success"
-                      style="width: 90%"></div>
-                  </div>
-                </td>
-                <td><span class="badge bg-green">90%</span></td>
-              </tr>
-            </table>
-          </div>
-          <!-- /.box-body -->
-        </div>
-
-        <div class="box box-primary">
-          <div class="box-header with-border">
-            <h3 class="box-title">Quick Example</h3>
-          </div>
-          <!-- /.box-header -->
-          <!-- form start -->
-          <form role="form">
-            <div class="box-body">
-              <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label> <input
-                  type="email" class="form-control"
-                  id="exampleInputEmail1" placeholder="Enter email">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">Password</label> <input
-                  type="password" class="form-control"
-                  id="exampleInputPassword1" placeholder="Password">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputFile">File input</label> <input
-                  type="file" id="exampleInputFile">
-
-                <p class="help-block">Example block-level help text
-                  here.</p>
-              </div>
-              <div class="checkbox">
-                <label> <input type="checkbox"> Check me
-                  out
-                </label>
-              </div>
-            </div>
-            <!-- /.box-body -->
-
-            <div class="box-footer">
-              <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-          </form>
-        </div>
 
         <!-- 분석서비스 통계 -->
-        <canvas id="canvas" width="795" height="397"
+        <canvas id="canvas" width="795" height="150"
           class="chartjs-render-monitor"
           style="display: block; height: 318px; width: 636px;"></canvas>
 
         <!-- 로그파일 기반 사용자 수 통계 -->
 
         <!--  -->
-
+        <canvas id="canvas2" width="350" height="150"
+          class="chartjs-render-monitor"
+          style="display: block; height: 318px; width: 636px;"></canvas>
+          
+        <canvas id="canvas3" width="350" height="150"
+          class="chartjs-render-monitor"
+          style="display: block; height: 318px; width: 636px;"></canvas>
 
       </section>
       <!-- /.content -->
@@ -249,8 +119,8 @@ desired effect
 						{
 							type : 'line',
 							label : 'Dataset 2',
-							backgroundColor : '#123456',
-							borderColor : '#033321',
+							backgroundColor : '#110000',
+							borderColor : '#335511',
 							data : [ 52,
 									255,
 									111,
@@ -262,8 +132,8 @@ desired effect
 						{
 							type : 'bar',
 							label : 'Dataset 3',
-							backgroundColor : '#123456',
-							borderColor : '#033321',
+							backgroundColor : '#FF0000',
+							borderColor : '#01DF74',
 							data : [ 52,
 									255,
 									111,
@@ -273,7 +143,48 @@ desired effect
 									111 ]
 						} ]
 			};
+			
+			var barChartData2 = {
+					labels : [ '접속 후 로그인', '로그인 후 분석', '분석 후 상담예약'],
+					datasets : [
+							{
+								type : 'line',
+								label : 'Dataset 2',
+								backgroundColor : '#ff5500',
+								borderColor : '#335511',
+								data : [ 89,
+										75,
+										50]
+							} ]
+				};
 
+			var barChartData3 = {
+					labels : [ '접속 후 로그인', '로그인 후 분석', '분석 후 상담예약'],
+					datasets : [
+							{
+								type : 'line',
+								label : 'Dataset 2',
+								backgroundColor : '#ff5500',
+								borderColor : '#335511',
+								data : [ 89,
+										75,
+										50]
+							} ]
+				};
+			
+			var barChartData4 = {
+					labels : [ '접속 후 로그인', '로그인 후 분석', '분석 후 상담예약'],
+					datasets : [
+							{
+								type : 'line',
+								label : 'Dataset 2',
+								backgroundColor : '#ff5500',
+								borderColor : '#335511',
+								data : [ 89,
+										75,
+										50]
+							} ]
+				};
 			// Define a plugin to provide data labels
 			Chart.plugins.register({
 				afterDatasetsDraw : function(chart) {
@@ -285,9 +196,11 @@ desired effect
 							meta.data
 									.forEach(function(element, index) {
 										// Draw the text in black, with the specified font
-										ctx.fillStyle = 'rgb(0, 0, 0)';
+										
+										// 텍스트 색깔
+										ctx.fillStyle = 'rgb(100, 200, 0)';
 
-										var fontSize = 16;
+										var fontSize = 25;
 										var fontStyle = 'normal';
 										var fontFamily = 'Helvetica Neue';
 										ctx.font = Chart.helpers
@@ -316,8 +229,10 @@ desired effect
 
 			window.onload = function() {
 				var ctx = document.getElementById('canvas').getContext('2d');
+				var ctx2 = document.getElementById('canvas2').getContext('2d');
+				var ctx3 = document.getElementById('canvas3').getContext('2d');
 				window.myBar = new Chart(ctx, {
-					type : 'bar',
+					type : 'line',
 					data : barChartData,
 					options : {
 						responsive : true,
@@ -325,7 +240,64 @@ desired effect
 							display : true,
 							text : 'Chart.js Combo Bar Line Chart'
 						},
+						scales: {
+			                yAxes: [{
+			                    ticks: {
+			                        min: 0,
+			                        max: 100,
+			                        stepSize:20,
+			                        beginAtZero: true
+			                    }
+			                }]
+			            }
 					}
+		            
+				});
+				
+				window.myBar2 = new Chart(ctx2, {
+					type : 'line',
+					data : barChartData2,
+					options : {
+						responsive : true,
+						title : {
+							display : true,
+							text : 'Chart.js Combo Bar Line Chart'
+						},
+						scales: {
+			                yAxes: [{
+			                    ticks: {
+			                        min: 0,
+			                        max: 100,
+			                        stepSize:20,
+			                        beginAtZero: true
+			                    }
+			                }]
+			            }
+					}
+		            
+				});
+				
+				window.myBar3 = new Chart(ctx3, {
+					type : 'line',
+					data : barChartData3,
+					options : {
+						responsive : true,
+						title : {
+							display : true,
+							text : 'Chart.js Combo Bar Line Chart'
+						},
+						scales: {
+			                yAxes: [{
+			                    ticks: {
+			                        min: 0,
+			                        max: 100,
+			                        stepSize:20,
+			                        beginAtZero: true
+			                    }
+			                }]
+			            }
+					}
+		            
 				});
 			};
 		</script>
