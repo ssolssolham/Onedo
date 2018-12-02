@@ -100,7 +100,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 body, html {
   height: 100%;
-  font-family: 'ë§‘ì€ê³ ë”•','ë‹ì›€', 'dotum', 'AppleGothic';
+  font-family: '¸¼Àº°íµñ','µ¸¿ò', 'dotum', 'AppleGothic';
 	/*font-family: Montserrat, sans-serif;*/
   font-weight: 400;
   font-size: 2rem;
@@ -269,7 +269,7 @@ button[type="button"]:hover {
 }
 
 .analysisBtn { 
-  width: 111px;
+  width: 16%;
   height: 40px;
   background: #27b2a5;
   color: white;
@@ -280,7 +280,7 @@ button[type="button"]:hover {
 }
 
 .analysisBtn:hover {
-  width: 111px;
+  width: 16%;
   height: 40px;
   background-color: #268f84;
   color: white;
