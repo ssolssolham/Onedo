@@ -112,22 +112,25 @@
                   <div style="width: 100%; height: 2px; background-color: #27b2a5">&nbsp;</div>
                   <br>
                   <div class="form-group">
-                    <h2 class="card-title fw-b">Step 4. 상권 검색 우선순위</h2>
-                    <div id="priorityFilter">
-                      <button style="width: 100%;" class="m-b-10 villageBtn">예상매출액 우선</button>
-                      <button style="width: 100%;" class="m-b-10 villageBtn">창업안전도 우선</button>
-                    </div>
-                  </div>
-                  <div class="form-group">
                     <button type="button" style="float: left;" id="analysisStartBtn">분석하기</button>
                     <button type="button" style="float: right;" id="resetFilterBtn">초기화</button>
                   </div>
                 </div>
               </div>
             </div>
+            <!-- 다음 지도 올 곳임 -->
             <div class="col-sm-9">
-              <div style="width: 99%; height: 648.5px; border:1px solid black; background-color: white;" id="mapArea" class="card-body">다음지도 API</div>
-            </div>
+            <div id="map_wrap">
+              <div style="width: 99%; height: 648.5px; border:1px solid black; background-color: white;" id="map" class="card-body"></div>
+              	<div class="category">
+	       			 <ul id="category">
+				        <li id="CE7" data-order="4"> 
+				            <span class="category_bg cafe"></span>
+				            카페
+				        </li>  
+				    </ul>
+   				</div>
+           </div>
         </div>
         </div>
         <!-- 분석 결과 비동기로 출력 해주는 부분 -->
@@ -979,6 +982,20 @@
         		var target = document.getElementById('districtSelect');
         		var selectedDistrict = target.options[target.selectedIndex].text;
         		// 구가 변하면 필터 초기화 하기 위함
+        		
+        		
+        		$.ajax({
+        	         type : 'GET',
+        	         url : "/analysis/getvillagelist/" + selectedDistrict,
+        	         dataType : "json",
+        	         success : function(data) {
+        	        	 
+        	         },
+        	         error : function(error) {
+        	        	 
+        	         }
+        	      });
+        		
         		for(var i = 1; i <=4; i++) {
         			$('#filterColumn' + i).empty();
         		}
@@ -997,7 +1014,7 @@
     					}
     				}
     				
-    				$('#mapArea').css('height', $('.col-sm-3').height());
+    				$('#map').css('height', $('.col-sm-3').height());
         		}
         		
         		// 동 생성 완료 후 
@@ -1034,16 +1051,6 @@
     			  	}
         		})
         		
-        		$('#priorityFilter').find('button').click(function(){
-        			 if(!($(this).hasClass('active'))) { // 클릭을 했는데 active 되어 있지 않으면 -> 활성화
-        				 $('#priorityFilter').children().removeClass('active');
-      				     $(this).addClass('active');
-    			  	} else { // 클릭을 했는데 활성화가 되어있으면,
-        				 $(this).removeClass('active');
-    			  		
-    			  	}
-        		})
-        		
         		
         	})
         	
@@ -1059,7 +1066,6 @@
     	}
     	
     	$('#regionFilter').children().removeClass('active');
-    	$('#priorityFilter').children().removeClass('active');
     })
     
     // 분석하기 버튼 클릭 시, 발생하는 이벤트(필터에서 검색한 변수들을 Ajax 통신을 위해 변수로 저장)
@@ -1088,18 +1094,9 @@
     		}
     	}
     	
-    	// 선택한 우선순위 변수로 저장
-    	var priorityList = $('#priorityFilter').children();
-    	var priority;
-    	for(var i = 0; i < priorityList.length; i++) {
-    		if(priorityList[i].classList.contains('active') === true) {
-    			priority = priorityList[i].textContent;
-    		}
-    	}
     	
     	console.log('클릭된 동 리스트 : ' + activeVillageList);
     	console.log('클릭된 지역 유형 : ' + activeRegionType);
-    	console.log('클릭된 우선순위 : ' + priority);
     	
     	
     })
@@ -2228,7 +2225,70 @@ $(function(){
       $("#selectSecurityLoanForm").submit();
     });
 });
+
 </script>
+	<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85fa2226a5b3318b6ed8f59fb0e16f4e&libraries=services,clusterer,drawing"></script>
+	
+	<script type="text/javascript">
+	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+	var infowindow = new daum.maps.InfoWindow({zIndex:1});
+	    
+	 
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = {
+	        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+	        level: 3 // 지도의 확대 레벨
+	    };  
+
+	// 지도를 생성합니다    
+	var map = new daum.maps.Map(mapContainer, mapOption); 
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new daum.maps.services.Geocoder();
+
+	
+	var coords;
+	// 주소로 좌표를 검색합니다
+	geocoder.addressSearch('강남구', function(result, status) {
+
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === daum.maps.services.Status.OK) {
+
+	        coords = new daum.maps.LatLng(result[0].y, result[0].x);
+			console.log(coords);
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new daum.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new daum.maps.InfoWindow({
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">호암로 공인중개 사무소</div>'
+	        });
+	        infowindow.open(map, marker);
+
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	    } 
+	    
+	  // 지도에 표시할 원을 생성
+	 	var circle = new daum.maps.Circle({
+	 	    center : new daum.maps.LatLng(coords.jb, coords.ib),  // 원의 중심좌표 입니다 
+	 	    radius: 3000, // 미터 단위의 원의 반지름입니다 
+	 	    strokeWeight: 3, // 선의 두께입니다 
+	 	    strokeColor: '#27b2a5', // 선의 색깔입니다
+	 	    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	 	    strokeStyle: 'solid', // 선의 스타일 입니다
+	 	    fillColor: '#27b2a5', // 채우기 색깔입니다
+	 	    fillOpacity: 0.7  // 채우기 불투명도 입니다   
+	 	});
+	 	
+	 	// 지도에 원을 표시합니다 
+	 	circle.setMap(map);
+	});
+	</script>
     
 <!--===============================================================================================-->    	
 <!--===============================================================================================-->
