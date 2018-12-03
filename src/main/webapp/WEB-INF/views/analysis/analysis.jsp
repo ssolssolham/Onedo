@@ -989,7 +989,8 @@
         	         url : "/analysis/getvillagelist/" + selectedDistrict,
         	         dataType : "json",
         	         success : function(data) {
-        	        	 
+        	        	 alert(data.area);
+        	        	 console.log(data.area);
         	         },
         	         error : function(error) {
         	        	 
