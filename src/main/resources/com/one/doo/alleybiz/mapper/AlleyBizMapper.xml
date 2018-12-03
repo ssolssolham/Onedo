@@ -3,6 +3,46 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.doo.alleybiz.mapper.AlleyBizMapper">
+<select id="getAreaCodeByAnalyze1" resultType="int">
+	<![CDATA[
+	select ALLEYBIZCODE
+	from
+	    (select DISTINCT *
+	    from ALLEYBIZ alley 
+	         inner join livingperalleybiz lib on alley.ALLEYBIZCODE = lib.alleybizcode AND lib.lap_date LIKE '201807'
+	         inner join areacodes ac on alley.areacode = ac.areacode AND ac.areacode_name IN (#{AreaNames}) 
+	         inner join indexperalleybiz ipb on ipb.alleybizcode = alley.alleybizcode 
+	                    AND ipb.cobb_code LIKE 'CS100009' AND ipbd_DATE LIKE '201807'
+	         inner join riskoffoundation rof on rof.areacode = alley.areacode AND rof.rofpd_date LIKE '201807'   
+	    where 
+	          rof.rof_code > 2 AND ipb.stabilityindexcode < 3          
+	    order by ipb.growthindex + ipb.activityindex desc)
+	order by totalliving desc
+	]]>
+</select>
+<select id="getAreaCodeByAnalyze2" resultType="int">
+	<![CDATA[
+	select ALLEYBIZCODE
+	from
+	    (select DISTINCT *
+	    from ALLEYBIZ alley 
+	         inner join livingperalleybiz lib on alley.ALLEYBIZCODE = lib.alleybizcode AND lib.lap_date LIKE '201807'
+	         inner join areacodes ac on alley.areacode = ac.areacode AND ac.areacode_name IN (#{AreaNames}) 
+	         inner join indexperalleybiz ipb on ipb.alleybizcode = alley.alleybizcode 
+	                    AND ipb.cobb_code LIKE 'CS100009' AND ipbd_DATE LIKE '201807'
+	         inner join riskoffoundation rof on rof.areacode = alley.areacode AND rof.rofpd_date LIKE '201807'   
+	    where 
+	          rof.rof_code > 2 AND ipb.stabilityindexcode < 3          
+	    order by ipb.growthindex + ipb.activityindex desc)
+	order by totalhousehold desc
+	]]>
+</select>
+<select id="getAreaCodeByAnalyze3" resultType="int">
+</select>
+<select id="getAreaCodeByAnalyze4" resultType="int">
+</select>
+<select id="getAreaCodeByAnalyze5" resultType="int">
+</select>
 
 
 </mapper>
