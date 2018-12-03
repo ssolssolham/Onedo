@@ -52,6 +52,11 @@ public class ReviewController {
 		model.addAttribute("pageMaker", new Page(cri, total));
 		return "review/review";
 	}
+	
+	@GetMapping("/review")
+	public String review() {
+		return "review/review";
+	}
 
 	@GetMapping("/detail")
 	public String get(@RequestParam("article_num") Long article_num, @ModelAttribute("cri")Criteria cri, Model model) {

@@ -54,8 +54,10 @@
                       <option value="TW" <c:out value="${pageMaker.cri.type eq 'TW'?'selected':'' }"/>>제목 or 작성자</option>
                       <option value="TWC" <c:out value="${pageMaker.cri.type eq 'TWC'?'selected':'' }"/>>제목 or 내용 or 작성자</option>
 					</select>
-					<input type="text" name="keyword" style="vertical-align: top; width: 15%; height: 35px; display: inline;" class="form-control" id="searchValue" name="keyword">
-					<button type="button" style="vertical-align: top; height:35px; width: 10%;" class="" id="reviewSearchBtn" >검색</button>
+					<input type="text" name="keyword" value="${pageMaker.cri.keyword }" style="vertical-align: top; width: 15%; height: 35px; display: inline;" class="form-control" id="searchValue">
+					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+					<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+					<button id="reviewSearchBtn" style="vertical-align: top; height:35px; width: 10%;">검색</button>
 				
 				<sec:authorize access="isAuthenticated()">
 					<button type="button" class="float-r" style="height:35px;" id="createReviewBtn" data-toggle="modal" data-target="#createReviewModal">후기작성</button>
@@ -96,26 +98,38 @@
 						<!-- pagination -->
 						<ul class="pagination">
 							<c:if test="${pageMaker.prev }">
-								<li class="paginate_button"><a href="#">Previous</a>
+								<li class="paginate_button">
+								<a href="${pageMaker.startPage -1 }">Previous</a>
 								</li>
 							</c:if>
 							
 							<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-								<li class="paginate_button"><a href="#">${num }</a></li>
+								<li class="paginate_button ${pageMaker.cri.pageNum == num ? "active":"" }">
+								<a href="${num }">${num }</a></li>
 							</c:forEach>
 
 							<c:if test="${pageMaker.next }">
-								<li class="paginate_button"><a href="#">Next</a>
+								<li class="paginate_button">
+								<a href="${pageMaker.endPage +1 }">Next</a>
 								</li>
 							</c:if>
 						</ul><!-- end pagination -->
 					</div>
+					
+					<!-- page a태그 원래동작 방지 -->
+					<form id="actionForm" action="/review/list" method="get">
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+						<!-- 검색에서도 페이징처리 -->
+						<input type="hidden" name="type" value="${pageMaker.cri.type }">
+						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+					</form>
 				</div><!-- end card body -->
 			</div>
 	</div>
 </section>
 
-  <!-- 후기 작성 Modal HTML -->
+  <!-- 후기 작성(register) Modal HTML -->
   <div id="createReviewModal" class="modal fade">
 		<div class="modal-dialog modal-login">
 		  <div class="modal-content">
@@ -150,8 +164,64 @@
 	  </div>  
 
 
-
-
+<!-- javascript by siwon -->
+<script type="text/javascript">
+$(document).ready(function() {
+	//모달처리를 위한 javascript
+	var result = '<c:out value="${result}"/>';
+	checkModal(result);
+	
+	// history back, 모달띄울필요X
+	history.replaceState({}, null, null);
+	
+	function checkModal(result) {
+		// 결과값이 없거나, history back인경우 모달X
+		if(result === '' || history.state){
+			return;
+		}
+		if(parseInt(result)>0){
+			// 처리완료모달 만들어야함..
+			$('.modal-body').html("게시글" + parseInt(result) + "번이 등록되었습니다.");
+		}
+		// 처리완료모달의 아이디값 들어가야함
+		$('#').modal("sohw");
+	}
+	
+	// page이동
+	var actionForm = $('#actionForm');
+	
+	$('.paginate_button a').on("click", function(e) {
+		e.preventDefault(); //원래 a태그 동작 방지
+		
+		console.log('페이지눌림!!!');
+		
+		//form태그 내, pageNum은 href속성으로 변경
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		// 변경후 form제출
+		actionForm.submit();
+	});
+	
+	
+	// 검색
+	var searchForm = $('#searchForm');
+	
+	$("#reviewSearchBtn").on("click", function(e) {
+		
+		if(!searchForm.find("option:selected").val()){
+			alert("검색종류를 선택해 주세요");
+			return false;
+		}
+		if(!searchForm.find("input[name='keyword']").val()){
+			alert("키워드를 입력하세요");
+			return false;
+		}
+		
+		searchForm.find("input[name='pageNum']").val("1");
+		e.prevenDefault();
+	});
+	
+});
+</script>
 	
 
 
