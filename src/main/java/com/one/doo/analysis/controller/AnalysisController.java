@@ -28,17 +28,18 @@ public class AnalysisController {
 	
 	@RequestMapping(value = "/getvillagelist/{selectedDistrict}", produces = "application/json; charset=utf8")
 	public @ResponseBody String getVillageList(@PathVariable String selectedDistrict)  {
-		log.info("들어옴?");
 		log.info(selectedDistrict);
 		
-		
 		String result = "{\"area\":\""+ analysisService.getVillageList(selectedDistrict) +"\"}";
-		
-
 		
 		log.info(result);
 		
 		return result;
+	}
+	
+	@RequestMapping("/analysisstart")
+	public @ResponseBody String getAnalysisResult() {
+		return null;
 	}
 	
 }
