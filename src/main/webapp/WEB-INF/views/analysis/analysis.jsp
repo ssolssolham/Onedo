@@ -917,16 +917,17 @@
         		// 구가 변하면 필터 초기화 하기 위함
         		
         		
-//         		$.ajax({
-//         	         type : 'GET',
-//         	         url : "/analysis/getvillagelist/" + selectedDistrict,
-//         	         dataType : "json",
-//         	         success : function(data) {
-//         	         },
-//         	         error : function(error) {
+        		$.ajax({
+        	         type : 'GET',
+        	         url : "/analysis/getvillagelist/" + selectedDistrict,
+        	         dataType : "json",
+        	         success : function(data) {
         	        	 
-//         	         }
-//         	      });
+        	         },
+        	         error : function(error) {
+        	        	 
+        	         }
+        	      });
         		
         		for(var i = 1; i <=4; i++) {
         			$('#filterColumn' + i).empty();
@@ -2004,31 +2005,18 @@
 	// 지도를 생성합니다    
 	var map = new daum.maps.Map(mapContainer, mapOption); 
 	
-	// 지도에 표시할 원을 생성
-	var circle = new daum.maps.Circle({
-	    center : new daum.maps.LatLng(37.566826, 126.9786567),  // 원의 중심좌표 입니다 
-	    radius: 100, // 미터 단위의 원의 반지름입니다 
-	    strokeWeight: 5, // 선의 두께입니다 
-	    strokeColor: '#75B8FA', // 선의 색깔입니다
-	    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-	    strokeStyle: 'dashed', // 선의 스타일 입니다
-	    fillColor: '#CFE7FF', // 채우기 색깔입니다
-	    fillOpacity: 0.7  // 채우기 불투명도 입니다   
-	});
-	
-	// 지도에 원을 표시합니다 
-	circle.setMap(map);
-	
 	// 주소-좌표 변환 객체를 생성합니다
 	var geocoder = new daum.maps.services.Geocoder();
 
+	
+	var coords;
 	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('호암로18길', function(result, status) {
+	geocoder.addressSearch('강남구', function(result, status) {
 
 	    // 정상적으로 검색이 완료됐으면 
 	     if (status === daum.maps.services.Status.OK) {
 
-	        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+	        coords = new daum.maps.LatLng(result[0].y, result[0].x);
 			console.log(coords);
 	        // 결과값으로 받은 위치를 마커로 표시합니다
 	        var marker = new daum.maps.Marker({
@@ -2045,6 +2033,21 @@
 	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 	        map.setCenter(coords);
 	    } 
+	    
+	  // 지도에 표시할 원을 생성
+	 	var circle = new daum.maps.Circle({
+	 	    center : new daum.maps.LatLng(coords.jb, coords.ib),  // 원의 중심좌표 입니다 
+	 	    radius: 3000, // 미터 단위의 원의 반지름입니다 
+	 	    strokeWeight: 3, // 선의 두께입니다 
+	 	    strokeColor: '#27b2a5', // 선의 색깔입니다
+	 	    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	 	    strokeStyle: 'solid', // 선의 스타일 입니다
+	 	    fillColor: '#27b2a5', // 채우기 색깔입니다
+	 	    fillOpacity: 0.7  // 채우기 불투명도 입니다   
+	 	});
+	 	
+	 	// 지도에 원을 표시합니다 
+	 	circle.setMap(map);
 	});
 	</script>
     

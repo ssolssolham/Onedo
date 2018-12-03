@@ -33,9 +33,7 @@ public class AnalysisController {
 	
 	@RequestMapping("/getvillagelist/{selectedDistrict}")
 	public @ResponseBody String getVillageList(@PathVariable String selectedDistrict)  {
-		String[] villageList = {};
-		villageList = analysisService.getVillageList(selectedDistrict);
-		String result = "{\"cnt\":"+count+"}";
+		log.info("들어옴?");
 		return "analysis/analysis";
 	}
 	
