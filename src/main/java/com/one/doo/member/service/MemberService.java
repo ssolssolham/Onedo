@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.one.doo.board.domain.Criteria;
 import com.one.doo.member.domain.Member;
+import com.one.doo.metadata.log.domain.Log;
 
 /**
  * 멤버관련 비즈니스로직을 처리하기위한 서비스객체
@@ -27,5 +28,14 @@ public interface MemberService {
 	
 	// 이메일인증
 	public String sendMailCertify(String mail);
+	
 	public int getTotalCount();
+	
+	public int getUrlNo(String url,String method);
+	
+	public int countTodayLog(int url_no,String log_day);
+	
+	public void makeLoginLog(int url_no,String log_day);
+	
+	public int sumUpLoginLog(int url_no,String log_day);
 }
