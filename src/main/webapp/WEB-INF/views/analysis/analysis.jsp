@@ -2225,7 +2225,6 @@ $(function(){
       $("#selectSecurityLoanForm").submit();
     });
 });
-
 </script>
 	<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85fa2226a5b3318b6ed8f59fb0e16f4e&libraries=services,clusterer,drawing"></script>
@@ -2250,7 +2249,7 @@ $(function(){
 	
 	var coords;
 	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('강남구', function(result, status) {
+	geocoder.addressSearch('역삼1동', function(result, status) {
 
 	    // 정상적으로 검색이 완료됐으면 
 	     if (status === daum.maps.services.Status.OK) {
@@ -2265,7 +2264,7 @@ $(function(){
 
 	        // 인포윈도우로 장소에 대한 설명을 표시합니다
 	        var infowindow = new daum.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:6px 0;">호암로 공인중개 사무소</div>'
+	            content: '<div style="width:150px;text-align:center;padding:6px 0;">역삼 1동</div>'
 	        });
 	        infowindow.open(map, marker);
 
@@ -2276,7 +2275,7 @@ $(function(){
 	  // 지도에 표시할 원을 생성
 	 	var circle = new daum.maps.Circle({
 	 	    center : new daum.maps.LatLng(coords.jb, coords.ib),  // 원의 중심좌표 입니다 
-	 	    radius: 3000, // 미터 단위의 원의 반지름입니다 
+	 	    radius: 700, // 미터 단위의 원의 반지름입니다 
 	 	    strokeWeight: 3, // 선의 두께입니다 
 	 	    strokeColor: '#27b2a5', // 선의 색깔입니다
 	 	    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
@@ -2289,6 +2288,7 @@ $(function(){
 	 	circle.setMap(map);
 	});
 	</script>
+>>>>>>> feature/화면_관련_이미지_추가_uk
     
 <!--===============================================================================================-->    	
 <!--===============================================================================================-->
