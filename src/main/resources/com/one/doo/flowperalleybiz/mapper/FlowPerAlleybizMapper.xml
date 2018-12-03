@@ -3,5 +3,8 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.doo.flowperalleybiz.mapper.FlowPerAlleybizMapper">
-
+<select id="read" resultType="com.one.doo.flowperalleybiz.domain.FlowPerAlleybiz">
+select * from flowperalleybiz
+where alleybizcode = #{AlleyBizCode} AND fpa_date LIKE '201807' 
+</select>
 </mapper>
