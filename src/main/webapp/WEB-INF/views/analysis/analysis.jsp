@@ -106,8 +106,6 @@
                       <button style="width: 100%;" class="m-b-10 villageBtn">역세권</button>
                       <button style="width: 100%;" class="m-b-10 villageBtn">오피스</button>
                     </div>
-                    <div style="font-size: 18px; height: 50px;" id="regionDetail">
-                    </div>
                   </div>
                   <div style="width: 100%; height: 2px; background-color: #27b2a5">&nbsp;</div>
                   <br>
@@ -280,7 +278,9 @@
                     <!-- 3개 상권 비교분석 결과 테이블 -->
                     <div class="row">
                     <br>
+                    <br>
                     <span style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">해당 상권의 부대시설 갯수</span>
+                    <br>
                     <br>
                       <table class="table table-bordered" style="text-align: center;">
                         <tbody>
@@ -963,100 +963,184 @@
 			}
 		});
 	</script>
-<!--===============================================================================================-->    
+<!--===============================================================================================-->
+<!-- 다음 지도 API Script -->
+<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85fa2226a5b3318b6ed8f59fb0e16f4e&libraries=services,clusterer,drawing"></script>
+<!--===============================================================================================-->	
+<script type="text/javascript">
+// 분석 관련 필터 입력 시, 동적으로 보이는 지도(분석 첫페이지 지도)
+// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+var infowindow = new daum.maps.InfoWindow({zIndex:1});
+	 
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	    mapOption = {
+	        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+	        level: 7 // 지도의 확대 레벨
+	    };  
+
+	// 지도를 생성합니다    
+	var map = new daum.maps.Map(mapContainer, mapOption);
+	
+	// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+	var mapTypeControl = new daum.maps.MapTypeControl();
+
+	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+	// daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+	map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
+
+	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+	var zoomControl = new daum.maps.ZoomControl();
+	map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new daum.maps.services.Geocoder();
+
+	
+	var coords;
+	</script>
     <script type="text/javascript">
-        // 동 필터 선택 시 보이는 효과
-          $('.js-show-filter').on('click',function(){
-              $(this).toggleClass('show-filter');
-              $('.panel-filter').slideToggle(400);
-      
-              if($('.js-show-search').hasClass('show-search')) {
-                  $('.js-show-search').removeClass('show-search');
-                  $('.panel-search').slideUp(400);
-              }    
-          });
-          var village;		
-        	$('#districtSelect').change(function() {
-        		// 이벤트를 연결
+     // 동 필터 선택 시 보이는 효과
+    $('.js-show-filter').on('click',function(){
+        $(this).toggleClass('show-filter');
+        $('.panel-filter').slideToggle(400);
+
+        if($('.js-show-search').hasClass('show-search')) {
+            $('.js-show-search').removeClass('show-search');
+            $('.panel-search').slideUp(400);
+        }    
+    });
+        
+   	var village;		
+ 	$('#districtSelect').change(function() {
+ 		// 이벤트를 연결
+ 		
+ 		var target = document.getElementById('districtSelect');
+ 		var selectedDistrict = target.options[target.selectedIndex].text;
+ 		// 구가 변하면 필터 초기화 하기 위함
+ 		
+ 		
+ 		$.ajax({
+ 	         type : 'GET',
+ 	         url : "/analysis/getvillagelist/" + selectedDistrict,
+ 	         dataType : "json",
+ 	         success : function(data) {
+ 	        	 village = data.area;
+ 	        	 village = village.split(',');
+ 	        	 
+ 	        	 for(var i = 1; i <=4; i++) {
+ 	        			$('#filterColumn' + i).empty();
+ 	        		}
+ 	        		
+	   				for(var i = 0; i < village.length; i++) {
+	   					if((i % 4) == 0) {
+	   						$('#filterColumn1').append('<button style="width: 100%;" class="m-b-10 villageBtn">'+ village[i] + '</button>');
+	   					} else if ((i % 4) == 1) {
+	   						$('#filterColumn2').append('<button style="width: 100%;" class="m-b-10 villageBtn">'+ village[i] + '</button>');
+	   					} else if ((i % 4) == 2) {
+	   						$('#filterColumn3').append('<button style="width: 100%;" class="m-b-10 villageBtn">'+ village[i] + '</button>');
+	   					} else {
+	   						$('#filterColumn4').append('<button style="width: 100%;" class="m-b-10 villageBtn">'+ village[i] + '</button>');
+	   					}
+	    				
+	        		}
+	   				$('#map').css('height', $('.col-sm-4').height());
+ 	        	 
+ 	        	 var target = document.getElementById('snackbar');
+	        	  	 target.innerHTML = selectedDistrict + '에 속한 동을 성공적으로 불러왔습니다.';
+	        	  	 toast(); 
+	        	  	 
+        	  	// 동 생성 완료 후 
+     			$('#vilFilter').find('button').click(function(){
+     				// 클릭을 했는데 active 되어 있지 않으면 -> 활성화
+     				if(!($(this).hasClass('active'))) {
+     			  		$(this).addClass('active');
+     			  		geocoder.addressSearch($(this).text(), function(result, status) {
+     						
+     					    // 정상적으로 검색이 완료됐으면 
+     					     if (status === daum.maps.services.Status.OK) {
+
+     					        coords = new daum.maps.LatLng(result[0].y, result[0].x);
+     							console.log(coords);
+     					        // 결과값으로 받은 위치를 마커로 표시합니다
+     					        var marker = new daum.maps.Marker({
+     					            map: map,
+     					            position: coords
+     					        });
+     							console.log($(this).text());
+     					        var content = '<div style="width:150px;text-align:center;padding:6px 0;">'+ $(this).text() +'</div>';
+     					        // 인포윈도우로 장소에 대한 설명을 표시합니다
+     					        var infowindow = new daum.maps.InfoWindow({
+     					            content: content
+     					        });
+     					        infowindow.open(map, marker);
+
+     					        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+     					        map.setCenter(coords);
+     					    }
+     					    
+     					  // 지도에 표시할 원을 생성
+     						 	var circle = new daum.maps.Circle({
+     						 	    center : new daum.maps.LatLng(coords.jb, coords.ib),  // 원의 중심좌표 입니다 
+     						 	    radius: 700, // 미터 단위의 원의 반지름입니다 
+     						 	    strokeWeight: 3, // 선의 두께입니다 
+     						 	    strokeColor: '#27b2a5', // 선의 색깔입니다
+     						 	    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+     						 	    strokeStyle: 'solid', // 선의 스타일 입니다
+     						 	    fillColor: '#27b2a5', // 채우기 색깔입니다
+     						 	    fillOpacity: 0.7  // 채우기 불투명도 입니다   
+     						 	});
+     						 	
+     						 	// 지도에 원을 표시합니다 
+     						 	circle.setMap(map);
+     					}) // geoCoder 끝나는 부분
+     				} // if 문 끝나는 부분
+     				// 클릭을 했는데 활성화가 되어있으면,
+     				else { 
+     			   		$(this).removeClass('active');
+     			  	}
+     			}) 	 
+ 	         },
+ 	         error : function(error) {
+ 	        	var target = document.getElementById('snackbar');
+       	  	 		target.innerHTML = 'DB에서 동을 불러올 수 없습니다 다시 시도하세요!';
+       	  	 		toast();
+ 	         }
+ 	      })
+			
+ 	});
         		
-        		var target = document.getElementById('districtSelect');
-        		var selectedDistrict = target.options[target.selectedIndex].text;
-        		// 구가 변하면 필터 초기화 하기 위함
         		
         		
-        		$.ajax({
-        	         type : 'GET',
-        	         url : "/analysis/getvillagelist/" + selectedDistrict,
-        	         dataType : "json",
-        	         success : function(data) {
-        	        	 village = data.area;
-        	        	 village = village.split(',');
-        	        	 var target = document.getElementById('snackbar');
-       	        	  	 target.innerHTML = '동을 성공적으로 불러왔습니다.';
-       	        	  	 toast();
-        	        	  
-        	         },
-        	         error : function(error) {
-        	        	 
-        	         }
-        	      });
-        		
-        		for(var i = 1; i <=4; i++) {
-        			$('#filterColumn' + i).empty();
-        		}
-        		
-   				for(var i = 0; i < village.length; i++) {
-   					if((i % 4) == 0) {
-   						$('#filterColumn1').append('<button style="width: 100%;" class="m-b-10 villageBtn">'+ village[i] + '</button>');
-   					} else if ((i % 4) == 1) {
-   						$('#filterColumn2').append('<button style="width: 100%;" class="m-b-10 villageBtn">'+ village[i] + '</button>');
-   					} else if ((i % 4) == 2) {
-   						$('#filterColumn3').append('<button style="width: 100%;" class="m-b-10 villageBtn">'+ village[i] + '</button>');
-   					} else {
-   						$('#filterColumn4').append('<button style="width: 100%;" class="m-b-10 villageBtn">'+ village[i] + '</button>');
-   					}
-    				
-    				$('#map').css('height', $('.col-sm-3').height());
-        		}
-        		
-        		// 동 생성 완료 후 
-        		$('#vilFilter').find('button').click(function(){
-        			// 클릭을 했는데 active 되어 있지 않으면 -> 활성화
-        			if(!($(this).hasClass('active'))) { 
-        		  		$(this).addClass('active');
-        		  	} 
-        			// 클릭을 했는데 활성화가 되어있으면,
-        			else { 
-        		   		$(this).removeClass('active');
-        		  	}
-        		});
-        		
-        		$('#regionFilter').find('button').click(function(){
-        			 if(!($(this).hasClass('active'))) { // 클릭을 했는데 active 되어 있지 않으면 -> 활성화
-        				 $('#regionDetail').text('');
-        				 if($(this).text() === '주택가') {
-        					 $('#regionDetail').text('거주인구가 많은 지역을 추천');
-        				 } else if($(this).text() === '대학가') {
-        					 $('#regionDetail').text('대학가 및 20대가 많은 지역을 추천');
-        				 } else if($(this).text() === '유흥가') {
-        					 $('#regionDetail').text('유흥 지출이 많은 지역을 추천');
-        				 } else if($(this).text() === '역세권') {
-        					 $('#regionDetail').text('교통 지출이 많은 지역을 추천');
-        				 } else if($(this).text() === '오피스') {
-        					 $('#regionDetail').text('직장인이 많은 지역, 회사 밀집 지역을 우선으로 추천');
-        				 }
-        				 
-        				 $('#regionFilter').children().removeClass('active');
-      				     $(this).addClass('active');
-    			  	} else { // 클릭을 했는데 활성화가 되어있으면,
-        				 $(this).removeClass('active');
-    			  	}
-        		})
-        		
-        		
-        	})
-        	
-        	
+	$('#regionFilter').find('button').click(function(){
+		 if(!($(this).hasClass('active'))) { // 클릭을 했는데 active 되어 있지 않으면 -> 활성화
+			 if($(this).text() === '주택가') {
+				 var target = document.getElementById('snackbar');
+    	  	 		target.innerHTML = '거주인구가 많은 지역을 우선으로 추천합니다';
+    	  	 		toast();
+			 } else if($(this).text() === '대학가') {
+				 var target = document.getElementById('snackbar');
+ 	  	 			 target.innerHTML = '대학가 근처 및 20대가 많은 지역을 우선으로 추천합니다';
+ 	  	 			 toast();
+			 } else if($(this).text() === '유흥가') {
+				 var target = document.getElementById('snackbar');
+	  	 			 target.innerHTML = '유흥 지출이 많은 지역을 우선으로 추천합니다';
+	  	 			 toast();
+			 } else if($(this).text() === '역세권') {
+				 var target = document.getElementById('snackbar');
+  	 			 target.innerHTML = '교통 지출이 많은 지역을 우선으로 추천합니다';
+  	 			 toast();
+			 } else if($(this).text() === '오피스') {
+				 var target = document.getElementById('snackbar');
+  	 			 target.innerHTML = '직장인이 많은 지역, 회사 밀집 지역을 우선으로 추천합니다';
+  	 			 toast();
+			 }
+			 $('#regionFilter').children().removeClass('active');
+	     $(this).addClass('active');
+	} else { // 클릭을 했는데 활성화가 되어있으면,
+			 $(this).removeClass('active');
+		}
+	});
         </script>
 <!--===============================================================================================-->        
     <script type="text/javascript">
@@ -1096,6 +1180,9 @@
     		}
     	}
     	
+    	var target = document.getElementById('snackbar');
+			 target.innerHTML = '필터에 입력하신 값을 바탕으로 지도에 표시된 영역 골목 상권 분석을 진행합니다';
+			 toast();
     	$.ajax({
 	         type : 'GET',
 	         url : '/analysis/analysisstart/' ,
@@ -2241,68 +2328,6 @@ $(function(){
     });
 });
 </script>
-	<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85fa2226a5b3318b6ed8f59fb0e16f4e&libraries=services,clusterer,drawing"></script>
-	
-	<script type="text/javascript">
-	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-	var infowindow = new daum.maps.InfoWindow({zIndex:1});
-	    
-	 
-	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	    mapOption = {
-	        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
-	    };  
-
-	// 지도를 생성합니다    
-	var map = new daum.maps.Map(mapContainer, mapOption); 
-	
-	// 주소-좌표 변환 객체를 생성합니다
-	var geocoder = new daum.maps.services.Geocoder();
-
-	
-	var coords;
-	// 주소로 좌표를 검색합니다
-	geocoder.addressSearch('역삼1동', function(result, status) {
-
-	    // 정상적으로 검색이 완료됐으면 
-	     if (status === daum.maps.services.Status.OK) {
-
-	        coords = new daum.maps.LatLng(result[0].y, result[0].x);
-			console.log(coords);
-	        // 결과값으로 받은 위치를 마커로 표시합니다
-	        var marker = new daum.maps.Marker({
-	            map: map,
-	            position: coords
-	        });
-
-	        // 인포윈도우로 장소에 대한 설명을 표시합니다
-	        var infowindow = new daum.maps.InfoWindow({
-	            content: '<div style="width:150px;text-align:center;padding:6px 0;">역삼 1동</div>'
-	        });
-	        infowindow.open(map, marker);
-
-	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-	        map.setCenter(coords);
-	    } 
-	    
-	  // 지도에 표시할 원을 생성
-	 	var circle = new daum.maps.Circle({
-	 	    center : new daum.maps.LatLng(coords.jb, coords.ib),  // 원의 중심좌표 입니다 
-	 	    radius: 700, // 미터 단위의 원의 반지름입니다 
-	 	    strokeWeight: 3, // 선의 두께입니다 
-	 	    strokeColor: '#27b2a5', // 선의 색깔입니다
-	 	    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-	 	    strokeStyle: 'solid', // 선의 스타일 입니다
-	 	    fillColor: '#27b2a5', // 채우기 색깔입니다
-	 	    fillOpacity: 0.7  // 채우기 불투명도 입니다   
-	 	});
-	 	
-	 	// 지도에 원을 표시합니다 
-	 	circle.setMap(map);
-	});
-	</script>
     
 <!--===============================================================================================-->    	
 <!--===============================================================================================-->

@@ -14,15 +14,13 @@
         </div>
         
         <!-- 상단 Nav 바 Menu -->
-        <div class="wrap_menu p-l-45 p-l-0-xl">
+        <div class="wrap_menu p-l-0-xl" style="padding-left:355px;">
           <nav class="menu">
             <ul class="main_menu">
               <li><a href="/">Home</a></li>
-              <li><a href="">티아이 소개</a></li>
               <li><a href="/analysis/">분석하기</a></li>
               <li><a href="/qna/">이용 문의</a></li>
               <li><a href="/review/list">이용 후기</a></li>
-              <li><a href="/reserve/">상담 예약</a></li>
             <!-- 로그인 안했을 경우 -->
             <sec:authorize access="isAnonymous()">
               <li><a href="/member/loginForm">로그인</a></li>
