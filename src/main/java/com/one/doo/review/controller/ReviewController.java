@@ -21,7 +21,6 @@ import lombok.extern.log4j.Log4j;
 /**
  * 리뷰게시판 컨트롤러
  * @author siwonPark
- *
  */
 @Controller
 @Log4j
@@ -30,7 +29,7 @@ import lombok.extern.log4j.Log4j;
 public class ReviewController {
 	
 	@Inject
-	ArticleService service;
+	private ArticleService service;
 	
 	// 후기 게시판 매핑...
 	// /review/list                 : 후기글 전체목록
