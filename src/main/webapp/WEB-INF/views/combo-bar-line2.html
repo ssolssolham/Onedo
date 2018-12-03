@@ -1,0 +1,348 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Combo Bar-Line Chart</title>
+ <meta charset="utf-8">
+<script src="/jsp/dist/Chart.bundle.js"></script>
+<script src="/jsp/dist/utils.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<style>
+	canvas {
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
+</head>
+
+<body>
+
+<div class="calculatGraph">
+	<div style="width: 75%">
+		<canvas class="canvas"></canvas>
+	</div>
+	<button id="tableView">월 상환금액 표로 보기</button>
+    <button id="graphView">월 상환금액 그래프로 보기</button>
+  
+  <table class="table" border="1" style="display: none">
+  <thead>
+    <tr>
+      <th>납입 차수</th>
+      <th>매월 납입액</th>
+      <th>월 납입원금</th>
+      <th>월 납입이자</th>
+      <th>납입원금 누계</th>
+      <th>납입이자 누계</th>
+      <th>대출 잔액</th>
+    </tr>
+  </thead>
+  <tbody class="cell">
+  </tbody>
+  </table>
+ </div>
+  
+  
+                <!-- 금리 계산기 1  -->
+                  <div class="col-md-4" >
+                      <table class="table table-condensed">
+                      <tr>
+                          <td>대출원금</td>
+                          <td><input type="text" name="principal">10000<label>원</label></td></tr>
+                      <tr>
+                          <td>대출기간</td>
+                          <td><input type="text" name="period"style="width:110px;" />20<label>개월</label></td></tr>
+                      <tr>
+                          <td>거치기간</td>
+                          <td><input type="text" name="term">5<label>개월</label></td>
+                          </tr>
+                      <tr>
+                          <td>대출금리</td>
+                           <td><input type="text" name="rate" maxlength="7" value="<?=$rate?>" class="inp1 float">5<label>%</label></td></tr>
+                      </table>
+                  </div>  
+                    
+                    
+                     <!-- 금리 계산기 2  -->
+                  <div class="col-md-4" >
+                      <table class="table table-condensed">
+                      <tr>
+                          <td>대출원금</td>
+                          <td><input type="text" name="principal">10000<label>원</label></td></tr>
+                      <tr>
+                          <td>대출기간</td>
+                          <td><input type="text" name="period"style="width:110px;" />20<label>개월</label></td></tr>
+                      <tr>
+                          <td>거치기간</td>
+                          <td><input type="text" name="term">5<label>개월</label></td>
+                          </tr>
+                      <tr>
+                          <td>대출금리</td>
+                           <td><input type="text" name="rate" maxlength="7" value="<?=$rate?>" class="inp1 float">5<label>%</label></td></tr>
+                      </table>
+                  </div>   
+                    
+ <div class="calculatGraph">
+  <div style="width: 75%">
+    <canvas class="canvas"></canvas>
+  </div>
+  <button id="tableView">월 상환금액 표로 보기</button>
+    <button id="graphView">월 상환금액 그래프로 보기</button>
+  
+  <table class="table" border="1" style="display: none">
+  <thead>
+    <tr>
+      <th>납입 차수</th>
+      <th>매월 납입액</th>
+      <th>월 납입원금</th>
+      <th>월 납입이자</th>
+      <th>납입원금 누계</th>
+      <th>납입이자 누계</th>
+      <th>대출 잔액</th>
+    </tr>
+  </thead>
+  <tbody class="cell">
+  </tbody>
+  </table>
+ </div> 
+  
+<script>	
+$('.calculatGraph').each(function(index) { 
+	console.log(index + ': ' + $(this).text());
+});
+
+var amount_of_loans = 1000000; // 대출원금 (입력)
+var lending_rate = 0.12; // 이율(입력)
+var monthly_installment_plan = 12; // 상환기간(입력)
+var holding_period = 6;  //거치기간(입력)
+var holding = 6//보관용 거치기간(입력)
+var type_repayment = ""; //상환타입(입력)
+var my_asset = ""; // 내 연소득(입력)
+
+var my_amount_of_loans = amount_of_loans; // 대출잔액
+
+var repayments = new Array();
+var interests = new Array();
+var principals = new Array();
+var balances = new Array();
+var date = new Array();
+
+/* //if문이든 switch문으로 분기 시키기 만기일시상환
+for(var i=0; i<monthly_installment_plan - 1; i++) {
+    console.log("------------   "+Number(i+1)+"개월   ------------");
+	if(holding_period != 0){
+  	    var repayment = 0; //상환금액
+  	    var interest = my_amount_of_loans * lending_rate / 12; //납입이자    
+  	    var principal = 0;  //납입원금
+  	    var balance = my_amount_of_loans; //대출금잔액
+  	    
+  	    repayments.push(Math.round(repayment));
+  	    interests.push(Math.round(interest));
+  	    principals.push(Math.round(principal));
+  	    balances.push(Math.round(balance));
+  	    
+  	    holding_period--;
+  	    console.log(holding_period);
+  	}else{
+    var power = Math.pow(1+lending_rate/12, monthly_installment_plan);
+    var repayment = 0 //상환금   
+    var interest = my_amount_of_loans * lending_rate/12; //이자    
+    var principal = repayment - interest;  //원금
+    var balance = my_amount_of_loans-principal; //잔액
+    
+    repayments.push(Math.round(repayment));
+    interests.push(Math.round(interest));
+    principals.push(Math.round(principal));
+    balances.push(Math.round(balance));
+
+    my_amount_of_loans = balance;
+  	}
+ }
+ 
+ //마지막 달에 만기상환, 잔액 초기화 시키기 위한 원금납입
+repayments.push(my_amount_of_loans);
+interests.push(my_amount_of_loans * lending_rate/12);
+principals.push(0);
+balances.push(0);
+ */
+
+//원금 균등상환
+
+//거치기간 설정했을 때
+
+
+
+for(var i=0; i < monthly_installment_plan; i++) {
+	console.log("------------   "+Number(i+1)+"개월   ------------");
+  	if(holding_period != 0){
+  	    var repayment = 0; //상환금액
+  	    var interest = my_amount_of_loans * lending_rate / 12; //납입이자    
+  	    var principal = 0;  //납입원금
+  	    var balance = my_amount_of_loans; //대출금잔액
+  	    
+  	    repayments.push(Math.round(repayment));
+  	    interests.push(Math.round(interest));
+  	    principals.push(Math.round(principal));
+  	    balances.push(Math.round(balance));
+  	    
+  	    holding_period--;
+  	    console.log(holding_period);
+  	}else{
+  	
+    var repayment = (amount_of_loans / (monthly_installment_plan - holding)) + (my_amount_of_loans * lending_rate / 12); //상환금액
+    var interest = my_amount_of_loans * lending_rate / 12; //납입이자    
+    var principal = repayment - interest;  //납입원금
+    var balance = my_amount_of_loans-principal; //대출금잔액
+    
+    repayments.push(Math.round(repayment));
+    interests.push(Math.round(interest));
+    principals.push(Math.round(principal));
+    balances.push(Math.round(balance));
+  
+    my_amount_of_loans = balance;
+    console.log("------------  정산 완료  ------------");
+  	}
+} 
+
+
+//원리금 균등 상환
+/* for(var i=0; i<monthly_installment_plan; i++) {
+	
+	if(holding_period != 0){
+  	    var repayment = 0; //상환금액
+  	    var interest = my_amount_of_loans * lending_rate / 12; //납입이자    
+  	    var principal = 0;  //납입원금
+  	    var balance = my_amount_of_loans; //대출금잔액
+  	    
+  	    repayments.push(Math.round(repayment));
+  	    interests.push(Math.round(interest));
+  	    principals.push(Math.round(principal));
+  	    balances.push(Math.round(balance));
+  	    
+  	    holding_period--;
+  	    console.log(holding_period);
+  	}else{
+	
+  console.log("------------   "+Number(i+1)+"개월   ------------");
+  var power = Math.pow(1 + lending_rate / 12, monthly_installment_plan - holding); //월 이자율
+  var repayment = amount_of_loans * lending_rate/12 * power / (power-1); //상환금   
+  var interest = my_amount_of_loans * lending_rate/12; //이자    
+  var principal = repayment-interest;  //원금
+  var balance = my_amount_of_loans-principal; //잔액
+  
+  repayments.push(Math.round(repayment));
+  interests.push(Math.round(interest));
+  principals.push(Math.round(principal));
+  balances.push(Math.round(balance));
+
+  my_amount_of_loans = balance;
+  	}
+} */
+
+var interestSum = 0;
+var principalSum = 0;
+var body = document.getElementById('cell');  //행을 추가할 테이블
+
+body.innerHTML += "<tr><td colspan='6' style='text-align:center;'>"
+							+ "상환 개시전"+"</td><td>"
+							+ amount_of_loans +"</td></tr>";
+for (var i = 0; i < monthly_installment_plan; i++) {
+	interestSum += interests[i];
+	principalSum += principals[i];
+	body.innerHTML += "<tr><td>"
+									+ (i+1) + "개월"+"</td><td>"
+									+repayments[i]+"</td><td>"
+									+principals[i]+"</td><td>"
+									+interests[i]+"</td><td>"
+									+principalSum+"</td><td>"
+									+interestSum+"</td><td>"
+									+balances[i]+"</td></tr>";
+}
+body.innerHTML += "<tr><td colspan='5' style='text-align:center;'>"
+	+ "총 납입금액 "+"</td><td colspan='2'>"
+	+(interestSum + principalSum)+"원</tr>";
+
+var chartData = {
+		labels: ['2018-01', '2018-02', '2018-03', '2018-04', '2018-05', '2018-06', '2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12'],
+		datasets:
+			[
+				{
+				type: 'bar',
+				label: '잔액',
+				borderColor: window.chartColors.blue,
+				borderWidth: 2,
+				fill: false,
+				data: balances
+				}, 
+			
+				{
+				type: 'bar',
+				label: '월 납입액',
+				backgroundColor: window.chartColors.red,
+				data: repayments ,
+				borderColor: 'white',
+				borderWidth: 2
+				}, 
+				
+				{
+				type: 'bar',
+				label: '월 납입원금',
+				backgroundColor: window.chartColors.green,
+				data: principals
+				},
+			
+				{
+				type: 'bar',
+				label: '월 납입이자',
+				backgroundColor: window.chartColors.yellow,
+				data: interests
+				}
+			]
+		};
+		
+		window.onload = function() {
+			var ctx = document.getElementById('canvas').getContext('2d');
+			window.myMixedChart = new Chart(ctx, {
+				type: 'bar',
+				data: chartData,
+				options: {
+					responsive: true,
+					title: {
+						display: true,
+						text: 'Chart.js Combo Bar Line Chart'
+					},
+					tooltips: {
+						mode: 'index',
+						intersect: true
+					}
+				}
+			});
+		};
+
+/*  		document.getElementById('randomizeData').addEventListener('click', function() {
+			chartData.datasets.forEach(function(dataset) {
+				dataset.data = dataset.data.map(function() {
+					return randomScalingFactor();
+				});
+			});
+			window.myMixedChart.update();
+		}); */
+		
+		
+	document.getElementById('tableView').addEventListener('click', function(){
+		document.getElementById('canvas').style.display = "none";
+		document.getElementById('table').style.display = "block";
+		});
+		
+	document.getElementById('graphView').addEventListener('click', function(){
+		document.getElementById('canvas').style.display = "block";
+		document.getElementById('table').style.display = "none";
+		});		
+		
+	</script>
+</body>
+
+</html>

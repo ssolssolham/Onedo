@@ -7,7 +7,8 @@
 SELECT loan_id, loan_name, loan_content, loan_division, loan_category, interestRate_category, creditLine_desc,
            	loanPeriod_desc, repayment_way, detail_url,  target_description, 
            	TO_CHAR(loanUpdate_date, 'MM-DD-YYYY') "UPDATE_DATE", target_detail1,  target_detail2, target_detail3, 
-           	t.target_name, c.loancomp_name, c.present_num, c.sub_num
+           	holding, holding_min, holding_max, repay1, repay2, repay3, repayM, 
+           	t.target_name, c.loancomp_name, c.present_num, c.sub_num, loanperiod_min, loanperiod_max
 FROM    loan_product p
 			JOIN loan_target t
 			ON p.target_id = t.target_id
@@ -129,9 +130,9 @@ FROM    loan_product p
 		             #{securityType})
 	</insert>
 
-	<select id="readLoan" resultType="com.one.doo.loan.domain.Loan">
+<!-- 	<select id="readLoan" resultType="com.one.doo.loan.domain.Loan">
 	 	SELECT * FROM loan_product WHERE loan_id = #{loanId}
-	</select>
+	</select> -->
 
 	<update id="updateLoan">
 		UPDATE loan_product
@@ -159,17 +160,52 @@ FROM    loan_product p
 
 
 <!-- 신용도에 따른 대출 이율 읽기  -->
-	<select id="readRate" resultType="com.one.doo.loan.domain.CreditRank">
-		SELECT * 
-		FROM credit_rate_category 
-		WHERE rate_id = #{rateId}
+  <resultMap type="com.one.doo.loan.domain.Loan" id="loanMap">
+    <id property="loanId" column="loan_id"/>
+    <result property="loanCompId" column="loanComp_id"/>
+    <result property="targetId" column="target_id"/>
+    <result property="loanDivision" column="loan_division"/>
+    <result property="loanCategory" column="loan_category"/>
+    <result property="loanName" column="loan_name"/>
+    <result property="loanContent" column="loan_content"/>
+    <result property="loanUpdateDate" column="loanUpdate_date"/>
+    <result property="termService" column="term_service"/>
+    <result property="moneyConditionMin" column="money_condition_min"/>
+    <result property="moneyConditionMax" column="money_condition_max"/>
+    <result property="targetDescription" column="target_description"/>
+    <result property="targetDetail1" column="target_detail1"/>
+    <result property="targetDetail2" column="target_detail2"/>
+    <result property="targetDetail3" column="target_detail3"/>
+    
+    <result property="interestRateCategory" column="interestRate_category"/>
+    <result property="interestRateMin" column="interestRate_min"/>
+    <result property="interestRateMax" column="interestRate_max"/>
+    
+    <result property="creditLineMin" column="creditLine_min"/>
+    <result property="creditLineMax" column="creditLine_max"/>
+    <result property="creditLineDesc" column="creditLine_desc"/>
+    
+    <result property="loanPeriodMin" column="loanPeriod_min"/>
+    <result property="loanPeriodMax" column="loanPeriod_max"/>
+   <result property="loanPeriodDesc" column="loanPeriod_desc"/>
+    <result property="repaymentWay" column="repayment_way"/> 
+    
+    <result property="holding" column="holding"/>
+    <result property="holdingMin" column="holding_min"/>
+    <result property="holdingMax" column="holding_max"/>
+    <result property="repay1" column="repay1"/>
+    <result property="repay2" column="repay2"/>
+    <result property="repay3" column="repay3"/>
+    <result property="repayM" column="repayM"/>
+    <result property="detailUrl" column="detail_url"/>
+    <result property="securityType" column="security_type"/>
+  </resultMap>	
+
+	<select id="readLoan" resultMap="loanMap">
+		SELECT *
+		FROM loan_product 
+		WHERE loan_id = #{loanId}
 	</select>
 
-
-	<update id="updateRate">
-		UPDATE credit_rate_category 
-		SET rate_id = #{rateId} 
-		WHERE rate_id = #{rateId}
-	</update>
 
 </mapper>
