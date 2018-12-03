@@ -91,17 +91,16 @@
 					<br>
 					<div>
 					<!-- 글쓴이와 보고있는사람 아이디 일치할경우 -->
+                    <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" href="/review/list">목록</a><span class="float-r">&nbsp;&nbsp;</span>
+                    <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" id="replyReviewBtn" data-toggle="modal" data-target="#replyReviewModal">댓글</a><span class="float-r">&nbsp;&nbsp;</span>
+					
 					<sec:authentication var="loginId" property="principal.member.userid" /><!-- 로그인한사람 id값 변수로 저장 -->
 					<c:set var="writer" value="${review.userid }"/>
 					<c:if test="${writer eq loginId }">
-					아이디같다고ㅡㅡ
-                        <a class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" href="/review/list">목록</a>
                         <!-- 해당 아이디인 경우에만 확인할 수 있도록 작성 -->
- 						<button type="button" class="float-r" style="height:35px;" id="updateReviewBtn" data-toggle="modal" data-target="#updateReviewModal">수정</button><span class="float-r">&nbsp;&nbsp;</span>
-						<button type="button" class="float-r" style="height:35px;" id="deleteReviewBtn" data-toggle="modal" data-target="#deleteReviewModal">삭제</button>
+                        <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" id="updateReviewBtn" data-toggle="modal" data-target="#updateReviewModal">수정</a><span class="float-r">&nbsp;&nbsp;</span>
+                        <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton"id="deleteReviewBtn" data-toggle="modal" data-target="#deleteReviewModal">삭제</a>
 					</c:if>
-					<!-- 글쓴이이외의 사람 -->
-                        <a class="btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" href="/review/list">목록dl</a>
 					</div>
 				</div>
 			</div>
@@ -142,15 +141,15 @@
 		</div>
 	  </div>
     
-  <!-- 후기 수정 Modal HTML -->
-  <div id="updateReviewModal" class="modal fade">
+  <!-- 후기 댓글 Modal HTML -->
+  <div id="replyReviewModal" class="modal fade">
     <div class="modal-dialog modal-login">
       <div class="modal-content">
       <div class="modal-header">        
-        <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;후기 수정</h4>
+        <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;댓글달기</h4>
       </div>
       <div class="modal-body">
-        <form action="/review/modify" method="post">
+        <form action="/reply/register" method="post">
         <div class="form-group">
           <input type="text" class="form-control " required="required" style="padding-left:10px;" value="기존 제목 동적으로 불러옴">
         </div>

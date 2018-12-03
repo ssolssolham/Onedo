@@ -164,7 +164,7 @@
 	  </div>  
 
 
-<!-- javascript by siwon -->
+<!-- 검색처리관련 javascript by siwon -->
 <script type="text/javascript">
 $(document).ready(function() {
 	//모달처리를 위한 javascript
