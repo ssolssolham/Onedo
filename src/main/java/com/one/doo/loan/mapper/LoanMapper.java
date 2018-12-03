@@ -19,9 +19,6 @@ public interface LoanMapper {
 	//대출상품 정보 수정
 	public int updateLoan(Loan loan);
 	
-	//대출상세정보 읽기
-	public Loan readLoan(int loanId);
-	
 	//신용도에 따른 대출이율 읽기
-	public CreditRank readRate(int rateId);
+	public Loan readLoan(int loanId);
 }

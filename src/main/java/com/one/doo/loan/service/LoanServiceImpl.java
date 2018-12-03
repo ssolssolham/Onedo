@@ -43,9 +43,6 @@ public class LoanServiceImpl implements LoanService{
 		return mapper.readLoan(loanId);
 	}
 
-	@Override
-	public CreditRank readRate(int rateId) {
-		return mapper.readRate(rateId);
-	}
+
 
 }

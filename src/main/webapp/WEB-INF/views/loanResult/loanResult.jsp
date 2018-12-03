@@ -6,6 +6,36 @@
 <title>추천 대출 상품 확인</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="${pageContext.request.contextPath}/resources/dist/js/Chart.bundle.js"></script>
+<script src="${pageContext.request.contextPath}/resources/dist/js/utils.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+<style>
+  canvas {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+  
+  #modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%; 
+  pointer-events: auto;
+  background-color: white;
+  background-clip: padding-box;
+  border: 1px solid;
+  outline: 0;
+}
+  
+  .calculatorTable{
+    background-color: white;
+  }
+  </style>
+
 <!-- header include 시작 -->
 <jsp:include
   page="${pageContext.request.contextPath}/resources/includes/headTagConfig.jsp" />
@@ -52,7 +82,6 @@
             회원님의 정보와 일치하는 대출 상품을 확인하시고, 상담 예약을 진행하세요!</span> <br><br>
           
           
-          
           <!-- 상품 리스트 출력  -->
           <div class="row" style="margin-top: 20px;">
           
@@ -63,7 +92,7 @@
             <div class="container">
               <div class="ziehharmonika">
                 <h3>${loan.get('LOAN_NAME')} 
-                <span style="font-weight: bold; color: #27b2a5;">업데이트 날짜 : </span><p>${loan.get('UPDATE_DATE')}</p>
+                <span style="font-weight: bold; color: #27b2a5;">업데이트 날짜 : <p>${loan.get('UPDATE_DATE')}</p></span>
                 </h3>
                 <div>
                 
@@ -109,11 +138,11 @@
                       </tr>
                       <tr>
                         <td>5. 가입대상</td>
-                        <td>하나은행을 이용하는 고객 모두</td>
+                        <td><c:out value="${loan.get('TARGET_DESCRIPTION')}" /></td>
                       </tr>
                       <tr>
                         <td>6. 대출한도</td>
-                        <td>1000만원 까지</td>
+                        <td><c:out value="${loan.get('CREDITLINE_DESC')}" /></td>
                       </tr>
                       <tr>
                         <td>7. 제품상세보기</td>
@@ -121,10 +150,11 @@
                       </tr>
                     </tbody>
                   </table>
+                <button class="float-r" id="calculateBtn" data-toggle="modal" data-target="#calculatorModal" value="${loan.get('LOAN_ID')}">
+                        금리계산기</button>
                   <button type="button" class="float-r" id="loanModalBtn" data-toggle="modal" data-target="#loanModal1">
-                          해당 대출로 상담 예약</button>
+                         대출상담 예약</button>
                 </div>
-
               </div>
             </div>
              </c:forEach>
@@ -132,23 +162,66 @@
             <c:otherwise>
               <div class="container">
                   <h3>죄송합니다. 현재 입력해주신 정보로 조회되는 상품이 없습니다.
-                    <span style="font-weight: bold; color: #27b2a5;">바로 상담원 연결 </span>
+                    <span style="font-weight: bold; color: #27b2a5;">바로 상담원 연결</span>
                   </h3>
                   <button type="button" class="float-r" id="loanModalBtn" data-toggle="modal" data-target="#loanModal1">
-                          해당 대출로 상담 예약</button>
+                           상담 예약</button>
               </div>
             </c:otherwise>
             </c:choose>
 
             <!--상품목록 끝-->
-
           </div>
         </div>
       </div>
      </div>
   </section>
 
-  <!--   
+               <!-- 금리 계산기 부분  -->
+               <div id="modal-content">
+                  <div class="modal" id="calculatorModal"  style="display:none;">
+                      <div class="modal-header">
+                          <h5 class="modal-title" style="color: gray;"><b>대출이율 계산하기</b></h5>
+                          <button type="button" class="close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                    <div id="calculator">
+                    
+                    </div>
+                   <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                    <button type="button" style="background-color: #27b2a5; border-color: #27b2a5;" class="btn btn-primary" id="checkRepayment">상환계획 조회 </button>
+                  </div>
+                  
+                   <div style="width: 75%" style="display:none;">
+                        <canvas id="canvas" style="display:none;">
+                        
+                        </canvas>
+                        <button id="tableView">월 상환금액 표로 보기</button>
+                        <button id="graphView">월 상환금액 그래프로 보기</button>
+                    </div>
+                       
+                    <table id="table" border="1" style="display: none">
+                        <thead>
+                          <tr>
+                            <th>납입 차수</th>
+                            <th>매월 납입액</th>
+                            <th>월 납입원금</th>
+                            <th>월 납입이자</th>
+                            <th>납입원금 누계</th>
+                            <th>납입이자 누계</th>
+                            <th>대출 잔액</th>
+                          </tr>
+                        </thead>
+                        <tbody id="cell">
+                        </tbody>
+                    </table>
+                    
+                  </div>
+                  </div>
+ 
+                    
 	 <div class="modal fade" id="loanModal1" tabindex="-1" role="dialog" aria-labelledby="loanModal1Label" aria-hidden="true">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
@@ -159,7 +232,6 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						
 							<h6 style="color: gray;"><b>이름</b></h6>
 							<div style="text-align: right; font-size: 0.8em; color: darkgray;">강원준</div>
 							<h6 style="color: gray;"><b>대출 희망금액</b></h6>
@@ -181,8 +253,363 @@
 					</div>
 				</div>
 			</div>
-		</div>   -->
+		</div>
+    
+<script>
 
+<%-- <table class="table table-condensed">
+<tr>
+    <td>대출원금</td>
+    <td><input type="text" name="principal" maxlength="${loan.get('CREDITLINE_MAX')}" value="${param.requiredMoney}" class="inp1 money"></td>${param.requiredMoney}<label>원</label></tr>
+<tr>
+    <td>대출기간</td>
+    <td><input type="text" name="period" maxlength="${loan.get('LOANPERIOD_MAX')}" value="<?=$month?>" class="inp1 onlyNum" style="width:110px;" /> </td>개월</tr>
+<tr>
+    <td>거치기간</td>
+    <c:if test="${loan.get('HOLDING' == '1')}">
+      <td><input type="text" name="term" maxlength="${loan.get('HOLDING_MAX')}"></td><label>개월</label>
+    </c:if>
+    <td><input type="text" name="term" disabled="disabled"></td><label>개월</label>
+    </tr>
+<tr>
+    <td>대출금리</td>
+     <td><input type="text" name="rate" maxlength="7" value="<?=$rate?>" class="inp1 float"></td><label>%</label></tr>
+<tr>
+  <td>상환방법</td>
+  <td>
+  <c:if test="${loan.get('REPAY1') == '1'}"><input type="radio" name="rapay1" value="1"><label for="1">만기일시상환</label></c:if>
+  <c:if test="${loan.get('REPAY2') == '1'}"><input type="radio" name="rapay2" value="2"><label for="2">원리금균등상환</label></c:if>
+  <c:if test="${loan.get('REPAY3') == '1'}"><input type="radio" name="rapay3" value="3"><label for="3">원금균등상환</label></c:if>
+  <c:if test="${loan.get('REPAYM') == '1'}"><input type="radio" name="rapayM" value="4"><label for="4">통장대출</label></c:if>
+  <option value="07" ${extraInfoList[16].txt != 'null' && extraInfoList[16].txt == '07' ? 'selected="selected"':''}>토</option>
+  </td>
+</tr>
+</table> --%>
+
+
+
+//신용등급별 이율 컨트롤
+    $(".float-r" ).each(function(index) {
+        $(this).on("click", function(){
+            var loanId = parseInt($(this).val());
+            var table = "<table class='calculatorTable'>";
+            console.log(loanId);
+    	 	$.ajax({
+    	        url : '/loan/loan/' + loanId,
+    	        success : function(data) {
+    	          console.log(data);
+    	           var holding = data.holding;
+    	           console.log(holding);
+    	           var creditLineMax = data.creditLineMax;
+    	           console.log(creditLineMax);
+    	           var loanPeriodMax = data.loanPeriodMax;
+    	           console.log(loanPeriodMax);
+				   var holdingMax = data.holdingMax;
+				   console.log(holdingMax);
+				   var repay1 = data.repay1;
+				   var repay2 = data.repay2;
+				   var repay3 = data.repay3;
+				   var repayM = data.repayM;
+    	           
+				   table += "<tr><td>대출원금</td><td><input type='text' id='principal' name='principal' maxlength='"+creditLineMax+"' value='"+${param.requiredMoney}+"' class='inp1 money'></td>"+${param.requiredMoney}+"<label>원</label></tr>";
+				   table += "<tr><td>대출기간</td><td><input type='text' id='period' name='period' maxlength='"+loanPeriodMax+"' class='inp1 onlyNum' style='width:110px;'/>개월</td></tr>";
+				   table += "<tr><td>거치기간</td>";
+				   
+				   if(holding){
+				   	  table += "<td><input type='text' id='term' name='term' maxlength='"+holdingMax+"'></td><label>개월</label>";
+				   }else{
+					  table += "<td><input type='text' id='term' value='0' name='term' disabled></td><label>개월</label></tr>"; 
+				   }
+				    table += "<tr><td>대출금리</td><td><input type='text' id='rate' name='rate' maxlength='7' class='inp1 float'></td><label>%</label></tr>";
+				    table += "<tr><td>상환방법</td><td>";
+				    
+				    if(repay1){
+				    	table += "<input type='radio' name='repay' value='1'><label for='1'>만기일시상환</label>";
+				    };
+				    if(repay2){
+				    	table += "<input type='radio' name='repay' value='2'><label for='2'>원리금균등상환</label>";
+				    };
+				    if(repay3){
+				    	table += "<input type='radio' name='repay' value='3'><label for='3'>원금균등상환</label>";
+				    };
+				    if(repayM){
+				    	table += "<input type='radio' name='repay' value='4'><label for='4'>통장대출</label>";
+				    };
+				    table += "</td></tr>";
+				    table += "<tr><td>연 소득</td><td><input type='text' id='salary' name='salary' ><label>만원</label>";
+				    table += "</table>";
+					$("#calculator").html(table);   
+					console.log(table);
+					
+					$(function() {
+						  var modal = document.getElementById("calculatorModal");
+						  var btn = document.getElementById("calculateBtn");
+						  var span = document.getElementsByClassName("close")[0];
+						  
+						  // When the user clicks on the button, open the modal 
+						  btn.onclick = function() {
+						    modal.style.display = 'block';
+						  }
+
+						  // When the user clicks on <span> (x), close the modal
+						  span.onclick = function() {
+						    modal.style.display = 'none';
+						  }
+
+						  // When the user clicks anywhere outside of the modal, close it
+						  window.onclick = function(event) {
+						    if (event.target == modal) {
+						      modal.style.display = 'none';
+						    }
+						  }
+						});
+    	        },
+    	        error : function(data){
+    	        	console.log("비동기 실패요~");
+    	        }
+    	    });
+        });
+    });
+</script>
+
+<script>
+function checkRepayment(){
+	 var interestSum = 0;
+	 var principalSum = 0;
+	 var body = document.getElementById('cell');  //행을 추가할 테이블
+
+	 body.innerHTML += "<tr><td colspan='6' style='text-align:center;'>"
+	               + "상환 개시전"+"</td><td>"
+	               + amount_of_loans +"</td></tr>";
+	 for (var i = 0; i < monthly_installment_plan; i++) {
+	   interestSum += interests[i];
+	   principalSum += principals[i];
+	   body.innerHTML += "<tr><td>"
+	                   + (i+1) + "개월"+"</td><td>"
+	                   +repayments[i]+"</td><td>"
+	                   +principals[i]+"</td><td>"
+	                   +interests[i]+"</td><td>"
+	                   +principalSum+"</td><td>"
+	                   +interestSum+"</td><td>"
+	                   +balances[i]+"</td></tr>";
+	 }
+	 body.innerHTML += "<tr><td colspan='5' style='text-align:center;'>"
+	   + "총 납입금액 "+"</td><td colspan='2'>"
+	   +(interestSum + principalSum)+"원</tr>";
+
+	  console.log(repayments); 
+	   	
+	 var chartData = {
+	     labels: ['2018-01', '2018-02', '2018-03', '2018-04', '2018-05', '2018-06', '2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12'],
+	     datasets:
+	       [
+	         {
+	         type: 'bar',
+	         label: '잔액',
+	         borderColor: window.chartColors.blue,
+	         borderWidth: 2,
+	         fill: false,
+	         data: balances
+	         }, 
+	       
+	         {
+	         type: 'bar',
+	         label: '월 납입액',
+	         backgroundColor: window.chartColors.red,
+	         data: repayments ,
+	         borderColor: 'white',
+	         borderWidth: 2
+	         }, 
+	         
+	         {
+	         type: 'bar',
+	         label: '월 납입원금',
+	         backgroundColor: window.chartColors.green,
+	         data: principals
+	         },
+	       
+	         {
+	         type: 'bar',
+	         label: '월 납입이자',
+	         backgroundColor: window.chartColors.yellow,
+	         data: interests
+	         }
+	       ]
+	     };
+	     
+	     window.onload = function() {
+	       var ctx = document.getElementById('canvas').getContext('2d');
+	       window.myMixedChart = new Chart(ctx, {
+	         type: 'bar',
+	         data: chartData,
+	         options: {
+	           responsive: true,
+	           title: {
+	             display: true,
+	             text: 'Chart.js Combo Bar Line Chart'
+	           },
+	           tooltips: {
+	             mode: 'index',
+	             intersect: true
+	           }
+	         }
+	       });
+	     };
+
+	   document.getElementById('tableView').addEventListener('click', function(){
+	     document.getElementById('canvas').style.display = "none";
+	     document.getElementById('table').style.display = "block";
+	     });
+	     
+	   document.getElementById('graphView').addEventListener('click', function(){
+	     document.getElementById('canvas').style.display = "block";
+	     document.getElementById('table').style.display = "none";
+	     });   
+	 
+	   $("#canvas").show();
+}
+</script>
+
+<!-- 상품별 금융계산기  -->
+<script>
+var amount_of_loans = $('#principal').val(); // 대출원금 (입력)
+var lending_rate = $('#rate').val(); // 이율(입력)
+var monthly_installment_plan = $('#period').val(); // 상환기간(입력)
+var holding_period = $('#term').val();  //거치기간(입력)
+var holding = $('#term').val()//보관용 거치기간(입력)
+var type_repayment = $('input[name="repay"]:checked').val(); //상환타입(입력) var radioVal = $('input[name="radioTxt"]:checked').val();
+var my_asset = $('#salary').val(); // 내 연소득(입력)
+
+var my_amount_of_loans = amount_of_loans; // 대출잔액
+
+var repayments = new Array();
+var interests = new Array();
+var principals = new Array();
+var balances = new Array();
+var date = new Array();
+
+
+
+ //if문이든 switch문으로 분기 시키기 만기일시상환
+if(type_repayment == '1'){
+for(var i=0; i<monthly_installment_plan - 1; i++) {
+    console.log("------------   "+Number(i+1)+"개월   ------------");
+  if(holding_period != 0){
+        var repayment = 0; //상환금액
+        var interest = my_amount_of_loans * lending_rate / 12; //납입이자    
+        var principal = 0;  //납입원금
+        var balance = my_amount_of_loans; //대출금잔액
+        
+        repayments.push(Math.round(repayment));
+        interests.push(Math.round(interest));
+        principals.push(Math.round(principal));
+        balances.push(Math.round(balance));
+        
+        holding_period--;
+        console.log(holding_period);
+    }else{
+    var power = Math.pow(1+lending_rate/12, monthly_installment_plan);
+    var repayment = 0 //상환금   
+    var interest = my_amount_of_loans * lending_rate/12; //이자    
+    var principal = repayment - interest;  //원금
+    var balance = my_amount_of_loans-principal; //잔액
+    
+    repayments.push(Math.round(repayment));
+    interests.push(Math.round(interest));
+    principals.push(Math.round(principal));
+    balances.push(Math.round(balance));
+
+    my_amount_of_loans = balance;
+    }
+ 
+   //마지막 달에 만기상환, 잔액 초기화 시키기 위한 원금납입
+  repayments.push(my_amount_of_loans);
+  interests.push(my_amount_of_loans * lending_rate/12);
+  principals.push(0);
+  balances.push(0);
+}
+  $('#checkRepayment').on('click', function(){
+  	  checkRepayment;  
+  });
+
+}else if(type_repayment == '3'){
+
+//원금 균등상환
+//거치기간 설정했을 때
+for(var i=0; i < monthly_installment_plan; i++) {
+  console.log("------------   "+Number(i+1)+"개월   ------------");
+    if(holding_period != 0){
+        var repayment = 0; //상환금액
+        var interest = my_amount_of_loans * lending_rate / 12; //납입이자    
+        var principal = 0;  //납입원금
+        var balance = my_amount_of_loans; //대출금잔액
+        
+        repayments.push(Math.round(repayment));
+        interests.push(Math.round(interest));
+        principals.push(Math.round(principal));
+        balances.push(Math.round(balance));
+        
+        holding_period--;
+        console.log(holding_period);
+    }else{
+   	var repayment = (amount_of_loans / (monthly_installment_plan - holding)) + (my_amount_of_loans * lending_rate / 12);
+    var interest = my_amount_of_loans * lending_rate / 12; //납입이자    
+    var principal = repayment - interest;  //납입원금
+    var balance = my_amount_of_loans-principal; //대출금잔액
+    
+    repayments.push(Math.round(repayment));
+    interests.push(Math.round(interest));
+    principals.push(Math.round(principal));
+    balances.push(Math.round(balance));
+  
+    my_amount_of_loans = balance;
+    }
+    $('#checkRepayment').on('click', function(){
+    	  checkRepayment();  
+  	}); 
+}
+}else if(type_repayment == '2'){
+//원리금 균등 상환
+ for(var i=0; i<monthly_installment_plan; i++) {
+  if(holding_period != 0){
+        var repayment = 0; //상환금액
+        var interest = my_amount_of_loans * lending_rate / 12; //납입이자    
+        var principal = 0;  //납입원금
+        var balance = my_amount_of_loans; //대출금잔액
+        
+        repayments.push(Math.round(repayment));
+        interests.push(Math.round(interest));
+        principals.push(Math.round(principal));
+        balances.push(Math.round(balance));
+        
+        holding_period--;
+        console.log(holding_period);
+    }else{
+    console.log("------------   "+Number(i+1)+"개월   ------------");
+    var power = Math.pow(1 + lending_rate / 12, monthly_installment_plan - holding);  //월 이자율
+    var repayment = amount_of_loans * lending_rate/12 * power / (power-1); //상환금   
+    var interest = my_amount_of_loans * lending_rate/12; //이자    
+    var principal = repayment-interest;  //원금
+    var balance = my_amount_of_loans-principal; //잔액
+    
+    repayments.push(Math.round(repayment));
+    interests.push(Math.round(interest));
+    principals.push(Math.round(principal));
+    balances.push(Math.round(balance));
+  
+    my_amount_of_loans = balance;
+     }
+  }
+ 	$('#checkRepayment').on('click', function(){
+ 	  checkRepayment();  
+   });
+  
+}else{
+	console.log("마이너스는 나중에,,");
+}
+
+ //$('#checkRepayment').on('click', function(){});
+  </script>
 
   <!--===============================================================================================-->
   <script type="text/javascript"
