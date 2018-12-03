@@ -43,7 +43,7 @@ public class ReviewController {
 	@GetMapping("/list")
 	public String list(Criteria cri, Model model) {
 		log.info("후기게시판 list요청..");
-		log.info("list: "+cri);
+		log.info("들어온 criteria값!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!\n"+cri);
 		
 		model.addAttribute("list", service.getReviewList(cri));
 		//model.addAttribute("pageMaker", new Page(cri, 123)); //임의로 123(total값)

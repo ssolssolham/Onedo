@@ -44,8 +44,8 @@
 					<br>
 					<br>
 					&nbsp;&nbsp;
-					<form id="searchForm" action="/review/list" method="get"></form>
-					<select name="type" style="height: 35px; font-size: 20px; text-align: center; width: 15%; display: inline" class="form-control form-control-sm">
+					<form id="searchForm" action="/review/list" method="get">
+					<select name="type" id="optionSel" style="height: 35px; font-size: 20px; text-align: center; width: 15%; display: inline" class="form-control form-control-sm">
 					  <option value="" <c:out value="${pageMaker.cri.type == null?'selected':'' }"/>>--</option>
 					  <option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':'' }"/>>제목</option>
                       <option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':'' }"/>>내용</option>
@@ -54,11 +54,11 @@
                       <option value="TW" <c:out value="${pageMaker.cri.type eq 'TW'?'selected':'' }"/>>제목 or 작성자</option>
                       <option value="TWC" <c:out value="${pageMaker.cri.type eq 'TWC'?'selected':'' }"/>>제목 or 내용 or 작성자</option>
 					</select>
-					<input type="text" name="keyword" value="${pageMaker.cri.keyword }" style="vertical-align: top; width: 15%; height: 35px; display: inline;" class="form-control" id="searchValue">
+					<input type="text" name="keyword" id="keyword" value="${pageMaker.cri.keyword }" style="vertical-align: top; width: 15%; height: 35px; display: inline;" class="form-control"> <!--  id="searchValue" -->
 					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 					<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-					<button id="reviewSearchBtn" style="vertical-align: top; height:35px; width: 10%;">검색</button>
-				
+					<button type="button" id="reviewSearchBtn" style="vertical-align: top; height:35px; width: 10%;">검색</button>
+				  </form>
 				<sec:authorize access="isAuthenticated()">
 					<button type="button" class="float-r" style="height:35px;" id="createReviewBtn" data-toggle="modal" data-target="#createReviewModal">후기작성</button>
 				</sec:authorize>
@@ -201,23 +201,26 @@ $(document).ready(function() {
 		actionForm.submit();
 	});
 	
-	
 	// 검색
 	var searchForm = $('#searchForm');
 	
 	$("#reviewSearchBtn").on("click", function(e) {
 		
-		if(!searchForm.find("option:selected").val()){
+		console.log("선택옵션: " + $('#optionSel option:selected').val());
+		console.log("입력키워드: " + $('#keyword').val());
+
+		if(!$('#optionSel option:selected').val()){
 			alert("검색종류를 선택해 주세요");
 			return false;
 		}
-		if(!searchForm.find("input[name='keyword']").val()){
+		if(!$('#keyword').val()){
 			alert("키워드를 입력하세요");
 			return false;
 		}
 		
 		searchForm.find("input[name='pageNum']").val("1");
-		e.prevenDefault();
+		e.preventDefault();
+		searchForm.submit();
 	});
 	
 });

@@ -53,6 +53,8 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<Article> getReviewList(Criteria cri) {
 		log.info("리뷰게시글 리스트 with 페이징 서비스");
+//		log.info("criteria값: "+cri);
+//		log.info("불러온리스트\n"+mapper.getListWithPaging(cri));
 		return mapper.getListWithPaging(cri);
 	}
 
