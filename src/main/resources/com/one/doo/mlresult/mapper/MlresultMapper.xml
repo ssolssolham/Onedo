@@ -3,6 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.doo.mlresult.mapper.MlresultMapper">
+<select id="firstStep" resultType="map">
+select * 
+from MLResult mr 
+     inner join alleybiz ab on mr.alleybizcode = ab.alleybizcode
+     inner join areacodes ac on ab.areacode = ac.areacode
+     inner join livingperalleybiz lib on mr.alleybizcode = lib.alleybizcode AND lib.lap_date LIKE '201807'
+where MLR_DATE LIKE '201812' 
+      AND ac.areacode_name IN
+      <foreach item="item" index="index" collection="Areas"
+        open="(" separator="," close=")">
+          #{item}
+    </foreach>
+order by mr.estmt_sales desc,lib.totalliving desc
+</select>
 
-
+<select id="read" resultType="com.one.doo.mlresult.domain.Mlresult">
+select * from MLResult
+where alleybizcode = #{AlleyBizCode} AND mlr_date LIKE '201812'
+</select>
 </mapper>

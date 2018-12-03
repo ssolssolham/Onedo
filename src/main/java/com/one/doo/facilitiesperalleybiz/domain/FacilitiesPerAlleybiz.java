@@ -1,9 +1,23 @@
 package com.one.doo.facilitiesperalleybiz.domain;
 
+import com.one.doo.flowperalleybiz.domain.FlowPerAlleybiz;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 /**
  * @author 박호준
  *
  */
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 public class FacilitiesPerAlleybiz {
 	private String FPD_DATE;     
 	private int AlleybizCode;

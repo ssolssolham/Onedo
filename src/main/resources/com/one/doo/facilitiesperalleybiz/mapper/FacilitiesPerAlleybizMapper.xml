@@ -3,6 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.doo.facilitiesperalleybiz.mapper.FacilitiesPerAlleybizMapper">
-
+<select id="read" resultType="com.one.doo.facilitiesperalleybiz.domain.FacilitiesPerAlleybiz">
+select * from facilitiesperalleybiz
+where alleybizcode = #{AlleyBizCode} AND fpd_date LIKE '201807'
+</select>
 
 </mapper>
