@@ -8,6 +8,7 @@
   <title>이용 후기</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <sec:csrfMetaTags/>
   <!-- header include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/headTagConfig.jsp"/>
   <!-- header include 종료 -->
@@ -92,7 +93,6 @@
 					<div>
 					<!-- 글쓴이와 보고있는사람 아이디 일치할경우 -->
                     <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" href="/review/list">목록</a><span class="float-r">&nbsp;&nbsp;</span>
-                    <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" id="replyReviewBtn" data-toggle="modal" data-target="#replyReviewModal">댓글</a><span class="float-r">&nbsp;&nbsp;</span>
 					
 					<sec:authentication var="loginId" property="principal.member.userid" /><!-- 로그인한사람 id값 변수로 저장 -->
 					<c:set var="writer" value="${review.userid }"/>
@@ -186,26 +186,46 @@
   <div id="replyModal" class="modal fade">
     <div class="modal-dialog modal-login">
       <div class="modal-content">
+      
       <div class="modal-header">        
-        <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;댓글달기</h4>
+        <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;댓글</h4>
       </div>
+      
       <div class="modal-body">
-        <form action="/replies/new" method="post">
         
         <div class="form-group">
-          <input type="text" name="reply" class="form-control" placeholder="후기에 대한 댓글내용을 자유롭게 작성해주세요" required="required" style="padding-left:10px; font-size: 20px;"/>
+        	<label>댓글내용</label>
+          	<input type="text" name="reply" class="form-control" placeholder="후기에 대한 댓글내용을 자유롭게 작성해주세요" 
+          	required="required" style="padding-left:10px; font-size: 20px;"/>
+        </div>
+        <div class="form-group">
+        	<label>작성자</label>
+        	<input class="form-control" name="replyer" value="${loginId }" placeholder="${loginId }"
+        	style="padding-left:10px; font-size: 20px;"/>
+        </div>
+        <div class="form-group">
+        	<label>등록날짜</label>
+        	<input class="form-control" name="replyDate" value=""
+        	style="padding-left:10px; font-size: 20px;" />
         </div>
         <!-- hidden으로 send -->
 		<input type="hidden" name="article_num">              
         <input type="hidden" name="replyer" value="<sec:authentication property="principal.member.userid"/>"/>      
         <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
         <!-- 후기버튼(등록/취소, 수정/삭제: 로그인한사람과 댓작성자일치에게만 보임) -->
-   		<div class="form-group" style="display: flex; align-items: center; justify-content: center;">
+<!--    		<div class="form-group" style="display: flex; align-items: center; justify-content: center;">
       		<button type="button"  value="등록">등록</button>&nbsp;
       		<button type="button"  value="취소" data-dismiss="modal">취소</button>
     	</div>
-        </form>       
+ -->
+      </div><!-- end modal body -->
+      <div class="modal-footer">
+      	<button id="modalModBtn" type="button" class="btn btn-warning">수정</button>
+      	<button id="modalRemoveBtn" type="button" class="btn btn-danger">삭제</button>
+      	<button id="modalRegisterBtn" type="button" class="btn btn-primary">등록</button>
+      	<button id="modalCloseBtn" type="button" class="btn btn-default">닫기</button>
       </div>
+      
       </div>
     </div>
    </div>
@@ -256,7 +276,7 @@
 		    
 		function showList(page){
 			
-			  console.log("show list " + page);
+			console.log("show list " + page);
 		    
 		    replyService.getList({article_num:articleNumVal,page: page|| 1 }, function(replyCnt, list) {
 		      
@@ -360,16 +380,18 @@
 		    var modalRemoveBtn = $("#modalRemoveBtn");
 		    var modalRegisterBtn = $("#modalRegisterBtn");
 		    
+		    // 닫기버튼
 		    $("#modalCloseBtn").on("click", function(e){
 		    	
 		    	modal.modal('hide');
 		    });
 		    
+		    // 댓글추가버튼(new Reply)
 		    $("#addReplyBtn").on("click", function(e){
 		      
 		      modal.find("input").val("");
-		     // modalInputReplyDate.closest("div").hide();
-		     // modal.find("button[id !='modalCloseBtn']").hide();
+		      modalInputReplyDate.closest("div").hide();
+		      modal.find("button[id !='modalCloseBtn']").hide();
 		      
 		      modalRegisterBtn.show();
 		      
@@ -377,13 +399,14 @@
 		      
 		    });
 		    
-
+			// 댓글등록 이벤트
 		    modalRegisterBtn.on("click",function(e){
-		      
+		      //alert("댓추가할거"+modalInputReply.val()+"작성자: "+modalInputReplyer.val()+"게시글번호: "+articleNumVal);
 		      var reply = {
 		            reply: modalInputReply.val(),
 		            replyer:modalInputReplyer.val(),
 		            article_num:articleNumVal
+		            //,_csrf.headerName:${_csrf.token}
 		          };
 		      replyService.add(reply, function(result){
 		        
@@ -393,7 +416,7 @@
 		        modal.modal("hide");
 		        
 		        //showList(1);
-		        showList(-1);
+		        showList(1);
 		        
 		      });
 		      

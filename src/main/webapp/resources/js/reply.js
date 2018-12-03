@@ -4,18 +4,27 @@ var replyService = (function() {
 
 	function add(reply, callback, error) {
 		console.log("add reply...............");
+		var token = $("meta[name='_csrf']").attr("content");
+
+		var header = $("meta[name='_csrf_header']").attr("content");
 
 		$.ajax({
 			type : 'post',
 			url : '/replies/new',
 			data : JSON.stringify(reply),
+			beforeSend : function(xhr){   
+				/*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+				xhr.setRequestHeader(header, token);
+			},
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
+				alert("add..!"+result);
 				if (callback) {
 					callback(result);
 				}
 			},
 			error : function(xhr, status, er) {
+				alert("비동기오류.."+er);
 				if (error) {
 					error(er);
 				}
@@ -23,7 +32,7 @@ var replyService = (function() {
 		})
 	}
 
-
+	// 댓글목록 get
 	function getList(param, callback, error) {
 
 	    var article_num = param.article_num;
@@ -31,7 +40,8 @@ var replyService = (function() {
 	    
 	    $.getJSON("/replies/pages/" + article_num + "/" + page + ".json",
 	        function(data) {
-	    	
+	    	console.log("데이터");
+	    	console.log(data);
 	          if (callback) {
 	            //callback(data); // 댓글 목록만 가져오는 경우 
 	            callback(data.replyCnt, data.list); //댓글 숫자와 목록을 가져오는 경우 

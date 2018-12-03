@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.one.doo.article.domain.Criteria;
 import com.one.doo.article.domain.Reply;
+import com.one.doo.article.domain.ReplyPage;
 import com.one.doo.article.mapper.ReplyMapper;
 
 import lombok.AllArgsConstructor;
@@ -52,6 +53,14 @@ public class ReplyServiceImpl implements ReplyService {
 	public List<Reply> getList(Criteria cri, Long article_num) {
 		log.info("게시글에따른 댓글목록조회서비스.."+article_num);
 		return mapper.getListWithPaging(cri, article_num);
+	}
+
+	@Override
+	public ReplyPage getListPage(Criteria cri, Long article_num) {
+		log.info("댓글페이징까지");
+		return new ReplyPage(
+				mapper.getCountByArticleNum(article_num),
+				mapper.getListWithPaging(cri, article_num));
 	}
 
 }

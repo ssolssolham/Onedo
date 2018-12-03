@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.one.doo.article.domain.Criteria;
 import com.one.doo.article.domain.Reply;
+import com.one.doo.article.domain.ReplyPage;
 
 /**
  * 댓글처리를 위한 서비스 인터페이스
@@ -24,6 +25,9 @@ public interface ReplyService {
 	
 	// 게시글에대한 모든댓글 조회
 	public List<Reply> getList(Criteria cri, Long article_num);
+	
+	// 게시글에 대한 댓글 페이징까지
+	public ReplyPage getListPage(Criteria cri, Long article_num);
 	
 	
 	
