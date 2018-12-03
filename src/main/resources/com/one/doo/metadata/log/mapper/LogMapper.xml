@@ -4,4 +4,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.doo.metadata.log.mapper.LogMapper">
 
+	<!-- LOG 등록(가져온 url_no,등록시 날짜[년-월-일],1)
+		 날짜 예시 '20141111','20141101'
+	 -->
+	<insert id="insert">
+		insert into METADATA_LOGS(url_no,log_day,log_cnt)
+		values(#{url_no},to_date(#{log_day},'yyyy-MM-dd'),1)
+	</insert>
+	
+	<!-- LOG 조회수 증가(가져온 url_no) -->
+	<update id="update">
+		update METADATA_LOGS SET log_cnt = log_cnt + 1
+		where url_no = #{url_no} AND log_day LIKE to_date(#{log_day},'yyyy-MM-dd')
+	</update>
+	
+	<!-- 오늘의 LOG 기록 확인(가져온 url_no, log_day) -->
+	<select id="countTodayLog" resultType="int">
+		select count(*) 
+		from metadata_logs 
+		where url_no = #{url_no} AND log_day LIKE to_date(#{log_day},'yyyy-MM-dd')
+	</select>
 </mapper>

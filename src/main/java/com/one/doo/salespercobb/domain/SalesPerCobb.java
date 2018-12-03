@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class SalesPerCOBB {
+public class SalesPerCobb {
     private String SPC_DATE;     
     private int AlleybizCode;
     private String COBB_code;

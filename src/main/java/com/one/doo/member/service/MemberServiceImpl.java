@@ -5,7 +5,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +14,9 @@ import com.one.doo.member.domain.Member;
 import com.one.doo.member.mapper.AuthMapper;
 import com.one.doo.member.mapper.MemberMapper;
 import com.one.doo.member.validate.MailCertify;
+import com.one.doo.metadata.log.domain.Log;
+import com.one.doo.metadata.log.mapper.LogMapper;
+import com.one.doo.metadata.url.mapper.UrlMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -32,6 +34,12 @@ public class MemberServiceImpl implements MemberService {
 	private PasswordEncoder pwencoder;
 	@Inject
 	private MailCertify mail;
+	// 로그 등록을 위한 Mapper
+	
+	@Inject
+	private LogMapper logMapper;
+	@Inject
+	private UrlMapper urlMapper;
 	
 	@Transactional
 	@Override
@@ -74,6 +82,24 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.getTotalCount();
 	}
 	
+	@Override
+	public int getUrlNo(String url,String method) {
+		return urlMapper.readUrlNo(url, method);
+	}
 	
+	@Override
+	public int countTodayLog(int url_no,String log_day) {
+		return logMapper.countTodayLog(url_no, log_day);
+	}
+	
+	@Override
+	public void makeLoginLog(int url_no,String log_day) {
+		logMapper.insert(url_no, log_day);
+	}
+
+	@Override
+	public int sumUpLoginLog(int url_no, String log_day) {
+		return logMapper.update(url_no, log_day);
+	}
 
 }

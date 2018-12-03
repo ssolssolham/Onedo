@@ -1,4 +1,4 @@
-package com.one.doo.budongsan.domain;
+package com.one.doo.realestate.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Budongsan {
+public class Realestate {
 	private int mamul_no;
 	private String img_url;
 	private String heating_type;

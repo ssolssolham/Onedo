@@ -57,10 +57,27 @@
 		
 	<!-- 매퍼등록 -->
 	<mybatis-spring:scan base-package="com.one.doo.member.mapper"/>
-	<!-- <mybatis-spring:scan base-package="com.one.doo.auth.mapper"/> -->
 	<mybatis-spring:scan base-package="com.one.doo.loan.mapper"/>
 	<!-- <mybatis-spring:scan base-package="com.one.doo.board.mapper"/> -->
-	<!-- <mybatis-spring:scan base-package="com.one.doo.auth.mapper"/>-->
+	<mybatis-spring:scan base-package="com.one.doo.auth.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.metadata.log.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.metadata.url.mapper"/>
+
+	<!-- 호준 -->	
+	<mybatis-spring:scan base-package="com.one.doo.alleybiz.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.areacode.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.cobb.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.facilitiesperalleybiz.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.flowperalleybiz.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.indexperalleybiz.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.livingperalleybiz.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.mlresult.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.outperalleybiz.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.realestate.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.riskoffounndation.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.salespercobb.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.storeperalleybiz.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.workerperalleybiz.mapper"/>
 	
 	<!-- 서비스등록 -->	
 	<context:component-scan base-package="com.one.doo.member.service"/>
