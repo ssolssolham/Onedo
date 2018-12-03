@@ -114,8 +114,11 @@
                   <div class="form-group">
                     <h2 class="card-title fw-b">Step 4. 상권 검색 우선순위</h2>
                     <div id="priorityFilter">
-                      <button style="width: 100%;" class="m-b-10 villageBtn">예상매출액 우선</button>
-                      <button style="width: 100%;" class="m-b-10 villageBtn">창업안전도 우선</button>
+                      <button style="width: 100%;" class="m-b-10 villageBtn">신규 창업 </button>
+                      <button style="width: 100%;" class="m-b-10 villageBtn">과밀 지수</button>
+                      <button style="width: 100%;" class="m-b-10 villageBtn">활성도 지수</button>
+                      <button style="width: 100%;" class="m-b-10 villageBtn">성장성 지수</button>
+                      <button style="width: 100%;" class="m-b-10 villageBtn">안정성 지수</button>
                     </div>
                   </div>
                   <div class="form-group">
@@ -125,8 +128,9 @@
                 </div>
               </div>
             </div>
+            <!-- 다음 지도 올 곳임 -->
             <div class="col-sm-9">
-              <div style="width: 99%; height: 648.5px; border:1px solid black; background-color: white;" id="mapArea" class="card-body">다음지도 API</div>
+              <div style="width: 99%; height: 648.5px; border:1px solid black; background-color: white;" id="map" class="card-body"></div>
             </div>
         </div>
         </div>
@@ -912,6 +916,23 @@
         		var target = document.getElementById('districtSelect');
         		var selectedDistrict = target.options[target.selectedIndex].text;
         		// 구가 변하면 필터 초기화 하기 위함
+        		
+        		
+        		$.ajax({
+        	         type : 'GET',
+        	         url : "/analysis/getvillagelist/" + selectedDistrict,
+        	         dataType : "json",
+        	         success : function(data) {
+        	            //비동기 성공 시
+        	            if(data.cnt > 0){
+        	            }else{
+        	            }
+        	         },
+        	         error : function(error) {
+        	            alert("비동기 오류!");
+        	         }
+        	      });
+        		
         		for(var i = 1; i <=4; i++) {
         			$('#filterColumn' + i).empty();
         		}
@@ -930,7 +951,7 @@
     					}
     				}
     				
-    				$('#mapArea').css('height', $('.col-sm-3').height());
+    				$('#map').css('height', $('.col-sm-3').height());
         		}
         		
         		// 동 생성 완료 후 
@@ -1956,6 +1977,7 @@
     
     
     
+    
     <script type="text/javascript">
     // 대출 관련 정보 입력하기 버튼 클릭 시, 활성화 되는 필터 입력창
     $('#inputInfoBtn').click(function(){
@@ -1989,6 +2011,21 @@
     	}
     })
     </script>
+    
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85fa2226a5b3318b6ed8f59fb0e16f4e"></script>
+	<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85fa2226a5b3318b6ed8f59fb0e16f4e&libraries=services,clusterer,drawing"></script>
+	
+	<script type="text/javascript">
+		var container = document.getElementById('map');
+		var options = {
+			center: new daum.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
+
+		var map = new daum.maps.Map(container, options);
+	</script>
+    
 <!--===============================================================================================-->    	
 <!--===============================================================================================-->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
