@@ -104,7 +104,7 @@
 					</div>
 					
 					<!-- 댓글영역 -->
-					<div class="panel-body">
+<!-- 					<div class="panel-body">
 					<ul class="chat">
 					<li class="left clearfix" data-rno='12'>
 					  <div style="border:1px solid black;">
@@ -116,8 +116,33 @@
 					  </div>
 					</li>
 					</ul>
-					</div> <!-- 댓글끝 -->
-					
+					</div> 댓글끝
+ -->
+     <!-- /.panel -->
+    <div class="panel panel-default">
+<!--       <div class="panel-heading">
+        <i class="fa fa-comments fa-fw"></i> Reply
+      </div> -->
+      
+      <div class="panel-heading">
+        <i class="fa fa-comments fa-fw"></i> Reply
+        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New Reply</button>
+      </div>      
+      
+      
+      <!-- /.panel-heading -->
+      <div class="panel-body">        
+      
+        <ul class="chat">
+
+        </ul>
+        <!-- ./ end ul -->
+      </div>
+      <!-- /.panel .chat-panel -->
+
+	<div class="panel-footer"></div>
+ 
+ 					
 				</div>
 			</div>
 	</div>
@@ -158,7 +183,7 @@
 	  </div>
     
   <!-- 후기 댓글 Modal HTML -->
-  <div id="replyReviewModal" class="modal fade">
+  <div id="replyModal" class="modal fade">
     <div class="modal-dialog modal-login">
       <div class="modal-content">
       <div class="modal-header">        
@@ -175,15 +200,15 @@
         <input type="hidden" name="replyer" value="<sec:authentication property="principal.member.userid"/>"/>      
         <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
         <!-- 후기버튼(등록/취소, 수정/삭제: 로그인한사람과 댓작성자일치에게만 보임) -->
-        <div class="form-group" style="display: flex; align-items: center; justify-content: center;">
-          <button type="button" class="" value="등록">등록</button>&nbsp;
-          <button type="button" class="" value="취소"  data-dismiss="modal">취소</button>
-        </div>
+   		<div class="form-group" style="display: flex; align-items: center; justify-content: center;">
+      		<button type="button"  value="등록">등록</button>&nbsp;
+      		<button type="button"  value="취소" data-dismiss="modal">취소</button>
+    	</div>
         </form>       
       </div>
       </div>
     </div>
-    </div>
+   </div>
     
      <!-- 후기 삭제 Modal HTML -->
   <div id="deleteReviewModal" class="modal fade">
@@ -343,12 +368,12 @@
 		    $("#addReplyBtn").on("click", function(e){
 		      
 		      modal.find("input").val("");
-		      modalInputReplyDate.closest("div").hide();
-		      modal.find("button[id !='modalCloseBtn']").hide();
+		     // modalInputReplyDate.closest("div").hide();
+		     // modal.find("button[id !='modalCloseBtn']").hide();
 		      
 		      modalRegisterBtn.show();
 		      
-		      $(".modal").modal("show");
+		      $("#replyModal").modal("show");
 		      
 		    });
 		    
@@ -358,7 +383,7 @@
 		      var reply = {
 		            reply: modalInputReply.val(),
 		            replyer:modalInputReplyer.val(),
-		            bno:bnoValue
+		            article_num:articleNumVal
 		          };
 		      replyService.add(reply, function(result){
 		        
