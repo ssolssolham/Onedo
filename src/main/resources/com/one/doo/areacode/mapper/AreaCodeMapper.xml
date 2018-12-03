@@ -4,4 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.doo.areacode.mapper.AreaCodeMapper">
 
+	<select id="getAreaCodeListByAdmin" parameterType="String" resultType="com.one.doo.areacode.domain.AreaCode">
+		select areacode_name
+		from AREACODES
+		WHERE administrativedistrictcodename LIKE #{AdminName}
+	</select>
 </mapper>

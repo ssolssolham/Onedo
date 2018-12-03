@@ -81,6 +81,7 @@
 	<mybatis-spring:scan base-package="com.one.doo.workerperalleybiz.mapper"/>
 	
 	<!-- 서비스등록 -->	
+	<context:component-scan base-package="com.one.doo.analysis.service"/>
 	<context:component-scan base-package="com.one.doo.member.service"/>
 	<context:component-scan base-package="com.one.doo.member.validate"/>
 	<context:component-scan base-package="com.one.doo.article.service"/>
