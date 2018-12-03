@@ -43,7 +43,7 @@ public class LoanController{
 		System.out.println(param instanceof Parameter);
 		System.out.println(service.getLoanList(param));
 		model.addAttribute("loanlist", service.getLoanList(param));
-		model.addAttribute("caculator", param.getRequiredMoney());
+		model.addAttribute("param", param);
 		return "/loanResult/loanResult";
 	}
 	
@@ -67,6 +67,15 @@ public class LoanController{
 		}
 		
 		return "redirect:/admin/loanlist";
+	}
+	
+	
+	@GetMapping(value="/loan/{loanId}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
+	public ResponseEntity<Loan> getCreditRate(@PathVariable("loanId") int loanId) {
+		System.out.println("비동기 들어옴 ?");
+		log.info("get: " + loanId + "등급");
+		System.out.println("비동기 나감 ?");
+		return new ResponseEntity<>(service.readLoan(loanId), HttpStatus.OK);
 	}
 }
 

@@ -19,7 +19,7 @@ public class LoanMapperTests {
 	@Setter(onMethod_ = @Autowired)
 	private LoanMapper mapper;
 
-	@Test
+	//@Test
 	public void testGetList() {
 		mapper.getLoanList(new Parameter()).forEach(loan -> log.info(loan));
 	}
@@ -32,7 +32,7 @@ public class LoanMapperTests {
 		log.info(loan);
 	}
 	
-	//@Test
+	@Test
 	public void testRead() {
 		Loan loan = mapper.readLoan(52);
 		log.info(loan);
