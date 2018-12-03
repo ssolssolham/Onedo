@@ -43,7 +43,6 @@ public class ReviewController {
 	@GetMapping("/list")
 	public String list(Criteria cri, Model model) {
 		log.info("후기게시판 list요청..");
-		log.info("들어온 criteria값!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!\n"+cri);
 		
 		model.addAttribute("list", service.getReviewList(cri));
 		//model.addAttribute("pageMaker", new Page(cri, 123)); //임의로 123(total값)
@@ -67,7 +66,7 @@ public class ReviewController {
 	}
 	
 	// 후기등록
-	@PostMapping("/register")
+	@GetMapping("/register")
 	public String register(Article article, RedirectAttributes rttr) {
 		log.info("후기등록 요청..컨트롤러");
 		log.info("들어온 후기글객체: "+article);

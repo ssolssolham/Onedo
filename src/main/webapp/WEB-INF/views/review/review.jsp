@@ -137,7 +137,7 @@
 			  <h4 class="modal-title">서비스 이용 후기</h4>
 			</div>
 			<div class="modal-body">
-			  <form action="/review/register" method="post">
+			  <form action="/review/register" method="get">
 				<div class="form-group">
 				  <input type="text" name="title" class="form-control " placeholder="제목 입력" required="required" style="padding-left:10px;">
 				</div>
@@ -169,6 +169,7 @@
 $(document).ready(function() {
 	//모달처리를 위한 javascript
 	var result = '<c:out value="${result}"/>';
+	console.log("result값"+result);
 	checkModal(result);
 	
 	// history back, 모달띄울필요X
