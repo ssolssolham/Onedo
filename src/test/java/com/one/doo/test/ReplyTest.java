@@ -25,12 +25,12 @@ public class ReplyTest {
 	public void testMapper() {
 		//log.info("댓글매퍼: "+mapper);
 		
-//		Reply reply = new Reply();
-//		reply.setArticle_num(151L);
-//		reply.setReply("댓글매퍼 유닛테스트");
-//		reply.setReplyer("hi");
-//		log.info("댓글!!"+reply);
-//		mapper.insert(reply);
+		Reply reply = new Reply();
+		reply.setArticle_num(14L);
+		reply.setReply("댓글매퍼 유닛테스트..");
+		reply.setReplyer("hi");
+		log.info("댓글!!"+reply);
+		mapper.insert(reply);
 		
 		//mapper.getListWithPaging(cri, 14L);
 	}	

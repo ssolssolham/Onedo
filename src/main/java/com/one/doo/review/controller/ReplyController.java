@@ -50,7 +50,7 @@ public class ReplyController {
 	}
 	
 	// 게시물에대한 댓글목록
-	@GetMapping(value="/pages{article_num}/{page}",
+	@GetMapping(value="/pages/{article_num}/{page}",
 				produces = {
 						MediaType.APPLICATION_JSON_UTF8_VALUE,
 						MediaType.APPLICATION_XML_VALUE	})
