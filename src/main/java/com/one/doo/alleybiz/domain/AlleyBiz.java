@@ -1,7 +1,5 @@
 package com.one.doo.alleybiz.domain;
 
-import com.one.doo.loanproduct.domain.LoanProduct;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;

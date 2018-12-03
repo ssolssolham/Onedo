@@ -25,7 +25,7 @@
 	<context:component-scan base-package="com.one.doo.member.controller" />
 	<context:component-scan base-package="com.one.doo.analysis.controller"/>
 	<context:component-scan base-package="com.one.doo.inputinfo.controller"/>
-	<context:component-scan base-package="com.one.doo.loanresult.controller"/>
+	<context:component-scan base-package="com.one.doo.loan.controller"/>
 	<context:component-scan base-package="com.one.doo.qna.controller"/>
 	<context:component-scan base-package="com.one.doo.review.controller"/>
 	<context:component-scan base-package="com.one.doo.reserve.controller"/>

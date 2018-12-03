@@ -1,6 +1,5 @@
 package com.one.doo.indexperalleybiz.domain;
 
-import com.one.doo.loanproduct.domain.LoanProduct;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
