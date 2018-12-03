@@ -33,15 +33,17 @@
 <security:http pattern="/member/regist"         security="none" />
 <security:http pattern="/member/idDupCheck/*"   security="none" />
 <security:http pattern="/member/emailCertify/*" security="none" />
-
-
+<!-- <security:http pattern="/review/register"		security="none" />
+<security:http pattern="/review/modify"			security="none" />
+ -->
 <security:http>
 	<!-- intercept-url설정순서 중요(구체적->포괄적) -->
 	<!-- 권한에따른 url설정 -->
 	
 	<security:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/admin/**"/>
-<!-- 	<security:intercept-url access="hasRole('ROLE_USER')" pattern="/**"/> -->
-	<security:intercept-url access="permitAll" pattern="/member/**"/>
+ 	<security:intercept-url access="hasRole('ROLE_USER')"  pattern="/review/*"/>
+ 	<security:intercept-url access="hasRole('ROLE_USER')"  pattern="/review/**"/>
+	<security:intercept-url access="permitAll"             pattern="/member/**"/>
  
 	<security:form-login 
 			login-page="/member/loginForm"

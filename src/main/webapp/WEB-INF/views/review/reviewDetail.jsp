@@ -1,4 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 <html lang="en">
 <head>
   <title>이용 후기</title>
@@ -48,14 +52,14 @@
                         </td>
                         
                         <td>
-                        <!-- 제목 동적으로 불러오는 부분 -->
+                        ${review.title }
                         </td>
                         <td style="text-align: center; vertical-align: middle; color: #27b2a5;">
                           <b>작성자</b>
                         </td>
                         
                         <td>
-                        <!-- 작성자 동적으로 불러오는 부분 -->
+                        ${review.userid }
                         </td>
                       </tr>
                       
@@ -64,7 +68,7 @@
                           <b>최종수정일</b>
                         </td>
                         <td>
-                        <!-- 최종 수정일 동적으로 불러오는 부분 -->
+                        <fmt:formatDate pattern="yyyy-mm-dd" value="${review.regdate }"/>
                         </td>
                         
                         <td style="text-align: center; vertical-align: middle; color: #27b2a5;">
@@ -79,18 +83,41 @@
                         <td colspan="4">
                           <!-- 게시물 내용 동적으로 불러오는 부분 -->
                           <div id="reviewDetailContent" style="height: 300px;">
-                            해당 게시물 내용 동적으로 불러와야함
+                          ${review.content }
                           </div>
                         </td>
                       </tr>
                     </table>
 					<br>
 					<div>
-                        <button type="button" class="float-r" style="height:35px;" id="historyBackBtn" data-toggle="modal" data-target="#updateReviewModal">목록</button><span class="float-r">&nbsp;&nbsp;</span>
+					<!-- 글쓴이와 보고있는사람 아이디 일치할경우 -->
+                    <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" href="/review/list">목록</a><span class="float-r">&nbsp;&nbsp;</span>
+                    <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" id="replyReviewBtn" data-toggle="modal" data-target="#replyReviewModal">댓글</a><span class="float-r">&nbsp;&nbsp;</span>
+					
+					<sec:authentication var="loginId" property="principal.member.userid" /><!-- 로그인한사람 id값 변수로 저장 -->
+					<c:set var="writer" value="${review.userid }"/>
+					<c:if test="${writer eq loginId }">
                         <!-- 해당 아이디인 경우에만 확인할 수 있도록 작성 -->
-						<button type="button" class="float-r" style="height:35px;" id="updateReviewBtn" data-toggle="modal" data-target="#updateReviewModal">수정</button><span class="float-r">&nbsp;&nbsp;</span>
-						<button type="button" class="float-r" style="height:35px;" id="deleteReviewBtn" data-toggle="modal" data-target="#deleteReviewModal">삭제</button>
+                        <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" id="updateReviewBtn" data-toggle="modal" data-target="#updateReviewModal">수정</a><span class="float-r">&nbsp;&nbsp;</span>
+                        <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton"id="deleteReviewBtn" data-toggle="modal" data-target="#deleteReviewModal">삭제</a>
+					</c:if>
 					</div>
+					
+					<!-- 댓글영역 -->
+					<div class="panel-body">
+					<ul class="chat">
+					<li class="left clearfix" data-rno='12'>
+					  <div style="border:1px solid black;">
+					  	<div class="header">
+					  	  <strong class="primary-font">댓글작성자</strong>
+					  	  <small class="pull-right text-muted">2018-12-03(정적)</small>
+					  	</div>
+					  	<p>댓글내용쓰</p>
+					  </div>
+					</li>
+					</ul>
+					</div> <!-- 댓글끝 -->
+					
 				</div>
 			</div>
 	</div>
@@ -104,19 +131,22 @@
 			  <h4 class="modal-title">후기 내용 수정</h4>
 			</div>
 			<div class="modal-body">
-			  <form action="" method="post">
+			  <form action="/review/modify" method="get">
 				<div class="form-group">
-				  <input type="text" class="form-control " required="required" style="padding-left:10px;" value="기존 제목 동적으로 불러옴">
+				  <input type="text" name="title" class="form-control " required="required" style="padding-left:10px;" value="${review.title }">
 				</div>
 				
 				<div class="form-group">
-				  <input type="password" class="form-control " placeholder="비밀번호 입력(수정, 삭제 시 이용)" required="required" style="padding-left:10px;">         
+				  <input type="password" name="article_pw" class="form-control " placeholder="비밀번호 입력(수정, 삭제 시 이용)" required="required" style="padding-left:10px;">         
 				</div>
 				
 				<div class="form-group">
-					<textarea rows="10" cols="50" class="form-control" placeholder="후기의 내용을 자유롭게 작성해주세요" required="required" style="padding-left:10px; font-size: 20px;">기존 작성 내용 동적으로 불러와야함</textarea>
+					<textarea rows="10" cols="50" class="form-control" name="content" required="required" style="padding-left:10px; font-size: 20px;">${review.content }</textarea>
 				</div>
-						  
+				
+				<input type="hidden" name="article_num" value="${review.article_num }">		  
+				<input type="hidden" name="bno" value="2">
+				<input type="hidden" name="${review.userid }">		  
 				<div class="form-group" style="display: flex; align-items: center; justify-content: center;">
 				  <input type="submit" class="" value="수정">&nbsp;
 				  <button type="button" class="" value="취소"  data-dismiss="modal">취소</button>
@@ -127,29 +157,26 @@
 		</div>
 	  </div>
     
-  <!-- 후기 수정 Modal HTML -->
-  <div id="updateReviewModal" class="modal fade">
+  <!-- 후기 댓글 Modal HTML -->
+  <div id="replyReviewModal" class="modal fade">
     <div class="modal-dialog modal-login">
       <div class="modal-content">
       <div class="modal-header">        
-        <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;후기 수정</h4>
+        <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;댓글달기</h4>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
-        <div class="form-group">
-          <input type="text" class="form-control " required="required" style="padding-left:10px;" value="기존 제목 동적으로 불러옴">
-        </div>
+        <form action="/replies/new" method="post">
         
         <div class="form-group">
-          <input type="password" class="form-control " placeholder="비밀번호 입력(수정, 삭제 시 이용)" required="required" style="padding-left:10px;">         
+          <input type="text" name="reply" class="form-control" placeholder="후기에 대한 댓글내용을 자유롭게 작성해주세요" required="required" style="padding-left:10px; font-size: 20px;"/>
         </div>
-        
-        <div class="form-group">
-          <textarea rows="10" cols="50" class="form-control" placeholder="후기의 내용을 자유롭게 작성해주세요" required="required" style="padding-left:10px; font-size: 20px;"></textarea>
-        </div>
-              
+        <!-- hidden으로 send -->
+		<input type="hidden" name="article_num">              
+        <input type="hidden" name="replyer" value="<sec:authentication property="principal.member.userid"/>"/>      
+        <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
+        <!-- 후기버튼(등록/취소, 수정/삭제: 로그인한사람과 댓작성자일치에게만 보임) -->
         <div class="form-group" style="display: flex; align-items: center; justify-content: center;">
-          <input type="submit" class="" value="등록">&nbsp;
+          <button type="button" class="" value="등록">등록</button>&nbsp;
           <button type="button" class="" value="취소"  data-dismiss="modal">취소</button>
         </div>
         </form>       
@@ -166,12 +193,13 @@
         <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;후기 삭제</h4>
       </div>
       <div class="modal-body">
-        <form action="" method="post">
+        <form action="/review/remove?article_num=${review.article_num }" method="get">
         <div class="fs-20 t-center">후기 등록 시, 입력했던 비밀번호를 입력하세요</div><br>
         <div class="fs-20 t-center" style="color: red; font-weight: bold;">&lt;주의&gt; 삭제 시, 복구할 수 없습니다!</div>
         <br>
         <br>
         <div class="form-group">
+          <input type="hidden" name="article_num" value="${review.article_num }">
           <input type="password" class="form-control " placeholder="비밀번호 입력" required="required" style="padding-left:10px;">         
         </div>
         <br>
@@ -191,8 +219,219 @@
 	
 
 
+<!-- 댓글처리 관련 js파일 추가 by sw -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reply.js"></script>
+	<script type="text/javascript">
+	$(document).ready(function () {
+		  
+		  var articleNumVal = '<c:out value="${review.article_num}"/>';
+		  var replyUL = $(".chat");
+		  
+		    showList(1);
+		    
+		function showList(page){
+			
+			  console.log("show list " + page);
+		    
+		    replyService.getList({article_num:articleNumVal,page: page|| 1 }, function(replyCnt, list) {
+		      
+		    console.log("replyCnt: "+ replyCnt );
+		    console.log("list: " + list);
+		    console.log(list);
+		    
+		    if(page == -1){
+		      pageNum = Math.ceil(replyCnt/10.0);
+		      showList(pageNum);
+		      return;
+		    }
+		      
+		     var str="";
+		     
+		     if(list == null || list.length == 0){
+		       return;
+		     }
+		     
+		     for (var i = 0, len = list.length || 0; i < len; i++) {
+		       str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
+		       str +="  <div><div class='header'><strong class='primary-font'>["
+		    	   +list[i].rno+"] "+list[i].replyer+"</strong>"; 
+		       str +="    <small class='pull-right text-muted'>"
+		           +replyService.displayTime(list[i].replyDate)+"</small></div>";
+		       str +="    <p>"+list[i].reply+"</p></div></li>";
+		     }
+		     
+		     replyUL.html(str);
+		     
+		     showReplyPage(replyCnt);
 
+		 
+		   });//end function
+		     
+		 }//end showList
+		    
+		    var pageNum = 1;
+		    var replyPageFooter = $(".panel-footer");
+		    
+		    function showReplyPage(replyCnt){
+		      
+		      var endNum = Math.ceil(pageNum / 10.0) * 10;  
+		      var startNum = endNum - 9; 
+		      
+		      var prev = startNum != 1;
+		      var next = false;
+		      
+		      if(endNum * 10 >= replyCnt){
+		        endNum = Math.ceil(replyCnt/10.0);
+		      }
+		      
+		      if(endNum * 10 < replyCnt){
+		        next = true;
+		      }
+		      
+		      var str = "<ul class='pagination pull-right'>";
+		      
+		      if(prev){
+		        str+= "<li class='page-item'><a class='page-link' href='"+(startNum -1)+"'>Previous</a></li>";
+		      }
+		      
+		      for(var i = startNum ; i <= endNum; i++){
+		        
+		        var active = pageNum == i? "active":"";
+		        
+		        str+= "<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"+i+"</a></li>";
+		      }
+		      
+		      if(next){
+		        str+= "<li class='page-item'><a class='page-link' href='"+(endNum + 1)+"'>Next</a></li>";
+		      }
+		      
+		      str += "</ul></div>";
+		      
+		      console.log(str);
+		      
+		      replyPageFooter.html(str);
+		    }
+		     
+		    replyPageFooter.on("click","li a", function(e){
+		       e.preventDefault();
+		       console.log("page click");
+		       
+		       var targetPageNum = $(this).attr("href");
+		       
+		       console.log("targetPageNum: " + targetPageNum);
+		       
+		       pageNum = targetPageNum;
+		       
+		       showList(pageNum);
+		     });     
+
+		   
+		    var modal = $(".modal");
+		    var modalInputReply = modal.find("input[name='reply']");
+		    var modalInputReplyer = modal.find("input[name='replyer']");
+		    var modalInputReplyDate = modal.find("input[name='replyDate']");
+		    
+		    var modalModBtn = $("#modalModBtn");
+		    var modalRemoveBtn = $("#modalRemoveBtn");
+		    var modalRegisterBtn = $("#modalRegisterBtn");
+		    
+		    $("#modalCloseBtn").on("click", function(e){
+		    	
+		    	modal.modal('hide');
+		    });
+		    
+		    $("#addReplyBtn").on("click", function(e){
+		      
+		      modal.find("input").val("");
+		      modalInputReplyDate.closest("div").hide();
+		      modal.find("button[id !='modalCloseBtn']").hide();
+		      
+		      modalRegisterBtn.show();
+		      
+		      $(".modal").modal("show");
+		      
+		    });
+		    
+
+		    modalRegisterBtn.on("click",function(e){
+		      
+		      var reply = {
+		            reply: modalInputReply.val(),
+		            replyer:modalInputReplyer.val(),
+		            bno:bnoValue
+		          };
+		      replyService.add(reply, function(result){
+		        
+		        alert(result);
+		        
+		        modal.find("input").val("");
+		        modal.modal("hide");
+		        
+		        //showList(1);
+		        showList(-1);
+		        
+		      });
+		      
+		    });
+
+
+		  //댓글 조회 클릭 이벤트 처리 
+		    $(".chat").on("click", "li", function(e){
+		      
+		      var rno = $(this).data("rno");
+		      
+		      replyService.get(rno, function(reply){
+		      
+		        modalInputReply.val(reply.reply);
+		        modalInputReplyer.val(reply.replyer);
+		        modalInputReplyDate.val(replyService.displayTime( reply.replyDate))
+		        .attr("readonly","readonly");
+		        modal.data("rno", reply.rno);
+		        
+		        modal.find("button[id !='modalCloseBtn']").hide();
+		        modalModBtn.show();
+		        modalRemoveBtn.show();
+		        
+		        $(".modal").modal("show");
+		            
+		      });
+		    });
+		 
+
+		    modalModBtn.on("click", function(e){
+		    	  
+		   	  var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
+		   	  
+		   	  replyService.update(reply, function(result){
+		   	        
+		   	    alert(result);
+		   	    modal.modal("hide");
+		   	    showList(pageNum);
+		   	    
+		   	  });
+		   	  
+		   	});
+
+
+		   	modalRemoveBtn.on("click", function (e){
+		   	  
+		   	  var rno = modal.data("rno");
+		   	  
+		   	  replyService.remove(rno, function(result){
+		   	        
+		   	      alert(result);
+		   	      modal.modal("hide");
+		   	      showList(pageNum);
+		   	      
+		   	  });
+		   	  
+		   	});
+
+		 
+		});
 	
+	</script>
+
 <!--===============================================================================================-->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->

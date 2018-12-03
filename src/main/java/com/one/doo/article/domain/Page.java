@@ -3,6 +3,10 @@ package com.one.doo.article.domain;
 import lombok.Getter;
 import lombok.ToString;
 
+/**
+ * 페이지처리를 위한 dto객체
+ * @author siwonPark
+ */
 @Getter
 @ToString
 public class Page {

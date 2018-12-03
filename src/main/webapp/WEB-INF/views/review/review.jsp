@@ -1,4 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <html lang="en">
 <head>
   <title>이용 후기</title>
@@ -40,19 +44,24 @@
 					<br>
 					<br>
 					&nbsp;&nbsp;
-					<select style="height: 35px; font-size: 20px; text-align: center; width: 15%; display: inline" class="form-control form-control-sm">
-						<option default>전체</option>
-						<option>제목</option>
-						<option>내용</option>
-						<option>작성자</option>
-						<option>제목 or 내용</option>
-						<option>제목 or 작성자</option>
-						<option>제목 or 내용 or 작성자</option>
+					<form id="searchForm" action="/review/list" method="get">
+					<select name="type" id="optionSel" style="height: 35px; font-size: 20px; text-align: center; width: 15%; display: inline" class="form-control form-control-sm">
+					  <option value="" <c:out value="${pageMaker.cri.type == null?'selected':'' }"/>>--</option>
+					  <option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':'' }"/>>제목</option>
+                      <option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':'' }"/>>내용</option>
+                      <option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':'' }"/>>작성자</option>
+                      <option value="TC" <c:out value="${pageMaker.cri.type eq 'TC'?'selected':'' }"/>>제목 or 내용</option>
+                      <option value="TW" <c:out value="${pageMaker.cri.type eq 'TW'?'selected':'' }"/>>제목 or 작성자</option>
+                      <option value="TWC" <c:out value="${pageMaker.cri.type eq 'TWC'?'selected':'' }"/>>제목 or 내용 or 작성자</option>
 					</select>
-
-					<input type="text" style="vertical-align: top; width: 15%; height: 35px; display: inline;" class="form-control" id="searchValue" name="searchValue">
-					<button type="button" style="vertical-align: top; height:35px; width: 10%;" class="" id="reviewSearchBtn" >검색</button>
+					<input type="text" name="keyword" id="keyword" value="${pageMaker.cri.keyword }" style="vertical-align: top; width: 15%; height: 35px; display: inline;" class="form-control"> <!--  id="searchValue" -->
+					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+					<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+					<button type="button" id="reviewSearchBtn" style="vertical-align: top; height:35px; width: 10%;">검색</button>
+				  </form>
+				<sec:authorize access="isAuthenticated()">
 					<button type="button" class="float-r" style="height:35px;" id="createReviewBtn" data-toggle="modal" data-target="#createReviewModal">후기작성</button>
+				</sec:authorize>
 					<br>
 					<table>
 						<colgroup>
@@ -73,95 +82,54 @@
 						</thead>
 						<br>
 						<tbody>
+						<c:forEach items="${list }" var="review" varStatus="status">
 							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
+							  <td>${status.index +1 }</td>
+							  <td><a href="/review/detail?article_num=${review.article_num }">${review.title }</a></td>
+							  <td>${review.userid }</td>
+							  <td><fmt:formatDate pattern="yyyy-mm-dd" value="${review.regdate }"/></td>
+							  <td>${review.enabled }</td>
 							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
-							<tr>
-								<td style="text-align:center;">1</td>
-								<td style="text-align:left; padding-left: 7px;">테스트</td>
-								<td style="text-align:center;">bangry</td>
-								<td style="text-align:center;">2018.11.25</td>
-								<td style="text-align:center;">1</td>
-							</tr>
+						</c:forEach>
 						</tbody>
 					</table>
 					<br>
 					<div class="table-nav-bar">
-						
+						<!-- pagination -->
+						<ul class="pagination">
+							<c:if test="${pageMaker.prev }">
+								<li class="paginate_button">
+								<a href="${pageMaker.startPage -1 }">Previous</a>
+								</li>
+							</c:if>
+							
+							<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+								<li class="paginate_button ${pageMaker.cri.pageNum == num ? "active":"" }">
+								<a href="${num }">${num }</a></li>
+							</c:forEach>
+
+							<c:if test="${pageMaker.next }">
+								<li class="paginate_button">
+								<a href="${pageMaker.endPage +1 }">Next</a>
+								</li>
+							</c:if>
+						</ul><!-- end pagination -->
 					</div>
-				</div>
+					
+					<!-- page a태그 원래동작 방지 -->
+					<form id="actionForm" action="/review/list" method="get">
+						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+						<!-- 검색에서도 페이징처리 -->
+						<input type="hidden" name="type" value="${pageMaker.cri.type }">
+						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
+					</form>
+				</div><!-- end card body -->
 			</div>
 	</div>
 </section>
 
-  <!-- 후기 작성 Modal HTML -->
+  <!-- 후기 작성(register) Modal HTML -->
   <div id="createReviewModal" class="modal fade">
 		<div class="modal-dialog modal-login">
 		  <div class="modal-content">
@@ -169,18 +137,21 @@
 			  <h4 class="modal-title">서비스 이용 후기</h4>
 			</div>
 			<div class="modal-body">
-			  <form action="" method="post">
+			  <form action="/review/register" method="get">
 				<div class="form-group">
-				  <input type="text" class="form-control " placeholder="제목 입력" required="required" style="padding-left:10px;">
+				  <input type="text" name="title" class="form-control " placeholder="제목 입력" required="required" style="padding-left:10px;">
 				</div>
 				
 				<div class="form-group">
-				  <input type="password" class="form-control " placeholder="비밀번호 입력(수정, 삭제 시 이용)" required="required" style="padding-left:10px;">         
+				  <input type="password" name="article_pw" class="form-control " placeholder="비밀번호 입력(수정, 삭제 시 이용)" required="required" style="padding-left:10px;">         
 				</div>
 				
 				<div class="form-group">
-					<textarea rows="10" cols="50" class="form-control" placeholder="후기의 내용을 자유롭게 작성해주세요" required="required" style="padding-left:10px; font-size: 20px;"></textarea>
+					<textarea name="content" rows="10" cols="50" class="form-control" placeholder="후기의 내용을 자유롭게 작성해주세요" required="required" style="padding-left:10px; font-size: 20px;"></textarea>
 				</div>
+				
+				<input type="hidden" name="bno" value="2">
+				<input type="hidden" name="userid" value="<sec:authentication property="principal.member.userid"/>">
 						  
 				<div class="form-group" style="display: flex; align-items: center; justify-content: center;">
 				  <input type="submit" class="" value="등록">&nbsp;
@@ -193,8 +164,68 @@
 	  </div>  
 
 
+<!-- 검색처리관련 javascript by siwon -->
+<script type="text/javascript">
+$(document).ready(function() {
+	//모달처리를 위한 javascript
+	var result = '<c:out value="${result}"/>';
+	console.log("result값"+result);
+	checkModal(result);
+	
+	// history back, 모달띄울필요X
+	history.replaceState({}, null, null);
+	
+	function checkModal(result) {
+		// 결과값이 없거나, history back인경우 모달X
+		if(result === '' || history.state){
+			return;
+		}
+		if(parseInt(result)>0){
+			// 처리완료모달 만들어야함..
+			$('.modal-body').html("게시글" + parseInt(result) + "번이 등록되었습니다.");
+		}
+		// 처리완료모달의 아이디값 들어가야함
+		$('#').modal("sohw");
+	}
+	
+	// page이동
+	var actionForm = $('#actionForm');
+	
+	$('.paginate_button a').on("click", function(e) {
+		e.preventDefault(); //원래 a태그 동작 방지
+		
+		console.log('페이지눌림!!!');
+		
+		//form태그 내, pageNum은 href속성으로 변경
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		// 변경후 form제출
+		actionForm.submit();
+	});
+	
+	// 검색
+	var searchForm = $('#searchForm');
+	
+	$("#reviewSearchBtn").on("click", function(e) {
+		
+		console.log("선택옵션: " + $('#optionSel option:selected').val());
+		console.log("입력키워드: " + $('#keyword').val());
 
-
+		if(!$('#optionSel option:selected').val()){
+			alert("검색종류를 선택해 주세요");
+			return false;
+		}
+		if(!$('#keyword').val()){
+			alert("키워드를 입력하세요");
+			return false;
+		}
+		
+		searchForm.find("input[name='pageNum']").val("1");
+		e.preventDefault();
+		searchForm.submit();
+	});
+	
+});
+</script>
 	
 
 
