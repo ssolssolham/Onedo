@@ -6,7 +6,7 @@
 	<!-- 검색조건 sql구문 -->
 	<sql id="criteria">
 	  <trim prefix="(" suffix=") AND " prefixOverrides="OR">
-	    <foreach item="type" collection="typeArr">
+	    <foreach item='type' collection="typeArr">
 	      <trim prefix="OR">
 	      <choose>
 	        <when test="type == 'T'.toString()">
@@ -26,40 +26,41 @@
 	
 	<!-- 게시판번호를 통해 게시글 리스트 가져옴 -->
 	<select id="getList" resultType="com.one.doo.article.domain.Article">
-		<![CDATA[
 		SELECT * FROM articles
 		WHERE bno = #{bno}
-		]]>
 	</select>
 	
-	<!-- 게시판번호를 통해 게시글 리스트를 페이지네이션과 함께 가져옴 -->
+	<!-- (게시판번호를 통해)->받아서 넣는거 못해서 걍 정적으로 넣음 게시글 리스트를 페이지네이션과 함께 가져옴 -->
+	<!-- bno=2인(리뷰)게시판 글 목록+페이징 조회 -->
 	<select id="getListWithPaging" resultType="com.one.doo.article.domain.Article">
 	<![CDATA[
-		SELECT article_num, bno, userid, title, content, regdate, updatedate, replycnt, enabled
-		FROM (SELECT /* + INDEX_DESC(articles pk article) */
+		SELECT *
+		FROM (SELECT /* + INDEX_DESC(articles pk_articles) */
 					ROWNUM rn, article_num, bno, userid, title, content, regdate, updatedate, replycnt, enabled
 					FROM articles
-					WHERE
-	]]>				<include refid="criteria"/>
+					WHERE 
+					bno = 2 AND
+					enabled = 'Y' AND
+	]]>				<include refid="criteria"></include>
 	<![CDATA[
 					ROWNUM <= #{pageNum} * #{amount})
 					WHERE rn > (#{pageNum} - 1) * #{amount}
 	]]>
 	</select>
 	
-	<!-- 게시판별 총 게시글 수 -->
+	<!-- 후기게시판 총 게시글 수 -->
 	<select id="getTotalCount" resultType="int">
 		SELECT	count(*) 
 		FROM	articles
 		WHERE	<include refid="criteria"/>
-		bno = #{bno}
+		bno = 2
 	</select>
 	
-	<!-- 게시글추가 -->
+	<!-- 후기게시글추가 -->
 	<insert id="insert">
-		INSERT INTO arricles (article_num, bno, userid, title, content, regdate, replycnt)
+		INSERT INTO articles (article_num, bno, userid, title, content, regdate, replycnt, article_pw)
 		VALUES(
-		article_seq.nextval, #{bno}, #{userid}, #{title}, #{content}, SYSDATE, 0 
+		article_seq.nextval, #{bno}, #{userid}, #{title}, #{content}, SYSDATE, 0, #{article_pw}
 		)
 	</insert>
 	
@@ -80,8 +81,8 @@
 	<!-- 게시글 수정 -->
 	<update id="update">
 		UPDATE	articles
-		SET		title   	= #{title}
-				content 	= #{content}
+		SET		title   	= #{title},
+				content 	= #{content},
 				updatedate 	= SYSDATE
 		WHERE	article_num = #{article_num}
 	</update>

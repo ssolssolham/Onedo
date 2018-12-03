@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.one.doo.article.mapper.ReplyMapper">
+
+	<insert id="insert">
+		INSERT INTO replies (rno, article_num, reply, replyer)
+		VALUES			  (reply_seq.nextval, #{article_num}, #{reply}, #{replyer})
+	</insert>
+
+	<select id="read" resultType="com.one.doo.article.domain.Reply">
+		SELECT * FROM replies
+		WHERE 		  rno = #{rno}
+	</select>
+	
+	<delete id="delete">
+		DELETE FROM replies
+		WHERE 		rno = #{rno}
+	</delete>
+	
+	<update id="update">
+		UPDATE replies
+		SET	   reply = #{reply},
+			   updatedate = SYSDATE
+		WHERE  rno = #{rno}
+	</update>
+	
+	<select id="getListWithPaging" resultType="com.one.doo.article.domain.Reply">
+	<![CDATA[
+		SELECT *
+		FROM(
+			 SELECT /* + INDEX(replies reply_idx) */
+			 	    ROWNUM rn, rno, article_num, reply, replyer, replyDate, updatedate
+			 FROM	replies
+			 WHERE	article_num = #{article_num}
+			 AND	rno > 0
+			 AND 	ROWNUM <= #{cri.pageNum} * #{cri.amount}
+			 )
+		WHERE rn > (#{cri.pageNum} -1) * #{cri.amount}
+	]]>
+	</select>
+	
+	<select id="getCountByArticleNum" resultType="int">
+	<![CDATA[
+		SELECT	COUNT(rno)
+		FROM	replies
+		WHERE	article_num = #{article_num}
+	]]>
+	</select>
+
+</mapper>

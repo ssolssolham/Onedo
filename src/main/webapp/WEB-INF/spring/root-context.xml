@@ -60,6 +60,7 @@
 	<mybatis-spring:scan base-package="com.one.doo.loan.mapper"/>
 	<!-- <mybatis-spring:scan base-package="com.one.doo.board.mapper"/> -->
 	<mybatis-spring:scan base-package="com.one.doo.auth.mapper"/>
+	<mybatis-spring:scan base-package="com.one.doo.article.mapper"/>
 	<mybatis-spring:scan base-package="com.one.doo.metadata.log.mapper"/>
 	<mybatis-spring:scan base-package="com.one.doo.metadata.url.mapper"/>
 
@@ -80,8 +81,11 @@
 	<mybatis-spring:scan base-package="com.one.doo.workerperalleybiz.mapper"/>
 	
 	<!-- 서비스등록 -->	
+	<context:component-scan base-package="com.one.doo.analysis.service"/>
 	<context:component-scan base-package="com.one.doo.member.service"/>
 	<context:component-scan base-package="com.one.doo.member.validate"/>
+	<context:component-scan base-package="com.one.doo.article.service"/>
+	<!-- <context:component-scan base-package="com.one.doo.member"></context:component-scan> -->
 	<context:component-scan base-package="com.one.doo.loan.service"/>
 	<!-- <context:component-scan base-package="com.one.doo.member"/>-->
 	<!--AOP 프록시 설정-->
