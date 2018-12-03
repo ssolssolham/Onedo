@@ -1097,6 +1097,10 @@
     		}
     	}
     	
+    	console.log(activeRegionType);
+    	console.log(activeVillageList);
+    	
+    	var message = "RegionType : " + activeRegionType + "#" + "VillageList : " + activeVillageList 
     	$.ajax({
 	         type : 'GET',
 	         url : '/analysis/analysisstart/' ,
@@ -1106,6 +1110,7 @@
 	        	'regionType' : activeRegionType
 	         },
 	         success : function(data) {
+	        	 console.log(data);
 	         },
 	         error : function(error) {
 	        	 

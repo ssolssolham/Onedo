@@ -10,5 +10,6 @@ public interface IndexPerAlleybizMapper {
 
 	// 상권코드, 상권업종
 	public List<IndexPerAlleybiz> getIndexPerAlleybizList(@Param("AlleyBizCode") String AlleyBizCode,@Param("CobbCode") String CobbCode);
+	public IndexPerAlleybiz read(@Param("AlleyBizCode") int AlleyBizCode);
 	
 }
