@@ -16,10 +16,10 @@ public interface ReplyMapper {
 	public int insert(Reply reply);
 	
 	// 댓글보기
-	public Reply read(Long article_num);
+	public Reply read(Long rno);
 	
 	// 댓글삭제
-	public int delete(Long article_num);
+	public int delete(Long rno);
 	
 	// 댓글수정
 	public int update(Reply reply);

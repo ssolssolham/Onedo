@@ -17,6 +17,8 @@ public class Article {
 	
 	private int replyCnt;
 	private String enabled; //공지: 게시여부, 리뷰: 삭제여부
+	
+	private String article_pw;
 	// 파일추가시 추가됨
 	// private List<ArticleAttach> attachList;
 }

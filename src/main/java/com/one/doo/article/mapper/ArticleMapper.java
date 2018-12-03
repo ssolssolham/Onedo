@@ -2,6 +2,8 @@ package com.one.doo.article.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.one.doo.article.domain.Article;
 import com.one.doo.article.domain.Criteria;
 
@@ -13,14 +15,14 @@ public interface ArticleMapper {
 	// 게시판별 게시글 목록 조회
 	public List<Article> getList(Long bno);
 	
-	// 게시판별 페이징처리한 게시글 목록
-	public List<Article> getListWithPaging(Criteria cri, Long bno);
+	// 후기 페이징처리한 게시글 목록(enabled = 'Y')
+	public List<Article> getListWithPaging(Criteria cri);
 	
-	// 게시판별 게시글 숫자
-	public int getTotalCount(Criteria cri, Long boardNo);
+	// 후기게시판 검색조건에 맞는 게시글 숫자
+	public int getTotalCount(Criteria cri);
 	
 	// 게시판별 게시글작성
-	public void insert(Article article, Long boardNo);
+	public void insert(Article article);
 	
 	// 다음작성되는 게시판 글 번호확인 후 insert???이게뭐지..?
 //	public void insertSelectKey(Article article);

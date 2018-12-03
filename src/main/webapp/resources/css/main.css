@@ -100,7 +100,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 body, html {
   height: 100%;
-  font-family: '¸¼Àº°íµñ','µ¸¿ò', 'dotum', 'AppleGothic';
+  font-family: 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½ï¿½', 'dotum', 'AppleGothic';
 	/*font-family: Montserrat, sans-serif;*/
   font-weight: 400;
   font-size: 2rem;
@@ -1863,4 +1863,8 @@ body {padding-right: 0px !important;}
 .active {
 	background-color: #27b2a5;
 	color: white;
+}
+
+.reviewDetailBtn {
+	display: inline;
 }
