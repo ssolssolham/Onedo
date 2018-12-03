@@ -1,21 +1,13 @@
 package com.one.doo.analysis.controller;
 
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import javax.inject.Inject;
 
-import com.one.doo.board.domain.Board;
-import com.one.doo.board.domain.Criteria;
-import com.one.doo.board.domain.Page;
-import com.one.doo.board.service.BoardService;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.one.doo.analysis.service.AnalysisService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -26,15 +18,27 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class AnalysisController {
 	
+	@Inject
+	private AnalysisService analysisService;
+	
 	@RequestMapping("/")
 	public String home() {
 		return "analysis/analysis";
 	}
 	
-	@RequestMapping("/getvillagelist/{selectedDistrict}")
+	@RequestMapping(value = "/getvillagelist/{selectedDistrict}", produces = "application/json; charset=utf8")
 	public @ResponseBody String getVillageList(@PathVariable String selectedDistrict)  {
 		log.info("들어옴?");
-		return "analysis/analysis";
+		log.info(selectedDistrict);
+		
+		
+		String result = "{\"area\":\""+ analysisService.getVillageList(selectedDistrict) +"\"}";
+		
+
+		
+		log.info(result);
+		
+		return result;
 	}
 	
 }
