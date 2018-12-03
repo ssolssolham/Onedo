@@ -1,6 +1,6 @@
 package com.one.doo.loancompany.domain;
 
-import com.one.doo.budongsan.domain.Budongsan;
+import com.one.doo.realestate.domain.Realestate;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
