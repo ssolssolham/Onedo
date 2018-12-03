@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.one.doo.loan.mapper.LoanMapper">
+	
+	<select id="getLoanList" resultType="Map" parameterType="Map">					
+SELECT loan_id, loan_name, loan_content, loan_division, loan_category, interestRate_category, creditLine_desc,
+           	loanPeriod_desc, repayment_way, detail_url,  target_description, 
+           	TO_CHAR(loanUpdate_date, 'MM-DD-YYYY') "UPDATE_DATE", target_detail1,  target_detail2, target_detail3, 
+           	t.target_name, c.loancomp_name, c.present_num, c.sub_num
+FROM    loan_product p
+			JOIN loan_target t
+			ON p.target_id = t.target_id
+			JOIN loan_company c
+         	ON p.loanComp_id = c.loanComp_id
+         	
+         	<choose>
+         		<when test="loanCategory == '신용'">
+         				WHERE loan_category = '신용' 
+         				AND #{requiredMoney} BETWEEN creditLine_min AND creditLine_max
+         				AND #{resultRate} BETWEEN interestRate_min AND interestRate_max
+         				AND  t.target_id = #{targetNum}	
+         				
+         				<if test="termService != 0 ">
+         				<![CDATA[
+         				AND  term_service >= #{termService}
+         						]]>
+         				</if>
+         		</when>
+         		<otherwise>		
+         		<if test="loanCategory=='담보'">
+	         		WHERE loan_category = '담보'
+	         		<![CDATA[
+	         		AND creditLine_max  >=  #{requiredMoney}
+					]]>
+	         		AND t.target_id = #{targetNum}
+	         		<if test="securityType != '전체'">
+	         			AND security_type = #{securityType}
+					</if>
+	         		 <if test="termService != 0 ">
+         				<![CDATA[
+         				AND  term_service >= #{termService}
+         				]]>
+         			</if>
+         		</if>		
+         		</otherwise>
+         	</choose>
+         	ORDER BY interestRate_min
+	</select>
+
+	<select id="getTotalCount" resultType="int">
+		SELECT count(*) FROM loan_product 
+		<![CDATA[
+			WHERE loan_id > 0
+		]]>
+	</select>
+	
+	
+	
+	<insert id="insertLoan">
+		INSERT INTO loan_product 
+		             (loan_id,
+		              loanComp_id,
+		              target_id,
+		              loan_division,
+		              loan_category,
+		              loan_name,
+		              loan_content,
+		              loanUpdate_date,
+		              term_service,
+		              money_condition_min,
+		              money_condition_max,
+		              target_description,
+		              target_detail1,
+		              target_detail2,
+		              target_detail3,
+		              interestRate_category,
+		              interestRate_min,
+		              interestRate_max,
+		              creditLine_min,
+		              creditLine_max,
+		              creditLine_desc,
+		              loanPeriod_min,
+		              loanPeriod_max,
+		              loanPeriod_desc,
+		              repayment_way,
+		              holding,
+		              holding_min,
+		              holding_max,
+		              repay1,
+		              repay2,
+		              repay3,
+		              repayM,
+		              detail_url,
+		              security_type)
+		VALUES  (seq_loan.nextval,
+		             #{loanCompId},
+		             #{targetId},
+		             #{loanDivision},
+		             #{loanCategory},
+		             #{loanName},
+		             #{loanContent},
+		             TO_DATE(sysdate,'MM-DD-YYYY'),
+		             #{termService},
+		             #{moneyConditionMin},
+		             #{moneyConditionMax},
+		             #{targetDescription},
+		             #{targetDetail1},
+		             #{targetDetail2},
+		             #{targetDetail3},
+		             #{interestRateCategory},
+		             #{interestRateMin},
+		             #{interestRateMax},
+		             #{creditLineMin},
+		             #{creditLineMax},
+		             #{creditLineDesc},
+		             #{loanPeriodMin},
+		             #{loanPeriodMax},
+		             #{loanPeriodDesc},
+		             #{repaymentWay},
+		             #{holding},
+		             #{holdingMin},
+		             #{holdingMax},
+		             #{repay1},
+		             #{repay2},
+		             #{repay3},
+		             #{repayM},
+		             #{detailUrl},
+		             #{securityType})
+	</insert>
+
+	<select id="readLoan" resultType="com.one.doo.loan.domain.Loan">
+	 	SELECT * FROM loan_product WHERE loan_id = #{loanId}
+	</select>
+
+	<update id="updateLoan">
+		UPDATE loan_product
+		SET 		loan_name=#{loanName},
+			   		loan_content=#{loanContent},
+			   		loanUpdate_date = sysdate,
+			   		target_description = #{targetDescription},
+			   		target_detail1 = #{targetDetail1},
+			   		target_detail2 = #{targetDetail2},
+			   		target_detail3 = #{targetDetail3},
+			   		interestRate_min = #{interestRateMin},
+			   		interestRate_max = #{interestRateMax},
+			   		creditLine_min = #{creditLineMin},
+			   		creditLine_max = #{creditLineMax},
+			   		creditLine_desc = #{creditLineDesc},
+			   		loanPeriod_min = #{loanPeriodMin},
+			   		loanPeriod_max = #{loanPeriodMax},
+			   		repayment_way = #{repaymentWay},
+			   		holding_min = #{holdingMin},
+			   		holding_max = #{holdingMax},
+			   		detail_url = #{detailUrl},
+			   		security_type = #{securityType}
+		WHERE loan_id = #{loanId}
+	</update>
+
+
+<!-- 신용도에 따른 대출 이율 읽기  -->
+	<select id="readRate" resultType="com.one.doo.loan.domain.CreditRank">
+		SELECT * 
+		FROM credit_rate_category 
+		WHERE rate_id = #{rateId}
+	</select>
+
+
+	<update id="updateRate">
+		UPDATE credit_rate_category 
+		SET rate_id = #{rateId} 
+		WHERE rate_id = #{rateId}
+	</update>
+
+</mapper>
