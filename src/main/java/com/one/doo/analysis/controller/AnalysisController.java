@@ -2,7 +2,6 @@ package com.one.doo.analysis.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -45,10 +44,9 @@ public class AnalysisController {
 	@RequestMapping(value = "/analysisstart", produces = "application/json; charset=utf8")
 	public @ResponseBody List<HashMap<String,Object>> getAnalysisResult(@RequestParam(value = "villageList[]") List<String> arrayParams,
 			@RequestParam(value = "regionType") String regionType) {
-		log.info(arrayParams);
-		log.info(regionType);
+		log.info("배열 파라미터??? " + arrayParams);
+		log.info("검색 타입??? " + regionType);
 		System.out.println(arrayParams.toString());
-		
 		
 		List<HashMap<String,Object>> hash = analysisService.firstStep(arrayParams, regionType);
 		log.info(hash);
