@@ -69,8 +69,35 @@ public class AnalysisServiceImpl implements AnalysisService {
 	@Transactional
 	@Override
 	public List<HashMap<String,Object>> firstStep(List<String> Areas,String regionType) {
+		log.info(regionType);
 		
-		List<HashMap> list = mlresultMapper.firstStep(Areas);
+		//리스트 반환할 객체 선언 
+		List<HashMap> list = null;
+		
+
+		switch(regionType) {
+			case "주택가" : list = mlresultMapper.firstStep(Areas);
+				break;
+			case "대학가" : list = mlresultMapper.secondStep(Areas);
+				log.info("대학가 부름??: "+regionType);
+				break;
+			case "유흥가" : list = mlresultMapper.thirdStep(Areas);
+				log.info("유흥가 부름??: "+regionType);
+				break;
+			case "역세권" : list = mlresultMapper.fourthStep(Areas);
+				log.info("역세권 부름??: "+regionType);
+				break;
+			case "오피스" : list = mlresultMapper.fifthStep(Areas);
+				log.info("오피스 부름??: "+regionType);
+				break;	
+		}
+		
+		//반환할 리스트가 없으면 
+		if (list == null) {
+			log.info("--------------list반환 없음 -----------");
+			return null;
+		}
+		
 		List<HashMap<String,Object>> returnList = new ArrayList();
 		
 		for (HashMap hashMap : list) {
