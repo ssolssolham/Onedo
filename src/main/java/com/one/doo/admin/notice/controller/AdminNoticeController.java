@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.one.doo.article.domain.Article;
@@ -43,15 +44,7 @@ public class AdminNoticeController {
 		return "admin/notice/notice";
 	}
 	
-	// 공지 등록
-	@GetMapping("/register")
-	public String register(Article article, RedirectAttributes rttr) {
-		log.info("공지등록");
-		service.register(article);
-		rttr.addFlashAttribute("result", article.getArticle_num());
-		return "redirect:/admin/notice/";
-	}
-	
+	// 공지등록화면
 	@RequestMapping("/enrollForm")
 	public String enroll(Locale locale, Model model) {
 		//logger.info("Welcome home! The client locale is {}.", locale);
@@ -65,4 +58,22 @@ public class AdminNoticeController {
 		
 		return "admin/notice/enroll";
 	}
+	// 공지 등록
+	@GetMapping("/register")
+	public String register(Article article, RedirectAttributes rttr) {
+		log.info("공지등록");
+		service.register(article);
+		rttr.addFlashAttribute("result", article.getArticle_num());
+		return "redirect:/admin/notice/";
+	}
+	
+	// 공지확인(read)
+	@GetMapping("/get")
+	public String get(@RequestParam("article_num")Long article_num, Model model) {
+		log.info("공지 상세보기"+article_num);
+		model.addAttribute("notice", service.get(article_num));
+		return "admin/notice/get";
+		
+	}
+	
 }

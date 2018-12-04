@@ -67,7 +67,7 @@
                       
                       <tr>
                         <td style="text-align: center; vertical-align: middle; color: #27b2a5;">
-                          <b>최종수정일</b>
+                          <b>등록일</b>
                         </td>
                         <td>
                         <fmt:parseDate pattern="yyyy-mm-dd" value="${review.regdate }"/>

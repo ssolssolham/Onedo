@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   
 <!DOCTYPE html>
 <!--
@@ -62,52 +62,72 @@ desired effect
         <!--------------------------
         | Your Page Content Here |
         -------------------------->
-        <div class="box">
-          <div class="box-header"></div>
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">공지 내용</h3>
+          </div>
           <!-- /.box-header -->
-          <div class="box-body">
-          <div>
-            <input type="button" style="margin: 10px;"
-              class="btn btn-primary btn-flat" value="공지 등록" onclick="location.href = '/admin/notice/enrollForm' "/>
-          </div>
-            <table id="example2"
-              class="table table-bordered table-hover">
-              <thead>
-                <tr>
-                  <th>순번</th>
-                  <th>제목</th>
-                  <th>작성자</th>
-                  <th>작성날짜</th>
-                  <th>게시여부</th>
-                </tr>
-              </thead>
-              <tbody>
-              <c:forEach items="${notices }" var="notice" varStatus="status">
-              	<tr>
-              		<td>${status.index+1 }</td>
-              		<td><a href="/admin/notice/get?article_num=+${notice.article_num }">${notice.title }</a></td>
-              		<td>${notice.userid }</td>
-              		<td><fmt:parseDate pattern="yyyy-mm-dd" value="${notice.regdate }"/></td>
-              		<td>${notice.enabled }</td>
-              	</tr>
-              </c:forEach>
-            </table>
-          </div>
-          <!-- /.box-body -->
-          <div style="text-align: end;">
-            <input type="button" style="margin: 10px;"
-              class="btn btn-primary btn-flat" value="공지 등록" onclick="location.href = '/admin/notice/enrollForm' "/>
-          </div>
 
+<!-- 공지 상세내용 -->
+<table style="border: 1px solid black;">
+	<colgroup>
+	<col width="18%">
+	<col width="32%">
+    <col width="18%">
+    <col width="32%">
+	</colgroup>
+    <tr>
+    	<td><b>공지제목</b></td>
+    	<td>${notice.title }</td>
+    	
+    	<td><b>작성자</b></td>
+    	<td>${notice.userid }</td>
+    </tr>
+    
+    <tr>
+    	<td><b>공지등록일</b></td>
+    	<td><fmt:parseDate pattern="yyyy-mm-dd" value="${notice.regdate }"/></td>
+    	<td><b>게시여부</b></td>
+    	<td>${notice.enabled }</td>
+    </tr>
+    <tr>
+    	<td colspan="4">
+    	${notice.content }
+    	</td>
+    </tr> 
+</table>
 
-        </div>
+          <!-- form start -->
+<%--           <form action="/admin/notice/register" method="get">
+            <div class="box-body">
+              <div class="form-group">
+                <label for="exampleInputEmail1">제목</label> 
+                <input name="title" type="text" class="form-control" placeholder="제목">
+              </div><br>
 
+ 			<div class="form-group">
+              <label for="exampleInputPassword1">내용</label>
+              <textarea name="content" class="form-control" cols="15" rows="5" placeholder="내용"></textarea>
+			</div><br>
 
+			<input type="hidden" name="article_pw" value="">
+			<input type="hidden" name="bno" value="1">
+			<input type="hidden" name="userid" value="<sec:authentication property="principal.member.userid"/>">
+						
+              <div>
+                <input type="submit" style="margin: 10px;"
+                  class="btn btn-primary btn-flat" value="공지 등록"
+                  onclick="location.href = '/admin/notice/enrollForm' " />
+              </div>
+
+            </div>
+           </form>
+ --%>           
       </section>
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-    
+
     <!-- Main Footer -->
     <jsp:include
       page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/footer.jsp" />

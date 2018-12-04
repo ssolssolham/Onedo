@@ -94,11 +94,4 @@ public class ReviewController {
 		return "redirect:/review/list";
 	}
 	
-//	@RequestMapping("/")
-//	public String home() {
-//		return "review/review";
-//	}
-	
-
-	
 }
