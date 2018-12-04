@@ -1168,6 +1168,9 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     	$('#regionFilter').children().removeClass('active');
     })
     
+    // 분석 후 도출되는 3개의 상권 리스트 담는 변수
+    var topThreeList = [];
+    
     // 분석하기 버튼 클릭 시, 발생하는 이벤트(필터에서 검색한 변수들을 Ajax 통신을 위해 변수로 저장)
     $('#analysisStartBtn').click(function() {
     	// 분석 결과 동적으로 출력
@@ -1194,15 +1197,11 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     		}
     	}
     	
-    	console.log(activeRegionType);
-    	console.log(activeVillageList);
     	
-    	var message = "RegionType : " + activeRegionType + "#" + "VillageList : " + activeVillageList 
 
     	var target = document.getElementById('snackbar');
 			 target.innerHTML = '필터에 입력하신 값을 바탕으로 지도에 표시된 영역 골목 상권 분석을 진행합니다';
 			 toast();
-    	
 		 $.ajax({
 	         type : 'GET',
 	         url : '/analysis/analysisstart/' ,
@@ -1212,7 +1211,12 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	        	'regionType' : activeRegionType
 	         },
 	         success : function(data) {
-	        	 console.log(data);
+	        	 topThreeList = [];
+	        	 for (var i = 0; i < 3; i++) {
+	        		
+	        	 	topThreeList.push(data[i]);
+	        	 }
+	        	 console.log(topThreeList);
 	        	 var target = document.getElementById('snackbar');
 				 target.innerHTML = '분석을 완료했습니다. 콘솔창에서 Data를 확인하세요';
 				 toast();
