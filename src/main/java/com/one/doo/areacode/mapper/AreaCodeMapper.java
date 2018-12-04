@@ -18,4 +18,6 @@ public interface AreaCodeMapper {
 	// 동 선택까지 한 경우
 	public List<AreaCode> getAreaCodeListByAreaNames(@Param("AdminName") HashMap AreaCodeNames);
 	
+	public AreaCode read(@Param("AlleyBizCode") int AlleyBizCode);
+	
 }

@@ -10,4 +10,5 @@ public interface OutPerAlleybizMapper {
 	
 	// 상권코드를 이용해 가져오기
 	public List<OutPerAlleybiz> getOutPerAlleybizList(@Param("AlleyBizCode") String AlleyBizCode);
+	public OutPerAlleybiz read(@Param("AlleyBizCode") int AlleyBizCode);
 }
