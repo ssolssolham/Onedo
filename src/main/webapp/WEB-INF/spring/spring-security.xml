@@ -43,6 +43,8 @@
 	<security:intercept-url access="hasRole('ROLE_ADMIN')" pattern="/admin/**"/>
  	<security:intercept-url access="hasRole('ROLE_USER')"  pattern="/review/*"/>
  	<security:intercept-url access="hasRole('ROLE_USER')"  pattern="/review/**"/>
+ 	<security:intercept-url access="hasRole('ROLE_USER')"  pattern="/replies/*"/>
+ 	<security:intercept-url access="hasRole('ROLE_USER')"  pattern="/replies/**"/>
 	<security:intercept-url access="permitAll"             pattern="/member/**"/>
  
 	<security:form-login 

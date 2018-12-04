@@ -8,6 +8,8 @@
   <title>이용 후기</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 비동기통신 토큰값 저장...(reply.js의 add에서 사용) -->
+  <sec:csrfMetaTags/>
   <!-- header include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/headTagConfig.jsp"/>
   <!-- header include 종료 -->
@@ -92,7 +94,6 @@
 					<div>
 					<!-- 글쓴이와 보고있는사람 아이디 일치할경우 -->
                     <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" href="/review/list">목록</a><span class="float-r">&nbsp;&nbsp;</span>
-                    <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" id="replyReviewBtn" data-toggle="modal" data-target="#replyReviewModal">댓글</a><span class="float-r">&nbsp;&nbsp;</span>
 					
 					<sec:authentication var="loginId" property="principal.member.userid" /><!-- 로그인한사람 id값 변수로 저장 -->
 					<c:set var="writer" value="${review.userid }"/>
@@ -104,7 +105,7 @@
 					</div>
 					
 					<!-- 댓글영역 -->
-					<div class="panel-body">
+<!-- 					<div class="panel-body">
 					<ul class="chat">
 					<li class="left clearfix" data-rno='12'>
 					  <div style="border:1px solid black;">
@@ -116,8 +117,33 @@
 					  </div>
 					</li>
 					</ul>
-					</div> <!-- 댓글끝 -->
-					
+					</div> 댓글끝
+ -->
+     <!-- /.panel -->
+    <div class="panel panel-default">
+<!--       <div class="panel-heading">
+        <i class="fa fa-comments fa-fw"></i> Reply
+      </div> -->
+      
+      <div class="panel-heading">
+        <i class="fa fa-comments fa-fw"></i> Reply
+        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New Reply</button>
+      </div>      
+      
+      
+      <!-- /.panel-heading -->
+      <div class="panel-body">        
+      
+        <ul class="chat">
+
+        </ul>
+        <!-- ./ end ul -->
+      </div>
+      <!-- /.panel .chat-panel -->
+
+	<div class="panel-footer"></div>
+ 
+ 					
 				</div>
 			</div>
 	</div>
@@ -157,33 +183,46 @@
 		</div>
 	  </div>
     
-  <!-- 후기 댓글 Modal HTML -->
-  <div id="replyReviewModal" class="modal fade">
+  <!-- 댓글 Modal HTML -->
+  <div id="replyModal" class="modal fade">
     <div class="modal-dialog modal-login">
       <div class="modal-content">
+      
       <div class="modal-header">        
-        <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;댓글달기</h4>
+        <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;댓글</h4>
       </div>
+      
       <div class="modal-body">
-        <form action="/replies/new" method="post">
         
         <div class="form-group">
-          <input type="text" name="reply" class="form-control" placeholder="후기에 대한 댓글내용을 자유롭게 작성해주세요" required="required" style="padding-left:10px; font-size: 20px;"/>
+        	<label>댓글내용</label>
+          	<input type="text" name="reply" class="form-control" placeholder="후기에 대한 댓글내용을 자유롭게 작성해주세요" 
+          	required="required" style="padding-left:10px; font-size: 20px;"/>
         </div>
-        <!-- hidden으로 send -->
-		<input type="hidden" name="article_num">              
-        <input type="hidden" name="replyer" value="<sec:authentication property="principal.member.userid"/>"/>      
-        <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
-        <!-- 후기버튼(등록/취소, 수정/삭제: 로그인한사람과 댓작성자일치에게만 보임) -->
-        <div class="form-group" style="display: flex; align-items: center; justify-content: center;">
-          <button type="button" class="" value="등록">등록</button>&nbsp;
-          <button type="button" class="" value="취소"  data-dismiss="modal">취소</button>
+        <div class="form-group">
+        	<label>작성자</label>
+        	<input type="text" class="form-control" id="replyer" name="replyer" placeholder="${loginId }" readonly="readonly"
+        	value="${loginId}" style="padding-left:10px; font-size: 20px;"/>
         </div>
-        </form>       
+        <div class="form-group">
+        	<label>등록날짜</label>
+        	<input class="form-control" name="replyDate" value=""
+        	style="padding-left:10px; font-size: 20px;" />
+        </div>
+      </div><!-- end modal body -->
+      <div class="modal-footer">
+      <c:set var="replyer" value="" />
+      <c:if test="${replyer eq loginId }">
+      </c:if>	
+      	<button id="modalModBtn" type="button" class="btn btn-warning">수정</button>
+      	<button id="modalRemoveBtn" type="button" class="btn btn-danger">삭제</button>
+      	<button id="modalRegisterBtn" type="button" class="btn btn-primary">등록</button>
+      	<button id="modalCloseBtn" type="button" class="btn btn-default">닫기</button>
       </div>
+      
       </div>
     </div>
-    </div>
+   </div>
     
      <!-- 후기 삭제 Modal HTML -->
   <div id="deleteReviewModal" class="modal fade">
@@ -231,7 +270,7 @@
 		    
 		function showList(page){
 			
-			  console.log("show list " + page);
+			console.log("show list " + page);
 		    
 		    replyService.getList({article_num:articleNumVal,page: page|| 1 }, function(replyCnt, list) {
 		      
@@ -335,11 +374,13 @@
 		    var modalRemoveBtn = $("#modalRemoveBtn");
 		    var modalRegisterBtn = $("#modalRegisterBtn");
 		    
+		    // 닫기버튼
 		    $("#modalCloseBtn").on("click", function(e){
 		    	
 		    	modal.modal('hide');
 		    });
 		    
+		    // 댓글추가버튼(new Reply)
 		    $("#addReplyBtn").on("click", function(e){
 		      
 		      modal.find("input").val("");
@@ -348,17 +389,18 @@
 		      
 		      modalRegisterBtn.show();
 		      
-		      $(".modal").modal("show");
+		      $("#replyModal").modal("show");
 		      
 		    });
 		    
-
+			// 댓글등록 이벤트
 		    modalRegisterBtn.on("click",function(e){
-		      
+		      alert("댓추가할거"+modalInputReply.val()+"작성자: "+$('#replyer').val()+"게시글번호: "+articleNumVal);
 		      var reply = {
 		            reply: modalInputReply.val(),
-		            replyer:modalInputReplyer.val(),
-		            bno:bnoValue
+		            replyer:$('#replyer').attr('value'),
+		            article_num:articleNumVal
+		            //,_csrf.headerName:${_csrf.token}
 		          };
 		      replyService.add(reply, function(result){
 		        
@@ -368,7 +410,7 @@
 		        modal.modal("hide");
 		        
 		        //showList(1);
-		        showList(-1);
+		        showList(1);
 		        
 		      });
 		      
@@ -381,7 +423,7 @@
 		      var rno = $(this).data("rno");
 		      
 		      replyService.get(rno, function(reply){
-		      
+		      	alert(reply.reply);
 		        modalInputReply.val(reply.reply);
 		        modalInputReplyer.val(reply.replyer);
 		        modalInputReplyDate.val(replyService.displayTime( reply.replyDate))
@@ -389,19 +431,26 @@
 		        modal.data("rno", reply.rno);
 		        
 		        modal.find("button[id !='modalCloseBtn']").hide();
+		        // replyer와 loginId가 같으면 수정삭제버튼 show, 
+		        var loginId = '${loginId}';
+				alert("로그인아이디: "+loginId);		        
+		        if(reply.replyer == loginId){
 		        modalModBtn.show();
-		        modalRemoveBtn.show();
-		        
-		        $(".modal").modal("show");
+		        // modalRemoveBtn.show();
+		        }else{
+		        	modalInputReply.attr("readonly", "readonly");
+		        }
+		        ///////////////
+		        $("#replyModal").modal("show");
 		            
 		      });
 		    });
 		 
-
+			// 댓글수정버튼 클릭이벤트
 		    modalModBtn.on("click", function(e){
 		    	  
 		   	  var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
-		   	  
+		   	  //alert("댓..:"+reply.relyer);
 		   	  replyService.update(reply, function(result){
 		   	        
 		   	    alert(result);
@@ -412,10 +461,11 @@
 		   	  
 		   	});
 
-
+			// 삭제버튼클릭이벤트
 		   	modalRemoveBtn.on("click", function (e){
-		   	  
 		   	  var rno = modal.data("rno");
+		   		alert("댓글을 정말로 삭제하시겠습니까?" + rno);
+		   	  
 		   	  
 		   	  replyService.remove(rno, function(result){
 		   	        

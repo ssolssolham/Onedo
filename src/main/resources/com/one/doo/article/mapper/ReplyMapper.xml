@@ -4,8 +4,8 @@
 <mapper namespace="com.one.doo.article.mapper.ReplyMapper">
 
 	<insert id="insert">
-		INSERT INTO replies (rno, article_num, reply, replyer)
-		VALUES			  (reply_seq.nextval, #{article_num}, #{reply}, #{replyer})
+		INSERT INTO replies (rno, article_num, reply, replyer, replydate, updatedate)
+		VALUES			  (reply_seq.nextval, #{article_num}, #{reply}, #{replyer}, SYSDATE, SYSDATE)
 	</insert>
 
 	<select id="read" resultType="com.one.doo.article.domain.Reply">

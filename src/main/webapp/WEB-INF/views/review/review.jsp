@@ -85,7 +85,7 @@
 						<c:forEach items="${list }" var="review" varStatus="status">
 							<tr>
 							  <td>${status.index +1 }</td>
-							  <td><a href="/review/detail?article_num=${review.article_num }">${review.title }</a></td>
+							  <td><a class="move" href="/review/detail?article_num=${review.article_num }">${review.title }</a></td>
 							  <td>${review.userid }</td>
 							  <td><fmt:formatDate pattern="yyyy-mm-dd" value="${review.regdate }"/></td>
 							  <td>${review.enabled }</td>

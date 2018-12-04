@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.one.doo.article.domain.Criteria;
 import com.one.doo.article.domain.Reply;
+import com.one.doo.article.domain.ReplyPage;
 import com.one.doo.article.service.ReplyService;
 
 import lombok.AllArgsConstructor;
@@ -50,11 +51,11 @@ public class ReplyController {
 	}
 	
 	// 게시물에대한 댓글목록
-	@GetMapping(value="/pages{article_num}/{page}",
+	@GetMapping(value="/pages/{article_num}/{page}",
 				produces = {
 						MediaType.APPLICATION_JSON_UTF8_VALUE,
 						MediaType.APPLICATION_XML_VALUE	})
-	public ResponseEntity<List<Reply>> getList(
+	public ResponseEntity<ReplyPage> getList(
 				@PathVariable("page") int page,
 				@PathVariable("article_num") Long article_num){
 		
@@ -62,7 +63,7 @@ public class ReplyController {
 		Criteria cri = new Criteria(page, 10);
 		log.info("criteria값: "+cri);
 		
-		return new ResponseEntity<>(service.getList(cri, article_num), HttpStatus.OK);
+		return new ResponseEntity<>(service.getListPage(cri, article_num), HttpStatus.OK);
 	}
 	
 	// 조회
