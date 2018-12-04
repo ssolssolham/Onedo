@@ -34,6 +34,15 @@
   .calculatorTable{
     background-color: white;
   }
+  
+  #table{
+    background-color: white;
+     background-clip: padding-box;
+    border: 1px solid;
+    color: black;
+    border: 1px solid thin;
+    
+  }
   </style>
 
 <!-- header include 시작 -->
@@ -372,126 +381,29 @@
     });
 </script>
 
-<script>
-function checkRepayment(){
-	 var interestSum = 0;
-	 var principalSum = 0;
-	 var body = document.getElementById('cell');  //행을 추가할 테이블
-
-	 body.innerHTML += "<tr><td colspan='6' style='text-align:center;'>"
-	               + "상환 개시전"+"</td><td>"
-	               + amount_of_loans +"</td></tr>";
-	 for (var i = 0; i < monthly_installment_plan; i++) {
-	   interestSum += interests[i];
-	   principalSum += principals[i];
-	   body.innerHTML += "<tr><td>"
-	                   + (i+1) + "개월"+"</td><td>"
-	                   +repayments[i]+"</td><td>"
-	                   +principals[i]+"</td><td>"
-	                   +interests[i]+"</td><td>"
-	                   +principalSum+"</td><td>"
-	                   +interestSum+"</td><td>"
-	                   +balances[i]+"</td></tr>";
-	 }
-	 body.innerHTML += "<tr><td colspan='5' style='text-align:center;'>"
-	   + "총 납입금액 "+"</td><td colspan='2'>"
-	   +(interestSum + principalSum)+"원</tr>";
-
-	  console.log(repayments); 
-	   	
-	 var chartData = {
-	     labels: ['2018-01', '2018-02', '2018-03', '2018-04', '2018-05', '2018-06', '2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12'],
-	     datasets:
-	       [
-	         {
-	         type: 'bar',
-	         label: '잔액',
-	         borderColor: window.chartColors.blue,
-	         borderWidth: 2,
-	         fill: false,
-	         data: balances
-	         }, 
-	       
-	         {
-	         type: 'bar',
-	         label: '월 납입액',
-	         backgroundColor: window.chartColors.red,
-	         data: repayments ,
-	         borderColor: 'white',
-	         borderWidth: 2
-	         }, 
-	         
-	         {
-	         type: 'bar',
-	         label: '월 납입원금',
-	         backgroundColor: window.chartColors.green,
-	         data: principals
-	         },
-	       
-	         {
-	         type: 'bar',
-	         label: '월 납입이자',
-	         backgroundColor: window.chartColors.yellow,
-	         data: interests
-	         }
-	       ]
-	     };
-	     
-	     window.onload = function() {
-	       var ctx = document.getElementById('canvas').getContext('2d');
-	       window.myMixedChart = new Chart(ctx, {
-	         type: 'bar',
-	         data: chartData,
-	         options: {
-	           responsive: true,
-	           title: {
-	             display: true,
-	             text: 'Chart.js Combo Bar Line Chart'
-	           },
-	           tooltips: {
-	             mode: 'index',
-	             intersect: true
-	           }
-	         }
-	       });
-	     };
-
-	   document.getElementById('tableView').addEventListener('click', function(){
-	     document.getElementById('canvas').style.display = "none";
-	     document.getElementById('table').style.display = "block";
-	     });
-	     
-	   document.getElementById('graphView').addEventListener('click', function(){
-	     document.getElementById('canvas').style.display = "block";
-	     document.getElementById('table').style.display = "none";
-	     });   
-	 
-	   $("#canvas").show();
-}
-</script>
 
 <!-- 상품별 금융계산기  -->
 <script>
-var amount_of_loans = $('#principal').val(); // 대출원금 (입력)
-var lending_rate = $('#rate').val(); // 이율(입력)
-var monthly_installment_plan = $('#period').val(); // 상환기간(입력)
-var holding_period = $('#term').val();  //거치기간(입력)
-var holding = $('#term').val()//보관용 거치기간(입력)
-var type_repayment = $('input[name="repay"]:checked').val(); //상환타입(입력) var radioVal = $('input[name="radioTxt"]:checked').val();
-var my_asset = $('#salary').val(); // 내 연소득(입력)
 
-var my_amount_of_loans = amount_of_loans; // 대출잔액
+$('#checkRepayment').on('click', function(){
+	var amount_of_loans = $('#principal').val(); // 대출원금 (입력)
+	var lending_rate = $('#rate').val(); // 이율(입력)
+	var monthly_installment_plan = $('#period').val(); // 상환기간(입력)
+	var holding_period = $('#term').val();  //거치기간(입력)
+	var holding = $('#term').val()//보관용 거치기간(입력)
+	var type_repayment = $('input[name="repay"]:checked').val(); //상환타입(입력) var radioVal = $('input[name="radioTxt"]:checked').val();
+	var my_asset = $('#salary').val(); // 내 연소득(입력)
+	var my_amount_of_loans = amount_of_loans; // 대출잔액
 
-var repayments = new Array();
-var interests = new Array();
-var principals = new Array();
-var balances = new Array();
-var date = new Array();
-
-
+	var repayments = new Array();
+	var interests = new Array();
+	var principals = new Array();
+	var balances = new Array();
+	var date = new Array();
+	console.log(type_repayment);  
 
  //if문이든 switch문으로 분기 시키기 만기일시상환
-if(type_repayment == '1'){
+if(type_repayment == "1"){
 for(var i=0; i<monthly_installment_plan - 1; i++) {
     console.log("------------   "+Number(i+1)+"개월   ------------");
   if(holding_period != 0){
@@ -508,11 +420,11 @@ for(var i=0; i<monthly_installment_plan - 1; i++) {
         holding_period--;
         console.log(holding_period);
     }else{
-    var power = Math.pow(1+lending_rate/12, monthly_installment_plan);
+    var power = Math.pow(1 + lending_rate/12, monthly_installment_plan);
     var repayment = 0 //상환금   
     var interest = my_amount_of_loans * lending_rate/12; //이자    
     var principal = repayment - interest;  //원금
-    var balance = my_amount_of_loans-principal; //잔액
+    var balance = my_amount_of_loans - principal; //잔액
     
     repayments.push(Math.round(repayment));
     interests.push(Math.round(interest));
@@ -520,20 +432,19 @@ for(var i=0; i<monthly_installment_plan - 1; i++) {
     balances.push(Math.round(balance));
 
     my_amount_of_loans = balance;
+    console.log(balance);
     }
- 
    //마지막 달에 만기상환, 잔액 초기화 시키기 위한 원금납입
   repayments.push(my_amount_of_loans);
   interests.push(my_amount_of_loans * lending_rate/12);
   principals.push(0);
   balances.push(0);
-}
-  $('#checkRepayment').on('click', function(){
-  	  checkRepayment;  
-  });
+} 
+  checkRepay();
+  $("#canvas").show();
 
-}else if(type_repayment == '3'){
 
+}else if(type_repayment == "3"){
 //원금 균등상환
 //거치기간 설정했을 때
 for(var i=0; i < monthly_installment_plan; i++) {
@@ -552,23 +463,23 @@ for(var i=0; i < monthly_installment_plan; i++) {
         holding_period--;
         console.log(holding_period);
     }else{
-   	var repayment = (amount_of_loans / (monthly_installment_plan - holding)) + (my_amount_of_loans * lending_rate / 12);
-    var interest = my_amount_of_loans * lending_rate / 12; //납입이자    
-    var principal = repayment - interest;  //납입원금
-    var balance = my_amount_of_loans-principal; //대출금잔액
+        var repayment = (amount_of_loans) / (monthly_installment_plan - holding) + ((my_amount_of_loans * lending_rate) / 12); //상환금액
+        var interest = my_amount_of_loans * lending_rate / 12; //납입이자    
+        var principal = repayment - interest;  //납입원금
+        var balance = my_amount_of_loans-principal; //대출금잔액
     
-    repayments.push(Math.round(repayment));
-    interests.push(Math.round(interest));
-    principals.push(Math.round(principal));
-    balances.push(Math.round(balance));
+      repayments.push(Math.round(repayment));
+      interests.push(Math.round(interest));
+      principals.push(Math.round(principal));
+      balances.push(Math.round(balance));
   
-    my_amount_of_loans = balance;
-    }
-    $('#checkRepayment').on('click', function(){
-    	  checkRepayment();  
-  	}); 
-}
-}else if(type_repayment == '2'){
+   	 my_amount_of_loans = balance;
+    	}
+  }
+  checkRepay();
+  $("#canvas").show();
+
+}else if(type_repayment == "2"){
 //원리금 균등 상환
  for(var i=0; i<monthly_installment_plan; i++) {
   if(holding_period != 0){
@@ -586,7 +497,7 @@ for(var i=0; i < monthly_installment_plan; i++) {
         console.log(holding_period);
     }else{
     console.log("------------   "+Number(i+1)+"개월   ------------");
-    var power = Math.pow(1 + lending_rate / 12, monthly_installment_plan - holding);  //월 이자율
+    var power = Math.pow((1 + lending_rate) / 12, (monthly_installment_plan - holding));  
     var repayment = amount_of_loans * lending_rate/12 * power / (power-1); //상환금   
     var interest = my_amount_of_loans * lending_rate/12; //이자    
     var principal = repayment-interest;  //원금
@@ -600,16 +511,112 @@ for(var i=0; i < monthly_installment_plan; i++) {
     my_amount_of_loans = balance;
      }
   }
- 	$('#checkRepayment').on('click', function(){
- 	  checkRepayment();  
-   });
+   checkRepay();
+	$("#canvas").show();
   
 }else{
 	console.log("마이너스는 나중에,,");
 }
 
- //$('#checkRepayment').on('click', function(){});
-  </script>
+
+function checkRepay(){
+	var interestSum = 0;
+	var principalSum = 0;
+	var body = document.getElementById('cell');  //행을 추가할 테이블
+	var amount_of_loans = $('#principal').val();
+
+body.innerHTML += "<tr><td colspan='6' style='text-align:center;'>"
+              + "상환 개시전"+"</td><td>"
+              + amount_of_loans +"</td></tr>";
+for (var i = 0; i < monthly_installment_plan; i++) {
+  interestSum += interests[i];
+  principalSum += principals[i];
+  body.innerHTML += "<tr><td>"
+                  + (i+1) + "개월"+"</td><td>"
+                  +repayments[i]+"</td><td>"
+                  +principals[i]+"</td><td>"
+                  +interests[i]+"</td><td>"
+                  +principalSum+"</td><td>"
+                  +interestSum+"</td><td>"
+                  +balances[i]+"</td></tr>";
+}
+body.innerHTML += "<tr><td colspan='5' style='text-align:center;'>"
+  + "총 납입금액 "+"</td><td colspan='2'>"
+  +(interestSum + principalSum)+"원</tr>";
+  	
+var chartData = {
+    labels: ['2018-01', '2018-02', '2018-03', '2018-04', '2018-05', '2018-06', '2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12'],
+    datasets:
+      [
+        {
+        type: 'bar',
+        label: '잔액',
+        borderColor: window.chartColors.blue,
+        borderWidth: 2,
+        fill: false,
+        data: balances
+        }, 
+      
+        {
+        type: 'bar',
+        label: '월 납입액',
+        backgroundColor: window.chartColors.red,
+        data: repayments ,
+        borderColor: 'white',
+        borderWidth: 2
+        }, 
+        
+        {
+        type: 'bar',
+        label: '월 납입원금',
+        backgroundColor: window.chartColors.green,
+        data: principals
+        },
+      
+        {
+        type: 'bar',
+        label: '월 납입이자',
+        backgroundColor: window.chartColors.yellow,
+        data: interests
+        }
+      ]
+    };
+
+	
+      var ctx = document.getElementById('canvas').getContext('2d');
+      window.myMixedChart = new Chart(ctx, {
+        type: 'bar',
+        data: chartData,
+        options: {
+          responsive: true,
+          title: {
+            display: true,
+            text: 'Chart.js Combo Bar Line Chart'
+          },
+          tooltips: {
+            mode: 'index',
+            intersect: true
+          }
+        }
+      });
+
+  document.getElementById('tableView').addEventListener('click', function(){
+    document.getElementById('canvas').style.display = "none";
+    document.getElementById('table').style.display = "block";
+    });
+    
+  document.getElementById('graphView').addEventListener('click', function(){
+    document.getElementById('canvas').style.display = "block";
+    document.getElementById('table').style.display = "none";
+    });   
+}
+});
+
+</script>
+<script>
+
+</script>
+ 
 
   <!--===============================================================================================-->
   <script type="text/javascript"
