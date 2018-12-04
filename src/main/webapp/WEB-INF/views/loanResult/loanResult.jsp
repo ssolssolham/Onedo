@@ -31,18 +31,62 @@
   outline: 0;
 }
   
-  .calculatorTable{
+.calculatorTable {
+    border-collapse: separate;
+    border-spacing: 2px;
+    border: none;
+    color: #000;
     background-color: white;
-  }
+    width: 70%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom : 5%;
+}
+
+.calculatorTable th {
+    padding: 15px;
+    background: url("/resoureces/images/monoton.gif");
+    border: none;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    text-shadow: 0 1px #FFF;
+}
+ 
+.calculatorTable td {
+    padding: 15px;
+    border: none;
+    border-bottom: 1px solid #000;
+    text-align: left;
+    vertical-align: baseline;
+} 
+  
+.calculatorTable > tbody > tr > td > input[type=text]{
+        border-radius: 2px;
+        text-align:right;
+}
+   
+.calculatorTable > tbody > tr > td > input[type=radio]{
+        margin-right: 1%;
+        margin-left: 3%;
+}
   
   #table{
     background-color: white;
-     background-clip: padding-box;
-    border: 1px solid;
+    background-clip: padding-box;
     color: black;
     border: 1px solid thin;
-    
+    font-size : 16px;
   }
+  
+ .ajaxTL{
+  font-size: 20px;
+  margin-left: 1%;
+ } 
+ 
+ #canvasDiv > button{
+  
+ }
   </style>
 
 <!-- header include 시작 -->
@@ -203,15 +247,10 @@
                     <button type="button" style="background-color: #27b2a5; border-color: #27b2a5;" class="btn btn-primary" id="checkRepayment">상환계획 조회 </button>
                   </div>
                   
-                   <div style="width: 75%" style="display:none;">
-                        <canvas id="canvas" style="display:none;">
-                        
+                   <div id ="canvasDiv" style="width: 100%; display:none; background-color: white;">
+                        <canvas id="canvas" style="display:block;">
                         </canvas>
-                        <button id="tableView">월 상환금액 표로 보기</button>
-                        <button id="graphView">월 상환금액 그래프로 보기</button>
-                    </div>
-                       
-                    <table id="table" border="1" style="display: none">
+                        <table id="table" style="display: none">
                         <thead>
                           <tr>
                             <th>납입 차수</th>
@@ -226,6 +265,11 @@
                         <tbody id="cell">
                         </tbody>
                     </table>
+                        <button id="tableView">월 상환금액 표로 보기</button>
+                        <button id="graphView">월 상환금액 그래프로 보기</button>
+                    </div>
+                       
+
                     
                   </div>
                   </div>
@@ -320,32 +364,32 @@
 				   var repay3 = data.repay3;
 				   var repayM = data.repayM;
     	           
-				   table += "<tr><td>대출원금</td><td><input type='text' id='principal' name='principal' maxlength='"+creditLineMax+"' value='"+${param.requiredMoney}+"' class='inp1 money'></td>"+${param.requiredMoney}+"<label>원</label></tr>";
-				   table += "<tr><td>대출기간</td><td><input type='text' id='period' name='period' maxlength='"+loanPeriodMax+"' class='inp1 onlyNum' style='width:110px;'/>개월</td></tr>";
-				   table += "<tr><td>거치기간</td>";
+				   table += "<tr><td><label class='ajaxTL'>대출원금</label></td><td><input type='text' id='principal' name='principal' maxlength='"+creditLineMax+"' value='"+${param.requiredMoney} / 10000+" 'class='inp1 money'><label class='ajaxTL'>만원</label></td></tr>";
+				   table += "<tr><td><label class='ajaxTL'>대출기간</label></td><td><input type='text' id='period' name='period' maxlength='"+loanPeriodMax+"' class='inp1 onlyNum' style='width:110px;'/><label class='ajaxTL'>개월</lable></td></tr>";
+				   table += "<tr><td><label class='ajaxTL'>거치기간</label></td>";
 				   
 				   if(holding){
-				   	  table += "<td><input type='text' id='term' name='term' maxlength='"+holdingMax+"'></td><label>개월</label>";
+				   	  table += "<td><input type='text' id='term' name='term' maxlength='"+holdingMax+"'><label>개월</label></td>";
 				   }else{
-					  table += "<td><input type='text' id='term' value='0' name='term' disabled></td><label>개월</label></tr>"; 
+					  table += "<td><input type='text' id='term' value='0' name='term' disabled><label class='ajaxTL'>개월</label></td></tr>"; 
 				   }
-				    table += "<tr><td>대출금리</td><td><input type='text' id='rate' name='rate' maxlength='7' class='inp1 float'></td><label>%</label></tr>";
-				    table += "<tr><td>상환방법</td><td>";
+				    table += "<tr><td><label class='ajaxTL'>대출금리</label></td><td><input type='text' id='rate' name='rate' maxlength='7' class='inp1 float'><label class='ajaxTL'>%</label></td></tr>";
+				    table += "<tr><td><label class='ajaxTL'>상환방법</label></td><td>";
 				    
 				    if(repay1){
-				    	table += "<input type='radio' name='repay' value='1'><label for='1'>만기일시상환</label>";
+				    	table += "<input type='radio' name='repay' value='1'><label for='1' class='ajaxTL'>만기일시상환</label>";
 				    };
 				    if(repay2){
-				    	table += "<input type='radio' name='repay' value='2'><label for='2'>원리금균등상환</label>";
+				    	table += "<input type='radio' name='repay' value='2'><label for='2' class='ajaxTL'>원리금균등상환</label>";
 				    };
 				    if(repay3){
-				    	table += "<input type='radio' name='repay' value='3'><label for='3'>원금균등상환</label>";
+				    	table += "<input type='radio' name='repay' value='3'><label for='3' class='ajaxTL'>원금균등상환</label>";
 				    };
 				    if(repayM){
-				    	table += "<input type='radio' name='repay' value='4'><label for='4'>통장대출</label>";
+				    	table += "<input type='radio' name='repay' value='4'><label for='4' class='ajaxTL'>통장대출</label>";
 				    };
 				    table += "</td></tr>";
-				    table += "<tr><td>연 소득</td><td><input type='text' id='salary' name='salary' ><label>만원</label>";
+				    table += "<tr><td><label class='ajaxTL'>연 소득 </label></td><td><input type='text' id='salary' name='salary' ><label class='ajaxTL'>만원</label>";
 				    table += "</table>";
 					$("#calculator").html(table);   
 					console.log(table);
@@ -386,8 +430,8 @@
 <script>
 
 $('#checkRepayment').on('click', function(){
-	var amount_of_loans = $('#principal').val(); // 대출원금 (입력)
-	var lending_rate = $('#rate').val(); // 이율(입력)
+ 	var amount_of_loans = $('#principal').val() * 10000; // 대출원금 (입력)
+	var lending_rate = $('#rate').val() / 100; // 이율(입력)
 	var monthly_installment_plan = $('#period').val(); // 상환기간(입력)
 	var holding_period = $('#term').val();  //거치기간(입력)
 	var holding = $('#term').val()//보관용 거치기간(입력)
@@ -395,6 +439,15 @@ $('#checkRepayment').on('click', function(){
 	var my_asset = $('#salary').val(); // 내 연소득(입력)
 	var my_amount_of_loans = amount_of_loans; // 대출잔액
 
+/* 	var amount_of_loans = 1000000; // 대출원금 (입력)
+	var lending_rate = 0.12; // 이율(입력)
+	var monthly_installment_plan = 12; // 상환기간(입력)
+	var holding_period = 6;  //거치기간(입력)
+	var holding = 6//보관용 거치기간(입력)
+	var type_repayment = "2"; //상환타입(입력)
+	var my_asset = ""; // 내 연소득(입력)
+	var my_amount_of_loans = amount_of_loans; // 대출잔액 */
+	
 	var repayments = new Array();
 	var interests = new Array();
 	var principals = new Array();
@@ -420,9 +473,9 @@ for(var i=0; i<monthly_installment_plan - 1; i++) {
         holding_period--;
         console.log(holding_period);
     }else{
-    var power = Math.pow(1 + lending_rate/12, monthly_installment_plan);
-    var repayment = 0 //상환금   
+    var power = Math.pow(1 + lending_rate/12, monthly_installment_plan);    
     var interest = my_amount_of_loans * lending_rate/12; //이자    
+    var repayment = interest //상환금   
     var principal = repayment - interest;  //원금
     var balance = my_amount_of_loans - principal; //잔액
     
@@ -441,6 +494,7 @@ for(var i=0; i<monthly_installment_plan - 1; i++) {
   balances.push(0);
 } 
   checkRepay();
+  $("#canvasDiv").show();
   $("#canvas").show();
 
 
@@ -463,7 +517,7 @@ for(var i=0; i < monthly_installment_plan; i++) {
         holding_period--;
         console.log(holding_period);
     }else{
-        var repayment = (amount_of_loans) / (monthly_installment_plan - holding) + ((my_amount_of_loans * lending_rate) / 12); //상환금액
+    	var repayment = (amount_of_loans / (monthly_installment_plan - holding)) + (my_amount_of_loans * lending_rate / 12); //상환금액
         var interest = my_amount_of_loans * lending_rate / 12; //납입이자    
         var principal = repayment - interest;  //납입원금
         var balance = my_amount_of_loans-principal; //대출금잔액
@@ -477,12 +531,14 @@ for(var i=0; i < monthly_installment_plan; i++) {
     	}
   }
   checkRepay();
+  $("#canvasDiv").show();
   $("#canvas").show();
 
 }else if(type_repayment == "2"){
 //원리금 균등 상환
  for(var i=0; i<monthly_installment_plan; i++) {
   if(holding_period != 0){
+	    console.log("------------   "+Number(i+1)+"개월   ------------");
         var repayment = 0; //상환금액
         var interest = my_amount_of_loans * lending_rate / 12; //납입이자    
         var principal = 0;  //납입원금
@@ -494,14 +550,21 @@ for(var i=0; i < monthly_installment_plan; i++) {
         balances.push(Math.round(balance));
         
         holding_period--;
-        console.log(holding_period);
+        
     }else{
     console.log("------------   "+Number(i+1)+"개월   ------------");
-    var power = Math.pow((1 + lending_rate) / 12, (monthly_installment_plan - holding));  
-    var repayment = amount_of_loans * lending_rate/12 * power / (power-1); //상환금   
-    var interest = my_amount_of_loans * lending_rate/12; //이자    
-    var principal = repayment-interest;  //원금
-    var balance = my_amount_of_loans-principal; //잔액
+    console.log(amount_of_loans);
+    var power = Math.pow(1 + lending_rate / 12, monthly_installment_plan - holding);  
+	console.log("이자율 :" + power);
+    var repayment = amount_of_loans * lending_rate/12 * power / (power-1); //상환금
+    console.log("상환금 : " + repayment);
+    var interest = my_amount_of_loans * lending_rate/12; //이자
+    console.log("이자 : " + interest);
+    var principal = repayment - interest;  //원금
+    console.log("원금 : " + principal);
+    var balance = my_amount_of_loans - principal; //잔액
+    
+	console.log(lending_rate);
     
     repayments.push(Math.round(repayment));
     interests.push(Math.round(interest));
@@ -511,7 +574,9 @@ for(var i=0; i < monthly_installment_plan; i++) {
     my_amount_of_loans = balance;
      }
   }
+  
    checkRepay();
+   $("#canvasDiv").show();
 	$("#canvas").show();
   
 }else{
@@ -550,7 +615,7 @@ var chartData = {
       [
         {
         type: 'bar',
-        label: '잔액',
+        label: '밸런스',
         borderColor: window.chartColors.blue,
         borderWidth: 2,
         fill: false,
@@ -559,7 +624,7 @@ var chartData = {
       
         {
         type: 'bar',
-        label: '월 납입액',
+        label: '리페이먼트',
         backgroundColor: window.chartColors.red,
         data: repayments ,
         borderColor: 'white',
@@ -568,14 +633,14 @@ var chartData = {
         
         {
         type: 'bar',
-        label: '월 납입원금',
+        label: '프린시팔',
         backgroundColor: window.chartColors.green,
         data: principals
         },
       
         {
         type: 'bar',
-        label: '월 납입이자',
+        label: '인터레스츠',
         backgroundColor: window.chartColors.yellow,
         data: interests
         }
