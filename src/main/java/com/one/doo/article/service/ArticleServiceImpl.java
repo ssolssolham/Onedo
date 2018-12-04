@@ -64,4 +64,11 @@ public class ArticleServiceImpl implements ArticleService {
 		return mapper.getTotalCount(cri);
 	}
 
+	@Override
+	public List<Article> getNoticeList() {
+		log.info("공지글 리스트 with 페이징");
+		
+		return mapper.getList(1L);
+	}
+
 }

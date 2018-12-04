@@ -29,7 +29,7 @@ public class MemberServiceImpl implements MemberService {
 	@Inject
 	private MemberMapper memberMapper;
 	@Inject
-	private AuthMapper authMapper;
+	private AuthMapper authMapper; // 회원가입시 인증정보추가 트랜잭션처리+
 	@Inject
 	private PasswordEncoder pwencoder;
 	@Inject

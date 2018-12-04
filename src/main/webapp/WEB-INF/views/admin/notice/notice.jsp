@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+  
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -63,6 +66,7 @@ desired effect
           <div class="box-header"></div>
           <!-- /.box-header -->
           <div class="box-body">
+                    
             <table id="example2"
               class="table table-bordered table-hover">
               <thead>
@@ -75,14 +79,15 @@ desired effect
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>신상품 출시에 대한 공지</td>
-                  <td>박호준</td>
-                  <td>11.28</td>
-                  <td>X</td>
-                </tr>
-              </tfoot>
+              <c:forEach items="${notices }" var="notice" varStatus="status">
+              	<tr>
+              		<td>${status.index+1 }</td>
+              		<td>${notice.title }</td>
+              		<td>${notice.userid }</td>
+              		<td><fmt:formatDate pattern="yyyy-mm-dd" value="${notice.regdate }"/></td>
+              		<td>${notice.enabled }</td>
+              	</tr>
+              </c:forEach>
             </table>
           </div>
           <!-- /.box-body -->
