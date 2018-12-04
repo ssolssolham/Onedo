@@ -88,5 +88,9 @@
 	</update>
 	
 	<!-- 게시글 enabled변경 -->
-	<update id=""></update>
+	<update id="changeArticleStatus">
+		UPDATE	articles
+		SET		enabled = 'N'
+		WHERE	article_num = #{article_num}
+	</update>
 </mapper>
