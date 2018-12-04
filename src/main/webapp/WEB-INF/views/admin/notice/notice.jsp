@@ -66,7 +66,10 @@ desired effect
           <div class="box-header"></div>
           <!-- /.box-header -->
           <div class="box-body">
-                    
+          <div>
+            <input type="button" style="margin: 10px;"
+              class="btn btn-primary btn-flat" value="공지 등록" onclick="location.href = '/admin/notice/enrollForm' "/>
+          </div>
             <table id="example2"
               class="table table-bordered table-hover">
               <thead>
@@ -93,7 +96,7 @@ desired effect
           <!-- /.box-body -->
           <div style="text-align: end;">
             <input type="button" style="margin: 10px;"
-              class="btn btn-primary btn-flat" value="공지 등록"  onclick="location.href = '/admin/notice/enrollForm' "/>
+              class="btn btn-primary btn-flat" value="공지 등록" onclick="location.href = '/admin/notice/enrollForm' "/>
           </div>
 
 
@@ -104,7 +107,7 @@ desired effect
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
+    
     <!-- Main Footer -->
     <jsp:include
       page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/footer.jsp" />

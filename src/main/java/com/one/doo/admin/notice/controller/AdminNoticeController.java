@@ -10,9 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.one.doo.article.domain.Article;
 import com.one.doo.article.service.ArticleService;
 
 import lombok.AllArgsConstructor;
@@ -30,6 +33,7 @@ public class AdminNoticeController {
 	@Inject
 	private ArticleService service;
 	
+	// 공지리스트 get(공지탭 화면)
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		log.info("관리자 공지관리 메인홈");
@@ -39,9 +43,18 @@ public class AdminNoticeController {
 		return "admin/notice/notice";
 	}
 	
+	// 공지 등록
+	@GetMapping("/register")
+	public String register(Article article, RedirectAttributes rttr) {
+		log.info("공지등록");
+		service.register(article);
+		rttr.addFlashAttribute("result", article.getArticle_num());
+		return "redirect:/admin/notice/";
+	}
+	
 	@RequestMapping("/enrollForm")
 	public String enroll(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+		//logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);

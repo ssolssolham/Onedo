@@ -23,7 +23,17 @@
 					</trim>
 			</sql>
 
-
+<!-- 시원 추가 -->	
+	<!-- 게시글작성에 따른 게시글 수 update -->
+	<update id="updateCnt">
+		UPDATE	boards 
+		SET		articlecnt = (
+							 SELECT COUNT(article_num)
+							 FROM	articles
+							 WHERE	bno = #{bno})
+		WHERE	bno = #{bno}	
+	</update>
+	
 	<select id="getList" resultType="com.one.doo.board.domain.Board">
 		<![CDATA[SELECT * FROM tbl_board where bno > 0]]>
 	</select>

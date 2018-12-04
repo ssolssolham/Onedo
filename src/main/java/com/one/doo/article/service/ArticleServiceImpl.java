@@ -5,10 +5,12 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.one.doo.article.domain.Article;
 import com.one.doo.article.domain.Criteria;
 import com.one.doo.article.mapper.ArticleMapper;
+import com.one.doo.board.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -20,12 +22,18 @@ public class ArticleServiceImpl implements ArticleService {
 	
 	@Inject
 	private ArticleMapper mapper;
+	@Inject
+	private BoardMapper bMapper; // 트랜잭션처리를 위한 보드매퍼
 
 	// 게시글 생성
+	@Transactional
 	@Override
 	public void register(Article article) {
 		log.info("게시글 생성 서비스: "+ article);
+		Long bno = article.getBno();
+		
 		mapper.insert(article);
+		bMapper.updateCnt(bno);
 	}
 	
 	// 게시글 조회(게시글번호로)

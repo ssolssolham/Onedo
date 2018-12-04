@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+  
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -65,42 +67,30 @@ desired effect
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form role="form">
+          <form action="/admin/notice/register" method="get">
             <div class="box-body">
               <div class="form-group">
-                <label for="exampleInputEmail1">제목</label> <input
-                  type="email" class="form-control"
-                  id="exampleInputEmail1" placeholder="제목">
-              </div>
-              <div class="form-group">
-                <label for="exampleInputPassword1">비밀번호</label> <input
-                  type="password" class="form-control"
-                  id="exampleInputPassword1" placeholder="비밀번호">
-              </div>
+                <label for="exampleInputEmail1">제목</label> 
+                <input name="title" type="text" class="form-control" placeholder="제목">
+              </div><br>
 
-              <!-- 
-                <div class="form-group">
-                  <label for="exampleInputFile">File input</label>
-                  <input type="file" id="exampleInputFile">
-
-                  <p class="help-block">Example block-level help text here.</p>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox"> Check me out
-                  </label>
-                </div>
-                 -->
+ 			<div class="form-group">
               <label for="exampleInputPassword1">내용</label>
-              <textarea class="form-control" cols="15" placeholder="내용"></textarea>
+              <textarea name="content" class="form-control" cols="15" rows="5" placeholder="내용"></textarea>
+			</div><br>
 
-              <div style="text-align: end;">
-                <input type="button" style="margin: 10px;"
+			<input type="hidden" name="article_pw" value="">
+			<input type="hidden" name="bno" value="1">
+			<input type="hidden" name="userid" value="<sec:authentication property="principal.member.userid"/>">
+						
+              <div>
+                <input type="submit" style="margin: 10px;"
                   class="btn btn-primary btn-flat" value="공지 등록"
                   onclick="location.href = '/admin/notice/enrollForm' " />
               </div>
 
             </div>
+           </form>
       </section>
       <!-- /.content -->
     </div>
