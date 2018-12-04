@@ -2,6 +2,7 @@
   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
   
 <!DOCTYPE html>
 <!--
@@ -101,7 +102,10 @@ desired effect
 		<div>
 		<a href="/admin/notice/" class="btn">목록</a><span>&nbsp;&nbsp;</span>
 		<a href="/admin/notice/modifyView?article_num=${notice.article_num }" class="btn">공지내용수정</a>
+		<c:set var="enabled" value="Y"/>
+		<c:if test="${notice.enabled eq enabled}">
 		<a href="/admin/notice/withdraw?article_num=${notice.article_num }" class="btn">공지내리기</a>
+		</c:if>
 		</div>
 
       </section>
@@ -123,5 +127,14 @@ desired effect
 
   <jsp:include
     page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/plugin_js.jsp" />
+   
+   <script type="text/javascript">
+   // 공지상태변경 클릭시
+   function withdraw(e) {
+	e.preventDefault();
+	alert("공지 상태를 변경하시겠습니까?");
+	
+}
+   </script>
 </body>
 </html>
