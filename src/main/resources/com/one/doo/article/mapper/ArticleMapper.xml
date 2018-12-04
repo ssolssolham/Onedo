@@ -86,4 +86,7 @@
 				updatedate 	= SYSDATE
 		WHERE	article_num = #{article_num}
 	</update>
+	
+	<!-- 게시글 enabled변경 -->
+	<update id=""></update>
 </mapper>
