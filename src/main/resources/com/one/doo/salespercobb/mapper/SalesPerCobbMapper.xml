@@ -2,12 +2,12 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.one.doo.storeperalleybiz.mapper.StorePerAlleybizMapper">
-<select id="read" resultType="com.one.doo.storeperalleybiz.domain.StorePerAlleybiz">
+<mapper namespace="com.one.doo.salespercobb.mapper.SalesPerCobbMapper">
+<select id="read" resultType="com.one.doo.salespercobb.domain.SalesPerCobb">
 	select * 
-	from StorePerAlleybiz
+	from SalesPerCobb
 	where alleybizcode = #{AlleyBizCode} 
-	      AND sap_date LIKE '201807'
+	      AND spc_date LIKE '201807'
 	      AND COBB_CODE LIKE 'CS100009'
 </select>
 </mapper>

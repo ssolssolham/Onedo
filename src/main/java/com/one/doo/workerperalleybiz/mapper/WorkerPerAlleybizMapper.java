@@ -10,4 +10,5 @@ public interface WorkerPerAlleybizMapper {
 
 	// 상권코드를 이용해 가져오기
 	public List<WorkerPerAlleybiz> getWorkerPerAlleybizList(@Param("AlleyBizCode") String AlleyBizCode);
+	public WorkerPerAlleybiz read(@Param("AlleyBizCode") int AlleyBizCode);
 }

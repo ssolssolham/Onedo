@@ -10,5 +10,6 @@ public interface SalesPerCobbMapper {
 
 	// 상권코드, 상권업종코드
 	public List<SalesPerCobb> getSalesPerCobbList(@Param("AlleyBizCode") String AlleyBizCode,@Param("CobbCode") String CobbCode);
+	public SalesPerCobb read(@Param("AlleyBizCode") int AlleyBizCode);
 	
 }

@@ -9,6 +9,8 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.one.doo.alleybiz.domain.AlleyBiz;
+import com.one.doo.alleybiz.mapper.AlleyBizMapper;
 import com.one.doo.areacode.domain.AreaCode;
 import com.one.doo.areacode.mapper.AreaCodeMapper;
 import com.one.doo.facilitiesperalleybiz.domain.FacilitiesPerAlleybiz;
@@ -21,6 +23,17 @@ import com.one.doo.livingperalleybiz.domain.LivingPerAlleybiz;
 import com.one.doo.livingperalleybiz.mapper.LivingPerAlleybizMapper;
 import com.one.doo.mlresult.domain.Mlresult;
 import com.one.doo.mlresult.mapper.MlresultMapper;
+import com.one.doo.outperalleybiz.domain.OutPerAlleybiz;
+import com.one.doo.outperalleybiz.mapper.OutPerAlleybizMapper;
+import com.one.doo.realestate.mapper.RealestateMapper;
+import com.one.doo.riskoffounndation.domain.RiskOfFoundation;
+import com.one.doo.riskoffounndation.mapper.RiskOfFoundationMapper;
+import com.one.doo.salespercobb.domain.SalesPerCobb;
+import com.one.doo.salespercobb.mapper.SalesPerCobbMapper;
+import com.one.doo.storeperalleybiz.domain.StorePerAlleybiz;
+import com.one.doo.storeperalleybiz.mapper.StorePerAlleybizMapper;
+import com.one.doo.workerperalleybiz.domain.WorkerPerAlleybiz;
+import com.one.doo.workerperalleybiz.mapper.WorkerPerAlleybizMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -47,6 +60,27 @@ public class AnalysisServiceImpl implements AnalysisService {
 	
 	@Inject
 	AreaCodeMapper areaCodeMapper;
+	
+	@Inject
+	OutPerAlleybizMapper outPerAlleybizMapper;
+	
+	@Inject 
+	RealestateMapper realestateMapper;
+	
+	@Inject
+	RiskOfFoundationMapper riskOfFoundationMapper;
+	
+	@Inject
+	AlleyBizMapper alleyBizMapper;
+	
+	@Inject
+	SalesPerCobbMapper salesPerCobbMapper;
+	
+	@Inject
+	StorePerAlleybizMapper storePerAlleybizMapper;
+	
+	@Inject
+	WorkerPerAlleybizMapper workerPerAlleybizMapper;
 	
 	@Transactional
 	@Override
@@ -84,7 +118,12 @@ public class AnalysisServiceImpl implements AnalysisService {
 			IndexPerAlleybiz indexPerAlleybiz = indexPerAlleybizMapper.read(ALLEYBIZCODE);
 			LivingPerAlleybiz livingPerAlleybiz = livingPerAlleybizMapper.read(ALLEYBIZCODE);
 			AreaCode areaCode = areaCodeMapper.read(ALLEYBIZCODE);
-			
+			OutPerAlleybiz outPerAlleybiz = outPerAlleybizMapper.read(ALLEYBIZCODE);
+			RiskOfFoundation riskOfFoundation = riskOfFoundationMapper.read(areaCode.getAreaCode());
+			AlleyBiz alleyBiz = alleyBizMapper.read(ALLEYBIZCODE);
+			SalesPerCobb salesPerCobb = salesPerCobbMapper.read(ALLEYBIZCODE);
+			StorePerAlleybiz storePerAlleybiz = storePerAlleybizMapper.read(ALLEYBIZCODE);
+			WorkerPerAlleybiz workerPerAlleybiz = workerPerAlleybizMapper.read(ALLEYBIZCODE);
 			
 			hash.put("mlresult", mlresult);
 			hash.put("facilitiesPerAlleybiz",facilitiesPerAlleybiz);
@@ -92,7 +131,12 @@ public class AnalysisServiceImpl implements AnalysisService {
 			hash.put("indexPerAlleybiz",indexPerAlleybiz);
 			hash.put("livingPerAlleybiz", livingPerAlleybiz);
 			hash.put("areaCode", areaCode);
-			
+			hash.put("outPerAlleybiz", outPerAlleybiz);
+			hash.put("riskOfFoundation",riskOfFoundation);
+			hash.put("alleyBiz",alleyBiz);
+			hash.put("salesPerCobb", salesPerCobb);
+			hash.put("storePerAlleybiz", storePerAlleybiz);
+			hash.put("workerPerAlleybiz", workerPerAlleybiz);
 			
 			returnList.add(hash);
 		}
