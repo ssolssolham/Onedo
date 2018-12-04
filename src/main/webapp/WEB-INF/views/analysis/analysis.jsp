@@ -1112,13 +1112,6 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
      				// 클릭을 했는데 활성화가 되어있으면,
      				else { 
      			   		$(this).removeClass('active');
-	     			   	geocoder.addressSearch($(this).text(), function(result, status) {
-	 						
-	 					    // 정상적으로 검색이 완료됐으면 
-	 					     if (status === daum.maps.services.Status.OK) {
-	 					        coords = new daum.maps.LatLng(result[0].y, result[0].x);
-	 					    }
-	     			   	}
      			  	}
      			}) 	 
  	         },
