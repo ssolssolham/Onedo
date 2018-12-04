@@ -8,6 +8,7 @@
   <title>이용 후기</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- 비동기통신 토큰값 저장...(reply.js의 add에서 사용) -->
   <sec:csrfMetaTags/>
   <!-- header include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/headTagConfig.jsp"/>
@@ -182,7 +183,7 @@
 		</div>
 	  </div>
     
-  <!-- 후기 댓글 Modal HTML -->
+  <!-- 댓글 Modal HTML -->
   <div id="replyModal" class="modal fade">
     <div class="modal-dialog modal-login">
       <div class="modal-content">
@@ -200,26 +201,19 @@
         </div>
         <div class="form-group">
         	<label>작성자</label>
-        	<input class="form-control" name="replyer" value="${loginId }" placeholder="${loginId }"
-        	style="padding-left:10px; font-size: 20px;"/>
+        	<input type="text" class="form-control" id="replyer" name="replyer" placeholder="${loginId }" readonly="readonly"
+        	value="${loginId}" style="padding-left:10px; font-size: 20px;"/>
         </div>
         <div class="form-group">
         	<label>등록날짜</label>
         	<input class="form-control" name="replyDate" value=""
         	style="padding-left:10px; font-size: 20px;" />
         </div>
-        <!-- hidden으로 send -->
-		<input type="hidden" name="article_num">              
-        <input type="hidden" name="replyer" value="<sec:authentication property="principal.member.userid"/>"/>      
-        <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }"/>
-        <!-- 후기버튼(등록/취소, 수정/삭제: 로그인한사람과 댓작성자일치에게만 보임) -->
-<!--    		<div class="form-group" style="display: flex; align-items: center; justify-content: center;">
-      		<button type="button"  value="등록">등록</button>&nbsp;
-      		<button type="button"  value="취소" data-dismiss="modal">취소</button>
-    	</div>
- -->
       </div><!-- end modal body -->
       <div class="modal-footer">
+      <c:set var="replyer" value="" />
+      <c:if test="${replyer eq loginId }">
+      </c:if>	
       	<button id="modalModBtn" type="button" class="btn btn-warning">수정</button>
       	<button id="modalRemoveBtn" type="button" class="btn btn-danger">삭제</button>
       	<button id="modalRegisterBtn" type="button" class="btn btn-primary">등록</button>
@@ -401,10 +395,10 @@
 		    
 			// 댓글등록 이벤트
 		    modalRegisterBtn.on("click",function(e){
-		      //alert("댓추가할거"+modalInputReply.val()+"작성자: "+modalInputReplyer.val()+"게시글번호: "+articleNumVal);
+		      alert("댓추가할거"+modalInputReply.val()+"작성자: "+$('#replyer').val()+"게시글번호: "+articleNumVal);
 		      var reply = {
 		            reply: modalInputReply.val(),
-		            replyer:modalInputReplyer.val(),
+		            replyer:$('#replyer').attr('value'),
 		            article_num:articleNumVal
 		            //,_csrf.headerName:${_csrf.token}
 		          };
@@ -429,7 +423,7 @@
 		      var rno = $(this).data("rno");
 		      
 		      replyService.get(rno, function(reply){
-		      
+		      	alert(reply.reply);
 		        modalInputReply.val(reply.reply);
 		        modalInputReplyer.val(reply.replyer);
 		        modalInputReplyDate.val(replyService.displayTime( reply.replyDate))
@@ -437,19 +431,26 @@
 		        modal.data("rno", reply.rno);
 		        
 		        modal.find("button[id !='modalCloseBtn']").hide();
+		        // replyer와 loginId가 같으면 수정삭제버튼 show, 
+		        var loginId = '${loginId}';
+				alert("로그인아이디: "+loginId);		        
+		        if(reply.replyer == loginId){
 		        modalModBtn.show();
-		        modalRemoveBtn.show();
-		        
-		        $(".modal").modal("show");
+		        // modalRemoveBtn.show();
+		        }else{
+		        	modalInputReply.attr("readonly", "readonly");
+		        }
+		        ///////////////
+		        $("#replyModal").modal("show");
 		            
 		      });
 		    });
 		 
-
+			// 댓글수정버튼 클릭이벤트
 		    modalModBtn.on("click", function(e){
 		    	  
 		   	  var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
-		   	  
+		   	  //alert("댓..:"+reply.relyer);
 		   	  replyService.update(reply, function(result){
 		   	        
 		   	    alert(result);
@@ -460,10 +461,11 @@
 		   	  
 		   	});
 
-
+			// 삭제버튼클릭이벤트
 		   	modalRemoveBtn.on("click", function (e){
-		   	  
 		   	  var rno = modal.data("rno");
+		   		alert("댓글을 정말로 삭제하시겠습니까?" + rno);
+		   	  
 		   	  
 		   	  replyService.remove(rno, function(result){
 		   	        

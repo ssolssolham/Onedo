@@ -2,11 +2,11 @@ console.log("Reply Module........");
 
 var replyService = (function() {
 
+	var header = $("meta[name='_csrf_header']").attr("content");
+	var token = $("meta[name='_csrf']").attr("content");
+
 	function add(reply, callback, error) {
 		console.log("add reply...............");
-		var token = $("meta[name='_csrf']").attr("content");
-
-		var header = $("meta[name='_csrf_header']").attr("content");
 
 		$.ajax({
 			type : 'post',
@@ -55,6 +55,7 @@ var replyService = (function() {
 
 	
 	function remove(rno, callback, error) {
+		alert("remove서비스들어옴");
 		$.ajax({
 			type : 'delete',
 			url : '/replies/' + rno,
@@ -80,6 +81,10 @@ var replyService = (function() {
 			url : '/replies/' + reply.rno,
 			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
+			beforeSend : function(xhr){   
+				/*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+				xhr.setRequestHeader(header, token);
+			},
 			success : function(result, status, xhr) {
 				if (callback) {
 					callback(result);
