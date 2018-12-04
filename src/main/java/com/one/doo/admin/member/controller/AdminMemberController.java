@@ -1,6 +1,5 @@
 package com.one.doo.admin.member.controller;
 
-import java.util.List;
 import java.util.Locale;
 
 import org.springframework.stereotype.Controller;
@@ -14,8 +13,8 @@ import com.one.doo.member.service.MemberService;
 import lombok.extern.log4j.Log4j;
 
 @Controller
-@Log4j
 @RequestMapping("/admin/member")
+@Log4j 
 public class AdminMemberController {
 	
 	private MemberService service;
