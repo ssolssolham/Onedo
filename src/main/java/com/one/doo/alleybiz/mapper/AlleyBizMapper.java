@@ -12,4 +12,5 @@ public interface AlleyBizMapper {
 	public List<AlleyBiz> getAlleyBizListByAreaCode(@Param("AreaCode") int AreaCode);
 	
 	public int getAreaCodeByAnalyze1(@Param("AreaNames") String AreaNames);
+	public AlleyBiz read(@Param("AlleyBizCode") int AlleyBizCode);
 }

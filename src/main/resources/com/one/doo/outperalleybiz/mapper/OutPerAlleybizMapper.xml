@@ -3,5 +3,10 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.doo.outperalleybiz.mapper.OutPerAlleybizMapper">
-
+	<select id="read" resultType="com.one.doo.outperalleybiz.domain.OutPerAlleybiz">
+	select * 
+	  from outperalleybiz
+	  where alleybizcode = #{AlleyBizCode} 
+	  		AND OPA_DATE LIKE '201807'
+	</select>
 </mapper>
