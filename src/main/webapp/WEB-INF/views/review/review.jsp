@@ -62,7 +62,7 @@
 				<sec:authorize access="isAuthenticated()">
 					<button type="button" class="float-r" style="height:35px;" id="createReviewBtn" data-toggle="modal" data-target="#createReviewModal">후기작성</button>
 				</sec:authorize>
-					<br>
+					<br><br>
 					<table>
 						<colgroup>
 							<col width="10%" style="text-align: center;">
@@ -87,7 +87,7 @@
 							  <td>${status.index +1 }</td>
 							  <td><a class="move" href="/review/detail?article_num=${review.article_num }">${review.title }</a></td>
 							  <td>${review.userid }</td>
-							  <td><fmt:formatDate pattern="yyyy-mm-dd" value="${review.regdate }"/></td>
+							  <td><fmt:parseDate value="${review.regdate }" pattern="yyyy-MM-dd"/></td>
 							  <td>${review.enabled }</td>
 							</tr>
 						</c:forEach>

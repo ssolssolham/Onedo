@@ -12,8 +12,8 @@ public class Article {
 	private String userid;
 	private String title;
 	private String content;
-	private Date regdate;
-	private Date updateDate;
+	private String regdate;
+	private String updateDate;
 	
 	private int replyCnt;
 	private String enabled; //공지: 게시여부, 리뷰: 삭제여부
