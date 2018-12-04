@@ -79,4 +79,11 @@ public class ArticleServiceImpl implements ArticleService {
 		return mapper.getList(1L);
 	}
 
+	@Override
+	public int changeStatus(Long article_num) {
+		log.info("공지글 상태 변경");
+		
+		return mapper.changeArticleStatus(article_num);
+	}
+
 }

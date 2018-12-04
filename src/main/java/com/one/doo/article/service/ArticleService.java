@@ -29,6 +29,9 @@ public interface ArticleService {
 	// 공지글 리스트
 	public List<Article> getNoticeList();
 	
+	// 게시글상태변경
+	public int changeStatus(Long article_num);
+	
 	// 검색조건에 맞는 총 게시글수 
 	public int getTotal(Criteria cri);
 }
