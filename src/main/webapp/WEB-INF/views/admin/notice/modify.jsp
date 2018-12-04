@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
   
 <!DOCTYPE html>
 <!--
@@ -63,6 +64,12 @@ desired effect
         -------------------------->
         <div class="box box-primary">
           <div class="box-header with-border">
+            <h3 class="box-title">공지 내용 수정</h3>
+          </div>
+          <!-- /.box-header -->
+
+        <div class="box box-primary">
+          <div class="box-header with-border">
             <h3 class="box-title">공지 등록</h3>
           </div>
           <!-- /.box-header -->
@@ -71,26 +78,29 @@ desired effect
             <div class="box-body">
               <div class="form-group">
                 <label for="exampleInputEmail1">제목</label> 
-                <input name="title" type="text" class="form-control" placeholder="제목">
+                <input name="title" type="text" class="form-control" value="${notice.title }">
               </div><br>
 
  			<div class="form-group">
               <label for="exampleInputPassword1">내용</label>
-              <textarea name="content" class="form-control" cols="15" rows="5" placeholder="내용"></textarea>
+              <textarea name="content" class="form-control" cols="30" rows="5" >${notice.content }</textarea>
 			</div><br>
 
 			<input type="hidden" name="article_pw" value="">
 			<input type="hidden" name="bno" value="1">
+			<input type="hidden" name="article_num" value="${notice.article_num }">
 			<input type="hidden" name="userid" value="<sec:authentication property="principal.member.userid"/>">
 						
               <div>
                 <input type="submit" style="margin: 10px;"
-                  class="btn btn-primary btn-flat" value="공지 등록"
-                  onclick="location.href = '/admin/notice/enrollForm' " />
+                  class="btn btn-primary btn-flat" value="공지 수정"
+                  onclick="location.href = '/admin/notice/modify' " />
               </div>
 
             </div>
            </form>
+		<br>
+
       </section>
       <!-- /.content -->
     </div>

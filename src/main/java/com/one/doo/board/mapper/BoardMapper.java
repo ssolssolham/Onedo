@@ -9,6 +9,9 @@ import com.one.doo.board.domain.Criteria;
 
 public interface BoardMapper {
 
+	// 게시판의 게시글 카운트 업데이트
+	public int updateCnt(Long bno);
+	
 	// 게시판 목록 조회
 	public List<Board> getList();
 	

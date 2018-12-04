@@ -26,6 +26,9 @@ public interface ArticleService {
 	// 후기게시글 리스트
 	public List<Article> getReviewList(Criteria cri);
 	
+	// 공지글 리스트
+	public List<Article> getNoticeList();
+	
 	// 검색조건에 맞는 총 게시글수 
 	public int getTotal(Criteria cri);
 }

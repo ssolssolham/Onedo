@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
   
 <!DOCTYPE html>
 <!--
@@ -63,34 +64,46 @@ desired effect
         -------------------------->
         <div class="box box-primary">
           <div class="box-header with-border">
-            <h3 class="box-title">공지 등록</h3>
+            <h3 class="box-title">공지 내용</h3>
           </div>
           <!-- /.box-header -->
-          <!-- form start -->
-          <form action="/admin/notice/register" method="get">
-            <div class="box-body">
-              <div class="form-group">
-                <label for="exampleInputEmail1">제목</label> 
-                <input name="title" type="text" class="form-control" placeholder="제목">
-              </div><br>
 
- 			<div class="form-group">
-              <label for="exampleInputPassword1">내용</label>
-              <textarea name="content" class="form-control" cols="15" rows="5" placeholder="내용"></textarea>
-			</div><br>
+		<!-- 공지 상세내용 -->
+		<table id="example2"
+		              class="table table-bordered table-hover">
+			<colgroup>
+			<col width="18%">
+			<col width="32%">
+		    <col width="18%">
+		    <col width="32%">
+			</colgroup>
+		    <tr>
+		    	<td><b>공지제목</b></td>
+		    	<td>${notice.title }</td>
+		    	
+		    	<td><b>작성자</b></td>
+		    	<td>${notice.userid }</td>
+		    </tr>
+		    
+		    <tr>
+		    	<td><b>공지등록일</b></td>
+		    	<td><fmt:parseDate pattern="yyyy-mm-dd" value="${notice.regdate }"/></td>
+		    	<td><b>게시여부</b></td>
+		    	<td>${notice.enabled }</td>
+		    </tr>
+		    <tr>
+		    	<td colspan="4">
+		    	${notice.content }
+		    	</td>
+		    </tr> 
+		</table>
+		<br>
+		<div>
+		<a href="/admin/notice/" class="btn">목록</a><span>&nbsp;&nbsp;</span>
+		<a href="/admin/notice/modifyView?article_num=${notice.article_num }" class="btn">공지내용수정</a>
+		<a href="/admin/notice/remove" class="btn">공지내리기</a>
+		</div>
 
-			<input type="hidden" name="article_pw" value="">
-			<input type="hidden" name="bno" value="1">
-			<input type="hidden" name="userid" value="<sec:authentication property="principal.member.userid"/>">
-						
-              <div>
-                <input type="submit" style="margin: 10px;"
-                  class="btn btn-primary btn-flat" value="공지 등록"
-                  onclick="location.href = '/admin/notice/enrollForm' " />
-              </div>
-
-            </div>
-           </form>
       </section>
       <!-- /.content -->
     </div>

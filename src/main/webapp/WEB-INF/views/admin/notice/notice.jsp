@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
   pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+  
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -63,6 +66,10 @@ desired effect
           <div class="box-header"></div>
           <!-- /.box-header -->
           <div class="box-body">
+          <div>
+            <input type="button" style="margin: 10px;"
+              class="btn btn-primary btn-flat" value="공지 등록" onclick="location.href = '/admin/notice/enrollForm' "/>
+          </div>
             <table id="example2"
               class="table table-bordered table-hover">
               <thead>
@@ -75,20 +82,21 @@ desired effect
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>신상품 출시에 대한 공지</td>
-                  <td>박호준</td>
-                  <td>11.28</td>
-                  <td>X</td>
-                </tr>
-              </tfoot>
+              <c:forEach items="${notices }" var="notice" varStatus="status">
+              	<tr>
+              		<td>${status.index+1 }</td>
+              		<td><a href="/admin/notice/get?article_num=${notice.article_num }">${notice.title }</a></td>
+              		<td>${notice.userid }</td>
+              		<td><fmt:parseDate pattern="yyyy-mm-dd" value="${notice.regdate }"/></td>
+              		<td>${notice.enabled }</td>
+              	</tr>
+              </c:forEach>
             </table>
           </div>
           <!-- /.box-body -->
           <div style="text-align: end;">
             <input type="button" style="margin: 10px;"
-              class="btn btn-primary btn-flat" value="공지 등록"  onclick="location.href = '/admin/notice/enrollForm' "/>
+              class="btn btn-primary btn-flat" value="공지 등록" onclick="location.href = '/admin/notice/enrollForm' "/>
           </div>
 
 
@@ -99,7 +107,7 @@ desired effect
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
-
+    
     <!-- Main Footer -->
     <jsp:include
       page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/footer.jsp" />

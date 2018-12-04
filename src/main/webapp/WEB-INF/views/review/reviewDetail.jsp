@@ -67,10 +67,10 @@
                       
                       <tr>
                         <td style="text-align: center; vertical-align: middle; color: #27b2a5;">
-                          <b>최종수정일</b>
+                          <b>등록일</b>
                         </td>
                         <td>
-                        <fmt:formatDate pattern="yyyy-mm-dd" value="${review.regdate }"/>
+                        <fmt:parseDate pattern="yyyy-mm-dd" value="${review.regdate }"/>
                         </td>
                         
                         <td style="text-align: center; vertical-align: middle; color: #27b2a5;">
@@ -93,7 +93,9 @@
 					<br>
 					<div>
 					<!-- 글쓴이와 보고있는사람 아이디 일치할경우 -->
-                    <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" href="/review/list">목록</a><span class="float-r">&nbsp;&nbsp;</span>
+                    <a href="/review/list"
+                       class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">목록
+                       </a><span class="float-r">&nbsp;&nbsp;</span>
 					
 					<sec:authentication var="loginId" property="principal.member.userid" /><!-- 로그인한사람 id값 변수로 저장 -->
 					<c:set var="writer" value="${review.userid }"/>
@@ -103,31 +105,17 @@
                         <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton"id="deleteReviewBtn" data-toggle="modal" data-target="#deleteReviewModal">삭제</a>
 					</c:if>
 					</div>
-					
-					<!-- 댓글영역 -->
-<!-- 					<div class="panel-body">
-					<ul class="chat">
-					<li class="left clearfix" data-rno='12'>
-					  <div style="border:1px solid black;">
-					  	<div class="header">
-					  	  <strong class="primary-font">댓글작성자</strong>
-					  	  <small class="pull-right text-muted">2018-12-03(정적)</small>
-					  	</div>
-					  	<p>댓글내용쓰</p>
-					  </div>
-					</li>
-					</ul>
-					</div> 댓글끝
- -->
+					<br><br>
      <!-- /.panel -->
+<!-- 댓글영역 -->
     <div class="panel panel-default">
-<!--       <div class="panel-heading">
+       <div class="panel-heading">
         <i class="fa fa-comments fa-fw"></i> Reply
-      </div> -->
+      </div> 
       
       <div class="panel-heading">
         <i class="fa fa-comments fa-fw"></i> Reply
-        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New Reply</button>
+        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New Reply</button><br>
       </div>      
       
       
@@ -291,7 +279,7 @@
 		     }
 		     
 		     for (var i = 0, len = list.length || 0; i < len; i++) {
-		       str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
+		       str +="<li class='left clearfix' data-rno='"+(i+1)+"'>";
 		       str +="  <div><div class='header'><strong class='primary-font'>["
 		    	   +list[i].rno+"] "+list[i].replyer+"</strong>"; 
 		       str +="    <small class='pull-right text-muted'>"
@@ -421,22 +409,23 @@
 		    $(".chat").on("click", "li", function(e){
 		      
 		      var rno = $(this).data("rno");
-		      
 		      replyService.get(rno, function(reply){
 		      	alert(reply.reply);
 		        modalInputReply.val(reply.reply);
 		        modalInputReplyer.val(reply.replyer);
-		        modalInputReplyDate.val(replyService.displayTime( reply.replyDate))
+		        modalInputReplyDate.val(replyService.displayTime(reply.replyDate))
 		        .attr("readonly","readonly");
 		        modal.data("rno", reply.rno);
 		        
 		        modal.find("button[id !='modalCloseBtn']").hide();
 		        // replyer와 loginId가 같으면 수정삭제버튼 show, 
 		        var loginId = '${loginId}';
-				alert("로그인아이디: "+loginId);		        
+				alert("로그인아이디: "+loginId+"\n댓글작성자: "+reply.replyer);		        
 		        if(reply.replyer == loginId){
-		        modalModBtn.show();
-		        // modalRemoveBtn.show();
+		        	alert("댓작성자랑 로그인자랑 같아요");
+		        	modalModBtn.show();
+		        	$("#replyModal").modal("show");
+		        	// modalRemoveBtn.show();
 		        }else{
 		        	modalInputReply.attr("readonly", "readonly");
 		        }

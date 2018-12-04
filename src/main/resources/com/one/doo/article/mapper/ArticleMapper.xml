@@ -56,11 +56,11 @@
 		bno = 2
 	</select>
 	
-	<!-- 후기게시글추가 -->
+	<!-- 게시글추가 -->
 	<insert id="insert">
-		INSERT INTO articles (article_num, bno, userid, title, content, regdate, replycnt, article_pw)
+		INSERT INTO articles (article_num, bno, userid, title, content, regdate, updatedate, replycnt, article_pw)
 		VALUES(
-		article_seq.nextval, #{bno}, #{userid}, #{title}, #{content}, SYSDATE, 0, #{article_pw}
+		article_seq.nextval, #{bno}, #{userid}, #{title}, #{content}, SYSDATE, SYSDATE, 0, #{article_pw}
 		)
 	</insert>
 	
@@ -86,4 +86,7 @@
 				updatedate 	= SYSDATE
 		WHERE	article_num = #{article_num}
 	</update>
+	
+	<!-- 게시글 enabled변경 -->
+	<update id=""></update>
 </mapper>
