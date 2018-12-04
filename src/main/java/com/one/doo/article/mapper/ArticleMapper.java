@@ -36,4 +36,7 @@ public interface ArticleMapper {
 	// 게시글 수정
 	public int update(Article article);
 	
+	// 게시글 상태 변경(공지글에 사용)
+	public int changeArticleStatus(Long article_num);
+	
 }

@@ -101,7 +101,7 @@ desired effect
 		<div>
 		<a href="/admin/notice/" class="btn">목록</a><span>&nbsp;&nbsp;</span>
 		<a href="/admin/notice/modifyView?article_num=${notice.article_num }" class="btn">공지내용수정</a>
-		<a href="/admin/notice/remove" class="btn">공지내리기</a>
+		<a href="/admin/notice/withdraw?article_num=${notice.article_num }" class="btn">공지내리기</a>
 		</div>
 
       </section>

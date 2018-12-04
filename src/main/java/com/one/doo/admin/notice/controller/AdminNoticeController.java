@@ -94,5 +94,13 @@ public class AdminNoticeController {
 		
 	}
 	
+	// 공지상태 변경요청
+	@RequestMapping("/withdraw")
+	public String withdraw(@RequestParam("article_num")Long article_num) {
+		log.info("공지게시 내리는 요청..");
+		service.changeStatus(article_num);
+		return "redirect:/admin/notice/";
+	}
+	
 	
 }
