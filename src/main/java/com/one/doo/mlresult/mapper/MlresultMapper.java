@@ -16,4 +16,12 @@ public interface MlresultMapper {
 	public Mlresult read(@Param("AlleyBizCode") int AlleyBizCode);
 	
 	public List<HashMap> firstStep(@Param("Areas") List<String> Areas);
+	
+	public List<HashMap> secondStep(@Param("Areas") List<String> Areas);
+	
+	public List<HashMap> thirdStep(@Param("Areas") List<String> Areas);
+	
+	public List<HashMap> fourthStep(@Param("Areas") List<String> Areas);
+	
+	public List<HashMap> fifthStep(@Param("Areas") List<String> Areas);
 }

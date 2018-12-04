@@ -3,23 +3,105 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.doo.mlresult.mapper.MlresultMapper">
-<select id="firstStep" resultType="map">
-select * 
-from MLResult mr 
-     inner join alleybiz ab on mr.alleybizcode = ab.alleybizcode
-     inner join areacodes ac on ab.areacode = ac.areacode
-     inner join livingperalleybiz lib on mr.alleybizcode = lib.alleybizcode AND lib.lap_date LIKE '201807'
-where MLR_DATE LIKE '201812' 
-      AND ac.areacode_name IN
-      <foreach item="item" index="index" collection="Areas"
-        open="(" separator="," close=")">
-          #{item}
-    </foreach>
-order by mr.estmt_sales desc,lib.totalliving desc
-</select>
 
-<select id="read" resultType="com.one.doo.mlresult.domain.Mlresult">
-select * from MLResult
-where alleybizcode = #{AlleyBizCode} AND mlr_date LIKE '201812'
-</select>
+
+	<!-- 주택가로 !! -->
+	<select id="firstStep" resultType="map">
+		select *
+		from MLResult mr
+		inner join alleybiz ab on mr.alleybizcode =
+		ab.alleybizcode
+		inner join areacodes ac on ab.areacode = ac.areacode
+		inner join livingperalleybiz lib on mr.alleybizcode = lib.alleybizcode
+		AND
+		lib.lap_date LIKE '201807'
+		where MLR_DATE LIKE '201812'
+		AND
+		ac.areacode_name IN
+		<foreach item="item" index="index" collection="Areas" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+		order by mr.estmt_sales desc,lib.totalliving desc
+	</select>
+
+	
+	<!-- 10,20대 유동인구 대학가 주변 !! -->
+	<select id="secondStep" resultType="map">
+		select * from MLResult mr
+			inner join alleybiz ab on mr.alleybizcode = ab.alleybizcode
+			inner join areacodes ac on ab.areacode = ac.areacode
+			inner join flowperalleybiz fa on mr.alleybizcode = fa.alleybizcode AND fa.fpa_date LIKE '201807'
+		where MLR_DATE LIKE '201812' AND ac.areacode_name IN
+		<foreach item="item" index="index" collection="Areas" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+		order by fa.flow20 desc, mr.estmt_sales desc
+	</select>
+	
+	<!-- 유흥가 !! -->
+	<select id="thirdStep" resultType="map">
+		select *
+		from MLResult mr
+		inner join alleybiz ab on mr.alleybizcode =
+		ab.alleybizcode
+		inner join areacodes ac on ab.areacode = ac.areacode
+		inner join OutPerAlleybiz opa on mr.alleybizcode = opa.alleybizcode
+		AND
+		opa.opa_date LIKE '201807'
+		where MLR_DATE LIKE '201812'
+		AND
+		ac.areacode_name IN
+		<foreach item="item" index="index" collection="Areas" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+		order by opa.enjoy_out desc, mr.estmt_sales desc
+	</select>
+	
+	<!-- 주택가로 !! -->
+	<select id="fourthStep" resultType="map">
+		select *
+		from MLResult mr
+		inner join alleybiz ab on mr.alleybizcode =
+		ab.alleybizcode
+		inner join areacodes ac on ab.areacode = ac.areacode
+		inner join livingperalleybiz lib on mr.alleybizcode = lib.alleybizcode
+		AND
+		lib.lap_date LIKE '201807'
+		where MLR_DATE LIKE '201812'
+		AND
+		ac.areacode_name IN
+		<foreach item="item" index="index" collection="Areas" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+		order by mr.estmt_sales desc,lib.totalliving desc
+	</select>
+	
+	<!-- 총직장인구 !! -->
+	<select id="fifthStep" resultType="map">
+		select *
+		from MLResult mr
+		inner join alleybiz ab on mr.alleybizcode = ab.alleybizcode
+		inner join areacodes ac on ab.areacode = ac.areacode
+		inner join WorkerPerAlleybiz wpa on mr.alleybizcode = wpa.alleybizcode AND
+		wpa.wpa_date LIKE '201807'
+		where MLR_DATE LIKE '201812'
+		AND ac.areacode_name IN 
+		<foreach item="item" index="index" collection="Areas" open="("
+			separator="," close=")">
+			#{item}
+		</foreach>
+		order by wpa.total_work desc, mr.estmt_sales desc
+	</select>
+	
+	<!-- 결과 반환 -->
+	<select id="read"
+		resultType="com.one.doo.mlresult.domain.Mlresult">
+		select * from MLResult
+		where alleybizcode = #{AlleyBizCode}
+		AND mlr_date LIKE '201812'
+	</select>
 </mapper>
