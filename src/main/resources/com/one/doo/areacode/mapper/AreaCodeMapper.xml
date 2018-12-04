@@ -9,4 +9,12 @@
 		from AREACODES
 		WHERE administrativedistrictcodename LIKE #{AdminName}
 	</select>
+	
+	<select id="read" resultType="com.one.doo.areacode.domain.AreaCode">
+		select * 
+		from alleybiz ab 
+			inner join areacodes ac 
+			on ab.areacode = ac.areacode
+		where alleybizcode = #{AlleyBizCode}
+	</select>
 </mapper>
