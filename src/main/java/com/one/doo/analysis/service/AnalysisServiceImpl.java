@@ -31,9 +31,6 @@ import lombok.extern.log4j.Log4j;
 public class AnalysisServiceImpl implements AnalysisService {
 	
 	@Inject
-	AreaCodeMapper areacodeMapper;
-	
-	@Inject
 	MlresultMapper mlresultMapper;
 	
 	@Inject
@@ -48,11 +45,14 @@ public class AnalysisServiceImpl implements AnalysisService {
 	@Inject
 	LivingPerAlleybizMapper livingPerAlleybizMapper;
 	
+	@Inject
+	AreaCodeMapper areaCodeMapper;
+	
 	@Transactional
 	@Override
 	public String getVillageList(String selectedDistrict) {
 		
-		List<AreaCode> list = areacodeMapper.getAreaCodeListByAdmin(selectedDistrict);
+		List<AreaCode> list = areaCodeMapper.getAreaCodeListByAdmin(selectedDistrict);
 		
 		String result = "";
 		
@@ -83,12 +83,16 @@ public class AnalysisServiceImpl implements AnalysisService {
 			FlowPerAlleybiz flowPerAlleybiz = flowPerAlleybizMapper.read(ALLEYBIZCODE);
 			IndexPerAlleybiz indexPerAlleybiz = indexPerAlleybizMapper.read(ALLEYBIZCODE);
 			LivingPerAlleybiz livingPerAlleybiz = livingPerAlleybizMapper.read(ALLEYBIZCODE);
+			AreaCode areaCode = areaCodeMapper.read(ALLEYBIZCODE);
+			
 			
 			hash.put("mlresult", mlresult);
 			hash.put("facilitiesPerAlleybiz",facilitiesPerAlleybiz);
 			hash.put("flowPerAlleybiz",flowPerAlleybiz);
 			hash.put("indexPerAlleybiz",indexPerAlleybiz);
 			hash.put("livingPerAlleybiz", livingPerAlleybiz);
+			hash.put("areaCode", areaCode);
+			
 			
 			returnList.add(hash);
 		}
