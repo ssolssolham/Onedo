@@ -10,4 +10,5 @@ public interface RealestateMapper {
 
 	// 동이름을 Where조건으로 걸어서 agent_Address와 비교
 	public List<Realestate> getRealestateList(@Param("AreaCodeName") String AreaCodeName);
+	public Realestate read(@Param("AreaCodeName") int AreaCodeName);
 }

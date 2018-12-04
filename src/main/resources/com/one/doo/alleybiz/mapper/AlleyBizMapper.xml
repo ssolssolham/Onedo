@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.doo.alleybiz.mapper.AlleyBizMapper">
-<select id="getAreaCodeByAnalyze1" resultType="int">
+	<select id="getAreaCodeByAnalyze1" resultType="int">
 	<![CDATA[
 	select ALLEYBIZCODE
 	from
@@ -19,8 +19,8 @@
 	    order by ipb.growthindex + ipb.activityindex desc)
 	order by totalliving desc
 	]]>
-</select>
-<select id="getAreaCodeByAnalyze2" resultType="int">
+	</select>
+	<select id="getAreaCodeByAnalyze2" resultType="int">
 	<![CDATA[
 	select ALLEYBIZCODE
 	from
@@ -36,13 +36,19 @@
 	    order by ipb.growthindex + ipb.activityindex desc)
 	order by totalhousehold desc
 	]]>
-</select>
-<select id="getAreaCodeByAnalyze3" resultType="int">
-</select>
-<select id="getAreaCodeByAnalyze4" resultType="int">
-</select>
-<select id="getAreaCodeByAnalyze5" resultType="int">
-</select>
-
+	</select>
+	<select id="getAreaCodeByAnalyze3" resultType="int">
+	</select>
+	<select id="getAreaCodeByAnalyze4" resultType="int">
+	</select>
+	<select id="getAreaCodeByAnalyze5" resultType="int">
+	</select>
+	
+	<select id="read"
+		resultType="com.one.doo.alleybiz.domain.AlleyBiz">
+		select * 
+		from alleybiz 
+		where alleybizcode = #{AlleyBizCode}
+	</select>
 
 </mapper>

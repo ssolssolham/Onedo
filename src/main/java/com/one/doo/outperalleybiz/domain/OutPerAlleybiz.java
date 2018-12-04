@@ -14,14 +14,15 @@ import lombok.Setter;
 public class OutPerAlleybiz {
     private String OPA_DATE;     
     private int AlleybizCode;
-    private int Total_out;               
-    private int Food_out;
-    private int Wear_out;
-    private int Living_out;
-    private int Cure_out;
-    private int Traffic_out;
-    private int Leisure_out;               
-    private int Culture_out;
-    private int Edu_out;
-    private int Enjoy_out;
+    // SQL getInt에서 오버플로우 방지
+    private long Total_out;               
+    private long Food_out;
+    private long Wear_out;
+    private long Living_out;
+    private long Cure_out;
+    private long Traffic_out;
+    private long Leisure_out;               
+    private long Culture_out;
+    private long Edu_out;
+    private long Enjoy_out;
 }
