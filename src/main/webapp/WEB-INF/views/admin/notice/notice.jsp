@@ -85,7 +85,7 @@ desired effect
               <c:forEach items="${notices }" var="notice" varStatus="status">
               	<tr>
               		<td>${status.index+1 }</td>
-              		<td><a href="/admin/notice/get?article_num=+${notice.article_num }">${notice.title }</a></td>
+              		<td><a href="/admin/notice/get?article_num=${notice.article_num }">${notice.title }</a></td>
               		<td>${notice.userid }</td>
               		<td><fmt:parseDate pattern="yyyy-mm-dd" value="${notice.regdate }"/></td>
               		<td>${notice.enabled }</td>

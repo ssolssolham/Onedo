@@ -93,7 +93,9 @@
 					<br>
 					<div>
 					<!-- 글쓴이와 보고있는사람 아이디 일치할경우 -->
-                    <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" href="/review/list">목록</a><span class="float-r">&nbsp;&nbsp;</span>
+                    <a href="/review/list"
+                       class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">목록
+                       </a><span class="float-r">&nbsp;&nbsp;</span>
 					
 					<sec:authentication var="loginId" property="principal.member.userid" /><!-- 로그인한사람 id값 변수로 저장 -->
 					<c:set var="writer" value="${review.userid }"/>

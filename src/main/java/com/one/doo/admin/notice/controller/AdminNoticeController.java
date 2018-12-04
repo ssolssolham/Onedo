@@ -73,7 +73,26 @@ public class AdminNoticeController {
 		log.info("공지 상세보기"+article_num);
 		model.addAttribute("notice", service.get(article_num));
 		return "admin/notice/get";
+	}
+
+	// 공지수정화면요청
+	@RequestMapping("/modifyView")
+	public String modify(@RequestParam("article_num")Long article_num, Model model) {
+		log.info("수정화면요청");
+		model.addAttribute("notice", service.get(article_num));
+		return "admin/notice/modify";
+	}
+	
+	// 공지수정 동작요청
+	@GetMapping("/modify")
+	public String modifyNotice(Article article, RedirectAttributes rttr) {
+		log.info("공지내용수정 동작요청(get)");	
+		log.info("수정된 공지글: "+article);
+		service.modify(article);
+		rttr.addFlashAttribute("result", article.getArticle_num());
+		return "redirect:/admin/notice/get?article_num="+article.getArticle_num();
 		
 	}
+	
 	
 }
