@@ -40,7 +40,7 @@
           <br>
           <div class="row">
             <div class="col-sm-4" >
-              <div class="card" style="width: 100%; margin-left:22px;">
+              <div class="card" style="width: 100%; min-height: 670px; margin-left:22px;">
                 <div class="card-body">
                   <div class="form-group">
                     <h2 class="card-title fw-b">Step 1. 구 선택</h2>
@@ -110,8 +110,8 @@
                   <div style="width: 100%; height: 2px; background-color: #27b2a5">&nbsp;</div>
                   <br>
                   <div class="form-group">
-                    <button type="button" style="float: left;" id="analysisStartBtn">분석하기</button>
-                    <button type="button" style="float: right;" id="resetFilterBtn">초기화</button>
+                    <button type="button" style="width: 49%; float: left;" id="analysisStartBtn">분석하기</button>
+                    <button type="button" style="width: 49%; float: right;" id="resetFilterBtn">초기화</button>
                   </div>
                 </div>
               </div>
@@ -119,7 +119,7 @@
             <!-- 다음 지도 올 곳임 -->
             <div class="col-sm-8">
             <div id="map_wrap">
-              <div style="width: 99%; height: 648.5px; border:1px solid black; background-color: white;" id="map" class="card-body"></div>
+              <div style="width: 99%; height: 670px; border:1px solid black; background-color: white;" id="map" class="card-body"></div>
               	<div class="category">
 	       			 <ul id="category">
 				        <li id="CE7" data-order="4"> 
@@ -168,16 +168,43 @@
                   <!-- 상권 종합 분석 결과 tab --> 
                   <div id="totalAnalysis" class="card-body bg1-pattern">
                     <br>
-                    <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">해당 상권의 지도</span><br><br>
-                    <!-- 지도 API 들어가는 곳 -->
-                    <div style="height: 500px; border-radius: 5px;  max-width: 1400px; margin-right: 20px; margin-left: 20px;" >
+                    <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">종합 분석 결과</span><br><br><br>
+                    <!-- 종합 분석 결과 수치 데이터 들어가는 곳 -->                        
+                    <div class="" style="font-family: a드림고딕4; padding: 20px;  background-color: white; max-width: 1400px; height: 500px; margin-right: 20px; margin-left: 20px; border-radius: 5px;"> 
+                      <div class ="t-center" style="font-size: 3.0em;">분석일자 : <span style="color: #27b2a5;">2018.12.12</span></div><br>
+                      <div class="t-center" style="font-size: 3.0em;"><b> ※ 예상 매출액은 해당 상권의 카페업종들에 대한 Data를 기반으로 분석하였습니다.</b></div><br>
+                      <div class="t-center" style="font-size: 3.0em;">
+                        <span style="color: #27b2a5;" id="resultDistrict">강남</span> 구 
+                        <span style="color: #27b2a5;" id="resultVillage">역삼12</span> 동 
+                        <span style="color: #27b2a5;" id="resultVillage">가로공원로76길</span> 골목상권 카페 업종
+                      </div>
+                      <br><br>
+                      <div class="col-sm-6 t-center" > <!-- 종합 분석 결과 수치데이터 Column 1 -->
+                        <div style="font-size: 4.0em;"><b>&lt;카페 컨셉 추천&gt;</b></div><br><br>
+                        <div style="font-size: 3.0em;"><span style="color: #27b2a5;">강남</span>구 주택가 지역 카페는<br>
+                        <span style="color: #27b2a5;">20</span>대 유동인구가 많고, <br>
+                        특히 00의 소득 매출이 높아<br>
+                        <span style="color: #27b2a5;">00, 00, 00</span> 등의 컨셉을 추천합니다.</div>
+                      </div>
+                      
+                      <div class="col-sm-6 t-center"> <!-- 종합 분석 결과 수치데이터 Column 2 -->
+                        <div style="font-size: 4.0em;">&lt;예상 매출액&gt;<br><br>
+                            <span style="color: #27b2a5;" id="expectedSalesAccount">0000000</span> 원
+                        </div>
+                      </div>
                     </div>
-                    
+                    <br>
+                    <br>
+                    <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">해당 상권의 지도</span><br><br><br>
+                    <!-- 지도 API 들어가는 곳 -->
+                    <div style="background-color: white; height: 500px; border-radius: 5px;  max-width: 1400px; margin-right: 20px; margin-left: 20px;" >
+                    </div>
+                    <br>
                     <!-- 종합 분석 결과 5대 지표 확인 -->
                       <br>
-                      <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">창업 5대 지표 사항 분석</span><br><br>
+                      <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">창업 5대 지표 사항 분석</span><br><br><br>
                       <!-- 첫번째 행 도넛 형 차트 -->
-                      <div class="" style="font-family: a드림고딕4; padding: 20px; color: white; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
+                      <div class="" style="font-family: a드림고딕4; padding: 20px; background-color: white; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
                         <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
                           <!-- 창업 안전도 차트 -->
                           <div class="col-sm-4">
@@ -216,9 +243,10 @@
                         </div>
                       </div>
                     <br>
-                    <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">주요 5개 및 Sub 5개의 지표 분석</span><br><br>
+                    <br>
+                    <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">주요 5개 및 Sub 5개의 지표 분석</span><br><br><br>
                     <!-- 메인 방사형, 서브 방사형 지표 -->
-                    <div class="" style="font-family: a드림고딕4; padding: 20px; color: white; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
+                    <div class="" style="background-color: white; font-family: a드림고딕4; padding: 20px; color: white; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
                       <div class="container" style="margin-top: 20px; padding-top: 20px; border-radius: 5px; padding-bottom: 20px;">
                       
                         <div class="col-sm-6">
@@ -230,12 +258,11 @@
                         </div>
                       </div>
                       </div>
-                    
                     <br>
-                    <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">분석 결과 도출된 상권의 예상 매출액 분석</span><br><br>
-                    <!-- 메인 방사형, 서브 방사형 지표 -->
-                    <div class="" style="font-family: a드림고딕4; padding: 20px; color: white; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
+                    <br>
+                    <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">분석 결과 도출된 상권의 예상 매출액 분석</span><br><br><br>
                     <!--  막대 그래프 -->
+                    <div class="" style="background-color: white; font-family: a드림고딕4; padding: 20px; color: white; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
                       <div class="row" style="margin-top: 20px;">
                           <!-- 3개 상권의 예상 매출액 막대형 그래프 -->
                           <div class="col-sm-12">
@@ -243,33 +270,6 @@
                           </div>
                       </div>
                     </div>
-                  <br>
-                    <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">종합 분석 결과</span><br><br>
-                    <!-- 종합 분석 결과 수치 데이터 들어가는 곳 -->                        
-                    <div class="" style="font-family: a드림고딕4; padding: 20px;  color: white; max-width: 1400px; height: 500px; margin-right: 20px; margin-left: 20px; border-radius: 5px;"> 
-                      <div class ="t-center" style="font-size: 3.0em;">분석일자 : <span style="color: #27b2a5;">2018.12.12</span></div><br>
-                      <div class="t-center" style="font-size: 3.0em;"><b> ※ 예상 매출액은 해당 상권의 카페업종들에 대한 Data를 기반으로 분석하였습니다.</b></div><br>
-                      <div class="t-center" style="font-size: 3.0em;">
-                        <span style="color: #27b2a5;" id="resultDistrict">강남</span> 구 
-                        <span style="color: #27b2a5;" id="resultVillage">역삼12</span> 동 
-                        <span style="color: #27b2a5;" id="resultVillage">가로공원로76길</span> 골목상권 카페 업종
-                      </div>
-                      <br><br>
-                      <div class="col-sm-6 t-center" > <!-- 종합 분석 결과 수치데이터 Column 1 -->
-                        <div style="font-size: 4.0em;"><b>&lt;카페 컨셉 추천&gt;</b></div><br><br>
-                        <div style="font-size: 3.0em;"><span style="color: #27b2a5;">강남</span>구 주택가 지역 카페는<br>
-                        <span style="color: #27b2a5;">20</span>대 유동인구가 많고, <br>
-                        특히 00의 소득 매출이 높아<br>
-                        <span style="color: #27b2a5;">00, 00, 00</span> 등의 컨셉을 추천합니다.</div>
-                      </div>
-                      
-                      <div class="col-sm-6 t-center"> <!-- 종합 분석 결과 수치데이터 Column 2 -->
-                        <div style="font-size: 4.0em;">&lt;예상 매출액&gt;<br><br>
-                            <span style="color: #27b2a5;" id="expectedSalesAccount">0000000</span> 원
-                        </div>
-                      </div>
-                    </div>
-                    <br>  
                   </div>
                   
                   <!-- 상권 상세 분석 결과 tab -->
@@ -437,8 +437,9 @@
                               <span style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">부동산 매물 리스트</span>
                           </div>
                         </div>
-                        
-                      <div class="" style="font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
+                        <br>
+						<br>
+                      <div class="" style="background-color: white; font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
                         
                         <div class="row">
                           <div class="col-sm-6" style="border: 1px solid grey; height: 600px;">
@@ -463,7 +464,7 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='none'"> 
+                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'"> 
                                   <td>image1</td>
                                   <td>
                                     <div>매물번호 : <span class="fs-18">12350</span></div>
@@ -472,7 +473,7 @@
                                     </div>
                                   </td>
                                 </tr>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='none'">
+                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
                                   <td>image1</td>
                                   <td>
                                     <div>매물번호 : <span class="fs-18">12350</span></div>
@@ -481,7 +482,7 @@
                                     </div>
                                   </td>
                                 </tr>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='none'">
+                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
                                   <td>image1</td>
                                   <td>
                                     <div>매물번호 : <span class="fs-18">12350</span></div>
@@ -490,7 +491,7 @@
                                     </div>
                                   </td>
                                 </tr>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='none'">
+                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
                                   <td>image1</td>
                                   <td>
                                     <div>매물번호 : <span class="fs-18">12350</span></div>
@@ -499,7 +500,7 @@
                                     </div>
                                   </td>
                                 </tr>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='none'">
+                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
                                   <td>image1</td>
                                   <td>
                                     <div>매물번호 : <span class="fs-18">12350</span></div>
@@ -1020,6 +1021,17 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
  		var selectedDistrict = target.options[target.selectedIndex].text;
  		// 구가 변하면 필터 초기화 하기 위함
  		
+ 		// 구 값이 바뀌면, 해당 구 중심 좌표로 이동
+ 		geocoder.addressSearch(selectedDistrict, function(result, status) {
+		    // 정상적으로 검색이 완료됐으면 
+		     if (status === daum.maps.services.Status.OK) {
+
+		        coords = new daum.maps.LatLng(result[0].y, result[0].x);
+
+		        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+		        map.setCenter(coords);
+		    }
+ 		});
  		
  		$.ajax({
  	         type : 'GET',
@@ -1056,6 +1068,9 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
      				// 클릭을 했는데 active 되어 있지 않으면 -> 활성화
      				if(!($(this).hasClass('active'))) {
      			  		$(this).addClass('active');
+     			  		var infoHeaderText = $(this).text();
+     			  		var marker;
+     			  		var infowindow;
      			  		geocoder.addressSearch($(this).text(), function(result, status) {
      						
      					    // 정상적으로 검색이 완료됐으면 
@@ -1064,20 +1079,18 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
      					        coords = new daum.maps.LatLng(result[0].y, result[0].x);
      							console.log(coords);
      					        // 결과값으로 받은 위치를 마커로 표시합니다
-     					        var marker = new daum.maps.Marker({
+     					        marker = new daum.maps.Marker({
      					            map: map,
      					            position: coords
      					        });
-     							console.log($(this).text());
-     					        var content = '<div style="width:150px;text-align:center;padding:6px 0;">'+ $(this).text() +'</div>';
+     					        console.log('infoHeaderText' + infoHeaderText);
+     					        var content = '<div style="width:150px;text-align:center;padding:6px 0;">'+ infoHeaderText +'</div>';
+     					        console.log('content' + content);
      					        // 인포윈도우로 장소에 대한 설명을 표시합니다
-     					        var infowindow = new daum.maps.InfoWindow({
+     					        infowindow = new daum.maps.InfoWindow({
      					            content: content
      					        });
      					        infowindow.open(map, marker);
-
-     					        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-     					        map.setCenter(coords);
      					    }
      					    
      					  // 지도에 표시할 원을 생성
@@ -1099,6 +1112,13 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
      				// 클릭을 했는데 활성화가 되어있으면,
      				else { 
      			   		$(this).removeClass('active');
+	     			   	geocoder.addressSearch($(this).text(), function(result, status) {
+	 						
+	 					    // 정상적으로 검색이 완료됐으면 
+	 					     if (status === daum.maps.services.Status.OK) {
+	 					        coords = new daum.maps.LatLng(result[0].y, result[0].x);
+	 					    }
+	     			   	}
      			  	}
      			}) 	 
  	         },
@@ -1200,6 +1220,9 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	         },
 	         success : function(data) {
 	        	 console.log(data);
+	        	 var target = document.getElementById('snackbar');
+				 target.innerHTML = '분석을 완료했습니다. 콘솔창에서 Data를 확인하세요';
+				 toast();
 	         },
 	         error : function(error) {
 	        	 
@@ -1302,6 +1325,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                 , datasets: [{
                     data: [25, 25, 25, 25]
                     , backgroundColor: backColArr[0]
+                	, borderColor : '#000000'
             }]
             }
             , options: {
@@ -1315,7 +1339,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                     display: true
                     , text: '창업위험지수' + ': ' + gradeArr[0]
                     , position: 'bottom'
-                    , fontColor: '#ffffff'
+                    , fontColor: '#000000'
                 }
             }
         });
@@ -1328,6 +1352,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                 , datasets: [{
                     data: [25, 25, 25, 25]
                     , backgroundColor: backColArr[1]
+                	, borderColor : '#000000'
             }]
             }
             , options: {
@@ -1341,7 +1366,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                     display: true
                     , text: '과밀지수' + ': ' + gradeArr[1]
                     , position: 'bottom'
-                    , fontColor: '#ffffff'
+                    , fontColor: '#000000'
                 }
             }
         });
@@ -1354,6 +1379,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                 , datasets: [{
                     data: [25, 25, 25, 25]
                     , backgroundColor: backColArr[2]
+                	, borderColor : '#000000'
             }]
             }
             , options: {
@@ -1367,7 +1393,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                     display: true
                     , text: '활성도' + ': ' + gradeArr[2]
                     , position: 'bottom'
-                    , fontColor: '#ffffff'
+                    , fontColor: '#000000'
                 }
             }
         });
@@ -1380,6 +1406,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                 , datasets: [{
                     data: [25, 25, 25, 25]
                     , backgroundColor: backColArr[3]
+                	, borderColor : '#000000'
             }]
             }
             , options: {
@@ -1393,7 +1420,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                     display: true
                     , text: '성장가능성' + ': ' + gradeArr[3]
                     , position: 'bottom'
-                    , fontColor: '#ffffff'
+                    , fontColor: '#000000'
                 }
             }
         });
@@ -1406,6 +1433,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                 , datasets: [{
                     data: [25, 25, 25, 25]
                     , backgroundColor: backColArr[4]
+                	, borderColor : '#000000'
             }]
             }
             , options: {
@@ -1419,7 +1447,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                     display: true
                     , text: '안전도' + ': ' + gradeArr[4]
                     , position: 'bottom'
-                    , fontColor: '#ffffff'
+                    , fontColor: '#000000'
                 }
             }
         });
