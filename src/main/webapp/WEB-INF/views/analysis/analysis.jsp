@@ -1294,7 +1294,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 					    }
 					    
 					}) // geoCoder 끝나는 부분
-    			}
+    		
 	    		// 클릭 시, 동 이름을 가지고, 창업 관련 5대 지표 불러옴
 	    		// 0 ~ 25 : 매우위험, 26 ~ 50 : 위험, 51 ~ 75 : 보통, 76 ~ 100 : 좋음
 	            // 백그라운드 컬러 배열
@@ -1310,6 +1310,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	            		   topThreeList[i].mlresult.estmt_AI_VALUE,
 	            		   topThreeList[i].mlresult.estmt_GI_VALUE,
 	            		   topThreeList[i].mlresult.estmt_SI_VALUE];
+	            
 	            // 종합 평가 점수 구하는 함수
 	            var totalEstimatedScore = 0;
 	            for (var i = 0; i < dataArr.length; i++) {
@@ -1419,6 +1420,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	                    }
 	                }
 	            });
+	            
 	            // 성장가능성 그래프 >> 배열의 3번째
 	            var potentialChart = document.getElementById("potentialChart").getContext('2d');
 	            var potentialChartA = new Chart(potentialChart, {
@@ -1473,7 +1475,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	                    }
 	                }
 	            });
-	            
+	         	
 	         // 메인 레이더 차트
 	            var mainRadarChart = document.getElementById("mainRadarChart").getContext('2d');
 	            var mainRadarChartA = new Chart(mainRadarChart, {
@@ -1482,22 +1484,34 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	                    labels: ["창업위험지수", "과밀지수", "활성도", "성장가능성", "안전도"]
 	                    , datasets: [{
 	                        label: '현재 상권'
-	                        , data: [100, 90, 20, 40, 70]
+	                        , data : dataArr
 	                        , backgroundColor: 'rgba(165, 223, 249, 0.3)'
 	                        , borderColor: 'rgba(165, 223, 249)'
 	                }, {
 	                        label: topThreeList[0].areaCode.areaCode_Name
-	                        , data: [50, 10, 30, 90, 50]
+	                        , data: [topThreeList[0].mlresult.estmt_ROF_VALUE, 
+	 	            		   		 topThreeList[0].mlresult.estmt_OI_VALUE, 
+				            		 topThreeList[0].mlresult.estmt_AI_VALUE,
+				            		 topThreeList[0].mlresult.estmt_GI_VALUE,
+				            		 topThreeList[0].mlresult.estmt_SI_VALUE]
 	                        , backgroundColor: 'rgba(239, 82, 133, 0.3)'
 	                        , borderColor: 'rgba(239, 82, 133)'
 	                }, {
 	                        label: topThreeList[1].areaCode.areaCode_Name
-	                        , data: [44, 12, 64, 23, 67]
+	                        , data: [topThreeList[1].mlresult.estmt_ROF_VALUE, 
+		            		   		 topThreeList[1].mlresult.estmt_OI_VALUE, 
+				            		 topThreeList[1].mlresult.estmt_AI_VALUE,
+				            		 topThreeList[1].mlresult.estmt_GI_VALUE,
+				            		 topThreeList[1].mlresult.estmt_SI_VALUE]
 	                        , backgroundColor: 'rgba(96, 197, 186, 0.3)'
 	                        , borderColor: 'rgba(96, 197, 186)'
 	                }, {
 	                        label: topThreeList[2].areaCode.areaCode_Name
-	                        , data: [96, 60, 90, 77, 55]
+	                        , data: [topThreeList[2].mlresult.estmt_ROF_VALUE, 
+	            		   		 	 topThreeList[2].mlresult.estmt_OI_VALUE, 
+			            		 	 topThreeList[2].mlresult.estmt_AI_VALUE,
+			            		 	 topThreeList[2].mlresult.estmt_GI_VALUE,
+			            		 	 topThreeList[2].mlresult.estmt_SI_VALUE]
 	                        , backgroundColor: 'rgba(254, 238, 125, 0.3)'
 	                        , borderColor: 'rgba(254, 238, 125)'
 	                }]
@@ -1567,6 +1581,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	                    }
 	                }
 	            });
+    		}
    		}
     })
     
