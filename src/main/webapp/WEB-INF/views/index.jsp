@@ -95,6 +95,20 @@
 <!-- 모달 javascript -->
 <script src="${pageContext.request.contextPath}/resources/js/modal.js"></script>
 
+<!-- 회원가입 javascript  -->
+<!-- 회원가입관련 javascript -->
+<!-- 모달띄우고 form제출 -->
+<script type="text/javascript">
+// before submit, make phoneNum, email
+function beforeSubmit() {
+  var memberPhoneNum = $('#memberPhone1').val()
+      + $('#memberPhone2').val() + $('#memberPhone3').val();
+  $('#memberPhoneNum').val(memberPhoneNum);
+  var memberEmail = $('#email').val() + '@'
+      + $('#emailHost').val();
+  $('#memberEmail').val(memberEmail);
+}
+</script> 
 <!-- 로그아웃 -->
 <script type="text/javascript">
 function logoutFormSubmit() {

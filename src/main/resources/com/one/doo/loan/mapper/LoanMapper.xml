@@ -27,6 +27,9 @@ FROM    loan_product p
          				AND  term_service >= #{termService}
          						]]>
          				</if>
+         				<![CDATA[
+         				AND rownum < 6
+         				]]>
          		</when>
          		<otherwise>		
          		<if test="loanCategory=='담보'">
@@ -43,6 +46,9 @@ FROM    loan_product p
          				AND  term_service >= #{termService}
          				]]>
          			</if>
+         			  <![CDATA[
+         				AND rownum < 6
+         				]]>
          		</if>		
          		</otherwise>
          	</choose>

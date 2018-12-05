@@ -34,20 +34,21 @@
           <h4 style="font-weight: bold; font-family: a드림고딕4;">
             OneDo 홈페이지에 오신 것을 환영합니다
           </h4>
-          <p>${error}</p>
-          <p>${logout}</p>
+          <!-- 스낵바(토스트 메시지) -->
+          <div id="snackbar"></div>
+          
             <form id="loginForm" action="/login" method="post">
               <div class="form-group">
                 <input type="text"
                        class="form-control"
-                       placeholder="ID 입력(12자 이내의 영문, 숫자 조합)"
-                       required="required" name="username">
+                       placeholder="ID 입력(12자 이내의 영문, 숫자 조합)" required 
+                        name="username">
               </div>
               <div class="form-group">
                 <input type="password"
                        class="form-control"
-                       placeholder="PW입력(12자 이내의 영문, 숫자 조합)"
-                       required="required" name="password">
+                       placeholder="PW입력(12자 이내의 영문, 숫자 조합)" required 
+                        name="password">
               </div>
               <div class="form-group">
                 &nbsp;&nbsp;
@@ -139,15 +140,17 @@
   <!-- footer include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/footer.jsp"/>
   <!-- footer include 종료 -->
-  
-<script type="text/javascript">
-// 아이디, 패스워드 찾기 전송
-$('#btn-lg').on("click", function(e){
-	e.preventDefault();
-	$("#loginForm").submit();
-});
-</script>
 
+<script> 
+/*   $(".btn-lg").on("click", function(e){
+    e.preventDefault();
+    $("form").submit();
+  }); */
+</script>  
+<!-- <script>
+ var target = document.getElementById('snackbar');
+  toast(); 
+</script> -->
 
 <script type="text/javascript">
 // 아이디, 패스워드 찾기 전송
@@ -206,5 +209,58 @@ function beforeSubmit() {
   $('#memberEmail').val(memberEmail);
 }
 </script>  
+
+<script src="/resources/jquery/jquery.checkable.js"></script> 
+<script src="/resources/js/jquery.Form.js"></script>
+ <!-- <script src="/resources/js/login.js"> -->
+ <script type="text/javascript">
+ $(document).ready(function() {
+	 
+    $('#loginForm').ajaxForm({
+      dataType : 'json',
+      beforeSubmit : function(formData, $form, options) {
+    	 var target = document.getElementById('snackbar');
+        for ( var i = 0; i < formData.length; i++) {
+          if (! formData[i].value) {
+        	target.innerHTML = "ID와 비밀번호는 공백으로 할 수 없습니다.";
+            return false;
+          }
+          
+        }
+/*         var idReg = '/[a-z0-9]{5,13}$/g';
+        if(!idReg.test( $("input[name=username]").val())){
+            alert("아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.");
+            return false;
+        } */
+      },
+      
+      success : function(json, statusText, xhr, $form) {
+        if (json.success == true) {
+          console.log(json.returnUrl);
+          var target = document.getElementById('snackbar');
+	  	 target.innerHTML = "로그인 성공!!";
+	  	 toast(); 
+	  	 
+          var url = json.returnUrl || '/';
+          document.location.href = url;
+          console.log(url);
+          
+        } else {
+      	 var target = document.getElementById('snackbar');
+	  	 target.innerHTML = "아이디, 비밀번호를 확인하세요.";
+	  	//alert("아이디, 비밀번호를 확인하세요.");
+	  	 toast(); 
+        }
+      },
+      error : function(xhr) {
+        alert("통신불가");
+      }
+    });
+    $(':input[name=username]').focus();
+  });
+ </script>
+<script src="${pageContext.request.contextPath}/resources/js/toastMessage.js"></script>
+<!-- 스낵바(토스트 메시지) -->
+<div id="snackbar"></div>
 </body>
 </html>

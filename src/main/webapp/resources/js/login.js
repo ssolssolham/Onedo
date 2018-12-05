@@ -16,6 +16,7 @@
 					var url = json.returnUrl || './';
 					document.location.href = url;
 					console.log(url);
+					
 				} else {
 					alert("아이디, 비밀번호를 확인하세요.");
 				}
