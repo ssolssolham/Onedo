@@ -62,7 +62,8 @@
             <div class="form-group">
               <input type="text" name="userid" id="userid"
                 class="form-control width-60 display-i"
-                placeholder="ID 입력 (12자 이내의 영문, 숫자 조합)"
+                placeholder="ID 입력 (4~12자 이내의 영문, 숫자 조합)"
+                pattern="^[A-Za-z0-9]{4,12}$"  
                 required="required"
                 style="padding-left: 10px; width:60%; display:inline;" /> 
                 &nbsp;
@@ -73,7 +74,8 @@
             <div class="form-group">
               <input type="password" name="userpw" id="userpw"
                 class="form-control "
-                placeholder="PW 입력 (12자 이내의 영문, 숫자 조합)"
+                pattern="/^[A-Za-z0-9]{4,12}$/"
+                placeholder="PW 입력 (4~12자 이내의 영문, 숫자 조합)"
                 required="required" style="padding-left: 10px;" />
             </div>
             <br>
@@ -86,6 +88,7 @@
             <div class="form-group">
               <input type="text" name="userName" class="form-control "
                 placeholder="이름 입력 (2~4 자리의 한글 이름)" required="required"
+                pattern="/^[가-힣]{2,4}$/"
                 style="padding-left: 10px;" />
             </div>
             <br>
@@ -166,46 +169,40 @@ var idck = false;
 var emailck = false;
 // 아이디 중복확인을 위한 비동기
 $(function() {
-   	// id체크여부
-   	
-   
-   
-   // idDup버튼 클릭 시, 비동기로 아이디 중복확인
-   $('#dupCheck').on('click', function() {
-      var userid = $('#userid').val();
+	// id체크여부
+   	// idDup버튼 클릭 시, 비동기로 아이디 중복확인
+   	$('#dupCheck').on('click', function() {
+    	var userid = $('#userid').val();
       
-      $.ajax({
-         type : 'GET',
-         url : "/member/idDupCheck/" + userid,
-         dataType : "json",
-         success : function(data) {
-            //비동기 성공 시
-            if(data.cnt > 0){
-            	var target = $('#snackbar');
-            	target.text('중복된 아이디 입니다. 다른 아이디를 입력해 주세요:(');
-            	toast();
-               	$('#userid').val("");
-               	$('#userid').focus();
-            }else{
-            	var target = $('#snackbar');
-				target.text('사용가능한 아이디 입니다:D');
-				toast();
-               	$('#userid').val(userid);
-               	$('#userid').attr('readonly', 'readonly');
-               	$('#dupCheck').attr('disabled', 'disabled');
-               	$('#userpw').focus();
-               	idck = true;
-            }
-         },
-         error : function(error) {
-            alert("비동기 오류!");
-         }
-      });
-   });
-});
-
-// email과 emailHost 연결
-
+	      $.ajax({
+	         type : 'GET',
+	         url : "/member/idDupCheck/" + userid,
+	         dataType : "json",
+	         success : function(data) {
+	            //비동기 성공 시
+	            if(data.cnt > 0){
+	            	var target = $('#snackbar');
+	            	target.text('중복된 아이디 입니다. 다른 아이디를 입력해 주세요:(');
+	            	toast();
+	               	$('#userid').val("");
+	               	$('#userid').focus();
+	            }else{
+	            	var target = $('#snackbar');
+					target.text('사용가능한 아이디 입니다:D');
+					toast();
+	               	$('#userid').val(userid);
+	               	$('#userid').attr('readonly', 'readonly');
+	               	$('#dupCheck').attr('disabled', 'disabled');
+            	   	$('#userpw').focus();
+               		idck = true;
+            	}
+         	},
+         	error : function(error) {
+            	alert("비동기 오류!");
+         	}
+      	});
+   	});
+}); // onload끝
 
    // 인증버튼클릭으로 생성된 임의의 코드저장할 변수
    var code;
@@ -284,7 +281,7 @@ $('input[name="passConfirm"]').focusout(function() {
 		target.text('입력한 비밀번호와 일치하지 않습니다!');
 		toast();
 	}
-})
+});
 
 // form제출 전, 아이디중복체크와 이메일인증을 했는지 체크
 function beforeSubmit() {
@@ -299,7 +296,18 @@ function beforeSubmit() {
 		toast();
 		return false;
 	}
-}
+};
+
+//정규표현
+/* function validate() {
+	// 정규표현
+	var regId = /^[A-Za-z0-9]{4,12}$/;
+	var regPw = /^[A-Za-z0-9]{4,12}$/;
+	var regName = /^[가-힣]{2,4}$/;
+	//var regEmail = ;
+	
+	$("#userid").focusout()
+} */
 
 
 </script>  
