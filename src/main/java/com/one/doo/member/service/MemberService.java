@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.one.doo.board.domain.Criteria;
+import com.one.doo.article.domain.Criteria;
 import com.one.doo.member.domain.Member;
 import com.one.doo.metadata.log.domain.Log;
 

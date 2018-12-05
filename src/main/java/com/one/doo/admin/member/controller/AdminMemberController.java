@@ -20,11 +20,12 @@ public class AdminMemberController {
 	private MemberService service;
 	
 	@RequestMapping("/")
-	public String home(Model model) {
-		/*int total = service.getTotalCount();
-		
-		model.addAttribute("userlist", service.getListWithCri(cri));
-		model.addAttribute("pageMaker", new Page(cri, total));*/
+	public String home(Criteria cri, Model model) {
+		log.info("멤버관리 메인페이지 요청 컨트롤러");
+		int total = service.getTotalCount();
+		log.info("총회원수: "+total);
+		model.addAttribute("users", service.getListWithCri(cri));
+		model.addAttribute("pageMaker", new Page(cri, total));
 		return "admin/member/member";
 	}
 	

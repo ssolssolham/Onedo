@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.one.doo.auth.domain.Auth;
 import com.one.doo.auth.mapper.AuthMapper;
-import com.one.doo.board.domain.Criteria;
+import com.one.doo.article.domain.Criteria;
 import com.one.doo.member.domain.Member;
 import com.one.doo.member.mapper.MemberMapper;
 import com.one.doo.member.validate.MailCertify;

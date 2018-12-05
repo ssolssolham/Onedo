@@ -2,7 +2,7 @@ package com.one.doo.member.mapper;
 
 import java.util.List;
 
-import com.one.doo.board.domain.Criteria;
+import com.one.doo.article.domain.Criteria;
 import com.one.doo.member.domain.Member;
 
 public interface MemberMapper {
