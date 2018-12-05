@@ -28,6 +28,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/ziehharmonika.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/tooltip.css">
 
 <!--===============================================================================================-->
 <!-- 홈페이지 Favicon SearchBar-->
