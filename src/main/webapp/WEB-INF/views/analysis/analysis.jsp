@@ -244,17 +244,12 @@
                       </div>
                     <br>
                     <br>
-                    <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">주요 5개 및 Sub 5개의 지표 분석</span><br><br><br>
+                    <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">창업 시 5개의 지표 분석</span><br><br><br>
                     <!-- 메인 방사형, 서브 방사형 지표 -->
                     <div class="" style="background-color: white; font-family: a드림고딕4; padding: 20px; color: white; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
                       <div class="container" style="margin-top: 20px; padding-top: 20px; border-radius: 5px; padding-bottom: 20px;">
-                      
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                           <canvas id="mainRadarChart" width="100%;"></canvas>
-                        </div>
-                        
-                        <div class="col-sm-6">
-                          <canvas id="subRadarChart" width="100%;"></canvas>
                         </div>
                       </div>
                       </div>
@@ -1303,6 +1298,10 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	            var backColArr = new Array();
 	            // 창업위험지수, 과밀지수, 활성도, 성장가능성, 안전도 순서로 각 번째에 맞게 무조건 데이터 삽입
 	            var dataArr = new Array();
+	            
+	            var dataArrSub = new Array();
+	            
+	            var expected
 	            // 등급 배열 >> 이것 또한 창업위험, 과밀, 활성, 성장, 안전도 순서로 배열에 등급이 들어감
 	            var gradeArr = new Array();
 	            dataArr = [topThreeList[i].mlresult.estmt_ROF_VALUE, 
@@ -1311,6 +1310,17 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	            		   topThreeList[i].mlresult.estmt_GI_VALUE,
 	            		   topThreeList[i].mlresult.estmt_SI_VALUE];
 	            
+	            dataArrSub = [topThreeList[i].livingPerAlleybiz.totalLiving, 
+           		 			  topThreeList[i].flowPerAlleybiz.total_flow, 
+           					  topThreeList[i].workerPerAlleybiz.total_work, 
+           		 		      topThreeList[i].storePerAlleybiz.open_percent,
+           		 			  topThreeList[i].storePerAlleybiz.store_count];
+	            
+	            dataEstimatedArr = [topThreeList[i].mlresult.estmt_SALES,
+	            					topThreeList[0].mlresult.estmt_SALES,
+	            					topThreeList[1].mlresult.estmt_SALES,
+	            					topThreeList[2].mlresult.estmt_SALES]
+	            					
 	            // 종합 평가 점수 구하는 함수
 	            var totalEstimatedScore = 0;
 	            for (var i = 0; i < dataArr.length; i++) {
@@ -1481,14 +1491,14 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	            var mainRadarChartA = new Chart(mainRadarChart, {
 	                type: 'radar'
 	                , data: {
-	                    labels: ["창업위험지수", "과밀지수", "활성도", "성장가능성", "안전도"]
+	                    labels: ['창업위험지수', '과밀지수', '활성도', '성장가능성', '안전도']
 	                    , datasets: [{
 	                        label: '현재 상권'
 	                        , data : dataArr
 	                        , backgroundColor: 'rgba(165, 223, 249, 0.3)'
 	                        , borderColor: 'rgba(165, 223, 249)'
 	                }, {
-	                        label: topThreeList[0].areaCode.areaCode_Name
+	                        label: topThreeList[0].alleyBiz.alleybizCode_Name
 	                        , data: [topThreeList[0].mlresult.estmt_ROF_VALUE, 
 	 	            		   		 topThreeList[0].mlresult.estmt_OI_VALUE, 
 				            		 topThreeList[0].mlresult.estmt_AI_VALUE,
@@ -1497,7 +1507,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	                        , backgroundColor: 'rgba(239, 82, 133, 0.3)'
 	                        , borderColor: 'rgba(239, 82, 133)'
 	                }, {
-	                        label: topThreeList[1].areaCode.areaCode_Name
+	                        label: topThreeList[1].alleyBiz.alleybizCode_Name
 	                        , data: [topThreeList[1].mlresult.estmt_ROF_VALUE, 
 		            		   		 topThreeList[1].mlresult.estmt_OI_VALUE, 
 				            		 topThreeList[1].mlresult.estmt_AI_VALUE,
@@ -1506,7 +1516,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	                        , backgroundColor: 'rgba(96, 197, 186, 0.3)'
 	                        , borderColor: 'rgba(96, 197, 186)'
 	                }, {
-	                        label: topThreeList[2].areaCode.areaCode_Name
+	                        label: topThreeList[2].alleyBiz.alleybizCode_Name
 	                        , data: [topThreeList[2].mlresult.estmt_ROF_VALUE, 
 	            		   		 	 topThreeList[2].mlresult.estmt_OI_VALUE, 
 			            		 	 topThreeList[2].mlresult.estmt_AI_VALUE,
@@ -1535,52 +1545,43 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	                }
 	            });
 	            
-	            // 서브 레이더 차트
-	            var subRadarChart = document.getElementById("subRadarChart").getContext('2d');
-	            var subRadarChartA = new Chart(subRadarChart, {
-	                type: 'radar'
+	            // 매출액 차트
+	            var salesAmount = document.getElementById("salesAmountChart").getContext('2d');
+	            var salesAmountChart = new Chart(salesAmount, {
+	                type: 'bar'
 	                , data: {
-	                    labels: ["상주인구", "유동인구", "직장인구", "개업률", "점포수"]
+	                    labels: ["현재 상권", 
+	                    		 topThreeList[0].alleyBiz.alleybizCode_Name, 
+           						 topThreeList[1].alleyBiz.alleybizCode_Name, 
+           						 topThreeList[2].alleyBiz.alleybizCode_Name]
 	                    , datasets: [{
-	                        label: '현재 상권'
-	                        , data: [100, 30, 50, 60, 11]
-	                        , backgroundColor: 'rgba(165, 223, 249, 0.3)'
-	                        , borderColor: 'rgba(165, 223, 249)'
-	                }, {
-	                        label: 'A 상권'
-	                        , data: [50, 10, 30, 90, 50]
-	                        , backgroundColor: 'rgba(239, 82, 133, 0.3)'
-	                        , borderColor: 'rgba(239, 82, 133)'
-	                }, {
-	                        label: 'B 상권'
-	                        , data: [44, 12, 64, 23, 67]
-	                        , backgroundColor: 'rgba(96, 197, 186, 0.3)'
-	                        , borderColor: 'rgba(96, 197, 186)'
-	                }, {
-	                        label: 'C 상권'
-	                        , data: [96, 60, 90, 77, 55]
-	                        , backgroundColor: 'rgba(254, 238, 125, 0.3)'
-	                        , borderColor: 'rgba(254, 238, 125)'
+	                        label: '매출액'
+	                        , data: dataEstimatedArr
+	                        , backgroundColor: ['rgba(165, 223, 249, 0.3)'
+	                        					, 'rgba(239, 82, 133, 0.3)'
+	                        					, 'rgba(96, 197, 186, 0.3)'
+	                        					, 'rgba(254, 238, 125, 0.3)']
+	                        , borderColor: ['rgba(165, 223, 249)'
+	                        				, 'rgba(239, 82, 133)'
+	                        				, 'rgba(96, 197, 186)'
+	                        				, 'rgba(254, 238, 125)']
+	                        , borderWidth: 1
 	                }]
 	                }
 	                , options: {
 	                    legend: {
-	                        display: true
-	                        , position: 'left'
-	                        , labels: {
-	                            fontColor: '#000000'
-	                        }
+	                        display: false
 	                    }
 	                    , circumference: 1 * Math.PI
 	                    , rotation: 1 * Math.PI
 	                    , title: {
 	                        display: true
-	                        , text: 'SUB CHART'
+	                        , text: '매출액'
 	                        , position: 'top'
-	                        , fontColor: '#000000'
 	                    }
 	                }
 	            });
+	            
     		}
    		}
     })
@@ -1624,87 +1625,6 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
       });
       </script>
 <!--===============================================================================================-->      
-    
-<!--===============================================================================================-->    
-    <script type="text/javascript">
-        
-        
-        // 매출액 차트
-        var salesAmount = document.getElementById("salesAmountChart").getContext('2d');
-        var salesAmountChart = new Chart(salesAmount, {
-            type: 'bar'
-            , data: {
-                labels: ["현재 상권", "A 상권", "B 상권", "C 상권"]
-                , datasets: [{
-                    label: '매출액'
-                    , data: [12, 19, 3, 5, 2, 3]
-                    , backgroundColor: [
-                    'rgba(165, 223, 249, 0.3)'
-                    , 'rgba(239, 82, 133, 0.3)'
-                    , 'rgba(96, 197, 186, 0.3)'
-                    , 'rgba(254, 238, 125, 0.3)'
-                ]
-                    , borderColor: [
-                    'rgba(165, 223, 249)'
-                    , 'rgba(239, 82, 133)'
-                    , 'rgba(96, 197, 186)'
-                    , 'rgba(254, 238, 125)'
-                ]
-                    , borderWidth: 1
-            }]
-            }
-            , options: {
-                legend: {
-                    display: false
-                }
-                , circumference: 1 * Math.PI
-                , rotation: 1 * Math.PI
-                , title: {
-                    display: true
-                    , text: '매출액'
-                    , position: 'top'
-                }
-            }
-        });
-        // 지출액 차트
-        var spentAmount = document.getElementById("spentAmountChart").getContext('2d');
-        var spentAmountChart = new Chart(spentAmount, {
-            type: 'bar'
-            , data: {
-                labels: ["현재 상권", "A 상권", "B 상권", "C 상권"]
-                , datasets: [{
-                    label: '지출액'
-                    , data: [12, 19, 3, 5, 2, 3]
-                    , backgroundColor: [
-                    'rgba(165, 223, 249, 0.3)'
-                    , 'rgba(239, 82, 133, 0.3)'
-                    , 'rgba(96, 197, 186, 0.3)'
-                    , 'rgba(254, 238, 125, 0.3)'
-                ]
-                    , borderColor: [
-                    'rgba(165, 223, 249)'
-                    , 'rgba(239, 82, 133)'
-                    , 'rgba(96, 197, 186)'
-                    , 'rgba(254, 238, 125)'
-                ]
-                    , borderWidth: 1
-            }]
-            }
-            , options: {
-                legend: {
-                    display: false
-                }
-                , circumference: 1 * Math.PI
-                , rotation: 1 * Math.PI
-                , title: {
-                    display: true
-                    , text: '지출액'
-                    , position: 'top'
-                }
-            }
-        });
-    </script>
-    
     <script type="text/javascript">
     // 상권 상세 분석에 들어가는 chart 종류
         var curMarketArr = new Array();
