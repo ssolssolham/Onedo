@@ -129,7 +129,6 @@ public class AnalysisServiceImpl implements AnalysisService {
            break;   
 		}
 		
-		//諛섑솚�븷 由ъ뒪�듃媛� �뾾�쑝硫� 
 		if (list == null) {
 			log.info("--------------해당 타입에 대한 list 반환값 없음 -----------");
 			return null;
