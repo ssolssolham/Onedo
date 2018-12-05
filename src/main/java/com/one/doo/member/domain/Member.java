@@ -3,6 +3,8 @@ package com.one.doo.member.domain;
 import java.util.Date;
 import java.util.List;
 
+import com.one.doo.auth.domain.Auth;
+
 import lombok.Data;
 import lombok.Getter;
 

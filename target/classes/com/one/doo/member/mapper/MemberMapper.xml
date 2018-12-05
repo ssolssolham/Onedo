@@ -23,6 +23,11 @@
 			</foreach>
 		</trim>
 	</sql>
+	
+	<resultMap type="com.one.doo.auth.domain.Auth" id="authMap">
+		<result property="userid" column="userid" />
+		<result property="auth" column="auth" />
+	</resultMap>
 
 	<resultMap type="com.one.doo.member.domain.Member"
 		id="memberMap">
@@ -37,10 +42,6 @@
 		</collection>
 	</resultMap>
 
-	<resultMap type="com.one.doo.member.domain.Auth" id="authMap">
-		<result property="userid" column="userid" />
-		<result property="auth" column="auth" />
-	</resultMap>
 
 	<select id="read" resultMap="memberMap">
 		SELECT

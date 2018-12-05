@@ -8,13 +8,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.one.doo.auth.domain.Auth;
+import com.one.doo.auth.mapper.AuthMapper;
 import com.one.doo.board.domain.Criteria;
-import com.one.doo.member.domain.Auth;
 import com.one.doo.member.domain.Member;
-import com.one.doo.member.mapper.AuthMapper;
 import com.one.doo.member.mapper.MemberMapper;
 import com.one.doo.member.validate.MailCertify;
-import com.one.doo.metadata.log.domain.Log;
 import com.one.doo.metadata.log.mapper.LogMapper;
 import com.one.doo.metadata.url.mapper.UrlMapper;
 
