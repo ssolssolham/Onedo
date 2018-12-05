@@ -274,11 +274,21 @@ $(function() {
       });
    });
 
+// 비밀번호확인
+$('input[name="passConfirm"]').focusout(function() {
+	var pass = $("#userpw").val();
+	var inputPass = $('input[name="passConfirm"]').val();
+	console.log(pass +" "+inputPass);
+	if(pass != inputPass){
+		var target = $('#snackbar');
+		target.text('입력한 비밀번호와 일치하지 않습니다!');
+		toast();
+	}
+})
+
 // form제출 전, 아이디중복체크와 이메일인증을 했는지 체크
 function beforeSubmit() {
 	console.log("제출전, 중복체크, 이메일인증 했는지..");
-	alert("idck값: "+idck+"emailck값: "+emailck);
-	
 	if(emailck && idck){
 		alert('트루로 들어옴');
 		return true;
