@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.one.doo.realestate.mapper.RealestateMapper">
+
+	<!-- // 추천된 해당 골목상권의 동 안에 있는 부동산 중개사만 불러오기(상일)  -->
+	<select id="getRealestateList" resultType="map">
+		SELECT DISTINCT agent_name, agent_address 
+		FROM   budongsan 
+		WHERE  agent_address LIKE '%' 
+		                          || Regexp_replace((SELECT ac.areacode_name 
+		                                             FROM   areacodes ac 
+		                                                    INNER JOIN alleybiz ab 
+		                                                            ON ac.areacode = 
+		                                                               ab.areacode 
+		                                             WHERE  ab.alleybizcode = #{AlleyBizCode}), 
+		                             '[0-9]') 
+		                          || '%'
+	</select>
+	
+	<!-- 결과 반환 -->
+	<!-- // 추천된 해당 골목상권의 동 안에 있는 부동산 중개사 매물 정보 모두 불러오기(상일) -->
+	<select id="read"
+		resultType="com.one.doo.realestate.domain.Realestate">
+		SELECT * 
+		FROM   budongsan 
+		WHERE  agent_address LIKE '%' 
+		                          || Regexp_replace((SELECT ac.areacode_name 
+		                                             FROM   areacodes ac 
+		                                                    INNER JOIN alleybiz ab 
+		                                                            ON ac.areacode = 
+		                                                               ab.areacode 
+		                                             WHERE  ab.alleybizcode = #{AlleyBizCode}), 
+		                             '[0-9]') 
+		                          || '%'
+	</select>
+</mapper>
