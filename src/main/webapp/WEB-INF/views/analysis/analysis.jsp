@@ -901,11 +901,11 @@
  * 지우지 마세요!!
  */
 
-  function getPropStep(topData,subData){
+  function getPropStep(topData,i,subData){
   	/*
   		동적 Property 접근을 위한 메서드
   	*/
-  	return topData[subData];
+  	return topData[i][subData];
   }
   
   function getPropStep2(topData,subData,subData2){
@@ -928,7 +928,7 @@
 		  /* 차트에 사용할 배열 만들기 */
 		  var result = new Array();
 		  
-		  if(getPropStep(topDataList,wishList[0]) == null){
+		  if(getPropStep(topDataList,i,wishList[0]) == null){
 			  for(var j = 1; j < wishList.length; j++){
 				  /* 결과값이 없으면 0을 넣어줍니다.*/
 				  result.push(0);
@@ -949,6 +949,44 @@
 	  return resultArr;
   }
   
+  /*
+  * 데이터 셋트 작성 메서드
+  */
+  
+  function makeDataSets(topDataList,curDataArr){
+	  
+	  var dataSets = [];
+	  for(var i = 0; i < topDataList.length; i++){
+		 var dataSet = {
+	                type: 'bar'
+	                    , label: topDataList[i].alleyBiz.alleybizCode_Name
+	                    , backgroundColor: chartbackcolor[i]
+	                    , borderWidth: 2
+	                    , fill: false
+	                    , data: curDataArr[i]
+	    			}
+		 dataSets.push(dataSet);
+	  }
+	  
+	  return dataSets;
+  }
+  
+function makeDataSets2(topDataList,curDataArr){
+	  
+	  var dataSets = [];
+	  for(var i = 0; i < topDataList.length; i++){
+		 var dataSet = {
+                 label: topDataList[i].alleyBiz.alleybizCode_Name
+                 , backgroundColor: chartbackcolor[i]
+                 , borderColor: 'rgb(255, 99, 132)'
+                 , data: curDataArr[i]
+     				}
+		 dataSets.push(dataSet);
+	  }
+	  
+	  return dataSets;
+  }
+  
   /* 
   	 배열의 0번째는 프로퍼티, 1번째부터는 프로퍼티 내 프로퍼티입니다.
   	 차트를 위한 배열 
@@ -961,12 +999,13 @@
   var liveWishList = ['livingPerAlleybiz','totalLiving','maleLiving','femaleLiving','living10','living20','living30','living40','living50','living60'];
   var jobWishList = ['workerPerAlleybiz','total_work','male_work','female_work','work10','work20','work30','work40','work50','work60'];
   var lossWishList = ['outPerAlleybiz','food_out','cure_out','living_out','traffic_out','leisure_out','culture_out','edu_out','enjoy_out'];
-  var survivalWishList = ['survival1','survival1_2','survival2_3','survival3_5','survival5'];
+  var survivalWishList = ['salesPerCobb','survival1','survival1_2','survival2_3','survival3_5','survival5'];
   
   /*
    * 차트 색깔 변수
    */
    
+   var chartbackcolor = ['#2b90d9','#ef5285','#60c5ba'];
    var chartbackcolor1 = '#2b90d9';
    var chartbackcolor2 = '#ef5285';
    var chartbackcolor3 = '#60c5ba';
@@ -1219,7 +1258,10 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	         success : function(data) {
 	        	 topThreeList = [];
 	        	 for (var i = 0; i < 3; i++) {
+	        		if(data[i] != undefined){
+	        			/* 빈것 넣기 방지 : 호준*/
 	        	 	topThreeList.push(data[i]);
+	        		}
 	        	 }
 	        	 var target = document.getElementById('snackbar');
 				 target.innerHTML = '분석을 완료했습니다. 콘솔창에서 Data를 확인하세요';
@@ -1667,35 +1709,11 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     // 상권 상세 분석에 들어가는 chart 종류
      function makePopChart(topThreeList,popWishList){
         var curMarketArr = makeDataArr(topThreeList,popWishList);
-    
+    	
         var populationChartData = {
             labels: ['총 유동인구 수', '남성 유동인구 수', '여성 유동인구 수']
-            , datasets: [{
-                type: 'bar'
-                , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor1
-                , borderWidth: 2
-                , fill: false
-                , data: curMarketArr[0]
-			}, {
-                type: 'bar'
-                , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor2
-                , data: curMarketArr[1]
-                , borderColor: 'white'
-                , borderWidth: 2
-			},{
-                type: 'bar'
-                    , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                    , backgroundColor: chartbackcolor3
-                    , data: curMarketArr[2]
-                    , borderColor: 'white'
-                    , borderWidth: 2
-    		  }
-			]
+            , datasets: makeDataSets(topThreeList,curMarketArr)
         };
-        
-     };
         
         var population = document.getElementById('populationChart').getContext('2d');
         var populationChart = new Chart(population, {
@@ -1712,37 +1730,19 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                 }
             }
         });
-    }
+        
+     };
+        
+        
    	
     function makedayChart(topThreeList,dayWishList){
     	var dayCurDataArr = makeDataArr(topThreeList,dayWishList);
         
         var dayChartData = {
             labels: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']
-            , datasets: [{
-                type: 'bar'
-                , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor1
-                , borderWidth: 2
-                , fill: false
-                , data: dayCurDataArr[0]
-			}, {
-                type: 'bar'
-                , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor2
-                , data: dayCurDataArr[1]
-                , borderColor: 'white'
-                , borderWidth: 2
-			},{
-                type: 'bar'
-                    , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                    , backgroundColor: chartbackcolor3
-                    , data: dayCurDataArr[2]
-                    , borderColor: 'white'
-                    , borderWidth: 2
-    			}
-			]
+            , datasets: makeDataSets(topThreeList,dayCurDataArr)
         };
+        
         var day = document.getElementById('dayChart').getContext('2d');
         var dayChart = new Chart(day, {
             type: 'bar'
@@ -1765,28 +1765,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
          
          var timeChartData = {
              labels: ['00시 ~ 06시', '06시 ~ 11시', '11시 ~ 14시', '14시 ~ 17시', '17시 ~ 21시', '21시 ~ 24시']
-             , datasets: [{
-                 type: 'bar'
-                 , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                 , backgroundColor: chartbackcolor1
-                 , borderWidth: 2
-                 , fill: false
-                 , data: timeCurDataArr[0]
- 			}, {
-                 type: 'bar'
-                 , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                 , backgroundColor: chartbackcolor2
-                 , data: timeCurDataArr[1]
-                 , borderColor: 'white'
-                 , borderWidth: 2
- 			},{
-                type: 'bar'
-                    , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                    , backgroundColor: chartbackcolor3
-                    , data: timeCurDataArr[2]
-                    , borderColor: 'white'
-                    , borderWidth: 2
-    			}]
+             , datasets: makeDataSets(topThreeList,timeCurDataArr)
          };
          
          var time = document.getElementById('timeChart').getContext('2d');
@@ -1811,29 +1790,9 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 
     	var ageChartData = {
             labels: ['10대', '20대', '30대', '40대', '50대', '60대']
-            , datasets: [{
-                type: 'bar'
-                , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor1
-                , borderWidth: 2
-                , fill: false
-                , data: ageCurDataArr[0]
-			}, {
-                type: 'bar'
-                , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor2
-                , data: ageCurDataArr[1]
-                , borderColor: 'white'
-                , borderWidth: 2
-			}, {
-                type: 'bar'
-                    , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                    , backgroundColor: chartbackcolor3
-                    , data: ageCurDataArr[2]
-                    , borderColor: 'white'
-                    , borderWidth: 2
-    			}]
+            , datasets: makeDataSets(topThreeList,ageCurDataArr)
         };
+    	
         var age = document.getElementById('ageChart').getContext('2d');
         var ageChart = new Chart(age, {
             type: 'bar'
@@ -1856,29 +1815,9 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
         
         var liveChartData = {
             labels: ['총 상주인구', '남성 상주인구 수', '여성 상주인구 수', '10대 상주인구 수', '20대 상주인구 수', '30대 상주인구 수', '40대 상주인구 수', '50대 상주인구 수', '60대 상주인구 수']
-            , datasets: [{
-                type: 'bar'
-                , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor1
-                , borderWidth: 2
-                , fill: false
-                , data: liveCurDataArr[0]
-			}, {
-                type: 'bar'
-                , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor2
-                , data: liveCurDataArr[1]
-                , borderColor: 'white'
-                , borderWidth: 2
-			}, {
-                type: 'bar'
-                , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor3
-                , data: liveCurDataArr[2]
-                , borderColor: 'white'
-                , borderWidth: 2
-			}]
+            , datasets: makeDataSets(topThreeList,liveCurDataArr)
         };
+        
         var live = document.getElementById('liveChart').getContext('2d');
         var liveChart = new Chart(live, {
             type: 'bar'
@@ -1898,29 +1837,9 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     	 
          var jobChartData = {
              labels: ['총 직장인구', '남성 직장인구 수', '여성 직장인구 수', '10대 직장인구 수', '20대 직장인구 수', '30대 직장인구 수', '40대 직장인구 수', '50대 직장인구 수', '60대 직장인구 수']
-             , datasets: [{
-                 type: 'bar'
-                 , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                 , backgroundColor: chartbackcolor1
-                 , borderWidth: 2
-                 , fill: false
-                 , data: jobCurDataArr[0]
- 			}, {
-                 type: 'bar'
-                 , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                 , backgroundColor: chartbackcolor2
-                 , data: jobCurDataArr[1]
-                 , borderColor: 'white'
-                 , borderWidth: 2
- 			}, {
-                 type: 'bar'
-                 , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                 , backgroundColor: chartbackcolor3
-                 , data: jobCurDataArr[2]
-                 , borderColor: 'white'
-                 , borderWidth: 2
- 			}]
+             , datasets: makeDataSets(topThreeList,jobCurDataArr)
          };
+         
          var job = document.getElementById('jobChart').getContext('2d');
          var jobChart = new Chart(job, {
              type: 'bar'
@@ -1940,29 +1859,9 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
         
         var lossChartData = {
             labels: ['지출 총 금액', '식료품 지출', '의료 지출', '생활용품 지출', '교통 지출', '여가 지출', '문화 지출', '교육 지출', '유흥 지출']
-            , datasets: [{
-                type: 'bar'
-                , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor1
-                , borderWidth: 2
-                , fill: false
-                , data: lossCurDataArr[0]
-			}, {
-                type: 'bar'
-                , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor2
-                , data: lossCurDataArr[1]
-                , borderColor: 'white'
-                , borderWidth: 2
-			}, {
-                type: 'bar'
-                , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor3
-                , data: lossCurDataArr[2]
-                , borderColor: 'white'
-                , borderWidth: 2
-			}]
+            , datasets: makeDataSets(topThreeList,lossCurDataArr)
         };
+        
         var loss = document.getElementById('lossChart').getContext('2d');
         var lossChart = new Chart(loss, {
             type: 'bar'
@@ -1987,23 +1886,8 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
            // The type of chart we want to create
            type: 'line', // The data for our dataset
            data: {
-               labels: ["2013", "2014", "2015", "2016", "2017", "2018"]
-               , datasets: [{
-                   label: topThreeList[0].alleyBiz.alleybizCode_Name
-                   , backgroundColor: 'rgb(255, 99, 132)'
-                   , borderColor: 'rgb(255, 99, 132)'
-                   , data: martCurDataArr[0]
-       },{
-           label: topThreeList[1].alleyBiz.alleybizCode_Name
-               , backgroundColor: 'rgb(255, 99, 132)'
-               , borderColor: 'rgb(255, 99, 132)'
-               , data: martCurDataArr[1]
-   },{
-       label: topThreeList[2].alleyBiz.alleybizCode_Name
-           , backgroundColor: 'rgb(255, 99, 132)'
-           , borderColor: 'rgb(255, 99, 132)'
-           , data: martCurDataArr[2]
-}]
+               labels: ["1년 이하", "1~2년", "2~3년", "3~5년", "5년 이상"]
+               , datasets: makeDataSets2(topThreeList,martCurDataArr)
            }, // Configuration options go here
            options: {}
        });
@@ -2041,22 +1925,6 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     </script>
     
 <script>
-    // 상권 상세 정보 분석 탭 두번째 Chart들
-        var martRunningTime = document.getElementById('martRunningTimeChart').getContext('2d');
-        var martRunningTimeChart = new Chart(martRunningTime, {
-            // The type of chart we want to create
-            type: 'line', // The data for our dataset
-            data: {
-                labels: ["2013", "2014", "2015", "2016", "2017", "2018"]
-                , datasets: [{
-                    label: "1년 이하 생존율"
-                    , backgroundColor: 'rgb(255, 99, 132)'
-                    , borderColor: 'rgb(255, 99, 132)'
-                    , data: [0, 10, 5, 2, 20, 30]
-        }]
-            }, // Configuration options go here
-            options: {}
-        });
         
         var sumMart = document.getElementById('sumMartChart').getContext('2d');
         var sumMartChart = new Chart(sumMart, {
