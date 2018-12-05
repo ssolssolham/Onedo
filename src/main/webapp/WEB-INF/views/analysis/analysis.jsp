@@ -915,7 +915,7 @@
 		  var result = new Array();
 		  
 		  if(getPropStep(topDataList[i],wishList[0]) == null){
-			  for(var j = 1; j <= wishList.length; j++){
+			  for(var j = 1; j < wishList.length; j++){
 				  /* 결과값이 없으면 0을 넣어줍니다.*/
 				  result.push(0);
 			  }
@@ -936,7 +936,10 @@
 	  return resultArr;
   }
   
-  /* 배열의 0번째는 프로퍼티, 1번째부터는 프로퍼티 내 프로퍼티입니다. */
+  /* 
+  	 배열의 0번째는 프로퍼티, 1번째부터는 프로퍼티 내 프로퍼티입니다.
+  	 차트를 위한 배열 
+  */
   
   var popWishList = ['flowPerAlleybiz','total_flow','male_flow','female_flow'];
   var dayWishList = ['flowPerAlleybiz','flow_sun', 'flow_mon','flow_tue','flow_wed','flow_thr','flow_fri','flow_sat'];
@@ -945,6 +948,15 @@
   var liveWishList = ['livingPerAlleybiz','totalLiving','maleLiving','femaleLiving','living10','living20','living30','living40','living50','living60'];
   var jobWishList = ['workerPerAlleybiz','total_work','male_work','female_work','work10','work20','work30','work40','work50','work60'];
   var lossWishList = ['outPerAlleybiz','food_out','cure_out','living_out','traffic_out','leisure_out','culture_out','edu_out','enjoy_out'];
+  
+  /*
+   * 차트 색깔 변수
+   */
+   
+   var chartbackcolor1 = '#2b90d9';
+   var chartbackcolor2 = '#ef5285';
+   var chartbackcolor3 = '#60c5ba';
+   
   
 </script>            
 
@@ -1729,21 +1741,21 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
             , datasets: [{
                 type: 'bar'
                 , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: '#2b90d9'
+                , backgroundColor: chartbackcolor1
                 , borderWidth: 2
                 , fill: false
                 , data: curMarketArr[0]
 			}, {
                 type: 'bar'
                 , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: '#ef5285'
+                , backgroundColor: chartbackcolor2
                 , data: curMarketArr[1]
                 , borderColor: 'white'
                 , borderWidth: 2
 			},{
                 type: 'bar'
                     , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                    , backgroundColor: '#ef5285'
+                    , backgroundColor: chartbackcolor3
                     , data: curMarketArr[2]
                     , borderColor: 'white'
                     , borderWidth: 2
@@ -1776,21 +1788,21 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
             , datasets: [{
                 type: 'bar'
                 , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: '#2b90d9'
+                , backgroundColor: chartbackcolor1
                 , borderWidth: 2
                 , fill: false
                 , data: dayCurDataArr[0]
 			}, {
                 type: 'bar'
                 , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: '#ef5285'
+                , backgroundColor: chartbackcolor2
                 , data: dayCurDataArr[1]
                 , borderColor: 'white'
                 , borderWidth: 2
 			},{
                 type: 'bar'
                     , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                    , backgroundColor: '#ef5285'
+                    , backgroundColor: chartbackcolor3
                     , data: dayCurDataArr[2]
                     , borderColor: 'white'
                     , borderWidth: 2
@@ -1822,21 +1834,21 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
              , datasets: [{
                  type: 'bar'
                  , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                 , backgroundColor: '#2b90d9'
+                 , backgroundColor: chartbackcolor1
                  , borderWidth: 2
                  , fill: false
                  , data: timeCurDataArr[0]
  			}, {
                  type: 'bar'
                  , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                 , backgroundColor: '#ef5285'
+                 , backgroundColor: chartbackcolor2
                  , data: timeCurDataArr[1]
                  , borderColor: 'white'
                  , borderWidth: 2
  			},{
                 type: 'bar'
                     , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                    , backgroundColor: '#ef5285'
+                    , backgroundColor: chartbackcolor3
                     , data: timeCurDataArr[2]
                     , borderColor: 'white'
                     , borderWidth: 2
@@ -1868,21 +1880,21 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
             , datasets: [{
                 type: 'bar'
                 , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: '#2b90d9'
+                , backgroundColor: chartbackcolor1
                 , borderWidth: 2
                 , fill: false
                 , data: ageCurDataArr[0]
 			}, {
                 type: 'bar'
                 , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: '#ef5285'
+                , backgroundColor: chartbackcolor2
                 , data: ageCurDataArr[1]
                 , borderColor: 'white'
                 , borderWidth: 2
 			}, {
                 type: 'bar'
                     , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                    , backgroundColor: '#ef5285'
+                    , backgroundColor: chartbackcolor3
                     , data: ageCurDataArr[2]
                     , borderColor: 'white'
                     , borderWidth: 2
@@ -1913,21 +1925,21 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
             , datasets: [{
                 type: 'bar'
                 , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: '#2b90d9'
+                , backgroundColor: chartbackcolor1
                 , borderWidth: 2
                 , fill: false
                 , data: liveCurDataArr[0]
 			}, {
                 type: 'bar'
                 , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: '#ef5285'
+                , backgroundColor: chartbackcolor2
                 , data: liveCurDataArr[1]
                 , borderColor: 'white'
                 , borderWidth: 2
 			}, {
                 type: 'bar'
                 , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                , backgroundColor: '#60c5ba'
+                , backgroundColor: chartbackcolor3
                 , data: liveCurDataArr[2]
                 , borderColor: 'white'
                 , borderWidth: 2
@@ -1957,21 +1969,21 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
              , datasets: [{
                  type: 'bar'
                  , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                 , backgroundColor: '#2b90d9'
+                 , backgroundColor: chartbackcolor1
                  , borderWidth: 2
                  , fill: false
                  , data: jobCurDataArr[0]
  			}, {
                  type: 'bar'
                  , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                 , backgroundColor: '#ef5285'
+                 , backgroundColor: chartbackcolor2
                  , data: jobCurDataArr[1]
                  , borderColor: 'white'
                  , borderWidth: 2
  			}, {
                  type: 'bar'
                  , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                 , backgroundColor: '#60c5ba'
+                 , backgroundColor: chartbackcolor3
                  , data: jobCurDataArr[2]
                  , borderColor: 'white'
                  , borderWidth: 2
@@ -1999,21 +2011,21 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
             , datasets: [{
                 type: 'bar'
                 , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: '#2b90d9'
+                , backgroundColor: chartbackcolor1
                 , borderWidth: 2
                 , fill: false
                 , data: lossCurDataArr[0]
 			}, {
                 type: 'bar'
                 , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: '#ef5285'
+                , backgroundColor: chartbackcolor2
                 , data: lossCurDataArr[1]
                 , borderColor: 'white'
                 , borderWidth: 2
 			}, {
                 type: 'bar'
                 , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                , backgroundColor: '#60c5ba'
+                , backgroundColor: chartbackcolor3
                 , data: lossCurDataArr[2]
                 , borderColor: 'white'
                 , borderWidth: 2
@@ -2034,7 +2046,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
         });
     }  
         
-    /* 차트 만드는 기능 */
+    /* 차트 만드는 기능 : 호준 */
     
     function makeAllChart(){
     	         makePopChart(topThreeList,popWishList);
