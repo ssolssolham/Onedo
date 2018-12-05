@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <header>
@@ -11,6 +12,13 @@
           <a href="/"> <img
             src="${pageContext.request.contextPath}/resources/images/icons/logo.png" alt="IMG-LOGO" data-logofixed="${pageContext.request.contextPath}/resources/images/icons/logo.png">
           </a>
+          
+          <div class="welcome" style="display: inline;">
+              <sec:authentication property="principal" var="member"/>
+                <sec:authorize access="isAuthenticated()">
+                    <h3> ${member.username}님, 환영합니다.</h3>
+                </sec:authorize>
+          </div>
         </div>
         
         <!-- 상단 Nav 바 Menu -->
@@ -18,7 +26,12 @@
           <nav class="menu">
             <ul class="main_menu">
               <li><a href="/">Home</a></li>
-              <li><a href="/analysis/">분석하기</a></li>
+              <sec:authorize access="isAnonymous()">
+                <li><a href="/member/loginForm">분석하기</a></li>
+              </sec:authorize>
+              <sec:authorize access="isAuthenticated()">
+                  <li><a href="/analysis/">분석하기</a></li>
+              </sec:authorize>
               <li><a href="/qna/">이용 문의</a></li>
               <li><a href="/review/list">이용 후기</a></li>
             <!-- 로그인 안했을 경우 -->

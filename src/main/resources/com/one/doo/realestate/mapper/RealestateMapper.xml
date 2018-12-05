@@ -5,9 +5,10 @@
 <mapper namespace="com.one.doo.realestate.mapper.RealestateMapper">
 
 	<!-- // 추천된 해당 골목상권의 동 안에 있는 부동산 중개사만 불러오기(상일)  -->
+	<!-- budongsan에서 realestate로 바꿈 : 호준 -->
 	<select id="getRealestateList" resultType="map">
 		SELECT DISTINCT agent_name, agent_address 
-		FROM   budongsan 
+		FROM   realestate 
 		WHERE  agent_address LIKE '%' 
 		                          || Regexp_replace((SELECT ac.areacode_name 
 		                                             FROM   areacodes ac 
@@ -24,7 +25,7 @@
 	<select id="read"
 		resultType="com.one.doo.realestate.domain.Realestate">
 		SELECT * 
-		FROM   budongsan 
+		FROM   realestate 
 		WHERE  agent_address LIKE '%' 
 		                          || Regexp_replace((SELECT ac.areacode_name 
 		                                             FROM   areacodes ac 
