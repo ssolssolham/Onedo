@@ -79,6 +79,8 @@
 	<mybatis-spring:scan base-package="com.one.doo.salespercobb.mapper"/>
 	<mybatis-spring:scan base-package="com.one.doo.storeperalleybiz.mapper"/>
 	<mybatis-spring:scan base-package="com.one.doo.workerperalleybiz.mapper"/>
+
+	
 	
 	<!-- 서비스등록 -->	
 	<context:component-scan base-package="com.one.doo.analysis.service"/>
