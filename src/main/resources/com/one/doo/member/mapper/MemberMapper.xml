@@ -9,14 +9,11 @@
 			<foreach item='type' collection="typeArr">
 				<trim prefix="OR">
 					<choose>
-						<when test="type == 'T'.toString()">
-							title like '%'||#{keyword}||'%'
+						<when test="type == 'I'.toString()">
+							mem.userid like '%'||#{keyword}||'%'
 						</when>
-						<when test="type == 'C'.toString()">
-							title like '%'||#{keyword}||'%'
-						</when>
-						<when test="type == 'W'.toString()">
-							title like '%'||#{keyword}||'%'
+						<when test="type == 'N'.toString()">
+							mem.username like '%'||#{keyword}||'%'
 						</when>
 					</choose>
 				</trim>
@@ -29,17 +26,16 @@
 		<result property="auth" column="auth" />
 	</resultMap>
 
-	<resultMap type="com.one.doo.member.domain.Member"
-		id="memberMap">
-		<id property="userid" column="userid" />
-		<result property="userid" column="userid" />
-		<result property="userpw" column="userpw" />
-		<result property="userName" column="username" />
-		<result property="regDate" column="regdate" />
-		<result property="updateDate" column="updatedate" />
-		<result property="email" column="email" />
-		<collection property="authList" resultMap="authMap">
-		</collection>
+	<resultMap type="com.one.doo.member.domain.Member" id="memberMap">
+		<id 		property="userid" 		column="userid" />
+		<result 	property="userid" 		column="userid" />
+		<result 	property="userpw" 		column="userpw" />
+		<result 	property="userName" 	column="username" />
+		<result 	property="regDate" 		column="regdate" />
+		<result 	property="updateDate" 	column="updatedate" />
+		<result 	property="enabled" 		column="enabled"/>
+		<result 	property="email" 		column="email" />
+		<collection property="authList" resultMap="authMap"/>
 	</resultMap>
 
 
@@ -63,9 +59,9 @@
 
 	<select id="getListWithCri" resultMap="memberMap">
 		<![CDATA[
-		SELECT mem.userid,  userpw, username, enabled, regdate, updatedate, auth 
+		SELECT userid, userpw, username, enabled, regdate, updatedate, auth 
 		FROM (SELECT /* + INDEX_DESC(tbl_board pk board) */
-					rownum rn, mem.userid,  userpw, username, enabled, regdate, updatedate, auth
+					rownum rn, mem.userid,  mem.userpw, mem.username, mem.enabled, mem.regdate, mem.updatedate, auth
 					FROM 
 	  	users mem LEFT OUTER JOIN userauths auth on mem.userid = auth.userid 
 					WHERE 	]]>
