@@ -108,7 +108,7 @@
               </select> <input type="hidden" id="useremail" name="email">
             </div>
             <br>
-            <div class="form-group">
+            <div class="form-group" id="emailDiv">
               <!-- <input type="text" class="display-i form-control width-40" placeholder="직접입력" required="required" style="padding-left:10px;"> -->
 
               <input type="text" id="certifyCodeInput"
@@ -137,9 +137,9 @@
   </div>
 </section>
 
-  <!-- footer include 시작 -->
+  <%-- <!-- footer include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/footer.jsp"/>
-  <!-- footer include 종료 -->
+  <!-- footer include 종료 --> --%>
 
 <script type="text/javascript">
 // 아이디, 패스워드 찾기 전송
@@ -152,8 +152,7 @@ $('#findInfo').click(function(){
 })
 </script>
 <!-- 회원가입관련 javascript -->
-<!-- 모달띄우고 form제출 -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 // before submit, make phoneNum, email
 function beforeSubmit() {
   var memberEmail = $('#email').val() + '@'
@@ -161,12 +160,15 @@ function beforeSubmit() {
   $('#useremail').val(memberEmail);
 }
 </script>  
-
+ -->
 <script>
 // 아이디 중복확인을 위한 비동기
 $(function() {
-   // id체크여부
-   var idck = 0;
+   	// id체크여부
+   	var idck = false;
+   	var emailck = false;
+	var target = $('#snackbar');
+   
    
    // idDup버튼 클릭 시, 비동기로 아이디 중복확인
    $('#dupCheck').on('click', function() {
@@ -179,16 +181,18 @@ $(function() {
          success : function(data) {
             //비동기 성공 시
             if(data.cnt > 0){
-               alert("중복!");
-               $('#userid').val("");
-               $('#userid').focus();
+            	target.text('중복된 아이디 입니다. 다른 아이디를 입력해 주세요:(');
+            	toast();
+               	$('#userid').val("");
+               	$('#userid').focus();
             }else{
-               alert("사용가능!");
-               $('#userid').val(userid);
-               $('#userid').attr('readonly', 'readonly');
-               $('#dupCheck').attr('disabled', 'disabled');
-               $('#userpw').focus();
-               idck = 1;
+				target.text('사용가능한 아이디 입니다:D');
+				toast();
+               	$('#userid').val(userid);
+               	$('#userid').attr('readonly', 'readonly');
+               	$('#dupCheck').attr('disabled', 'disabled');
+               	$('#userpw').focus();
+               	idck = true;
             }
          },
          error : function(error) {
@@ -199,9 +203,13 @@ $(function() {
 });
 
 // email과 emailHost 연결
-$(function(){
+
+
+   // 인증버튼클릭으로 생성된 임의의 코드저장할 변수
+   var code;
+
    $('#emailCertify').on('click', function() {
-      
+	  var target = $('#snackbar');
       // email값 비동기로 전송
       var useremail = $('#email').val()+'@'+$('#emailHost').val();
       console.log("이메일값: "+$('#email').val());
@@ -209,39 +217,47 @@ $(function(){
       
       //이메일 입력 안했을경우 return
       if($('#email').val().trim() === ''){
-         console.log("이메일입력안함");
-         alert('이메일을 입력해 주세요');
+         target.text('이메일을 입력해 주세요!');
+         toast();
          return;
       }
-      
-      $('#useremail').val(useremail);
-      // 인증버튼클릭으로 생성된 임의의 코드저장할 변수
-      var code;
-      
+      $('#useremail').val(useremail); //form submit에 보내질 변수 설정(hidden)
+
+      // 비동기통신을통해 이메일전송
       $.ajax({
          type : 'GET',
          url : "/member/emailCertify/"+useremail,
          dataType : "json",
          success : function(data) {
-            alert("비동기 성공.."+data.code+"인증번호를 보냈습니다. 확인 후 입력해주세요");
-            // 코드확인도 비동기 필요...
-            code = data.code;
+        	target.text('인증번호를 보냈습니다. 확인 후 입력해 주세요:)');
+      		toast(); 
+			// 메일로 보낸 코드값 변수로 저장
+      		code = data.code;
             console.log(code);
-            // 코드입력란 활성화, focus
+            // 코드입력란 활성화, focus, 기존 이메일인증버튼 display none, 새 버튼 생성
             $('#certifyCodeInput').removeAttr('disabled');
             $('#certifyCodeInput').focus();
-            $('#emailCertify').text('확인');
-            $('#emailCertify').attr('id', 'checkCertify');
-		  	 $('#checkCertify').on('click', function() {
+            $('#emailCertify').css('display', 'none');
+            
+            // 코드확인을 위한 새 버튼 생성 및 위치시켜주기
+            var emailDiv = $('#emailDiv');
+            var $certifyBtn = $("<button type='button' id='checkCertify' class='display-i btn btn-primary btn-block btn-lg width-37 height-40' style='width:38%; vertical-align: bottom; display:inline;'>확인</button>");
+			$certifyBtn.appendTo(emailDiv);   
+			$('#checkCertify').on('click', function(e) {
 				var inputCode = $('#certifyCodeInput').val();
+				alert();
 				// 코드값 입력 안했을 경우
 				if(inputCode === ''){
-					alert('메일로 전송된 코드값을 입력해 주세요!');
+					target.text('메일로 전송된 코드값을 입력해 주세요!');
+					toast();
 				}
 				else if(inputCode == code){
-					alert('인증되었습니다:D');
+					target.text('인증이 완료되었습니다! 회원가입을 계속 진행해 주세요:D');
+					toast();
+					console.log("인증성공경우!!!!")
 					$('#certifyCodeInput').attr('readonly', 'readonly');
 					$('#checkCertify').attr('disabled','disabled');
+					emailck = true;
 				}
 			});
          },
@@ -251,10 +267,7 @@ $(function(){
          }
       });
    });
-   
-});
 
-// 이메일인증코드값 확인
 
 
 
@@ -292,6 +305,10 @@ $(function(){
 <!--===============================================================================================-->
 <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 <!--===============================================================================================-->
+<script src="${pageContext.request.contextPath}/resources/js/toastMessage.js"></script>
+<!--===============================================================================================-->
 
+<!-- 토스트메세지 -->
+<div id="snackbar"></div>
 </body>
 </html>
