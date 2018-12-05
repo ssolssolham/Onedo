@@ -5,15 +5,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
-<!-- security적용이 필요없는 파일 설정 -->
-<!-- <security:http pattern="/**/*.scss" security="none"/>
-<security:http pattern="/**/*.js" security="none"/>
-<security:http pattern="/**/*.css" security="none"/>
-<security:http pattern="/images/*.jpg" security="none"/>
-<security:http pattern="/images/*.gif" security="none"/>
-<security:http pattern="/../resources/**" security="none"/> -->
-
 <!-- security에 사용되는 handler bean등록 -->
 <bean class="com.one.doo.common.security.CustomAccessDeniedHandler" 
 	  id="customAccessDeniedHandler" />
@@ -27,6 +18,7 @@
 	  id="bcryptPasswordEncoder"/>
 
 <!-- security제외 매핑 -->
+<security:http pattern="/noticePop"				security="none"/>
 <!--  <security:http pattern="/login"                 security="none" />-->
 <!-- <security:http pattern="/member/*" 				security="none" /> -->
 <security:http pattern="/resources/**/*"        security="none" />

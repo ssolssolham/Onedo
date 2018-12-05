@@ -11,7 +11,9 @@
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/headTagConfig.jsp"/>
   <!-- header include 종료 -->
 </head>
-<body class="animsition" style="overflow-y: hidden; overflow-x: hidden;">
+
+<body onload="window.open('/noticePop','','width=500px, height=300px, left=0px, top=0px, toolbar=0, status=yes, menubars=0, scrollbars=0, resizable=0, location=0, directories=0')" 
+		class="animsition" style="overflow-y: hidden; overflow-x: hidden;">
 
   <!-- header include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/header.jsp"/>
@@ -20,16 +22,6 @@
   <!-- asideMenu include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/asideMenu.jsp"/>
   <!-- asideMenu include 종료 -->
-
-<%--   <!-- 로그인 모달 include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/modal/loginModal.jsp"/>
-  <!-- 로그인 모달 include 종료 -->
-
-  <!-- 회원가입 모달 include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/modal/registModal.jsp"/>
-  <!-- 회원가입 모달 include 종료 -->
- --%>
-   
   <!-- 메인페이지 슬라이드쇼 -->
   <section class="section-slide">
     <div class="wrap-slick1">
@@ -58,7 +50,6 @@
     <!-- 메인 페이지 이미지 슬라이드 토글 -->
     <div class="wrap-slick1-dots"></div>
   </section>
-
 
   <!-- footer include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/footer.jsp"/>
@@ -104,19 +95,6 @@
 <!-- 모달 javascript -->
 <script src="${pageContext.request.contextPath}/resources/js/modal.js"></script>
 
-<!-- 회원가입관련 javascript -->
-<!-- 모달띄우고 form제출 -->
-<script type="text/javascript">
-// before submit, make phoneNum, email
-function beforeSubmit() {
-  var memberPhoneNum = $('#memberPhone1').val()
-      + $('#memberPhone2').val() + $('#memberPhone3').val();
-  $('#memberPhoneNum').val(memberPhoneNum);
-  var memberEmail = $('#email').val() + '@'
-      + $('#emailHost').val();
-  $('#memberEmail').val(memberEmail);
-}
-</script> 
 <!-- 로그아웃 -->
 <script type="text/javascript">
 function logoutFormSubmit() {
