@@ -1,7 +1,5 @@
 package com.one.doo.review.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.springframework.http.HttpStatus;
