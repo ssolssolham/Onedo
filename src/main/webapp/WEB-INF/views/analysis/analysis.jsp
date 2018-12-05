@@ -928,7 +928,7 @@
 		  /* 차트에 사용할 배열 만들기 */
 		  var result = new Array();
 		  
-		  if(getPropStep(topDataList[i],wishList[0]) == null){
+		  if(getPropStep(topDataList,wishList[0]) == null){
 			  for(var j = 1; j < wishList.length; j++){
 				  /* 결과값이 없으면 0을 넣어줍니다.*/
 				  result.push(0);
@@ -946,7 +946,6 @@
 		  
 	  }
 	  
-	  console.log(resultArr);
 	  return resultArr;
   }
   
@@ -962,6 +961,7 @@
   var liveWishList = ['livingPerAlleybiz','totalLiving','maleLiving','femaleLiving','living10','living20','living30','living40','living50','living60'];
   var jobWishList = ['workerPerAlleybiz','total_work','male_work','female_work','work10','work20','work30','work40','work50','work60'];
   var lossWishList = ['outPerAlleybiz','food_out','cure_out','living_out','traffic_out','leisure_out','culture_out','edu_out','enjoy_out'];
+  var survivalWishList = ['survival1','survival1_2','survival2_3','survival3_5','survival5'];
   
   /*
    * 차트 색깔 변수
@@ -974,86 +974,6 @@
   
 </script>            
 
-<!--===============================================================================================-->
-	<script type="text/javascript">
-	/*
-	 오류로 인한 주석처리
-		var ctxBar = document.getElementById("myBarChart").getContext('2d');
-		var myBarChart = new Chart(ctxBar, {
-			type: 'bar'
-			, data: {
-				labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"]
-				, datasets: [{
-					label: '# of Votes'
-					, data: [12, 19, 3, 5, 2, 3]
-					, backgroundColor: [
-				'rgba(255, 99, 132, 0.2)'
-				, 'rgba(54, 162, 235, 0.2)'
-				, 'rgba(255, 206, 86, 0.2)'
-				, 'rgba(75, 192, 192, 0.2)'
-				, 'rgba(153, 102, 255, 0.2)'
-				, 'rgba(255, 159, 64, 0.2)'
-			]
-					, borderColor: [
-				'rgba(255,99,132,1)'
-				, 'rgba(54, 162, 235, 1)'
-				, 'rgba(255, 206, 86, 1)'
-				, 'rgba(75, 192, 192, 1)'
-				, 'rgba(153, 102, 255, 1)'
-				, 'rgba(255, 159, 64, 1)'
-			]
-					, borderWidth: 1
-		}]
-			}
-			, options: {
-				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero: true
-						}
-			}]
-				}
-			}
-		});
-		var ctxLine = document.getElementById("myLineChart").getContext('2d');
-		var myLineChart = new Chart(ctxLine, {
-			type: 'line'
-			, data: {
-				labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"]
-				, datasets: [{
-					label: '# of Votes'
-					, data: [12, 19, 3, 5, 2, 3]
-					, backgroundColor: [
-				'rgba(255, 99, 132, 0.2)'
-				, 'rgba(54, 162, 235, 0.2)'
-				, 'rgba(255, 206, 86, 0.2)'
-				, 'rgba(75, 192, 192, 0.2)'
-				, 'rgba(153, 102, 255, 0.2)'
-				, 'rgba(255, 159, 64, 0.2)'
-			]
-					, borderColor: [
-				'rgba(255,99,132,1)'
-				, 'rgba(54, 162, 235, 1)'
-				, 'rgba(255, 206, 86, 1)'
-				, 'rgba(75, 192, 192, 1)'
-				, 'rgba(153, 102, 255, 1)'
-				, 'rgba(255, 159, 64, 1)'
-			]
-					, borderWidth: 1
-		}]
-			}
-			, options: {
-				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero: true
-						}
-			}]
-				}
-			}
-		});
-		*/
-	</script>
 <!--===============================================================================================-->
 <!-- 다음 지도 API Script -->
 <!-- services와 clusterer, drawing 라이브러리 불러오기 -->
@@ -2057,7 +1977,55 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
             }
         });
     }  
-        
+    
+    function makeMartChart(topThreeList,survivalWishList){
+    	var martCurDataArr = makeDataArr(topThreeList,survivalWishList);
+    	
+   	 // 상권 상세 정보 분석 탭 두번째 Chart들
+       var martRunningTime = document.getElementById('martRunningTimeChart').getContext('2d');
+       var martRunningTimeChart = new Chart(martRunningTime, {
+           // The type of chart we want to create
+           type: 'line', // The data for our dataset
+           data: {
+               labels: ["2013", "2014", "2015", "2016", "2017", "2018"]
+               , datasets: [{
+                   label: topThreeList[0].alleyBiz.alleybizCode_Name
+                   , backgroundColor: 'rgb(255, 99, 132)'
+                   , borderColor: 'rgb(255, 99, 132)'
+                   , data: martCurDataArr[0]
+       },{
+           label: topThreeList[1].alleyBiz.alleybizCode_Name
+               , backgroundColor: 'rgb(255, 99, 132)'
+               , borderColor: 'rgb(255, 99, 132)'
+               , data: martCurDataArr[1]
+   },{
+       label: topThreeList[2].alleyBiz.alleybizCode_Name
+           , backgroundColor: 'rgb(255, 99, 132)'
+           , borderColor: 'rgb(255, 99, 132)'
+           , data: martCurDataArr[2]
+}]
+           }, // Configuration options go here
+           options: {}
+       });
+   }
+  
+   function makeSumMartChart(){
+   	var sumMart = document.getElementById('sumMartChart').getContext('2d');
+       var sumMartChart = new Chart(sumMart, {
+           // The type of chart we want to create
+           type: 'line', // The data for our dataset
+           data: {
+               labels: ["01", "02", "03", "04", "05", "06"]
+               , datasets: [{
+                   label: "월별 점포 수"
+                   , backgroundColor: 'rgb(255, 99, 132)'
+                   , borderColor: 'rgb(255, 99, 132)'
+                   , data: [0, 10, 5, 2, 20, 30]
+       }]
+           }, // Configuration options go here
+           options: {}
+       });
+   }     
     /* 차트 만드는 기능 : 호준 */
     
     function makeAllChart(){
@@ -2068,6 +2036,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	        	 makeLiveChart(topThreeList,liveWishList);
 	        	 makeJobChart(topThreeList,jobWishList);
 	        	 makeLossChart(topThreeList,lossWishList);
+	        	 makeMartChart(topThreeList,survivalWishList);
     }
     </script>
     
