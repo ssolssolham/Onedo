@@ -652,13 +652,13 @@
                                       <div id="innerContainer">
                                         <div id="innerContent">
                                          <!-- 신용대출 부분 -->
-                                          <div id="creditLoan" class="card-body" style="">
+                                          <div id="creditLoan" class="card-body" onsubmit="return checkCreditLoanForm()">
                                           
-                                                                                      <!-- 대출 금액 입력 받는 부분 -->
+                                   <!-- 대출 금액 입력 받는 부분 -->
                                             <div style="font-size: 0.8em; color: darkgray;">금리산출을 위한 질문</div>
                                             <div class="fs-20"><b>필요하신 대출금액은 얼마인가요?</b><span style="color: orangered;">&nbsp;*</span></div>
                                             <div class="form-group" style="width: 100%; font-size: 1.2em;">
-                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="number" id="inputBorrowMoney1"/> 
+                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="text" id="inputBorrowMoney1"/> 
                                               <span style="font-size: 25px; width: 10%;">만원</span>
                                             </div>
                                             <div class="inputBorrowMoney1" id="BorrowMoney1">
@@ -668,6 +668,46 @@
                                               <button class="analysisBtn1" value="3000">3000만</button>
                                               <button class="analysisBtn1" value="5000">5000만</button>
                                               <button class="analysisBtn1" value="10000">1억</button>
+                                            </div>
+                                            <br>
+                                          
+                                        <!-- 연소득 입력 -->
+                                            <div style="font-size: 0.8em; color: darkgray;">한도산출을 위한 질문</div>
+                                            <div class="fs-20"><b>연 소득은 얼마인가요?</b><span style="color: orangered;">&nbsp;*</span></div>
+                                            <div class="form-group" style="width: 100%; font-size: 1.2em;">
+                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="text" id="inputYearMoney1" required/> <span style="font-size: 25px; width: 10%;">만원</span>
+                                            </div>
+                                            <div class="inputYearMoney1">
+                                              <button class="analysisBtn2" value="300">300만</button>
+                                              <button class="analysisBtn2" value="500">500만</button>
+                                              <button class="analysisBtn2" value="1000">1000만</button>
+                                              <button class="analysisBtn2" value="3000">3000만</button>
+                                              <button class="analysisBtn2" value="5000">5000만</button>
+                                              <button class="analysisBtn2" value="10000">1억</button>
+                                            </div>
+                                            <br>
+                                          
+                                           <!-- 직업 선택 Select -->
+                                            <div style="font-size: 0.8em; color: darkgray; clear: both;">대출대상을 위한 질문</div>
+                                            <div class="fs-20"><b>현재 직업을 선택해주세요</b><span style="color: orangered;">&nbsp;*</span></div>
+                                            <select class="form-control" style="height: 40px; display: inline-block;" id="creditJobSelect1">
+                                              <option value="1">일반 회사원</option>
+                                              <option value="2">자영업자/프리랜서</option>
+                                              <option value="3">군인/군무원/임관(예정)자</option>
+                                              <option value="4">경찰/소속공무원/임관(예정)자</option>
+                                              <option value="5">공무원</option>
+                                              <option value="6">의료계 직종</option>
+                                              <option value="7">교직원</option>
+                                              <option value="8">무직</option>
+                                              <option value="9">기타(연금 수령자 등)</option>
+                                              <option value="10">전문직</option>
+                                            </select>
+                                            <br>
+                                            <br>
+                                            <div id="creditWorkingPeriod1" class="dis-none">
+                                              <div class="fs-20"><b>재직(사업영위)기간을 입력하세요.</b><span style="color: orangered; font-size:10px;">&nbsp;(선택사항)</span></div>
+                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" id="inputTermService1" type="text" /> 
+                                              <span style="font-size: 25px; width: 10%;">개월</span> 
                                             </div>
                                             <br>
                                           
@@ -688,82 +728,48 @@
                                               <option value="10">10등급</option>
                                             </select>
                                             <br>
-                                            <br>
-                                            <!-- 직업 선택 Select -->
-                                            <div style="font-size: 0.8em; color: darkgray; clear: both;">금리산출을 위한 질문</div>
-                                            <div class="fs-20"><b>현재 직업을 선택해주세요</b><span style="color: orangered;">&nbsp;*</span></div>
-                                            <select class="form-control" style="height: 40px; display: inline-block;" id="creditJobSelect1">
-                                              <option value="1">일반 회사원</option>
-                                              <option value="2">자영업자/프리랜서</option>
-                                              <option value="3">군인/군무원/임관(예정)자</option>
-                                              <option value="4">경찰/소속공무원/임관(예정)자</option>
-                                              <option value="5">공무원</option>
-                                              <option value="6">의료계 직종</option>
-                                              <option value="7">교직원</option>
-                                              <option value="8">무직</option>
-                                              <option value="9">기타(연금 수령자 등)</option>
-                                              <option value="10">전문직</option>
-                                            </select>
-                                            <br>
-                                            <br>
-                                            <div id="creditWorkingPeriod1" class="dis-none" style="display:none">
-                                              <div class="fs-20"><b>재직(사업영위)기간을 입력하세요</b><span style="color: orangered;">&nbsp;*</span></div>
-                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="number" /> 
-                                              <span style="font-size: 25px; width: 10%;">개월</span> 
-                                            </div>
-                                            <br>
-
-                                            <!-- 연소득 입력 -->
-                                            <div style="font-size: 0.8em; color: darkgray;">한도산출을 위한 질문</div>
-                                            <div class="fs-20"><b>연 소득은 얼마인가요?</b><span style="color: orangered;">&nbsp;*</span></div>
-                                            <div class="form-group" style="width: 100%; font-size: 1.2em;">
-                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="number" id="inputYearMoney1"/> <span style="font-size: 25px; width: 10%;">만원</span>
-                                            </div>
-                                            <div class="inputYearMoney1">
-                                              <button class="analysisBtn2" value="300">300만</button>
-                                              <button class="analysisBtn2" value="500">500만</button>
-                                              <button class="analysisBtn2" value="1000">1000만</button>
-                                              <button class="analysisBtn2" value="3000">3000만</button>
-                                              <button class="analysisBtn2" value="5000">5000만</button>
-                                              <button class="analysisBtn2" value="10000">1억</button>
-                                            </div>
+                                            
                                             
                                           <form id="selectCreditLoanForm" action="/loan/list" method="get">
-                                            <div class="card-body" style="padding-top: 10px; padding-bottom: 10px; margin-left: 20px; margin-right: 20px;">
+                                            <div class="card-body loan" style="padding-top: 10px; padding-bottom: 10px; margin-left: 20px; margin-right: 20px; display: none">
                                               <div style="width: 100%; height: 3px; background-color: #27b2a5">&nbsp;</div>
                                               
                                               <input type="hidden" name="loanCategory" value="신용"/>
                                               
-                                              <div><b>대출 희망 금액</b></div>
+                                              <div id="showBorrowMoney1" ><b>대출 희망 금액</b>
                                               <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeBorrowMoney1"></b><b>만원</b></div>
-                                              <input type="hidden" name="requiredMoney" value='<c:out value="${param.requiredMoney}"/>'>
+                                              <input type="hidden" name="requiredMoney" ></div>
                                               
-                                              <div><b>직업</b></div>
-                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeJob1"></b></div>
-                                              <input type="hidden" name="targetNum" value='<c:out value="${param.targetNum}"/>'>
-                                              
-                                             <div><b>연 소득</b></div>
+                                              <div id="showYearMoney1" ><b>연 소득</b>
                                               <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeYearMoney1"></b><b>만원</b></div>
-                                              <input type="hidden" name="">
-                                             </div>
+                                              <input type="hidden" name="yearMoney"></div>
                                               
-                                              <div><b>예상 이율</b></div>
+                                              <div id="showJob1" ><b>직업</b>
+                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeJob1"></b></div>
+                                              <input type="hidden" name="targetNum"></div>
+                                              
+                                              <div id="showTermService1" style="display:none;"><b>재직기간</b>
+                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeTerm1"></b></div>
+                                              <input type="hidden" name="termService" value="0"></div>
+                                              
+                                              <div id="showRate1" ><b>예상 이율</b>
                                               <div style="color: #27b2a5; font-size: 20px; font-weight: bold; text-align: right;"><b id="takeRate1"></b><b>%</b></div>
-                                              <input type="hidden" name="resultRate" value='<c:out value="${param.resultRate}"/>'>
-                                              
+                                              <input type="hidden" name="resultRate" ></div>
+                                          </div>
 <!--                                               <div><b>예상 한도</b></div>
                                               <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeCreditLine1"></b><b>만원</b></div> -->
                                               
                                              <div class="t-center">
                                               <br>
-                                              <input type="submit" style="width:60%;" value="대출연계하기" class="loanSubmitBtn">  
+                                              <input type="submit" style="width:40%;" value="대출조회" class="loanSubmitBtn">  
+                                              <input type="submit" style="width:40%; background-color: gray" value="초기화">  
                                              </div>
                                           </form>
                                           </div>
                                           
                                           
                                           <!-- 담보대출 부분 -->
-                                        <div id="guaranteeLoan" class="card-body" style="display: none;">
+                                        <div id="guaranteeLoan" class="card-body loan" style="display: none;">
                                      <!-- 대출 금액 입력 받는 부분 -->
                                             <div style="font-size: 0.8em; color: darkgray;">금리산출을 위한 질문</div>
                                             <div class="fs-20"><b>필요하신 대출금액은 얼마인가요?</b><span style="color: orangered;">&nbsp;*</span></div>
@@ -817,7 +823,14 @@
                                             <br>
                                             <div id="guaranteeWorkingPeriod2" class="dis-none">
                                               <div class="fs-20"><b>재직(사업영위)기간을 입력하세요</b><span style="color: orangered;">&nbsp;*</span></div>
-                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="text" /> <span style="font-size: 25px; width: 10%;">개월</span> 
+                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="text"  value="0"  /> <span style="font-size: 25px; width: 10%;">개월</span>
+                                              <div class="inputWokingPeriod">
+                                                  <button class="analysisBtn3" value="300">1년</button>
+                                                  <button class="analysisBtn3" value="500">2년</button>
+                                                  <button class="analysisBtn3" value="1000">3년</button>
+                                                  <button class="analysisBtn3" value="3000">5년</button>
+                                                  <button class="analysisBtn3" value="5000">10년</button>
+                                            </div> 
                                             </div>
                                             <br>
                                             
@@ -841,19 +854,19 @@
                                               
                                                <div><b>제공 담보</b></div>
                                               <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeSecurity"></b></div>
-                                              <input type="hidden" name="securityType" value='<c:out value="${param.securityType}"/>'>
+                                              <input type="hidden" name="securityType">
                                               
                                               <div><b>대출 희망 금액</b></div>
                                               <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeBorrowMoney2"></b><b>만원</b></div>
-                                              <input type="hidden" name="requiredMoney" value='<c:out value="${param.requiredMoney}"/>'>
+                                              <input type="hidden" name="requiredMoney">
                                               
                                               <div><b>직업</b></div>
                                               <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeJob2"></b></div>
-                                              <input type="hidden" name="targetNum" value='<c:out value="${param.targetNum}"/>'>
+                                              <input type="hidden" name="targetNum" >
 
                                               <div><b>예상 이율</b></div>
                                               <div style="color: #27b2a5; font-size: 20px; font-weight: bold; text-align: right;"><b id="takeRate2">3</b><b>%</b></div>
-                                              <input type="hidden" name="resultRate" value='<c:out value="${param.resultRate}"/>'>
+                                              <input type="hidden" name="resultRate" >
                                               
 <!--                                               <div><b>예상 한도</b></div>
                                               <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeCreditLine2"></b><b>만원</b></div> -->
@@ -861,7 +874,8 @@
                                              </div>
                                              <div class="t-center">
                                               <br>
-                                              <input type="submit" style="width:60%;" value="대출연계하기" id="loanSubmitBtn2">  
+                                              <input type="submit" style="width:60%;" value="대출연계하기" id="loanSubmitBtn2">
+                                              <input type="reset" style="width:60%; background-color: gray" value="초기화">  
                                              </div>
                                           </form>
                                             
@@ -1001,7 +1015,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	
 	var coords;
 	</script>
-    <script type="text/javascript">
+<script type="text/javascript">
      // 동 필터 선택 시 보이는 효과
     $('.js-show-filter').on('click',function(){
         $(this).toggleClass('show-filter');
@@ -1157,7 +1171,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	});
         </script>
 <!--===============================================================================================-->        
-    <script type="text/javascript">
+<script type="text/javascript">
     // 초기화 버튼 클릭 시, 발생하는 이벤트
     // 필터에서 active 되어 있던 버튼들 모두 초기화
     $('#resetFilterBtn').click(function() {
@@ -1310,7 +1324,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     
     </script>
 <!--===============================================================================================-->    
-    <script type="text/javascript">
+<script type="text/javascript">
     // 분석 결과 리포트 탭 메뉴 클릭 시, 활성화 구현
         $('#primary a').click(function(){
             $('#primary a').removeClass('active');
@@ -1347,9 +1361,8 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
       });
       </script>
 <!--===============================================================================================-->      
-    
 <!--===============================================================================================-->    
-    <script type="text/javascript">
+<script type="text/javascript">
         // 0 ~ 25 : 매우위험, 26 ~ 50 : 위험, 51 ~ 75 : 보통, 76 ~ 100 : 좋음
         // 백그라운드 컬러 배열
         var backCol = new Array();
@@ -1683,7 +1696,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
         });
     </script>
     
-    <script type="text/javascript">
+<script type="text/javascript">
     // 상권 상세 분석에 들어가는 chart 종류
         var curMarketArr = new Array();
         var anotherMarketArr = new Array();
@@ -2111,7 +2124,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
         });
     </script>
     
-    <script>
+<script>
     // 상권 상세 정보 분석 탭 두번째 Chart들
         var martRunningTime = document.getElementById('martRunningTimeChart').getContext('2d');
         var martRunningTimeChart = new Chart(martRunningTime, {
@@ -2219,11 +2232,137 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
             }
         });
     </script>
+
+
+<!-- 유효성 검증 시 focus input tag 색 변경  -->
+<!-- <script>
+	$(document).ready(function() {
+		$("input[type=text]").focus(function() {
+			$(this).css("border", "1px solid red");
+		});
+
+		$("input[type=text]").blur(function() { //포커스잃으면 이벤트 발생
+			$(this).css("border", "1px");
+			$(this).css("background-color", "white");
+		});
+	});
+</script> -->
     
-    <script type="text/javascript">
-    /**
-     * 
-     */
+<script type="text/javascript">
+    /* 신용대출 Validation  */
+    function checkCreditLoanForm(){
+    	var target = document.getElementById('snackbar');
+    	var borrowMoney = $("#inputBorrowMoney1");
+    	var yearMoney = $("#inputYearMoney1");
+    	var regExp = /^[0-9]*$/;  
+    	
+    	
+    	/*대출 금액 입력안했을 때  */
+		if(borrowMoney.val().length == 0 || $.trim(borrowMoney.val()) == 0){
+			target.innerHTML = "대출 금액을 입력해주세요.";
+			borrowMoney.focus();
+			toast(); 
+			return false;
+		}
+    	
+		/* 최소 금액을 입력했을 때 */
+		if($.trim(borrowMoney.val()) < 50){
+			target.innerHTML = "대출 가능한 최소금액은 50만원입니다.";
+			borrowMoney.focus();
+			toast(); 
+			return false;
+		}
+		
+		/* 최대 금액을 입력했을 때 */
+		if($.trim(borrowMoney.val()) > 10000){
+			target.innerHTML = "신용대출 최대금액은 1억원입니다.";
+			borrowMoney.focus();
+			toast(); 
+			return false;
+		}
+		
+		/* 음수를 입력했을 때 */
+		if($.trim(borrowMoney.val()) < 0){
+			target.innerHTML = "대출 금액에 음수를 입력할 수 없습니다.";
+			borrowMoney.focus();
+			toast(); 
+			return false;
+		}
+		
+ 		/* 숫자 외 입력했을 때 */
+		/* if(!regExp.test(borrowMoney.val())){
+			target.innerHTML = "숫자로만 입력해주세요";
+			borrowMoney.val(borrowMoney.val().replace(regExp,''));
+			borrowMoney.focus();
+			toast(); 
+			return false;
+		}  */
+		
+		
+		/*소득 금액 입력안했을 때  */
+		if(yearMoney.val().length == 0 || $.trim(yearMoney.val()) == 0){
+			target.innerHTML = "연 소득을 입력해주세요.";
+			yearMoney.focus();
+			toast(); 
+			return false;
+		}
+		
+		/*소득 금액 음수로 했을 때  */
+		if($.trim(yearMoney.val()) < 0){
+			target.innerHTML = "연 소득금액에 음수를 입력할 수 없습니다.";
+			yearMoney.focus();
+			toast(); 
+			return false;
+		}
+    }
+
+    
+    function checkSecurityLoanForm(){
+    	var target = document.getElementById('snackbar');
+    	var borrowMoney = $("#inputBorrowMoney2");
+    	var yearMoney = $("#inputYearMoney2");
+    	
+    	/*대출 금액 입력안했을 때  */
+		if(borrowMoney.val().length == 0 || $.trim(borrowMoney.val()) == 0){
+			target.innerHTML = "대출 금액을 입력해주세요.";
+			borrowMoney.focus();
+			toast(); 
+			return false;
+		}
+    	
+		/* 최소 금액 이하 입력했을 때 */
+		if($.trim(borrowMoney.val()) < 50){
+			target.innerHTML = "대출 가능한 최소금액은 50만원입니다.";
+			borrowMoney.focus();
+			toast(); 
+			return false;
+		}
+		
+		/* 음수를 입력했을 때 */
+		if($.trim(borrowMoney.val()) < 0){
+			target.innerHTML = "대출 금액에 음수를 입력할 수 없습니다.";
+			borrowMoney.focus();
+			toast(); 
+			return false;
+		}
+    	
+		/*소득 금액 입력안했을 때  */
+		if(yearMoney.val().length == 0 || $.trim(yearMoney.val()) == 0){
+			target.innerHTML = "연 소득을 입력해주세요.";
+			yearMoney.focus();
+			toast(); 
+			return false;
+		}
+		
+		/*소득 금액 음수로 했을 때  */
+		if($.trim(yearMoney.val()) < 0){
+			target.innerHTML = "연 소득금액에 음수를 입력할 수 없습니다.";
+			yearMoney.focus();
+			toast(); 
+			return false;
+		}
+    }
+    
      // 대출 관련 정보 입력하기 버튼 클릭 시, 활성화 되는 필터 입력창
         $('#inputInfoBtn').click(function(){
         	if($('#inputInfoArea').hasClass('dis-none')) {
@@ -2233,41 +2372,93 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
         	}
         })
         
-        // 직업 선택 시, 재직 기간 입력 가능한 태그 생성 jQuery
-        $('#creditJobSelect').change(function() {
-        	if($(this).val() !== '무직') {
-        		$('#creditWorkingPeriod1').removeClass('dis-none');
-        		$('#creditWorkingPeriod1').addClass('dis-block');
-        	} else {
-        		$('#creditWorkingPeriod1').removeClass('dis-block');
-        		$('#creditWorkingPeriod1').addClass('dis-none');
-        		
-        	}
-        })
-        
-        $('#guaranteeJobSelect').change(function() {
-        	if($(this).val() !== '무직') {
-        		$('#guaranteeWorkingPeriod2').removeClass('dis-none');
-        		$('#guaranteeWorkingPeriod2').addClass('dis-block');
-        	} else {
-        		$('#guaranteeWorkingPeriod2').removeClass('dis-block');
-        		$('#guaranteeWorkingPeriod2').addClass('dis-none');
-        		
-        	}
-        })
-        
      // 신용대출용 ------------------------------------------------------------------------------------------------------------------------
         $(function(){
-        $('#creditJobSelect1').on('change', function(){
-        	var job = $('#creditJobSelect1 option:selected').val(); //input에 닮을 값
+        	
+        	
+            
+            
+            //소득금액 컨트롤
+                $("#inputYearMoney1").keyup(function() { 
+            	var money = $("#inputYearMoney1").val();
+            	console.log(money); 
+            	$("#selectCreditLoanForm input[name=yearMoney]").val(money);
+            	$('#takeYearMoney1').text(money);
+            	
+            });
+            
+            $(".analysisBtn2" ).each(function(index) {
+                $(this).on("click", function(){
+                    var money = parseInt($(this).val());
+                    console.log(money);
+                	$('#inputYearMoney1').val(money);
+                    //var resultMoney = parseInt($("#inputBorrowMoney1").val()) + money;
+                	$("#takeYearMoney1").text(money);
+                	$("#selectCreditLoanForm input[name=yearMoney]").val(money+"0000");
+                });
+            });
+            
+            //대출희망금액 컨트롤
+            $("#inputBorrowMoney1").keyup(function(){ 
+            	var target = document.getElementById('snackbar');
+            	var money = $('#inputBorrowMoney1').val();
+            	var reg = /^[0-9]*$/;
+            	
+            	if(!reg.test(money)){
+            		$(this).val(money.replace(reg,''));
+            		$(this).focus();
+            		target.innerHTML = "숫자만 입력해주세요.";
+            		toast();
+            		return;
+            		
+            	}else{
+                	console.log(money); 
+                	$('#selectCreditLoanForm input[name=requiredMoney]').val(money+"0000");
+                	$('#takeBorrowMoney1').text(money);
+            	}
+            });
+            
+            
+            $(".analysisBtn1" ).each(function(index) {
+                $(this).on("click", function(){
+                    var money = parseInt($(this).val());
+                    console.log(money);
+                    //var resultMoney = parseInt($("#inputBorrowMoney1").val()) + money;
+                	$("#inputBorrowMoney1").val(money);
+                	$('#takeBorrowMoney1').text(money);
+                	$("#selectCreditLoanForm input[name=requiredMoney]").val(money + "0000");
+                });
+            });	
+        	
+        	//직업 선택
+        $('#creditJobSelect1').on('click', function(){
+        	var job = $('#creditJobSelect1 option:selected').val();
         	/* $('#creditWorkingPeriod1').show(); */ //재직기간 오픈
+        	
+        	if($(this).val() != '8') {
+        		$('#creditWorkingPeriod1').removeClass('dis-none');
+        		$('#creditWorkingPeriod1').addClass('dis-block');
+        	}else{
+        		$('#creditWorkingPeriod1').removeClass('dis-block');
+        		$('#creditWorkingPeriod1').addClass('dis-none');
+        		$('#inputTermService1').keyup(function(){
+        			
+        			//유효성 검증 포함해야함.
+        			var term = $('#inputTermService1').val();
+        			$('#showTermService1').show();
+        			$('#selectSecurityLoanForm input[name=termService]').val(term);
+                    $('#takeTerm1').text(term);
+        		});
+        	}
+        	
         	$('#takeJob1').text($('#creditJobSelect1 option:selected').text());
         	/* $('#selectCreditLoanForm') */
         	$("#selectCreditLoanForm input[name=targetNum]").val(job);
         	
         });
         
-        $('#creditRankSelect1').on('change', function(){
+        	//신용등급 선택
+        $('#creditRankSelect1').on('click', function(){
         	var Rank = $('#creditRankSelect1 option:selected').val();
         	console.log(Rank);
        	 	$.ajax({
@@ -2284,6 +2475,10 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     	        	console.log("비동기 오류");
     	        }
     	    });
+       	 	
+       	 	$(".card-body .loan")[0].style.display='block';
+       	 	
+       	 	
     /*     	var money = $("#inputYearMoney1").val();
         	var line = $('#takeCreditLine1')
         	switch (Rank) { 
@@ -2301,51 +2496,14 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
         });
         
         
-        //소득금액 컨트롤
-            $("#inputYearMoney1").keyup(function() { 
-        	var money = $("#inputYearMoney1").val();
-        	console.log(money); 
-        	$("#selectCreditLoanForm input[name=resultRate]").val(money);
-        	$('#takeYearMoney1').text(money);
-        	
-        });
-        
-        $( ".analysisBtn2" ).each(function(index) {
-            $(this).on("click", function(){
-                var money = parseInt($(this).val());
-                console.log(money);
-            	$('#inputYearMoney1').val(money);
-                //var resultMoney = parseInt($("#inputBorrowMoney1").val()) + money;
-            	$("#takeYearMoney1").text(money);
-            	$("#selectCreditLoanForm input[name=requiredMoney]").val(money+"0000");
-            });
-        });
-        
-        
-        //대출희망금액 컨트롤
-        $("#inputBorrowMoney1").keyup(function() { 
-        	var money = $("#inputBorrowMoney1").val();
-        	console.log(money); 
-        	$('#selectCreditLoanForm input[name=resultRate]').val(money+"0000");
-        	$('#takeBorrowMoney1').text(money);
-        });
-        
-        
-        $( ".analysisBtn1" ).each(function(index) {
-            $(this).on("click", function(){
-                var money = parseInt($(this).val());
-                console.log(money);
-                //var resultMoney = parseInt($("#inputBorrowMoney1").val()) + money;
-            	$("#inputBorrowMoney1").val(money);
-            	$('#takeBorrowMoney1').text(money);
-            	$("#selectCreditLoanForm input[name=takeYearMoney1]").val(money + "0000");
-            });
-        });
-        
+        /* 대출연계 전 유효성 검증  */
         $("#loanSubmitBtn").on("click", function(e){
         	e.preventDefault();
+			
         	$("#selectCreditLoanForm").submit();
-        });
+        }); 
+        
+        
     });
         
      // 담보 대출용----------------------------------------------------------------------------------------------------------------------- 
@@ -2353,15 +2511,13 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
             //대출희망금액 컨트롤
             $("#inputBorrowMoney2").keyup(function() { 
               var money = $("#inputBorrowMoney2").val();
-              console.log(money); 
               $('#selectSecurityLoanForm input[name=requiredMoney]').val(money+"0000");
               $('#takeBorrowMoney2').text(money);
             });
             
             $( ".analysisBtn1" ).each(function(index) {
                 $(this).on("click", function(){
-                    var money = parseInt($(this).val());
-                    console.log(money);
+                    var money = $(this).val();
                   $("#inputBorrowMoney2").val(money);
                   $('#takeBorrowMoney2').text(money);
                   $("#selectSecurityLoanForm input[name=requiredMoney]").val(money+"0000");
@@ -2390,8 +2546,16 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
             
         	//직업 컨트롤
             $('#guaranteeJobSelect').on('change', function(){
-              var job = $('#guaranteeJobSelect option:selected').val(); //input에 닮을 값
-              $('#guaranteeWorkingPeriod2').show(); //재직(사업)기간 오픈
+              var job = $('#guaranteeJobSelect option:selected').val(); //input에 담을 값
+              /* $('#guaranteeWorkingPeriod2').show(); //재직(사업)기간 오픈 */
+              
+          	if($(this).val() != '8') {
+        		$('#guaranteeWorkingPeriod2').removeClass('dis-none');
+        		$('#guaranteeWorkingPeriod2').addClass('dis-block');
+        	}else{
+        		$('#guaranteeWorkingPeriod2').removeClass('dis-block');
+        		$('#guaranteeWorkingPeriod2').addClass('dis-none');
+        	}
               
               $('#takeJob2').text($('#guaranteeJobSelect option:selected').text());
               $("#selectSecurityLoanForm input[name=targetNum]").val(job);
@@ -2410,25 +2574,24 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                 $("#inputYearMoney2").keyup(function() { 
               var money = $("#inputYearMoney2").val();
               console.log(money); 
-              $("#selectSecurityLoanForm input[name=resultRate]").val(money);
+              $("#selectSecurityLoanForm input[name=yearMoney]").val(money);
               $('#takeYearMoney2').text(money);
               
             });
             
             $( ".analysisBtn2" ).each(function(index) {
                 $(this).on("click", function(){
-                    var money = parseInt($(this).val());
-                    console.log(money);
                   $('#inputYearMoney2').val(money);
                     //var resultMoney = parseInt($("#inputBorrowMoney1").val()) + money;
                   $("#takeYearMoney2").text(money);
-                  $("#selectSecurityLoanForm input[name=requiredMoney]").val(money+"0000");
+                  $("#selectSecurityLoanForm input[name=yearMoney]").val(money+"0000");
                 });
             });
             
             
             $("#loanSubmitBtn2").on("click", function(e){
               e.preventDefault();
+              
               $("#selectSecurityLoanForm").submit();
             });
         });

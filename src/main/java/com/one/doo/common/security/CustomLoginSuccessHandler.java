@@ -1,6 +1,7 @@
 package com.one.doo.common.security;
 
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -8,6 +9,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -50,31 +52,15 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 			roleNames.add(authority.getAuthority());
 		});
 		
-		for (GrantedAuthority grantedAuthority : collection) {
-				roleNames.add(grantedAuthority.getAuthority());
-				log.info("등록된 권한 이름들 : " + roleNames);
-		}
-		
-/*		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("success", true);
 		
 		if(roleNames.contains("ROLE_ADMIN")) {
-			map.put("returnUrl", request.getContextPath() + "/admin/admin");
-			
-		}else if(roleNames.contains("ROLE_USER")) {
-			map.put("returnUrl", request.getContextPath()+ "/");// 
+			map.put("returnUrl", request.getContextPath() + "/admin/");
 			
 		}else {
 			map.put("returnUrl", request.getContextPath());
-		}
-		String jsonString = om.writeValueAsString(map);
-		OutputStream out = response.getOutputStream();
-		out.write(jsonString.getBytes());*/
-		
-		if(roleNames.contains("ROLE_ADMIN")) {
-			response.sendRedirect(request.getContextPath() + "/admin/");
-			System.out.println("관리자 접속");
-		}else {
+			
 			/* 
 			 * 접속중복을 차단하기 위해
 			 * 사용자의 ip를 추적, Map 객체에 담습니다.
@@ -125,13 +111,10 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
         	// 하루 이상이 지난 후 로그기록 
 	        if((lastLogDate.getTime() / 1000 / 60 / 60 / 24) < (logDate.getTime() / 1000 / 60 / 60 / 24)) {
 	        	// select문으로 일일단위 데이터 여부 확인
-	        	
 	        	// 서버와 DB 시간 동기화
 	        	lastLogDate = logDate;
-	        	
 	        	// Map 비우기
 	        	members.clear();
-
 	        	// DB 기록 확인
 	        	int logCnt = memberService.countTodayLog(url_no, log_day);
 	        	
@@ -140,14 +123,12 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 	        	memberService.makeLoginLog(url_no, log_day);
 	        	// 서버에 접속자 등록
 		        members.put(ip, "member");
-	        	
 	        	}
 	        	
 	        	// DB 기록이 있다면 서버와 DB 시간 동기화로 끝
 	        	
 	        } else {
 	        	// 서버와 로그의 일자가 똑같다면
-	        	
 	        	// 접속자 수 변화를 보고 일일단위 url의 숫자 증가
 	        	int beforesize = members.size();
 	        
@@ -159,13 +140,11 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		        	memberService.sumUpLoginLog(url_no, log_day);
 		        }
 	        }
-	        
-			response.sendRedirect(request.getContextPath() + "/");
-			return;
-//			System.out.println("유저 접속");
+			
 		}
-//		response.sendRedirect(request.getContextPath());
-//		System.out.println("로그인 ----- 성공했니??");
+		String jsonString = om.writeValueAsString(map);
+		OutputStream out = response.getOutputStream();
+		out.write(jsonString.getBytes());
+		}
+	
 	}
-
-}

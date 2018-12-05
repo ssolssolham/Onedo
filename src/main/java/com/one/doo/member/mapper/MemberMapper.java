@@ -7,7 +7,7 @@ import com.one.doo.member.domain.Member;
 
 public interface MemberMapper {
 	
-	public Member read(String userid);	
+	public Member read(String userid);
 	
 	public void insert(Member member);
 	
@@ -18,5 +18,4 @@ public interface MemberMapper {
 	public List<Member> getListWithCri(Criteria cri);
 	
 	public int getTotalCount();
-	
 }

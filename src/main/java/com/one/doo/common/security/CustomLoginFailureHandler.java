@@ -33,7 +33,6 @@ public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
 		map.put("message", exception.getMessage());
 		
 		System.out.println("로그인 ----- 실패했니??");
-		
 		String jsonString = om.writeValueAsString(map);
 		OutputStream out = response.getOutputStream();
 		out.write(jsonString.getBytes());

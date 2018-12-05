@@ -104,6 +104,7 @@
 <!-- 모달 javascript -->
 <script src="${pageContext.request.contextPath}/resources/js/modal.js"></script>
 
+<!-- 회원가입 javascript  -->
 <!-- 회원가입관련 javascript -->
 <!-- 모달띄우고 form제출 -->
 <script type="text/javascript">
