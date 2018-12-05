@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
 <title>OneDo - 로그인</title>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=2">
   <!-- header include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/headTagConfig.jsp"/>

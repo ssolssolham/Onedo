@@ -12,11 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.one.doo.board.domain.Board;
-import com.one.doo.board.domain.Criteria;
-import com.one.doo.board.domain.Reply;
-import com.one.doo.loan.domain.CreditRank;
 import com.one.doo.loan.domain.Loan;
 import com.one.doo.loan.domain.Parameter;
 import com.one.doo.loan.service.LoanService;
