@@ -58,7 +58,7 @@
           </h4>
           <p>${error}</p>
           <p>${logout}</p>
-          <form action="/member/regist" method="post" onsubmit="return beforeSubmit(event)">
+          <form action="/member/regist" method="post" onsubmit="return beforeSubmit();">
             <div class="form-group">
               <input type="text" name="userid" id="userid"
                 class="form-control width-60 display-i"
@@ -162,12 +162,12 @@ function beforeSubmit() {
 </script>  
  -->
 <script>
+var idck = false;
+var emailck = false;
 // 아이디 중복확인을 위한 비동기
 $(function() {
    	// id체크여부
-   	var idck = false;
-   	var emailck = false;
-	var target = $('#snackbar');
+   	
    
    
    // idDup버튼 클릭 시, 비동기로 아이디 중복확인
@@ -181,11 +181,13 @@ $(function() {
          success : function(data) {
             //비동기 성공 시
             if(data.cnt > 0){
+            	var target = $('#snackbar');
             	target.text('중복된 아이디 입니다. 다른 아이디를 입력해 주세요:(');
             	toast();
                	$('#userid').val("");
                	$('#userid').focus();
             }else{
+            	var target = $('#snackbar');
 				target.text('사용가능한 아이디 입니다:D');
 				toast();
                	$('#userid').val(userid);
@@ -217,9 +219,10 @@ $(function() {
       
       //이메일 입력 안했을경우 return
       if($('#email').val().trim() === ''){
-         target.text('이메일을 입력해 주세요!');
-         toast();
-         return;
+    	  var target = $('#snackbar');
+          target.text('이메일을 입력해 주세요!');
+          toast();
+          return;
       }
       $('#useremail').val(useremail); //form submit에 보내질 변수 설정(hidden)
 
@@ -229,8 +232,9 @@ $(function() {
          url : "/member/emailCertify/"+useremail,
          dataType : "json",
          success : function(data) {
-        	target.text('인증번호를 보냈습니다. 확인 후 입력해 주세요:)');
-      		toast(); 
+        	 var target = $('#snackbar');
+         	target.text('인증번호를 보냈습니다. 확인 후 입력해 주세요:)');
+       		toast(); 
 			// 메일로 보낸 코드값 변수로 저장
       		code = data.code;
             console.log(code);
@@ -248,10 +252,12 @@ $(function() {
 				alert();
 				// 코드값 입력 안했을 경우
 				if(inputCode === ''){
+					var target = $('#snackbar');
 					target.text('메일로 전송된 코드값을 입력해 주세요!');
 					toast();
 				}
 				else if(inputCode == code){
+					var target = $('#snackbar');
 					target.text('인증이 완료되었습니다! 회원가입을 계속 진행해 주세요:D');
 					toast();
 					console.log("인증성공경우!!!!")
@@ -269,20 +275,20 @@ $(function() {
    });
 
 // form제출 전, 아이디중복체크와 이메일인증을 했는지 체크
-function beforeSubmit(e) {
-	e.preventDefault();
+function beforeSubmit() {
 	console.log("제출전, 중복체크, 이메일인증 했는지..");
 	alert("idck값: "+idck+"emailck값: "+emailck);
+	
 	if(emailck && idck){
+		alert('트루로 들어옴');
 		return true;
-	}else if(!idck || !emailck)	{
+	} else {
+		var target = $('#snackbar');
 		target.text('아이디 중복체크와 이메일인증을 먼저 진행해 주세요!');
+		alert('false로 들어옴 ?');
 		toast();
 		return false;
 	}
-}
-
-
 }
 
 
