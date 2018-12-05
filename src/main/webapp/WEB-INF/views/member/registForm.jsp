@@ -58,7 +58,7 @@
           </h4>
           <p>${error}</p>
           <p>${logout}</p>
-          <form action="/member/regist" method="post" onsubmit="beforeSubmit()">
+          <form action="/member/regist" method="post" onsubmit="return beforeSubmit(event)">
             <div class="form-group">
               <input type="text" name="userid" id="userid"
                 class="form-control width-60 display-i"
@@ -268,7 +268,22 @@ $(function() {
       });
    });
 
+// form제출 전, 아이디중복체크와 이메일인증을 했는지 체크
+function beforeSubmit(e) {
+	e.preventDefault();
+	console.log("제출전, 중복체크, 이메일인증 했는지..");
+	alert("idck값: "+idck+"emailck값: "+emailck);
+	if(emailck && idck){
+		return true;
+	}else if(!idck || !emailck)	{
+		target.text('아이디 중복체크와 이메일인증을 먼저 진행해 주세요!');
+		toast();
+		return false;
+	}
+}
 
+
+}
 
 
 </script>  
