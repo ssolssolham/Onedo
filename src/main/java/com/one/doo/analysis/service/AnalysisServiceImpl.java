@@ -105,30 +105,30 @@ public class AnalysisServiceImpl implements AnalysisService {
 	public List<HashMap<String,Object>> firstStep(List<String> Areas,String regionType) {
 		log.info(regionType);
 		
-		//리스트 반환할 객체 선언 
+		//由ъ뒪�듃 諛섑솚�븷 媛앹껜 �꽑�뼵 
 		List<HashMap> list = null;
 		
 
 		switch(regionType) {
-			case "주택가" : list = mlresultMapper.firstStep(Areas);
-				break;
-			case "대학가" : list = mlresultMapper.secondStep(Areas);
-				log.info("대학가 부름??: "+regionType);
-				break;
-			case "유흥가" : list = mlresultMapper.thirdStep(Areas);
-				log.info("유흥가 부름??: "+regionType);
-				break;
-			case "역세권" : list = mlresultMapper.fourthStep(Areas);
-				log.info("역세권 부름??: "+regionType);
-				break;
-			case "오피스" : list = mlresultMapper.fifthStep(Areas);
-				log.info("오피스 부름??: "+regionType);
-				break;	
+        case "주택가" : list = mlresultMapper.firstStep(Areas);
+           break;
+        case "대학가" : list = mlresultMapper.secondStep(Areas);
+           log.info("대학가 부름??: "+regionType);
+           break;
+        case "유흥가" : list = mlresultMapper.thirdStep(Areas);
+           log.info("유흥가 부름??: "+regionType);
+           break;
+        case "역세권" : list = mlresultMapper.fourthStep(Areas);
+           log.info("역세권 부름??: "+regionType);
+           break;
+        case "오피스" : list = mlresultMapper.fifthStep(Areas);
+           log.info("오피스 부름??: "+regionType);
+           break;   
 		}
 		
-		//반환할 리스트가 없으면 
+		//諛섑솚�븷 由ъ뒪�듃媛� �뾾�쑝硫� 
 		if (list == null) {
-			log.info("--------------list반환 없음 -----------");
+			log.info("--------------list諛섑솚 �뾾�쓬 -----------");
 			return null;
 		}
 		
@@ -138,7 +138,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 			int ALLEYBIZCODE = Integer.parseInt(String.valueOf(hashMap.get("ALLEYBIZCODE")));
 			
 			HashMap<String,Object> hash = new HashMap<String,Object>();
-			// 보낼 객체들 준비
+			// 蹂대궪 媛앹껜�뱾 以�鍮�
 			Mlresult mlresult = mlresultMapper.read(ALLEYBIZCODE);
 			FacilitiesPerAlleybiz facilitiesPerAlleybiz = facilitiesPerAlleybizMapper.read(ALLEYBIZCODE);
 			FlowPerAlleybiz flowPerAlleybiz = flowPerAlleybizMapper.read(ALLEYBIZCODE);
