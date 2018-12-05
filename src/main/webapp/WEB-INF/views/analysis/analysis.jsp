@@ -218,8 +218,8 @@
                           
                           <!-- 종합 평가 점수 -->
                           <div class="col-sm-4 t-center" style="font-family: a드림고딕4">
-                            <div style=" font-size: 4.0em;">&lt;종합 평가 점수&gt;<br><br>
-                            <span style="color: #27b2a5;" id="expectedSalesAccount">100</span> 점
+                            <div style=" font-size: 4.0em;">&lt;종합 평가 점수&gt;<br>
+                            <span style="color: #27b2a5;" id="expectedTotalEstimateScore"></span> 점
                             </div>
                           </div>
                         </div>
@@ -1083,9 +1083,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
      					            map: map,
      					            position: coords
      					        });
-     					        console.log('infoHeaderText' + infoHeaderText);
      					        var content = '<div style="width:150px;text-align:center;padding:6px 0;">'+ infoHeaderText +'</div>';
-     					        console.log('content' + content);
      					        // 인포윈도우로 장소에 대한 설명을 표시합니다
      					        infowindow = new daum.maps.InfoWindow({
      					            content: content
@@ -1246,32 +1244,44 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     	$('#resultDistrict').text(alleyBizFullName[0]); 
     	$('#resultVillage').text(alleyBizFullName[1]);
     	$('#resultAlleyBiz').text(alleyBizFullName[2]);
-    	var coords;
+    	
     	for(var i =0; i < topThreeList.length; i++) {
     		if(topThreeList[i].alleyBiz.alleybizCode_Name == alleyBizFullName[2]) {
+    			// 상위 3개의 상권 리스트 배열에서 도로명이 일치하는 배열의 요소를 불러와 해당하는 예상 매출액을 태그의 text로 추가
     			$('#expectedSalesAccount').text(topThreeList[i].mlresult.estmt_SALES);
-    			// 주소-좌표 변환 객체를 생성합니다
-    			var geocoder = new daum.maps.services.Geocoder();
-    			geocoder.addressSearch(alleyBizFullName[2], function(result, status) {
+    			var marker;
+		  		var infowindow;
+		  		var geocoder = new daum.maps.services.Geocoder();
+			  		geocoder.addressSearch(alleyBizFullName[2], function(result, status) {
 						
 					    // 정상적으로 검색이 완료됐으면 
 					     if (status === daum.maps.services.Status.OK) {
 
-					        coords = new daum.maps.LatLng(result[0].y, result[0].x);
-					        console.log('위,경도 : ' + coords);
+					        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 					        
-					        var staticMapContainer  = document.getElementById('staticMap'), // 이미지 지도를 표시할 div  
-			    		    staticMapOption = { 
-			    		        center: new daum.maps.LatLng(coords.jb, coords.ib), // 이미지 지도의 중심좌표
-			    		        level: 3 // 이미지 지도의 확대 레벨
-			    		    };
-			    			
-			    			// 이미지 지도를 표시할 div와 옵션으로 이미지 지도를 생성합니다
-			    			var staticMap = new daum.maps.StaticMap(staticMapContainer, staticMapOption);
-					        
+					        var mapContainer = document.getElementById('staticMap'), // 지도를 표시할 div 
+				  		    mapOption = {
+				  		        center: new daum.maps.LatLng(coords.jb, coords.ib), // 지도의 중심좌표
+				  		        level: 1 // 지도의 확대 레벨
+				  		    };  
+
+					  		// 지도를 생성합니다    
+					  		var map = new daum.maps.Map(mapContainer, mapOption);
+					  		
+					  		// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+					  		var mapTypeControl = new daum.maps.MapTypeControl();
+	
+					  		// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+					  		// daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+					  		map.addControl(mapTypeControl, daum.maps.ControlPosition.TOPRIGHT);
+	
+					  		// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+					  		var zoomControl = new daum.maps.ZoomControl();
+					  		map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
+				  		
 					        // 결과값으로 받은 위치를 마커로 표시합니다
 					        marker = new daum.maps.Marker({
-					            map: staticMap,
+					            map: map,
 					            position: coords
 					        });
 					        
@@ -1280,32 +1290,284 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 					        infowindow = new daum.maps.InfoWindow({
 					            content: content
 					        });
-					        infowindow.open(staticMap, marker);
+					        infowindow.open(map, marker);
 					    }
 					    
-					  	// 지도에 표시할 원을 생성
-					 	var circle = new daum.maps.Circle({
-					 	    center : new daum.maps.LatLng(coords.jb, coords.ib),  // 원의 중심좌표 입니다 
-					 	    radius: 700, // 미터 단위의 원의 반지름입니다 
-					 	    strokeWeight: 3, // 선의 두께입니다 
-					 	    strokeColor: '#27b2a5', // 선의 색깔입니다
-					 	    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-					 	    strokeStyle: 'solid', // 선의 스타일 입니다
-					 	    fillColor: '#27b2a5', // 채우기 색깔입니다
-					 	    fillOpacity: 0.7  // 채우기 불투명도 입니다   
-					 	});
-						 	
-					 	// 지도에 원을 표시합니다 
-					 	circle.setMap(map);
-					}) 
-					// geoCoder 끝나는 부분
-    			
-    			
-    		}
+					}) // geoCoder 끝나는 부분
+    			}
+	    		// 클릭 시, 동 이름을 가지고, 창업 관련 5대 지표 불러옴
+	    		// 0 ~ 25 : 매우위험, 26 ~ 50 : 위험, 51 ~ 75 : 보통, 76 ~ 100 : 좋음
+	            // 백그라운드 컬러 배열
+	            var backCol = new Array();
+	            // 백그라운드 컬러 배열 모은 배열
+	            var backColArr = new Array();
+	            // 창업위험지수, 과밀지수, 활성도, 성장가능성, 안전도 순서로 각 번째에 맞게 무조건 데이터 삽입
+	            var dataArr = new Array();
+	            // 등급 배열 >> 이것 또한 창업위험, 과밀, 활성, 성장, 안전도 순서로 배열에 등급이 들어감
+	            var gradeArr = new Array();
+	            dataArr = [topThreeList[i].mlresult.estmt_ROF_VALUE, 
+	            		   topThreeList[i].mlresult.estmt_OI_VALUE, 
+	            		   topThreeList[i].mlresult.estmt_AI_VALUE,
+	            		   topThreeList[i].mlresult.estmt_GI_VALUE,
+	            		   topThreeList[i].mlresult.estmt_SI_VALUE];
+	            // 종합 평가 점수 구하는 함수
+	            var totalEstimatedScore = 0;
+	            for (var i = 0; i < dataArr.length; i++) {
+	            	totalEstimatedScore += dataArr[i];
+	            }
+	            
+	           	var avgEstimatedScore = totalEstimatedScore / dataArr.length;
+	            $('#expectedTotalEstimateScore').text(avgEstimatedScore);
+	            for (var i = 0; i < 5; i++) {
+	                backCol = ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0)'];
+	                if (0 <= dataArr[i] && dataArr[i] <= 25) {
+	                    backCol[0] = 'rgba(255, 99, 132)';
+	                    gradeArr.push("매우위험");
+	                }
+	                if (26 <= dataArr[i] && dataArr[i] <= 50) {
+	                    backCol[1] = 'rgba(255,166,80)';
+	                    gradeArr.push("위험");
+	                }
+	                if (51 <= dataArr[i] && dataArr[i] <= 75) {
+	                    backCol[2] = 'rgba(86,232,164)';
+	                    gradeArr.push("보통");
+	                }
+	                if (76 <= dataArr[i] && dataArr[i] <= 100) {
+	                    backCol[3] = 'rgba(43,143,239)';
+	                    gradeArr.push("좋음");
+	                }
+	                backColArr.push(backCol);
+	            }
+	            // 창업위험지수 그래프 >> 배열의 0번째
+	            var dangerChart = document.getElementById("dangerChart").getContext('2d');
+	            var dangerChartA = new Chart(dangerChart, {
+	                type: 'doughnut'
+	                , data: {
+	                    labels: ["매우위험", "위험", "보통", "좋음"]
+	                    , datasets: [{
+	                        data: [25, 25, 25, 25]
+	                        , backgroundColor: backColArr[0]
+	                    	, borderColor : '#000000'
+	                }]
+	                }
+	                , options: {
+	                    tooltips: {enabled: false},
+	                    legend: {
+	                        display: false
+	                    }
+	                    , circumference: 1 * Math.PI
+	                    , rotation: 1 * Math.PI
+	                    , title: {
+	                        display: true
+	                        , text: '창업위험지수' + ': ' + gradeArr[0]
+	                        , position: 'bottom'
+	                        , fontColor: '#000000'
+	                    }
+	                }
+	            });
+	            // 과밀지수 그래프 >> 배열의 1번째
+	            var densityChart = document.getElementById("densityChart").getContext('2d');
+	            var densityChartA = new Chart(densityChart, {
+	                type: 'doughnut'
+	                , data: {
+	                    labels: ["매우위험", "위험", "보통", "좋음"]
+	                    , datasets: [{
+	                        data: [25, 25, 25, 25]
+	                        , backgroundColor: backColArr[1]
+	                    	, borderColor : '#000000'
+	                }]
+	                }
+	                , options: {
+	                    tooltips: {enabled: false},
+	                    legend: {
+	                        display: false
+	                    }
+	                    , circumference: 1 * Math.PI
+	                    , rotation: 1 * Math.PI
+	                    , title: {
+	                        display: true
+	                        , text: '과밀지수' + ': ' + gradeArr[1]
+	                        , position: 'bottom'
+	                        , fontColor: '#000000'
+	                    }
+	                }
+	            });
+	            // 활성도 그래프 >> 배열의 2번째
+	            var activationChart = document.getElementById("activationChart").getContext('2d');
+	            var activationChartA = new Chart(activationChart, {
+	                type: 'doughnut'
+	                , data: {
+	                    labels: ["매우위험", "위험", "보통", "좋음"]
+	                    , datasets: [{
+	                        data: [25, 25, 25, 25]
+	                        , backgroundColor: backColArr[2]
+	                    	, borderColor : '#000000'
+	                }]
+	                }
+	                , options: {
+	                    tooltips: {enabled: false},
+	                    legend: {
+	                        display: false
+	                    }
+	                    , circumference: 1 * Math.PI
+	                    , rotation: 1 * Math.PI
+	                    , title: {
+	                        display: true
+	                        , text: '활성도' + ': ' + gradeArr[2]
+	                        , position: 'bottom'
+	                        , fontColor: '#000000'
+	                    }
+	                }
+	            });
+	            // 성장가능성 그래프 >> 배열의 3번째
+	            var potentialChart = document.getElementById("potentialChart").getContext('2d');
+	            var potentialChartA = new Chart(potentialChart, {
+	                type: 'doughnut'
+	                , data: {
+	                    labels: ["매우위험", "위험", "보통", "좋음"]
+	                    , datasets: [{
+	                        data: [25, 25, 25, 25]
+	                        , backgroundColor: backColArr[3]
+	                    	, borderColor : '#000000'
+	                }]
+	                }
+	                , options: {
+	                    tooltips: {enabled: false},
+	                    legend: {
+	                        display: false
+	                    }
+	                    , circumference: 1 * Math.PI
+	                    , rotation: 1 * Math.PI
+	                    , title: {
+	                        display: true
+	                        , text: '성장가능성' + ': ' + gradeArr[3]
+	                        , position: 'bottom'
+	                        , fontColor: '#000000'
+	                    }
+	                }
+	            });
+	            // 안전도 그래프 >> 배열의 4번째
+	            var safeChart = document.getElementById("safeChart").getContext('2d');
+	            var safeChartA = new Chart(safeChart, {
+	                type: 'doughnut'
+	                , data: {
+	                    labels: ["매우위험", "위험", "보통", "좋음"]
+	                    , datasets: [{
+	                        data: [25, 25, 25, 25]
+	                        , backgroundColor: backColArr[4]
+	                    	, borderColor : '#000000'
+	                }]
+	                }
+	                , options: {
+	                    tooltips: {enabled: false},
+	                    legend: {
+	                        display: false
+	                    }
+	                    , circumference: 1 * Math.PI
+	                    , rotation: 1 * Math.PI
+	                    , title: {
+	                        display: true
+	                        , text: '안전도' + ': ' + gradeArr[4]
+	                        , position: 'bottom'
+	                        , fontColor: '#000000'
+	                    }
+	                }
+	            });
+	            
+	         // 메인 레이더 차트
+	            var mainRadarChart = document.getElementById("mainRadarChart").getContext('2d');
+	            var mainRadarChartA = new Chart(mainRadarChart, {
+	                type: 'radar'
+	                , data: {
+	                    labels: ["창업위험지수", "과밀지수", "활성도", "성장가능성", "안전도"]
+	                    , datasets: [{
+	                        label: '현재 상권'
+	                        , data: [100, 90, 20, 40, 70]
+	                        , backgroundColor: 'rgba(165, 223, 249, 0.3)'
+	                        , borderColor: 'rgba(165, 223, 249)'
+	                }, {
+	                        label: topThreeList[0].areaCode.areaCode_Name
+	                        , data: [50, 10, 30, 90, 50]
+	                        , backgroundColor: 'rgba(239, 82, 133, 0.3)'
+	                        , borderColor: 'rgba(239, 82, 133)'
+	                }, {
+	                        label: topThreeList[1].areaCode.areaCode_Name
+	                        , data: [44, 12, 64, 23, 67]
+	                        , backgroundColor: 'rgba(96, 197, 186, 0.3)'
+	                        , borderColor: 'rgba(96, 197, 186)'
+	                }, {
+	                        label: topThreeList[2].areaCode.areaCode_Name
+	                        , data: [96, 60, 90, 77, 55]
+	                        , backgroundColor: 'rgba(254, 238, 125, 0.3)'
+	                        , borderColor: 'rgba(254, 238, 125)'
+	                }]
+	                }
+	                , options: {
+	                    legend: {
+	                        display: true
+	                        , position: 'left'
+	                        , labels: {
+	                            fontColor: '#000000'
+	                        }
+	                    }
+	                    , circumference: 1 * Math.PI
+	                    , rotation: 1 * Math.PI
+	                    , title: {
+	                        display: true
+	                        , text: 'MAIN CHART'
+	                        , position: 'top'
+	                        , fontColor: '#000000'
+	                    }
+	                }
+	            });
+	            
+	            // 서브 레이더 차트
+	            var subRadarChart = document.getElementById("subRadarChart").getContext('2d');
+	            var subRadarChartA = new Chart(subRadarChart, {
+	                type: 'radar'
+	                , data: {
+	                    labels: ["상주인구", "유동인구", "직장인구", "개업률", "점포수"]
+	                    , datasets: [{
+	                        label: '현재 상권'
+	                        , data: [100, 30, 50, 60, 11]
+	                        , backgroundColor: 'rgba(165, 223, 249, 0.3)'
+	                        , borderColor: 'rgba(165, 223, 249)'
+	                }, {
+	                        label: 'A 상권'
+	                        , data: [50, 10, 30, 90, 50]
+	                        , backgroundColor: 'rgba(239, 82, 133, 0.3)'
+	                        , borderColor: 'rgba(239, 82, 133)'
+	                }, {
+	                        label: 'B 상권'
+	                        , data: [44, 12, 64, 23, 67]
+	                        , backgroundColor: 'rgba(96, 197, 186, 0.3)'
+	                        , borderColor: 'rgba(96, 197, 186)'
+	                }, {
+	                        label: 'C 상권'
+	                        , data: [96, 60, 90, 77, 55]
+	                        , backgroundColor: 'rgba(254, 238, 125, 0.3)'
+	                        , borderColor: 'rgba(254, 238, 125)'
+	                }]
+	                }
+	                , options: {
+	                    legend: {
+	                        display: true
+	                        , position: 'left'
+	                        , labels: {
+	                            fontColor: '#000000'
+	                        }
+	                    }
+	                    , circumference: 1 * Math.PI
+	                    , rotation: 1 * Math.PI
+	                    , title: {
+	                        display: true
+	                        , text: 'SUB CHART'
+	                        , position: 'top'
+	                        , fontColor: '#000000'
+	                    }
+	                }
+	            });
    		}
-    	
-    	
-    	
     })
     
     </script>
@@ -1350,263 +1612,8 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     
 <!--===============================================================================================-->    
     <script type="text/javascript">
-        // 0 ~ 25 : 매우위험, 26 ~ 50 : 위험, 51 ~ 75 : 보통, 76 ~ 100 : 좋음
-        // 백그라운드 컬러 배열
-        var backCol = new Array();
-        // 백그라운드 컬러 배열 모은 배열
-        var backColArr = new Array();
-        // 창업위험지수, 과밀지수, 활성도, 성장가능성, 안전도 순서로 각 번째에 맞게 무조건 데이터 삽입
-        var dataArr = new Array();
-        // 등급 배열 >> 이것 또한 창업위험, 과밀, 활성, 성장, 안전도 순서로 배열에 등급이 들어감
-        var gradeArr = new Array();
-        dataArr = [40, 20, 11, 99, 57];
-        for (var i = 0; i < 5; i++) {
-            backCol = ['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 0)'];
-            if (0 <= dataArr[i] && dataArr[i] <= 25) {
-                backCol[0] = 'rgba(255, 99, 132)';
-                gradeArr.push("매우위험");
-            }
-            if (26 <= dataArr[i] && dataArr[i] <= 50) {
-                backCol[1] = 'rgba(255,166,80)';
-                gradeArr.push("위험");
-            }
-            if (51 <= dataArr[i] && dataArr[i] <= 75) {
-                backCol[2] = 'rgba(86,232,164)';
-                gradeArr.push("보통");
-            }
-            if (76 <= dataArr[i] && dataArr[i] <= 100) {
-                backCol[3] = 'rgba(43,143,239)';
-                gradeArr.push("좋음");
-            }
-            backColArr.push(backCol);
-        }
-        // 창업위험지수 그래프 >> 배열의 0번째
-        var dangerChart = document.getElementById("dangerChart").getContext('2d');
-        var dangerChartA = new Chart(dangerChart, {
-            type: 'doughnut'
-            , data: {
-                labels: ["매우위험", "위험", "보통", "좋음"]
-                , datasets: [{
-                    data: [25, 25, 25, 25]
-                    , backgroundColor: backColArr[0]
-                	, borderColor : '#000000'
-            }]
-            }
-            , options: {
-                tooltips: {enabled: false},
-                legend: {
-                    display: false
-                }
-                , circumference: 1 * Math.PI
-                , rotation: 1 * Math.PI
-                , title: {
-                    display: true
-                    , text: '창업위험지수' + ': ' + gradeArr[0]
-                    , position: 'bottom'
-                    , fontColor: '#000000'
-                }
-            }
-        });
-        // 과밀지수 그래프 >> 배열의 1번째
-        var densityChart = document.getElementById("densityChart").getContext('2d');
-        var densityChartA = new Chart(densityChart, {
-            type: 'doughnut'
-            , data: {
-                labels: ["매우위험", "위험", "보통", "좋음"]
-                , datasets: [{
-                    data: [25, 25, 25, 25]
-                    , backgroundColor: backColArr[1]
-                	, borderColor : '#000000'
-            }]
-            }
-            , options: {
-                tooltips: {enabled: false},
-                legend: {
-                    display: false
-                }
-                , circumference: 1 * Math.PI
-                , rotation: 1 * Math.PI
-                , title: {
-                    display: true
-                    , text: '과밀지수' + ': ' + gradeArr[1]
-                    , position: 'bottom'
-                    , fontColor: '#000000'
-                }
-            }
-        });
-        // 활성도 그래프 >> 배열의 2번째
-        var activationChart = document.getElementById("activationChart").getContext('2d');
-        var activationChartA = new Chart(activationChart, {
-            type: 'doughnut'
-            , data: {
-                labels: ["매우위험", "위험", "보통", "좋음"]
-                , datasets: [{
-                    data: [25, 25, 25, 25]
-                    , backgroundColor: backColArr[2]
-                	, borderColor : '#000000'
-            }]
-            }
-            , options: {
-                tooltips: {enabled: false},
-                legend: {
-                    display: false
-                }
-                , circumference: 1 * Math.PI
-                , rotation: 1 * Math.PI
-                , title: {
-                    display: true
-                    , text: '활성도' + ': ' + gradeArr[2]
-                    , position: 'bottom'
-                    , fontColor: '#000000'
-                }
-            }
-        });
-        // 성장가능성 그래프 >> 배열의 3번째
-        var potentialChart = document.getElementById("potentialChart").getContext('2d');
-        var potentialChartA = new Chart(potentialChart, {
-            type: 'doughnut'
-            , data: {
-                labels: ["매우위험", "위험", "보통", "좋음"]
-                , datasets: [{
-                    data: [25, 25, 25, 25]
-                    , backgroundColor: backColArr[3]
-                	, borderColor : '#000000'
-            }]
-            }
-            , options: {
-                tooltips: {enabled: false},
-                legend: {
-                    display: false
-                }
-                , circumference: 1 * Math.PI
-                , rotation: 1 * Math.PI
-                , title: {
-                    display: true
-                    , text: '성장가능성' + ': ' + gradeArr[3]
-                    , position: 'bottom'
-                    , fontColor: '#000000'
-                }
-            }
-        });
-        // 안전도 그래프 >> 배열의 4번째
-        var safeChart = document.getElementById("safeChart").getContext('2d');
-        var safeChartA = new Chart(safeChart, {
-            type: 'doughnut'
-            , data: {
-                labels: ["매우위험", "위험", "보통", "좋음"]
-                , datasets: [{
-                    data: [25, 25, 25, 25]
-                    , backgroundColor: backColArr[4]
-                	, borderColor : '#000000'
-            }]
-            }
-            , options: {
-                tooltips: {enabled: false},
-                legend: {
-                    display: false
-                }
-                , circumference: 1 * Math.PI
-                , rotation: 1 * Math.PI
-                , title: {
-                    display: true
-                    , text: '안전도' + ': ' + gradeArr[4]
-                    , position: 'bottom'
-                    , fontColor: '#000000'
-                }
-            }
-        });
-        // 메인 레이더 차트
-        var mainRadarChart = document.getElementById("mainRadarChart").getContext('2d');
-        var mainRadarChartA = new Chart(mainRadarChart, {
-            type: 'radar'
-            , data: {
-                labels: ["창업위험지수", "과밀지수", "활성도", "성장가능성", "안전도"]
-                , datasets: [{
-                    label: '현재 상권'
-                    , data: [100, 30, 50, 60, 11]
-                    , backgroundColor: 'rgba(165, 223, 249, 0.3)'
-                    , borderColor: 'rgba(165, 223, 249)'
-            }, {
-                    label: 'A 상권'
-                    , data: [50, 10, 30, 90, 50]
-                    , backgroundColor: 'rgba(239, 82, 133, 0.3)'
-                    , borderColor: 'rgba(239, 82, 133)'
-            }, {
-                    label: 'B 상권'
-                    , data: [44, 12, 64, 23, 67]
-                    , backgroundColor: 'rgba(96, 197, 186, 0.3)'
-                    , borderColor: 'rgba(96, 197, 186)'
-            }, {
-                    label: 'C 상권'
-                    , data: [96, 60, 90, 77, 55]
-                    , backgroundColor: 'rgba(254, 238, 125, 0.3)'
-                    , borderColor: 'rgba(254, 238, 125)'
-            }]
-            }
-            , options: {
-                legend: {
-                    display: true
-                    , position: 'left'
-                    , labels: {
-                        fontColor: '#000000'
-                    }
-                }
-                , circumference: 1 * Math.PI
-                , rotation: 1 * Math.PI
-                , title: {
-                    display: true
-                    , text: 'MAIN CHART'
-                    , position: 'top'
-                    , fontColor: '#000000'
-                }
-            }
-        });
-        // 서브 레이더 차트
-        var subRadarChart = document.getElementById("subRadarChart").getContext('2d');
-        var subRadarChartA = new Chart(subRadarChart, {
-            type: 'radar'
-            , data: {
-                labels: ["상주인구", "유동인구", "직장인구", "개업률", "점포수"]
-                , datasets: [{
-                    label: '현재 상권'
-                    , data: [100, 30, 50, 60, 11]
-                    , backgroundColor: 'rgba(165, 223, 249, 0.3)'
-                    , borderColor: 'rgba(165, 223, 249)'
-            }, {
-                    label: 'A 상권'
-                    , data: [50, 10, 30, 90, 50]
-                    , backgroundColor: 'rgba(239, 82, 133, 0.3)'
-                    , borderColor: 'rgba(239, 82, 133)'
-            }, {
-                    label: 'B 상권'
-                    , data: [44, 12, 64, 23, 67]
-                    , backgroundColor: 'rgba(96, 197, 186, 0.3)'
-                    , borderColor: 'rgba(96, 197, 186)'
-            }, {
-                    label: 'C 상권'
-                    , data: [96, 60, 90, 77, 55]
-                    , backgroundColor: 'rgba(254, 238, 125, 0.3)'
-                    , borderColor: 'rgba(254, 238, 125)'
-            }]
-            }
-            , options: {
-                legend: {
-                    display: true
-                    , position: 'left'
-                    , labels: {
-                        fontColor: '#000000'
-                    }
-                }
-                , circumference: 1 * Math.PI
-                , rotation: 1 * Math.PI
-                , title: {
-                    display: true
-                    , text: 'SUB CHART'
-                    , position: 'top'
-                    , fontColor: '#000000'
-                }
-            }
-        });
+        
+        
         // 매출액 차트
         var salesAmount = document.getElementById("salesAmountChart").getContext('2d');
         var salesAmountChart = new Chart(salesAmount, {
