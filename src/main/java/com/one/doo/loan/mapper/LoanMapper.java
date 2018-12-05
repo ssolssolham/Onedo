@@ -3,8 +3,6 @@ package com.one.doo.loan.mapper;
 import java.util.HashMap;
 import java.util.List;
 
-import com.one.doo.board.domain.Reply;
-import com.one.doo.loan.domain.CreditRank;
 import com.one.doo.loan.domain.Loan;
 import com.one.doo.loan.domain.Parameter;
 public interface LoanMapper {

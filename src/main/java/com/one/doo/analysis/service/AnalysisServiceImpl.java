@@ -104,10 +104,9 @@ public class AnalysisServiceImpl implements AnalysisService {
 	@Override
 	public List<HashMap<String,Object>> firstStep(List<String> Areas,String regionType) {
 		log.info(regionType);
-		
+			
 		//리스트 반환할 객체 선언 
 		List<HashMap> list = null;
-		
 
 		switch(regionType) {
 			case "주택가" : list = mlresultMapper.firstStep(Areas);

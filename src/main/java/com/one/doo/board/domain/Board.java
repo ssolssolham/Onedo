@@ -15,5 +15,5 @@ public class Board {
 	private Date updateDate;
 	
 	private int replyCnt;
-	//private List<BoardAttach> attachList;
+	private List<BoardAttach> attachList;
 }
