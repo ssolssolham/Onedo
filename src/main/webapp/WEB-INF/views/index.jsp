@@ -42,13 +42,11 @@
           <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150">
             <!-- 메인 페이지에서 서비스 소개 끝나고 나타나는 버튼 // 클릭 시, 분석 페이지로 이동 -->
             <span id="introText3" style="font-size: 50px; font-weight: bold; color: white"></span>
-            <a href="analysis.html" class="btn1 flex-c-m size1 txt3 trans-0-4"> 분석 시작하기 </a>
+            <a href="/analysis/" class="btn1 flex-c-m size1 txt3 trans-0-4"> 분석 시작하기 </a>
           </div>
         </div>
       </div>
     </div>
-    <!-- 메인 페이지 이미지 슬라이드 토글 -->
-    <div class="wrap-slick1-dots"></div>
   </section>
 
   <!-- footer include 시작 -->
@@ -107,12 +105,6 @@ function beforeSubmit() {
   var memberEmail = $('#email').val() + '@'
       + $('#emailHost').val();
   $('#memberEmail').val(memberEmail);
-}
-</script> 
-<!-- 로그아웃 -->
-<script type="text/javascript">
-function logoutFormSubmit() {
-	$('#logoutForm').submit();
 }
 </script> 
 </body>
