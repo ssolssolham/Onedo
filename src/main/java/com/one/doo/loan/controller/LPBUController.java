@@ -5,12 +5,16 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.one.doo.board.domain.Board;
+import com.one.doo.board.domain.Criteria;
+import com.one.doo.board.domain.Page;
 import com.one.doo.loan.domain.LPBU;
 import com.one.doo.loan.service.LPBUService;
 
@@ -35,8 +39,14 @@ public class LPBUController{
 		
 		log.info("예약확인 : " + lpbu);
 		service.insertLPBU(lpbu);
-		rttr.addFlashAttribute("result", lpbu.getLpbuNum());
+		rttr.addFlashAttribute("list", service.listLPBU(lpbu.getUserId()));
+		rttr.addFlashAttribute("result", "상담예약이 완료되었습니다.");
 		return "redirect:/";
+	}
+	
+	@GetMapping("/reservelist")
+	public void list(String userId, Model model) {
+		model.addAttribute("list", service.listLPBU(userId));
 	}
 }
 

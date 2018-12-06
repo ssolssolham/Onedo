@@ -1,5 +1,8 @@
 package com.one.doo.loan.service;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +34,11 @@ public class LPBUServiceImpl implements LPBUService {
 	@Override
 	public int deleteLPBU(int lpbuNo) {
 		return mapper.deleteLPBU(lpbuNo);
+	}
+
+	@Override
+	public List<HashMap<String, Object>> listLPBU(String userId){
+		return mapper.listLPBU(userId);
 	}
 
 
