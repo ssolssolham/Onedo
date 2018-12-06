@@ -11,7 +11,7 @@ public class Reply {
 	
 	private String reply;	 // 게시글내용
 	private String replyer;	 // 게시글작성자
-	private Date replyDate;	 // 게시글등록일
-	private Date updateDate; // 게시글수정일
+	private String replyDate;	 // 게시글등록일
+	private String updateDate; // 게시글수정일
 	
 }

@@ -43,7 +43,8 @@
 					enabled = 'Y' AND
 	]]>				<include refid="criteria"></include>
 	<![CDATA[
-					ROWNUM <= #{pageNum} * #{amount})
+					ROWNUM <= #{pageNum} * #{amount}
+					ORDER BY regdate DESC)
 					WHERE rn > (#{pageNum} - 1) * #{amount}
 	]]>
 	</select>

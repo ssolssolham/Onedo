@@ -196,6 +196,17 @@
 
 })(jQuery);
 
+/**
+ * 토스트메시지함수
+ */
+function toast() {
+    var x = document.getElementById("snackbar");
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+/**
+ * 로그아웃 함수
+ */
 function logoutFormSubmit() {
 	$('#logoutForm').submit();
 }

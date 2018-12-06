@@ -87,7 +87,7 @@
 							  <td>${status.index +1 }</td>
 							  <td><a class="move" href="/review/detail?article_num=${review.article_num }">${review.title }</a></td>
 							  <td>${review.userid }</td>
-							  <td><fmt:parseDate value="${review.regdate }" pattern="yyyy-MM-dd"/></td>
+							  <td>${review.regdate }</td>
 							  <td>${review.enabled }</td>
 							</tr>
 						</c:forEach>
@@ -137,7 +137,7 @@
 			  <h4 class="modal-title">서비스 이용 후기</h4>
 			</div>
 			<div class="modal-body">
-			  <form action="/review/register" method="get">
+			  <form action="/review/register" method="get" id="registerForm">
 				<div class="form-group">
 				  <input type="text" name="title" class="form-control " placeholder="제목 입력" required="required" style="padding-left:10px;">
 				</div>
@@ -171,6 +171,15 @@ $(document).ready(function() {
 	var result = '<c:out value="${result}"/>';
 	console.log("result값"+result);
 	checkModal(result);
+	
+	//새 리뷰등록시 toast
+	var res = '${reviewRegiRes}';
+	if(res ==='success'){
+		//alert("등록성공!");
+		var target = $('#snackbar');
+    	target.text('후기를 등록하였습니다:D');
+    	toast();
+	}
 	
 	// history back, 모달띄울필요X
 	history.replaceState({}, null, null);
@@ -224,6 +233,11 @@ $(document).ready(function() {
 		searchForm.submit();
 	});
 	
+	$("#registerForm").submit(function() {
+		var checkRegister = confirm("후기를 등록하시겠습니까?");
+		return checkRegister;
+	});
+	
 });
 </script>
 	
@@ -257,6 +271,7 @@ $(document).ready(function() {
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/lightbox2/js/lightbox.min.js"></script>
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-
+<!-- toast msg영역 -->
+<div id="snackbar"></div>
 </body>
 </html>

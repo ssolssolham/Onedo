@@ -144,7 +144,7 @@
 			  <h4 class="modal-title">후기 내용 수정</h4>
 			</div>
 			<div class="modal-body">
-			  <form action="/review/modify" method="get">
+			  <form action="/review/modify" method="get" id="modForm">
 				<div class="form-group">
 				  <input type="text" name="title" class="form-control " required="required" style="padding-left:10px;" value="${review.title }">
 				</div>
@@ -169,7 +169,35 @@
 		  </div>
 		</div>
 	  </div>
-    
+	  
+     <!-- 후기 삭제 Modal HTML -->
+  <div id="deleteReviewModal" class="modal fade">
+    <div class="modal-dialog modal-login">
+      <div class="modal-content">
+      <div class="modal-header">        
+        <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;후기 삭제</h4>
+      </div>
+      <div class="modal-body">
+        <form action="/review/remove?article_num=${review.article_num }" method="get" id="removeForm">
+        <div class="fs-20 t-center">후기 등록 시, 입력했던 비밀번호를 입력하세요</div><br>
+        <div class="fs-20 t-center" style="color: red; font-weight: bold;">&lt;주의&gt; 삭제 시, 복구할 수 없습니다!</div>
+        <br>
+        <br>
+        <div class="form-group">
+          <input type="hidden" name="article_num" value="${review.article_num }">
+          <input type="password" name="article_pw" id="inputPw" class="form-control " placeholder="비밀번호 입력" required="required" style="padding-left:10px;">         
+        </div>
+        <br>
+        <div class="form-group" style="display: flex; align-items: center; justify-content: center;">
+          <input type="submit" class="" value="삭제">&nbsp;
+          <button type="button" class="" value="취소"  data-dismiss="modal">취소</button>
+        </div>
+        </form>       
+      </div>
+      </div>
+    </div>
+    </div>
+
   <!-- 댓글 Modal HTML -->
   <div id="replyModal" class="modal fade">
     <div class="modal-dialog modal-login">
@@ -211,34 +239,6 @@
     </div>
    </div>
     
-     <!-- 후기 삭제 Modal HTML -->
-  <div id="deleteReviewModal" class="modal fade">
-    <div class="modal-dialog modal-login">
-      <div class="modal-content">
-      <div class="modal-header">        
-        <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;후기 삭제</h4>
-      </div>
-      <div class="modal-body">
-        <form action="/review/remove?article_num=${review.article_num }" method="get">
-        <div class="fs-20 t-center">후기 등록 시, 입력했던 비밀번호를 입력하세요</div><br>
-        <div class="fs-20 t-center" style="color: red; font-weight: bold;">&lt;주의&gt; 삭제 시, 복구할 수 없습니다!</div>
-        <br>
-        <br>
-        <div class="form-group">
-          <input type="hidden" name="article_num" value="${review.article_num }">
-          <input type="password" class="form-control " placeholder="비밀번호 입력" required="required" style="padding-left:10px;">         
-        </div>
-        <br>
-        <div class="form-group" style="display: flex; align-items: center; justify-content: center;">
-          <input type="submit" class="" value="삭제">&nbsp;
-          <button type="button" class="" value="취소"  data-dismiss="modal">취소</button>
-        </div>
-        </form>       
-      </div>
-      </div>
-    </div>
-    </div>
-
 
 
 
@@ -249,7 +249,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reply.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function () {
-		  
+		
 		  var articleNumVal = '<c:out value="${review.article_num}"/>';
 		  var replyUL = $(".chat");
 		  
@@ -276,23 +276,20 @@
 		     if(list == null || list.length == 0){
 		       return;
 		     }
-		     
+
+		     // 댓글리스트 크기만큼 li태그 추가(댓글 show)
 		     for (var i = 0, len = list.length || 0; i < len; i++) {
-		       str +="<li class='left clearfix' data-rno='"+(i+1)+"'>";
+		       str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
 		       str +="  <div><div class='header'><strong class='primary-font'>["
-		    	   +list[i].rno+"] "+list[i].replyer+"</strong>"; 
+		    	   +(i+1)+"] "+list[i].replyer+"</strong>"; 
 		       str +="    <small class='pull-right text-muted'>"
 		           +replyService.displayTime(list[i].replyDate)+"</small></div>";
-		       str +="    <p>"+list[i].reply+"</p></div></li>";
+		       str +="<p>"+list[i].reply+"</p></div></li>";
 		     }
-		     
 		     replyUL.html(str);
 		     
 		     showReplyPage(replyCnt);
-
-		 
 		   });//end function
-		     
 		 }//end showList
 		    
 		    var pageNum = 1;
@@ -313,17 +310,15 @@
 		      if(endNum * 10 < replyCnt){
 		        next = true;
 		      }
-		      
+
+		      // 댓글영역 페이지네이션
 		      var str = "<ul class='pagination pull-right'>";
-		      
 		      if(prev){
 		        str+= "<li class='page-item'><a class='page-link' href='"+(startNum -1)+"'>Previous</a></li>";
 		      }
 		      
 		      for(var i = startNum ; i <= endNum; i++){
-		        
 		        var active = pageNum == i? "active":"";
-		        
 		        str+= "<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"+i+"</a></li>";
 		      }
 		      
@@ -332,12 +327,11 @@
 		      }
 		      
 		      str += "</ul></div>";
-		      
 		      console.log(str);
-		      
 		      replyPageFooter.html(str);
 		    }
 		     
+		    // 페이지 클릭시 이벤트 추가
 		    replyPageFooter.on("click","li a", function(e){
 		       e.preventDefault();
 		       console.log("page click");
@@ -352,7 +346,7 @@
 		     });     
 
 		   
-		    var modal = $(".modal");
+		    var modal = $("#replyModal");
 		    var modalInputReply = modal.find("input[name='reply']");
 		    var modalInputReplyer = modal.find("input[name='replyer']");
 		    var modalInputReplyDate = modal.find("input[name='replyDate']");
@@ -369,7 +363,6 @@
 		    
 		    // 댓글추가버튼(new Reply)
 		    $("#addReplyBtn").on("click", function(e){
-		      
 		      modal.find("input").val("");
 		      modalInputReplyDate.closest("div").hide();
 		      modal.find("button[id !='modalCloseBtn']").hide();
@@ -382,7 +375,6 @@
 		    
 			// 댓글등록 이벤트
 		    modalRegisterBtn.on("click",function(e){
-		      alert("댓추가할거"+modalInputReply.val()+"작성자: "+$('#replyer').val()+"게시글번호: "+articleNumVal);
 		      var reply = {
 		            reply: modalInputReply.val(),
 		            replyer:$('#replyer').attr('value'),
@@ -390,28 +382,19 @@
 		            //,_csrf.headerName:${_csrf.token}
 		          };
 		      replyService.add(reply, function(result){
-		        
-		        alert(result);
-		        
 		        modal.find("input").val("");
 		        modal.modal("hide");
-		        
-		        //showList(1);
 		        showList(1);
-		        
 		      });
-		      
 		    });
 
-
-		  //댓글 조회 클릭 이벤트 처리 
+		  //댓글 li클릭 이벤트 (댓글 get, 작성자와 로그인아이디 같으면 댓글영역 readonly풀고 수정버튼 보이게)
 		    $(".chat").on("click", "li", function(e){
 		      
 		      var rno = $(this).data("rno");
 		      replyService.get(rno, function(reply){
-		      	alert(reply.reply);
 		        modalInputReply.val(reply.reply);
-		        modalInputReplyer.val(reply.replyer);
+		        modalInputReplyer.val(reply.replyer).attr("readonly","readonly");
 		        modalInputReplyDate.val(replyService.displayTime(reply.replyDate))
 		        .attr("readonly","readonly");
 		        modal.data("rno", reply.rno);
@@ -419,16 +402,16 @@
 		        modal.find("button[id !='modalCloseBtn']").hide();
 		        // replyer와 loginId가 같으면 수정삭제버튼 show, 
 		        var loginId = '${loginId}';
-				alert("로그인아이디: "+loginId+"\n댓글작성자: "+reply.replyer);		        
 		        if(reply.replyer == loginId){
-		        	alert("댓작성자랑 로그인자랑 같아요");
+		        	alert("아이디같아");
+		        	modalInputReply.removeAttr("readonly");
 		        	modalModBtn.show();
-		        	$("#replyModal").modal("show");
 		        	// modalRemoveBtn.show();
+		        	$("#replyModal").modal("show");
 		        }else{
+		        	alert("아이디달라");
 		        	modalInputReply.attr("readonly", "readonly");
 		        }
-		        ///////////////
 		        $("#replyModal").modal("show");
 		            
 		      });
@@ -438,15 +421,11 @@
 		    modalModBtn.on("click", function(e){
 		    	  
 		   	  var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
-		   	  //alert("댓..:"+reply.relyer);
 		   	  replyService.update(reply, function(result){
 		   	        
-		   	    alert(result);
 		   	    modal.modal("hide");
 		   	    showList(pageNum);
-		   	    
 		   	  });
-		   	  
 		   	});
 
 			// 삭제버튼클릭이벤트
@@ -454,19 +433,51 @@
 		   	  var rno = modal.data("rno");
 		   		alert("댓글을 정말로 삭제하시겠습니까?" + rno);
 		   	  
-		   	  
 		   	  replyService.remove(rno, function(result){
 		   	        
-		   	      alert(result);
 		   	      modal.modal("hide");
 		   	      showList(pageNum);
-		   	      
 		   	  });
-		   	  
 		   	});
-
-		 
 		});
+	
+	$("#modForm").submit(function() {
+		var passwd = "${review.article_pw}";
+		var inputPw = $("input[name=article_pw]").val();
+		if(passwd != inputPw){
+			/* var target = $('#snackbar');
+	    	target.text('비밀번호가 일치하지 않습니다:()');
+	    	toast(); */
+	    	alert("비밀번호가 일치하지 않습니다:(");
+			return false;
+		}else{
+			var target = $('#snackbar');
+	    	target.text('후기를 수정하였습니다:D');
+	    	toast();
+			return true;
+		}
+	});
+	
+	$("#removeForm").submit(function() {
+		var passwd = "${review.article_pw}";
+		var inputPw = $("#inputPw").val();
+		if(passwd != inputPw){
+			/* var target = $('#snackbar');
+	    	target.text('비밀번호가 일치하지 않습니다:()');
+	    	toast(); */
+	    	alert("비밀번호가 일치하지 않습니다:(");
+	    	
+			return false;
+		}else{
+			var target = $('#snackbar');
+	    	target.text('후기를 삭제하였습니다:D');
+	    	toast();
+			return true;
+		}
+	});
+	
+	
+
 	
 	</script>
 
@@ -496,6 +507,8 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/lightbox2/js/lightbox.min.js"></script>
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+<!-- toast msg영역 -->
+<div id="snackbar"></div>
 
 </body>
 </html>
