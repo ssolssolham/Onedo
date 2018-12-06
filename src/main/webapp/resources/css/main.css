@@ -469,6 +469,7 @@ input[type="date" i] {
   border-radius: 3px;
   font-size: 15px;
   padding: 5px;
+  color : black;
 }
 .daterangepicker td {
     width: 60px;

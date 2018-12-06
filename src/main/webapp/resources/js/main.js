@@ -54,7 +54,7 @@
         "singleDatePicker": true,
         "showDropdowns": true,
         locale: {
-            format: 'DD/MM/YYYY'
+            format: 'YYYY-MM-DD'
         },
     });
 

@@ -35,11 +35,6 @@ public class BoardController {
 		
 		model.addAttribute("pageMaker", new Page(cri, total));
 	}
-		
-	@GetMapping("/register")
-	public void register() {
-		
-	}
 	
 	
 	@PreAuthorize("isAuthenticated()")
