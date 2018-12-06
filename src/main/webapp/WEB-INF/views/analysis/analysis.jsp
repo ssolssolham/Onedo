@@ -1244,6 +1244,10 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     // 분석 후 도출되는 3개의 상권 리스트 담는 변수
     var topThreeList = [];
     
+  	//(상일) 부동산 중개사 리스트 파싱 
+    var realestateOwnerList ;
+ 	var realestateList ;
+    
     // 분석하기 버튼 클릭 시, 발생하는 이벤트(필터에서 검색한 변수들을 Ajax 통신을 위해 변수로 저장)
     $('#analysisStartBtn').click(function() {
     	// 분석 결과 동적으로 출력
@@ -1334,6 +1338,10 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     	
     	for(var i =0; i < topThreeList.length; i++) {
     		if(topThreeList[i].alleyBiz.alleybizCode_Name == alleyBizFullName[2]) {
+    			
+    			realestateList = topThreeList[i].memulList;
+        	 	realestateOwnerList = topThreeList[i].realestateList;
+        	 	
     			// 상위 3개의 상권 리스트 배열에서 도로명이 일치하는 배열의 요소를 불러와 해당하는 예상 매출액을 태그의 text로 추가
     			$('#expectedSalesAccount').text(topThreeList[i].mlresult.estmt_SALES);
     			var marker;
@@ -1686,6 +1694,8 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	            });
 	            
     		}
+    	 	
+    		
    		}
     })
     
@@ -2380,6 +2390,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
               $("#selectSecurityLoanForm").submit();
             });
         });
+     	
     </script>
 <!--===============================================================================================-->
 <!--===============================================================================================-->
