@@ -120,14 +120,6 @@
             <div class="col-sm-8">
             <div id="map_wrap">
               <div style="width: 99%; height: 670px; border:1px solid black; background-color: white;" id="map" class="card-body"></div>
-              	<div class="category">
-	       			 <ul id="category">
-				        <li id="CE7" data-order="4"> 
-				            <span class="category_bg cafe"></span>
-				            카페
-				        </li>  
-				    </ul>
-   				</div>
            </div>
         </div>
         </div>
@@ -189,7 +181,7 @@
                       
                       <div class="col-sm-6 t-center"> <!-- 종합 분석 결과 수치데이터 Column 2 -->
                         <div style="font-size: 4.0em;">&lt;예상 매출액&gt;<br><br>
-                            <span style="color: #27b2a5;" id="expectedSalesAccount"></span> 만원
+                            월 <span style="color: #27b2a5;" id="expectedSalesAccount"></span> 만원
                         </div>
                       </div>
                     </div>
@@ -280,58 +272,82 @@
                       <table class="table table-bordered" style="text-align: center;">
                         <tbody>
                           <tr>
-                              <th>아파트단지 수</th>
-                              <th>집객시설 수</th>
-                              <th>관공서 수</th>
-                              <th>은행 수</th>
-                              <th>종합병원 수</th>
-                              <th>일반병원 수</th>
-                              <th>약국 수</th>
+                              <th>총 시설</th>
+                              <th>기반시설 및 가구</th>
+                              <th>총 가구수</th>
+                              <th>관공서</th>
+                              <th>은행</th>
+                              <th colspan="2" rowspan="2" style="background-color: unset;">단위에 대한 설명</th>
                           </tr>
                           <tr>
-                              <td>5000</td>
-                              <td>4000</td>
-                              <td>5000</td>
-                              <td>2000</td>
-                              <td>2000</td>
-                              <td>2000</td>
-                              <td>2000</td>
+                              <td class="facilities" style="background-color: bisque;">5000</td>
+                              <td class="facilities">4000</td>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">5000</td>
                           </tr>
                           <tr>
-                              <th>유처원 수</th>
-                              <th>초등학교 수</th>
-                              <th>중학교 수</th>
-                              <th>고등학교 수</th>
-                              <th>대학교 수</th>
-                              <th>백화점 수</th>
-                              <th>슈퍼마켓 수</th>
+                              <th rowspan="8" style="background-color: unset;">설명</th>
+                              <th>의료시설</th>
+                              <th>종합병원</th>
+                              <th>일반병원 </th>
+                              <th>약국</th>
+                              <!-- <th rowspan="2" colspan="2">???</th> -->
                           </tr>
                           <tr>
-                              <td>5000</td>
-                              <td>4000</td>
-                              <td>5000</td>
-                              <td>2000</td>
-                              <td>2000</td>
-                              <td>2000</td>
-                              <td>2000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
                           </tr>
                           <tr>
-                              <th>극장 수</th>
-                              <th>숙박 시설 수</th>
-                              <th>공항 수</th>
-                              <th>철도역 수</th>
-                              <th>버스 터미널 수</th>
-                              <th></th>
-                              <th></th>
+                              <th>교육시설</th>
+                              <th>유치원</th>
+                              <th>초등학교</th>
+                              <th>중학교</th>
+                              <th>고등학교</th>
+                              <th>대학교</th>
                           </tr>
                           <tr>
-                              <td>5000</td>
-                              <td>4000</td>
-                              <td>5000</td>
-                              <td>2000</td>
-                              <td>2000</td>
-                              <td></td>
-                              <td></td>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">4000</td>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
+                          </tr>
+                          <tr>
+                              <th>집객시설 및 상가</th>
+                              <th>집객시설</th>
+                              <th>백화점</th>
+                              <th>슈퍼마켓</th>
+                              <th>극장</th>
+                              <th>숙박시설</th>
+                          </tr>
+                          <tr>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">4000</td>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
+                          </tr>
+                          <tr>
+                              <th>교통시설</th>
+                              <th>공항</th>
+                              <th>철도역</th>
+                              <th>버스 터미널</th>
+                              <th>지하철</th>
+                              <th>버스 정거장</th>
+                              <!-- <th rowspan="2"></th> -->
+                          </tr>
+                          <tr>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">4000</td>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
                           </tr>
                         </tbody>
                       </table>
@@ -421,94 +437,100 @@
                   
                   <!-- 부동산 매물 결과 tab -->
                   <div id="landAnalysis" class="card-body bg1-pattern" style="display: none;">
-                        <div class="row" >
-                          <div class="col-sm-6">
-                            <br>                      
-                              <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">해당 상권의 지도</span>
-                          </div>
-                      
-                          <div class="col-sm-6">
-                            <br>
-                              <span style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">부동산 매물 리스트</span>
-                          </div>
+                  	<!-- 지도 + 로드뷰 영역 -->
+                    <br>                      
+                    <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">해당 상권의 지도(공인중개사 리스트 및 로드뷰)</span>
+              		<div class="" style="background-color: white; font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
+              		<div class="row">
+                      <div class="map_wrap" >
+                        <div id="mapWrapper" style="width: 50%; margin:0 0; float :left">
+                        	<div style="height: 600px;" id="roadMap">
+                        	</div>
                         </div>
-                        <br>
-						<br>
-                      <div class="" style="background-color: white; font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
                         
-                        <div class="row">
-                          <div class="col-sm-6" style="border: 1px solid grey; height: 600px;">
-                            지도지도
-                          </div>
-                      
-                          <div class="col-sm-6" style="border: 1px solid grey; height: 600px; padding: 20px;">
-                            <table>
-                              <colgroup>
-                                <col width="25%">
-                                <col width="75%">
-                              </colgroup>
-                              <thead>
-                                <tr>
-                                  <td colspan="2">
-                                    <br>
-                                    <div class="t-center" style="font-family: a드림고딕4; font-size: 20px;">
-                                      OOO 공인중개사의 매물정보
-                                    </div>
-                                    <br>
-                                  </td>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'"> 
-                                  <td>image1</td>
-                                  <td>
-                                    <div>매물번호 : <span class="fs-18">12350</span></div>
-                                    <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                    <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                  <td>image1</td>
-                                  <td>
-                                    <div>매물번호 : <span class="fs-18">12350</span></div>
-                                    <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                    <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                  <td>image1</td>
-                                  <td>
-                                    <div>매물번호 : <span class="fs-18">12350</span></div>
-                                    <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                    <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                  <td>image1</td>
-                                  <td>
-                                    <div>매물번호 : <span class="fs-18">12350</span></div>
-                                    <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                    <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                  <td>image1</td>
-                                  <td>
-                                    <div>매물번호 : <span class="fs-18">12350</span></div>
-                                    <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                    <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
+                        <div id="rvWrapper">
+                   			<div style="height: 600px;" id="roadview">
+                      			</div>
+                         	</div>
+             		      </div>
+                  	     </div>
+                    </div> 
+
+                  	<!-- 부동산 상가 매물 리스트 -->
+                  	<br>
+                    <span style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">부동산 매물 리스트</span>
+                    <div class="" style="background-color: white; font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
+                    	<div class="row">
+                        <div class="col-sm-12" style="height: 600px; padding: 20px;">
+                          <table>
+                            <colgroup>
+                              <col width="25%">
+                              <col width="75%">
+                            </colgroup>
+                            <thead>
+                              <tr>
+                                <td colspan="2">
+                                  <br>
+                                  <div class="t-center" style="font-family: a드림고딕4; font-size: 20px;">
+                                    OOO 공인중개사의 매물정보
+                                  </div>
+                                  <br>
+                                </td>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'"> 
+                                <td>image1</td>
+                                <td>
+                                  <div>매물번호 : <span class="fs-18">12350</span></div>
+                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
+                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
+                                <td>image1</td>
+                                <td>
+                                  <div>매물번호 : <span class="fs-18">12350</span></div>
+                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
+                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
+                                <td>image1</td>
+                                <td>
+                                  <div>매물번호 : <span class="fs-18">12350</span></div>
+                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
+                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
+                                <td>image1</td>
+                                <td>
+                                  <div>매물번호 : <span class="fs-18">12350</span></div>
+                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
+                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
+                                <td>image1</td>
+                                <td>
+                                  <div>매물번호 : <span class="fs-18">12350</span></div>
+                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
+                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
                         </div>
                       </div>
+                    </div>
+	                      	
+                    
                       <br>
                       <br>
                       <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">선택하신 매물의 상세 정보</span><br><br>
@@ -925,6 +947,11 @@
     </section>
 <script type="text/javascript">
 /*
+ * 선택된 객체의 인덱스를 나타내는 변수 
+ */ 
+  var selectedObject = 0;
+ 
+/*
  * 호준 : Reflection API와 비슷하게 만든 동적 접근 메서드
  * 지우지 마세요!!
  */
@@ -941,7 +968,6 @@
   		동적 Property 접근을 위한 메서드
   	*/
   	
-  	console.log(topData,subData,subData2);
   	return topData[subData][subData2];
   }
   
@@ -1038,7 +1064,97 @@ function makeDataSets2(topDataList,curDataArr){
    var chartbackcolor2 = '#ef5285';
    var chartbackcolor3 = '#60c5ba';
    
-  
+  function updateTable(topThreeList,selectedObject){
+	  
+	  var facility = topThreeList[selectedObject].facilitiesPerAlleybiz;
+	  
+	  var all = 0;
+	  var table1 = 0;
+	  var table2 = 0;
+	  var table3 = 0;
+	  var table4 = 0;
+	  var table5 = 0;
+	  
+	  
+	  // 총 가구수
+	  $('.facilities')[2].innerText = facility.totalHousehold;
+	  // 관공서 수
+	  $('.facilities')[3].innerText = facility.offices_count;
+	  // 은행 수
+	  $('.facilities')[4].innerText = facility.bank_count;
+	  
+	  table1 += (parseInt(facility.totalHousehold, 10) + parseInt(facility.offices_count,10) + parseInt(facility.bank_count,10));
+	  
+	  // 기반시설 및 가구
+	  $('.facilities')[1].innerText = table1;
+	  
+	  // 종합병원
+	  $('.facilities')[6].innerText = facility.ghospital_count
+	  // 일반병원
+	  $('.facilities')[7].innerText = facility.hospital_count
+	  // 약국
+	  $('.facilities')[8].innerText = facility.pharm_count
+	  
+	  table2 += (parseInt(facility.ghospital_count, 10) + parseInt(facility.hospital_count, 10) + parseInt(facility.pharm_count, 10));
+	  
+	  // 의료시설
+	   $('.facilities')[5].innerText = table2;
+	  
+	  // 유치원
+	  $('.facilities')[10].innerText = facility.kinder_count;
+	  // 초등학교
+	  $('.facilities')[11].innerText = facility.ele_count;
+	  // 중학교
+	  $('.facilities')[12].innerText = facility.mid_count;
+	  // 고등학교
+	  $('.facilities')[13].innerText = facility.high_count;
+	  // 대학교
+	  $('.facilities')[14].innerText = facility.uni_count;
+	 
+	  table3 += (parseInt(facility.kinder_count, 10) + parseInt(facility.ele_count, 10) + parseInt(facility.mid_count, 10) 
+			  	+ parseInt(facility.high_count, 10) + parseInt(facility.uni_count, 10));
+	  
+	  // 교육시설
+	  $('.facilities')[9].innerText = table3;
+	  
+	  // 집객시설
+	  $('.facilities')[16].innerText = facility.facility_count;
+	  // 백화점
+	  $('.facilities')[17].innerText = facility.depart_count;
+	  // 슈퍼마켓
+	  $('.facilities')[18].innerText = facility.market_count;
+	  // 극장 
+	  $('.facilities')[19].innerText = facility.theater_count;
+	  // 숙박시설
+	  $('.facilities')[20].innerText = facility.room_count;
+	  
+	  table4 += (parseInt(facility.facility_count, 10) + parseInt(facility.depart_count, 10) + parseInt(facility.market_count, 10) 
+			  	+ parseInt(facility.theater_count, 10) + parseInt(facility.room_count, 10));
+	
+	  // 집객시설 및 상가
+	  $('.facilities')[15].innerText = table4;
+	  
+	  // 공항
+	  $('.facilities')[22].innerText = facility.air_count
+	  // 철도
+	  $('.facilities')[23].innerText = facility.rail_count
+	  // 버스 터미널
+	  $('.facilities')[24].innerText = facility.terminal_count
+	  // 지하철
+	  $('.facilities')[25].innerText = facility.subway_count
+	  // 버스 정거장
+	  $('.facilities')[26].innerText = facility.bus_count
+	  
+	  table5 += (parseInt(facility.air_count, 10) + parseInt(facility.rail_count, 10) + parseInt(facility.terminal_count, 10) 
+			  	+ parseInt(facility.subway_count, 10) + parseInt(facility.bus_count, 10));
+	  
+	  $('.facilities')[21].innerText = table5;
+	  
+	  all += (table1 + table2 + table3 + table4 + table5);
+	  
+	  // 총합
+	  $('.facilities')[0].innerText = all;
+  }
 </script>            
 
 <!--===============================================================================================-->
@@ -1048,14 +1164,14 @@ function makeDataSets2(topDataList,curDataArr){
 <!--===============================================================================================-->	
 <script type="text/javascript">
 // 분석 관련 필터 입력 시, 동적으로 보이는 지도(분석 첫페이지 지도)
-// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	 
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
 	        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
 	        level: 7 // 지도의 확대 레벨
 	    };  
+	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+	var infowindow = new daum.maps.InfoWindow({zIndex:1});
 
 	// 지도를 생성합니다    
 	var map = new daum.maps.Map(mapContainer, mapOption);
@@ -1229,7 +1345,8 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	});
         </script>
 <!--===============================================================================================-->        
-<script type="text/javascript">
+    <script type="text/javascript">
+	var clickedVillage='';
     // 초기화 버튼 클릭 시, 발생하는 이벤트
     // 필터에서 active 되어 있던 버튼들 모두 초기화
     $('#resetFilterBtn').click(function() {
@@ -1242,6 +1359,10 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     
     // 분석 후 도출되는 3개의 상권 리스트 담는 변수
     var topThreeList = [];
+    
+  	//(상일) 부동산 중개사 리스트 파싱 
+    var realestateOwnerList ;
+ 	var realestateList ;
     
     // 분석하기 버튼 클릭 시, 발생하는 이벤트(필터에서 검색한 변수들을 Ajax 통신을 위해 변수로 저장)
     $('#analysisStartBtn').click(function() {
@@ -1317,10 +1438,23 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     
     
     // 분석 결과로 나온 버튼 클릭 시, 분석 결과 리포트 부분 활성화
-    $('.resultBtn').click(function() {
+    $('.resultBtn').click(function(e) {
     	if($('#analysisReport').hasClass('dis-none')) { // 보이지 않는 경우면
     		$('#analysisReport').removeClass('dis-none');
     		$('#analysisReport').addClass('dis-block');
+    		
+    		// 선택된 객체 인덱스 저장
+    		console.log(e.currentTarget.id);
+    		if(e.currentTarget.id === 'firstBtn'){
+    			selectedObject = 0;
+    		}else if(e.currentTarget.id === 'secondBtn'){
+    			selectedObject = 1;
+    		}else if(e.currentTarget.id === 'thirdBtn'){
+    			selectedObject = 2;
+    		}
+    		
+    		updateTable(topThreeList,selectedObject);
+    		
     	} else {
     		$('#analysisReport').removeClass('dis-block');
     		$('#analysisReport').addClass('dis-none');
@@ -1332,8 +1466,15 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     	$('#resultVillage').text(alleyBizFullName[1]);
     	$('#resultAlleyBiz').text(alleyBizFullName[2]);
     	
+    	// 부동산 매물 분석 페이지에 지도 표시를 위한 변수 저장
+    	clickedVillage = alleyBizFullName[1];
+    	
     	for(var i =0; i < topThreeList.length; i++) {
     		if(topThreeList[i].alleyBiz.alleybizCode_Name == alleyBizFullName[2]) {
+    			
+    			realestateList = topThreeList[i].memulList;
+        	 	realestateOwnerList = topThreeList[i].realestateList;
+        	 	
     			// 상위 3개의 상권 리스트 배열에서 도로명이 일치하는 배열의 요소를 불러와 해당하는 예상 매출액을 태그의 text로 추가
     			$('#expectedSalesAccount').text(topThreeList[i].mlresult.estmt_SALES);
     			var marker;
@@ -1351,7 +1492,11 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 				  		        center: new daum.maps.LatLng(coords.jb, coords.ib), // 지도의 중심좌표
 				  		        level: 1 // 지도의 확대 레벨
 				  		    };  
-
+							
+					        
+					        // 3개의 상권 탭에서 클릭 시, 지도 겹침 현상 제거 위한 하위태그 삭제 태그
+					        $('#staticMap').empty();
+					        
 					  		// 지도를 생성합니다    
 					  		var map = new daum.maps.Map(mapContainer, mapOption);
 					  		
@@ -1381,7 +1526,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 					    }
 					    
 					}) // geoCoder 끝나는 부분
-    		
+					
 	    		// 클릭 시, 동 이름을 가지고, 창업 관련 5대 지표 불러옴
 	    		// 0 ~ 25 : 매우위험, 26 ~ 50 : 위험, 51 ~ 75 : 보통, 76 ~ 100 : 좋음
 	            // 백그라운드 컬러 배열
@@ -1683,12 +1828,138 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	                        , position: 'top'
 	                    }
 	                }
-	            });
-	            
-    		}
-   		}
-    })
+	            }); // 매출액 차트 끝나는 부분
+   			}
+    	}
+   	});
     
+    
+    </script>
+    
+    <script>
+    // 부동산 매물 부분 데이터 뿌리는 JavasScirpt
+    $('.resultBtn').click(function() {
+    	
+    	// 클릭한 골목상권 테이블에 뿌리기 위해 파싱 
+    	var alleyBizFullName = $(this).text().split(' ');
+    	$('#resultDistrict').text(alleyBizFullName[0]); 
+    	$('#resultVillage').text(alleyBizFullName[1]);
+    	$('#resultAlleyBiz').text(alleyBizFullName[2]);
+    	
+    	// 부동산 매물 분석 페이지에 지도 표시를 위한 변수 저장
+    	var clickedVillage = alleyBizFullName[1];
+    	
+    	// 부동산 매물 분석 부분 -> 지도 및 로드뷰 생성
+    	var mapWrapper = document.getElementById('mapWrapper'); //지도를 감싸고 있는 DIV태그
+     	
+    	var geocoder2 = new daum.maps.services.Geocoder(); // 주소-좌표 변환 객체를 생성합니다
+    	
+    	// 변환된 좌표를 저장할 좌표 객체 생성
+    	var coords2;
+    	var map2;
+    	console.log('선택된 Village 어디여?' + clickedVillage);
+    	// 구 값이 바뀌면, 해당 구 중심 좌표로 이동
+    	geocoder2.addressSearch(clickedVillage, function(result, status) {
+    	     // 정상적으로 검색이 완료됐으면 
+    	     if (status === daum.maps.services.Status.OK) {
+    	        coords2 = new daum.maps.LatLng(result[0].y, result[0].x);				// 정상적으로 검색이 완료된 지역의 결과를 위도, 경도 좌표로 저장
+    			
+    			// 지도를 띄울 Div 태그 mapContainer 변수에 저장
+    			// 지도 가운데 좌표 저장 변수 mapCenter
+    			$('#roadMap').empty();
+    			var mapContainer2 = document.getElementById('roadMap'), // 지도를 표시할 div 
+    		        mapCenter2 = new daum.maps.LatLng(coords2.jb, coords2.ib), // 지도의 가운데 좌표
+    		        mapOption2 = {
+    		            center: mapCenter2, // 지도의 중심좌표
+    		            level: 1// 지도의 확대 레벨
+    		        };
+    	        
+    		    map2 = new daum.maps.Map(mapContainer2, mapOption2); 					// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+    	        map2.setCenter(coords2); 												// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    	    	var mapTypeControl2 = new daum.maps.MapTypeControl(); 					// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성
+    			map2.addControl(mapTypeControl2, daum.maps.ControlPosition.TOPRIGHT); 	// 지도에 컨트롤을 추가해야 지도위에 표시됨
+    			
+    			var zoomControl2 = new daum.maps.ZoomControl(); 						// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+    			map2.addControl(zoomControl2, daum.maps.ControlPosition.RIGHT); 		// 위에서 생성한 줌 컨트롤 지도에 추가
+    		    map2.addOverlayMapTypeId(daum.maps.MapTypeId.ROADVIEW); 				//지도 위에 로드뷰 도로 올리기
+    		    
+    	        marker2 = new daum.maps.Marker({ 										// 결과값으로 받은 위치를 마커로 표시
+    	            map: map2,															// 마커를 표시할 지도 변수
+    	            position: coords2													// 마커를 표시할 지도의 좌표
+    	        });
+    		    
+    	     	
+    	    	var infowindow2 = new daum.maps.InfoWindow({zIndex:1}); 				// 마커를 클릭하면 장소명을 표출할 인포윈도우 생성
+    	        
+    	        var content2 = '<div style="width:150px;text-align:center;padding:6px 0;">'+ clickedVillage +'</div>'; // 인포윈도우로 장소에 대한 설명을 표시합니다
+    	        
+    	        infowindow2 = new daum.maps.InfoWindow({
+    	            content: content2
+    	        });
+    	        
+    	        infowindow2.open(map2, marker2); 										// marker2 인포윈도우를 map2에 표시
+    	        
+    	        var rvContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+    	        var rv = new daum.maps.Roadview(rvContainer); //로드뷰 객체
+    	        var rvClient = new daum.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+    	       
+    	        toggleRoadview(mapCenter2);
+    	        
+    	        var markImage = new daum.maps.MarkerImage(								// 마커 이미지를 생성
+    	                'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/roadview_wk.png',
+    	                new daum.maps.Size(35,39),
+    	                {
+    	                    // 마커의 좌표에 해당하는 이미지의 위치를 설정
+    	                    // 이미지의 모양에 따라 값은 다를 수 있으나, 보통 width/2, height를 주면 좌표에 이미지의 하단 중앙이 올라가게 됨
+    	                    offset: new daum.maps.Point(14, 39)
+    	                }
+    	        );
+
+    	        // 드래그가 가능한 마커를 생성합니다.
+    	        var rvMarker = new daum.maps.Marker({
+    	            image : markImage,
+    	            position: mapCenter2,
+    	            draggable: true,
+    	            map: map2
+    	        });
+
+    	        //마커에 dragend 이벤트를 할당합니다
+    	        daum.maps.event.addListener(rvMarker, 'dragend', function(mouseEvent) {
+    	            var position = rvMarker.getPosition(); //현재 마커가 놓인 자리의 좌표
+    	            toggleRoadview(position); //로드뷰를 토글합니다
+    	        });
+
+    	        //지도에 클릭 이벤트를 할당합니다
+    	        daum.maps.event.addListener(map2, 'click', function(mouseEvent){
+    	            
+    	            // 현재 클릭한 부분의 좌표를 리턴 
+    	            var position = mouseEvent.latLng; 
+
+    	            rvMarker.setPosition(position);
+    	            toggleRoadview(position); //로드뷰를 토글합니다
+    	        });
+    	        
+    	      	//로드뷰 toggle함수
+    		    function toggleRoadview(position){
+    		        //전달받은 좌표(position)에 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄웁니다
+    		        rvClient.getNearestPanoId(position, 50, function(panoId) {
+    		            if (panoId === null) {
+    		                rvContainer.style.display = 'none'; //로드뷰를 넣은 컨테이너를 숨깁니다
+    		                mapWrapper.style.width = '100%';
+    		                map2.relayout();
+    		            } else {
+    		                mapWrapper.style.width = '50%';
+    		                map2.relayout(); //지도를 감싸고 있는 영역이 변경됨에 따라, 지도를 재배열합니다
+    		                rvContainer.style.display = 'block'; //로드뷰를 넣은 컨테이너를 보이게합니다
+    		                rv.setPanoId(panoId, position); //panoId를 통한 로드뷰 실행
+    		                rv.relayout(); //로드뷰를 감싸고 있는 영역이 변경됨에 따라, 로드뷰를 재배열합니다
+    		            }
+    		        });
+    		    }
+   	     	}
+    	})
+    }); // 버튼 클릭 이벤트 종료 부분
+    	
     </script>
 <!--===============================================================================================-->    
 <script type="text/javascript">
@@ -2434,12 +2705,56 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
          	 	
            	 	$(".card-body .loan")[1].style.display='block';
             });
+        	
+        	//직업 컨트롤
+            $('#guaranteeJobSelect').on('change', function(){
+              var job = $('#guaranteeJobSelect option:selected').val(); //input에 닮을 값
+              $('#guaranteeWorkingPeriod2').show(); //재직(사업)기간 오픈
+              
+              $('#takeJob2').text($('#guaranteeJobSelect option:selected').text());
+              $("#selectSecurityLoanForm input[name=targetNum]").val(job);
+            });
+
+            
+        	//담보종류 컨트롤
+            $('#guaranteeSelect').on('change', function(){
+                var security = $('#guaranteeSelect option:selected').val();
+                console.log(security);
+                $('#takeSecurity').text(security);
+                $("#selectSecurityLoanForm input[name=securityType]").val(security);
+            });
+        	
+            //소득금액 컨트롤
+            $("#inputYearMoney2").keyup(function() { 
+              var money = $("#inputYearMoney2").val();
+              console.log(money); 
+              $("#selectSecurityLoanForm input[name=resultRate]").val(money);
+              $('#takeYearMoney2').text(money);
+              
+            });
+            
+            $( ".analysisBtn2" ).each(function(index) {
+                $(this).on("click", function(){
+                    var money = parseInt($(this).val());
+                    console.log(money);
+                  $('#inputYearMoney2').val(money);
+                    //var resultMoney = parseInt($("#inputBorrowMoney1").val()) + money;
+                  $("#takeYearMoney2").text(money);
+                  $("#selectSecurityLoanForm input[name=requiredMoney]").val(money+"0000");
+                });
+            });
+            
             
             $("#loanSubmitBtn2").on("click", function(e){
               e.preventDefault();
               $("#selectSecurityLoanForm").submit();
             });
         });
+     	
+    </script>
+    
+    <script type="text/javascript">
+    
     </script>
 <!--===============================================================================================-->
 <!--===============================================================================================-->
