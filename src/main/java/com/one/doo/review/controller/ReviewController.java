@@ -50,11 +50,11 @@ public class ReviewController {
 		return "review/review";
 	}
 	
-	@GetMapping("/review")
+/*	@GetMapping("/review")
 	public String review() {
 		return "review/review";
 	}
-
+*/
 	@GetMapping("/detail")
 	public String get(@RequestParam("article_num") Long article_num, @ModelAttribute("cri")Criteria cri, Model model) {
 		log.info("후기게시판 상세보기요청");

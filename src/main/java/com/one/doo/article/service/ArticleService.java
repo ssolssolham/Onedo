@@ -29,9 +29,15 @@ public interface ArticleService {
 	// 공지글 리스트
 	public List<Article> getNoticeList();
 	
+	// 문의글 리스트
+	public List<Article> getQnaList(Criteria cri);
+	
 	// 게시글상태변경
 	public int changeStatus(Long article_num);
 	
-	// 검색조건에 맞는 총 게시글수 
+	// 검색조건에 맞는 총 게시글수 (후기..bno=2)
 	public int getTotal(Criteria cri);
+	
+	// 검색조건에 맞는 총 게시글 수 (문의 bno=3)
+	public int getQnaTotal(Criteria cri);
 }

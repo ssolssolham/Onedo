@@ -5,7 +5,7 @@
 
 <html lang="en">
 <head>
-  <title>이용 후기</title>
+  <title>이용 문의</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- 비동기통신 토큰값 저장...(reply.js의 add에서 사용) -->
@@ -20,18 +20,6 @@
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/header.jsp"/>
   <!-- header include 종료 -->
   
-  <!-- asideMenu include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/asideMenu.jsp"/>
-  <!-- asideMenu include 종료 -->
-
-  <!-- 로그인 모달 include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/modal/loginModal.jsp"/>
-  <!-- 로그인 모달 include 종료 -->
-
-  <!-- 회원가입 모달 include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/modal/registModal.jsp"/>
-  <!-- 회원가입 모달 include 종료 -->
-
   <section class="section-review">
 		<div class= "container" style="max-width: 1500px;">
 
@@ -54,14 +42,14 @@
                         </td>
                         
                         <td>
-                        ${review.title }
+                        ${qna.title }
                         </td>
                         <td style="text-align: center; vertical-align: middle; color: #27b2a5;">
                           <b>작성자</b>
                         </td>
                         
                         <td>
-                        ${review.userid }
+                        ${qna.userid }
                         </td>
                       </tr>
                       
@@ -70,7 +58,7 @@
                           <b>등록일</b>
                         </td>
                         <td>
-                        <fmt:parseDate pattern="yyyy-mm-dd" value="${review.regdate }"/>
+                        ${qna.regdate }
                         </td>
                         
                         <td style="text-align: center; vertical-align: middle; color: #27b2a5;">
@@ -85,7 +73,7 @@
                         <td colspan="4">
                           <!-- 게시물 내용 동적으로 불러오는 부분 -->
                           <div id="reviewDetailContent" style="height: 300px;">
-                          ${review.content }
+                          ${qna.content }
                           </div>
                         </td>
                       </tr>
@@ -93,12 +81,12 @@
 					<br>
 					<div>
 					<!-- 글쓴이와 보고있는사람 아이디 일치할경우 -->
-                    <a href="/review/list"
+                    <a href="/qna/"
                        class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">목록
                        </a><span class="float-r">&nbsp;&nbsp;</span>
 					
 					<sec:authentication var="loginId" property="principal.member.userid" /><!-- 로그인한사람 id값 변수로 저장 -->
-					<c:set var="writer" value="${review.userid }"/>
+					<c:set var="writer" value="${qna.userid }"/>
 					<c:if test="${writer eq loginId }">
                         <!-- 해당 아이디인 경우에만 확인할 수 있도록 작성 -->
                         <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" id="updateReviewBtn" data-toggle="modal" data-target="#updateReviewModal">수정</a><span class="float-r">&nbsp;&nbsp;</span>

@@ -75,7 +75,6 @@ public class ArticleServiceImpl implements ArticleService {
 	@Override
 	public List<Article> getNoticeList() {
 		log.info("공지글 리스트 with 페이징");
-		
 		return mapper.getList(1L);
 	}
 
@@ -84,6 +83,18 @@ public class ArticleServiceImpl implements ArticleService {
 		log.info("공지글 상태 변경");
 		
 		return mapper.changeArticleStatus(article_num);
+	}
+
+	@Override
+	public List<Article> getQnaList(Criteria cri) {
+		log.info("문의게시판목록서비스");
+		return mapper.getQnaListWithPaging(cri);
+	}
+
+	@Override
+	public int getQnaTotal(Criteria cri) {
+		log.info("문의게시글 총 갯수");
+		return mapper.getTotalQnaCount(cri);
 	}
 
 }

@@ -49,6 +49,31 @@
 	]]>
 	</select>
 	
+	<select id="getQnaListWithPaging" resultType="com.one.doo.article.domain.Article">
+	<![CDATA[
+		SELECT *
+		FROM (SELECT /* + INDEX_DESC(articles pk_articles) */
+					ROWNUM rn, article_num, bno, userid, title, content, regdate, updatedate, replycnt, enabled
+					FROM articles
+					WHERE 
+					bno = 3 AND
+					enabled = 'Y' AND
+	]]>				<include refid="criteria"></include>
+	<![CDATA[
+					ROWNUM <= #{pageNum} * #{amount}
+					ORDER BY regdate DESC)
+					WHERE rn > (#{pageNum} - 1) * #{amount}
+	]]>
+	</select>
+
+	<!-- 문의게시판 총 게시글 수 -->
+	<select id="getTotalQnaCount" resultType="int">
+		SELECT	count(*) 
+		FROM	articles
+		WHERE	<include refid="criteria"/>
+		bno = 3
+	</select>
+
 	<!-- 후기게시판 총 게시글 수 -->
 	<select id="getTotalCount" resultType="int">
 		SELECT	count(*) 

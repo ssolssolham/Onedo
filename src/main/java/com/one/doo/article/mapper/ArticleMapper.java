@@ -39,4 +39,10 @@ public interface ArticleMapper {
 	// 게시글 상태 변경(공지글에 사용)
 	public int changeArticleStatus(Long article_num);
 	
+	// 문의게시판 글목록 with paging
+	public List<Article> getQnaListWithPaging(Criteria cri);
+	
+	// 문의게시판 총 게시글 수(with 검색조건)
+	public int getTotalQnaCount(Criteria cri);
+	
 }
