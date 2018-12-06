@@ -280,58 +280,82 @@
                       <table class="table table-bordered" style="text-align: center;">
                         <tbody>
                           <tr>
-                              <th>아파트단지 수</th>
-                              <th>집객시설 수</th>
-                              <th>관공서 수</th>
-                              <th>은행 수</th>
-                              <th>종합병원 수</th>
-                              <th>일반병원 수</th>
-                              <th>약국 수</th>
+                              <th>총 시설</th>
+                              <th>기반시설 및 가구</th>
+                              <th>총 가구수</th>
+                              <th>관공서</th>
+                              <th>은행</th>
+                              <th colspan="2" rowspan="2" style="background-color: unset;">단위에 대한 설명</th>
                           </tr>
                           <tr>
-                              <td>5000</td>
-                              <td>4000</td>
-                              <td>5000</td>
-                              <td>2000</td>
-                              <td>2000</td>
-                              <td>2000</td>
-                              <td>2000</td>
+                              <td class="facilities" style="background-color: bisque;">5000</td>
+                              <td class="facilities">4000</td>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">5000</td>
                           </tr>
                           <tr>
-                              <th>유처원 수</th>
-                              <th>초등학교 수</th>
-                              <th>중학교 수</th>
-                              <th>고등학교 수</th>
-                              <th>대학교 수</th>
-                              <th>백화점 수</th>
-                              <th>슈퍼마켓 수</th>
+                              <th rowspan="8" style="background-color: unset;">설명</th>
+                              <th>의료시설</th>
+                              <th>종합병원</th>
+                              <th>일반병원 </th>
+                              <th>약국</th>
+                              <!-- <th rowspan="2" colspan="2">???</th> -->
                           </tr>
                           <tr>
-                              <td>5000</td>
-                              <td>4000</td>
-                              <td>5000</td>
-                              <td>2000</td>
-                              <td>2000</td>
-                              <td>2000</td>
-                              <td>2000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
                           </tr>
                           <tr>
-                              <th>극장 수</th>
-                              <th>숙박 시설 수</th>
-                              <th>공항 수</th>
-                              <th>철도역 수</th>
-                              <th>버스 터미널 수</th>
-                              <th></th>
-                              <th></th>
+                              <th>교육시설</th>
+                              <th>유치원</th>
+                              <th>초등학교</th>
+                              <th>중학교</th>
+                              <th>고등학교</th>
+                              <th>대학교</th>
                           </tr>
                           <tr>
-                              <td>5000</td>
-                              <td>4000</td>
-                              <td>5000</td>
-                              <td>2000</td>
-                              <td>2000</td>
-                              <td></td>
-                              <td></td>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">4000</td>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
+                          </tr>
+                          <tr>
+                              <th>집객시설 및 상가</th>
+                              <th>집객시설</th>
+                              <th>백화점</th>
+                              <th>슈퍼마켓</th>
+                              <th>극장</th>
+                              <th>숙박시설</th>
+                          </tr>
+                          <tr>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">4000</td>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
+                          </tr>
+                          <tr>
+                              <th>교통시설</th>
+                              <th>공항</th>
+                              <th>철도역</th>
+                              <th>버스 터미널</th>
+                              <th>지하철</th>
+                              <th>버스 정거장</th>
+                              <!-- <th rowspan="2"></th> -->
+                          </tr>
+                          <tr>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">4000</td>
+                              <td class="facilities">5000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
+                              <td class="facilities">2000</td>
                           </tr>
                         </tbody>
                       </table>
@@ -925,6 +949,11 @@
     </section>
 <script type="text/javascript">
 /*
+ * 선택된 객체의 인덱스를 나타내는 변수 
+ */ 
+  var selectedObject = 0;
+ 
+/*
  * 호준 : Reflection API와 비슷하게 만든 동적 접근 메서드
  * 지우지 마세요!!
  */
@@ -941,7 +970,6 @@
   		동적 Property 접근을 위한 메서드
   	*/
   	
-  	console.log(topData,subData,subData2);
   	return topData[subData][subData2];
   }
   
@@ -1038,7 +1066,97 @@ function makeDataSets2(topDataList,curDataArr){
    var chartbackcolor2 = '#ef5285';
    var chartbackcolor3 = '#60c5ba';
    
-  
+  function updateTable(topThreeList,selectedObject){
+	  
+	  var facility = topThreeList[selectedObject].facilitiesPerAlleybiz;
+	  
+	  var all = 0;
+	  var table1 = 0;
+	  var table2 = 0;
+	  var table3 = 0;
+	  var table4 = 0;
+	  var table5 = 0;
+	  
+	  
+	  // 총 가구수
+	  $('.facilities')[2].innerText = facility.totalHousehold;
+	  // 관공서 수
+	  $('.facilities')[3].innerText = facility.offices_count;
+	  // 은행 수
+	  $('.facilities')[4].innerText = facility.bank_count;
+	  
+	  table1 += (parseInt(facility.totalHousehold, 10) + parseInt(facility.offices_count,10) + parseInt(facility.bank_count,10));
+	  
+	  // 기반시설 및 가구
+	  $('.facilities')[1].innerText = table1;
+	  
+	  // 종합병원
+	  $('.facilities')[6].innerText = facility.ghospital_count
+	  // 일반병원
+	  $('.facilities')[7].innerText = facility.hospital_count
+	  // 약국
+	  $('.facilities')[8].innerText = facility.pharm_count
+	  
+	  table2 += (parseInt(facility.ghospital_count, 10) + parseInt(facility.hospital_count, 10) + parseInt(facility.pharm_count, 10));
+	  
+	  // 의료시설
+	   $('.facilities')[5].innerText = table2;
+	  
+	  // 유치원
+	  $('.facilities')[10].innerText = facility.kinder_count;
+	  // 초등학교
+	  $('.facilities')[11].innerText = facility.ele_count;
+	  // 중학교
+	  $('.facilities')[12].innerText = facility.mid_count;
+	  // 고등학교
+	  $('.facilities')[13].innerText = facility.high_count;
+	  // 대학교
+	  $('.facilities')[14].innerText = facility.uni_count;
+	 
+	  table3 += (parseInt(facility.kinder_count, 10) + parseInt(facility.ele_count, 10) + parseInt(facility.mid_count, 10) 
+			  	+ parseInt(facility.high_count, 10) + parseInt(facility.uni_count, 10));
+	  
+	  // 교육시설
+	  $('.facilities')[9].innerText = table3;
+	  
+	  // 집객시설
+	  $('.facilities')[16].innerText = facility.facility_count;
+	  // 백화점
+	  $('.facilities')[17].innerText = facility.depart_count;
+	  // 슈퍼마켓
+	  $('.facilities')[18].innerText = facility.market_count;
+	  // 극장 
+	  $('.facilities')[19].innerText = facility.theater_count;
+	  // 숙박시설
+	  $('.facilities')[20].innerText = facility.room_count;
+	  
+	  table4 += (parseInt(facility.facility_count, 10) + parseInt(facility.depart_count, 10) + parseInt(facility.market_count, 10) 
+			  	+ parseInt(facility.theater_count, 10) + parseInt(facility.room_count, 10));
+	
+	  // 집객시설 및 상가
+	  $('.facilities')[15].innerText = table4;
+	  
+	  // 공항
+	  $('.facilities')[22].innerText = facility.air_count
+	  // 철도
+	  $('.facilities')[23].innerText = facility.rail_count
+	  // 버스 터미널
+	  $('.facilities')[24].innerText = facility.terminal_count
+	  // 지하철
+	  $('.facilities')[25].innerText = facility.subway_count
+	  // 버스 정거장
+	  $('.facilities')[26].innerText = facility.bus_count
+	  
+	  table5 += (parseInt(facility.air_count, 10) + parseInt(facility.rail_count, 10) + parseInt(facility.terminal_count, 10) 
+			  	+ parseInt(facility.subway_count, 10) + parseInt(facility.bus_count, 10));
+	  
+	  $('.facilities')[21].innerText = table5;
+	  
+	  all += (table1 + table2 + table3 + table4 + table5);
+	  
+	  // 총합
+	  $('.facilities')[0].innerText = all;
+  }
 </script>            
 
 <!--===============================================================================================-->
@@ -1317,10 +1435,23 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     
     
     // 분석 결과로 나온 버튼 클릭 시, 분석 결과 리포트 부분 활성화
-    $('.resultBtn').click(function() {
+    $('.resultBtn').click(function(e) {
     	if($('#analysisReport').hasClass('dis-none')) { // 보이지 않는 경우면
     		$('#analysisReport').removeClass('dis-none');
     		$('#analysisReport').addClass('dis-block');
+    		
+    		// 선택된 객체 인덱스 저장
+    		console.log(e.currentTarget.id);
+    		if(e.currentTarget.id === 'firstBtn'){
+    			selectedObject = 0;
+    		}else if(e.currentTarget.id === 'secondBtn'){
+    			selectedObject = 1;
+    		}else if(e.currentTarget.id === 'thirdBtn'){
+    			selectedObject = 2;
+    		}
+    		
+    		updateTable(topThreeList,selectedObject);
+    		
     	} else {
     		$('#analysisReport').removeClass('dis-block');
     		$('#analysisReport').addClass('dis-none');
