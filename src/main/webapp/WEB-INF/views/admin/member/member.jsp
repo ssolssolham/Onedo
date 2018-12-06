@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <!--
 This is a starter template page. Use this page to start your new project from
@@ -100,24 +101,35 @@ desired effect
 		  	<td>${user.regDate }</td>
 		  	<td>${user.updateDate }</td>
 		  	<td>
-		  	<c:forEach items="${user.authList }" var="auth" varStatus="status">
-		  	${status.index+1 }: ${auth.auth }<br>
-		  	</c:forEach>
+		  	<c:if test="${fn:length(user.authList) >=1 }">
+			  	<c:forEach items="${user.authList }" var="auth" varStatus="status">
+			  		${status.index+1 }: ${auth.auth }<br>
+			  	</c:forEach>
+		  	</c:if>
 		  	</td>
-		  	<td>${user.enabled }</td>
+		  	<td>
+			  	<c:if test="${user.enabled eq 'Y' }">
+				회원		  	
+			  	</c:if>
+			  	<c:if test="${user.enabled eq 'N' }">
+				비회원		  	
+			  	</c:if>
+		  	</td>
 		  	<td>
               <button type="button" style="margin: 0px 0px 0px 10px;"
               class="accordion btn btn-primary btn-primary btn-flat"
                value="이름 수정">이름수정</button>
-              <input type="button" style="margin:  0px 0px 0px 10px;"
-              class="btn btn-primary btn-danger btn-flat" value="회원 탈퇴"  
-              onclick="location.href = '/admin/notice/withdraw?userid=${user.userid}' "/>
+             <form style="display: inline;" action="/admin/member/withdraw?userid=${user.userid }" method="get">
+              <input type="hidden" name="userid" value="${user.userid }">
+              <input type="submit" style="margin:  0px 0px 0px 10px;"
+              class="btn btn-primary btn-danger btn-flat" value="회원 탈퇴" > 
+              </form>
               <button type="button" style="margin: 0px 0px 0px 10px;"
               class="accordion2 btn btn-warning btn-primary btn-flat"
                value="권한 관리">권한관리</button>
             </td>
 		  </tr>
-		  <!-- 첫번째아코디언영역 -->
+		  <!-- 첫번째아코디언영역: 회원이름수정 -->
  		  <tr class="panel">
 		  	<td colspan="8">
 		  		<h4>이름수정</h4>
@@ -129,13 +141,17 @@ desired effect
 		  		</form>
 		  	</td>
 		  </tr>
-		  <!-- 두번째아코디언영역 -->
+		  <!-- 두번째아코디언영역: 회원권한부여 -->
 		  <tr class="panel2" style="display: none">
 		    <td colspan="8">
 				<h4>권한부여</h4>
-				<form action="">
+				<form name="authList" action="/admin/member/grantAuth" method="get">
 				회원아이디: <label>${user.userid }</label> <br>
-				수정할 이름: <input type="text" name="username"> <br>
+				<input type="hidden" name="userid" value="${user.userid }">
+				<input type="checkbox" name="authList" value="ROLE_USER">일반회원</input><br>
+				<input type="checkbox" name="authList" value="ROLE_ADMIN">관리자</input><br>
+				<input type="checkbox" name="authList" value="ROLE_MANAGER">매니저</input><br>
+				<input type="checkbox" name="authList" value="ROLE_ENGINEER">엔지니어</input><br>
 				<input type="submit" value="변경">
 				</form>
 		    </td>

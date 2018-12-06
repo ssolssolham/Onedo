@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.one.doo.article.domain.Criteria;
 import com.one.doo.article.domain.Page;
+import com.one.doo.auth.domain.Auth;
+import com.one.doo.member.domain.AuthVO;
 import com.one.doo.member.domain.Member;
 import com.one.doo.member.service.MemberService;
 
@@ -61,6 +63,18 @@ public class AdminMemberController {
 	}
 	
 	@GetMapping("/grantAuth")
+	public String grantAuth(AuthVO vo) {
+		log.info("권한부여 요청");
+		String userid = vo.getUserid();
+		List<String> authList = vo.getAuthList();
+		for (String role : authList) {
+			service.grantAuth(userid, role);
+		}
+		return "redirect:/admin/member/";
+	}
+
+	
+/*	@GetMapping("/grantAuth")
 	public String grantAuth(String userid, List<String> roles) {
 		log.info("권한부여 요청");
 		for (String role : roles) {
@@ -68,5 +82,5 @@ public class AdminMemberController {
 		}
 		return "redirect:/admin/member/";
 	}
-	
+*/	
 }

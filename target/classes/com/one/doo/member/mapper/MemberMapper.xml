@@ -114,7 +114,7 @@
 	<update id="updateEnabled">
 		UPDATE	users
 		SET		enabled = 'N'
-		WEHRE	userid = #{userid}
+		WHERE	userid = #{userid}
 	</update>
 	
 	<!-- 관리자: 권한부여 -->
