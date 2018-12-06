@@ -120,14 +120,6 @@
             <div class="col-sm-8">
             <div id="map_wrap">
               <div style="width: 99%; height: 670px; border:1px solid black; background-color: white;" id="map" class="card-body"></div>
-              	<div class="category">
-	       			 <ul id="category">
-				        <li id="CE7" data-order="4"> 
-				            <span class="category_bg cafe"></span>
-				            카페
-				        </li>  
-				    </ul>
-   				</div>
            </div>
         </div>
         </div>
@@ -189,7 +181,7 @@
                       
                       <div class="col-sm-6 t-center"> <!-- 종합 분석 결과 수치데이터 Column 2 -->
                         <div style="font-size: 4.0em;">&lt;예상 매출액&gt;<br><br>
-                            <span style="color: #27b2a5;" id="expectedSalesAccount"></span> 만원
+                            월 <span style="color: #27b2a5;" id="expectedSalesAccount"></span> 만원
                         </div>
                       </div>
                     </div>
@@ -421,94 +413,100 @@
                   
                   <!-- 부동산 매물 결과 tab -->
                   <div id="landAnalysis" class="card-body bg1-pattern" style="display: none;">
-                        <div class="row" >
-                          <div class="col-sm-6">
-                            <br>                      
-                              <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">해당 상권의 지도</span>
-                          </div>
-                      
-                          <div class="col-sm-6">
-                            <br>
-                              <span style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">부동산 매물 리스트</span>
-                          </div>
+                  	<!-- 지도 + 로드뷰 영역 -->
+                    <br>                      
+                    <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">해당 상권의 지도(공인중개사 리스트 및 로드뷰)</span>
+              		<div class="" style="background-color: white; font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
+              		<div class="row">
+                      <div class="map_wrap" >
+                        <div id="mapWrapper" style="width: 50%; margin:0 0; float :left">
+                        	<div style="height: 600px;" id="roadMap">
+                        	</div>
                         </div>
-                        <br>
-						<br>
-                      <div class="" style="background-color: white; font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
                         
-                        <div class="row">
-                          <div class="col-sm-6" style="border: 1px solid grey; height: 600px;">
-                            지도지도
-                          </div>
-                      
-                          <div class="col-sm-6" style="border: 1px solid grey; height: 600px; padding: 20px;">
-                            <table>
-                              <colgroup>
-                                <col width="25%">
-                                <col width="75%">
-                              </colgroup>
-                              <thead>
-                                <tr>
-                                  <td colspan="2">
-                                    <br>
-                                    <div class="t-center" style="font-family: a드림고딕4; font-size: 20px;">
-                                      OOO 공인중개사의 매물정보
-                                    </div>
-                                    <br>
-                                  </td>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'"> 
-                                  <td>image1</td>
-                                  <td>
-                                    <div>매물번호 : <span class="fs-18">12350</span></div>
-                                    <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                    <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                  <td>image1</td>
-                                  <td>
-                                    <div>매물번호 : <span class="fs-18">12350</span></div>
-                                    <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                    <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                  <td>image1</td>
-                                  <td>
-                                    <div>매물번호 : <span class="fs-18">12350</span></div>
-                                    <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                    <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                  <td>image1</td>
-                                  <td>
-                                    <div>매물번호 : <span class="fs-18">12350</span></div>
-                                    <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                    <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                    </div>
-                                  </td>
-                                </tr>
-                                <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                  <td>image1</td>
-                                  <td>
-                                    <div>매물번호 : <span class="fs-18">12350</span></div>
-                                    <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                    <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                    </div>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                          </div>
+                        <div id="rvWrapper">
+                   			<div style="height: 600px;" id="roadview">
+                      			</div>
+                         	</div>
+             		      </div>
+                  	     </div>
+                    </div> 
+
+                  	<!-- 부동산 상가 매물 리스트 -->
+                  	<br>
+                    <span style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">부동산 매물 리스트</span>
+                    <div class="" style="background-color: white; font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
+                    	<div class="row">
+                        <div class="col-sm-12" style="height: 600px; padding: 20px;">
+                          <table>
+                            <colgroup>
+                              <col width="25%">
+                              <col width="75%">
+                            </colgroup>
+                            <thead>
+                              <tr>
+                                <td colspan="2">
+                                  <br>
+                                  <div class="t-center" style="font-family: a드림고딕4; font-size: 20px;">
+                                    OOO 공인중개사의 매물정보
+                                  </div>
+                                  <br>
+                                </td>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'"> 
+                                <td>image1</td>
+                                <td>
+                                  <div>매물번호 : <span class="fs-18">12350</span></div>
+                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
+                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
+                                <td>image1</td>
+                                <td>
+                                  <div>매물번호 : <span class="fs-18">12350</span></div>
+                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
+                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
+                                <td>image1</td>
+                                <td>
+                                  <div>매물번호 : <span class="fs-18">12350</span></div>
+                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
+                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
+                                <td>image1</td>
+                                <td>
+                                  <div>매물번호 : <span class="fs-18">12350</span></div>
+                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
+                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
+                                  </div>
+                                </td>
+                              </tr>
+                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
+                                <td>image1</td>
+                                <td>
+                                  <div>매물번호 : <span class="fs-18">12350</span></div>
+                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
+                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
                         </div>
                       </div>
+                    </div>
+	                      	
+                    
                       <br>
                       <br>
                       <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">선택하신 매물의 상세 정보</span><br><br>
@@ -970,14 +968,14 @@
 <!--===============================================================================================-->	
 <script type="text/javascript">
 // 분석 관련 필터 입력 시, 동적으로 보이는 지도(분석 첫페이지 지도)
-// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	 
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
 	        center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
 	        level: 7 // 지도의 확대 레벨
 	    };  
+	// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+	var infowindow = new daum.maps.InfoWindow({zIndex:1});
 
 	// 지도를 생성합니다    
 	var map = new daum.maps.Map(mapContainer, mapOption);
@@ -1154,6 +1152,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
         </script>
 <!--===============================================================================================-->        
     <script type="text/javascript">
+	var clickedVillage='';
     // 초기화 버튼 클릭 시, 발생하는 이벤트
     // 필터에서 active 되어 있던 버튼들 모두 초기화
     $('#resetFilterBtn').click(function() {
@@ -1246,6 +1245,9 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     	$('#resultVillage').text(alleyBizFullName[1]);
     	$('#resultAlleyBiz').text(alleyBizFullName[2]);
     	
+    	// 부동산 매물 분석 페이지에 지도 표시를 위한 변수 저장
+    	clickedVillage = alleyBizFullName[1];
+    	
     	for(var i =0; i < topThreeList.length; i++) {
     		if(topThreeList[i].alleyBiz.alleybizCode_Name == alleyBizFullName[2]) {
     			// 상위 3개의 상권 리스트 배열에서 도로명이 일치하는 배열의 요소를 불러와 해당하는 예상 매출액을 태그의 text로 추가
@@ -1265,7 +1267,11 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 				  		        center: new daum.maps.LatLng(coords.jb, coords.ib), // 지도의 중심좌표
 				  		        level: 1 // 지도의 확대 레벨
 				  		    };  
-
+							
+					        
+					        // 3개의 상권 탭에서 클릭 시, 지도 겹침 현상 제거 위한 하위태그 삭제 태그
+					        $('#staticMap').empty();
+					        
 					  		// 지도를 생성합니다    
 					  		var map = new daum.maps.Map(mapContainer, mapOption);
 					  		
@@ -1295,7 +1301,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 					    }
 					    
 					}) // geoCoder 끝나는 부분
-    		
+					
 	    		// 클릭 시, 동 이름을 가지고, 창업 관련 5대 지표 불러옴
 	    		// 0 ~ 25 : 매우위험, 26 ~ 50 : 위험, 51 ~ 75 : 보통, 76 ~ 100 : 좋음
 	            // 백그라운드 컬러 배열
@@ -1586,12 +1592,138 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	                        , position: 'top'
 	                    }
 	                }
-	            });
-	            
-    		}
-   		}
-    })
+	            }); // 매출액 차트 끝나는 부분
+   			}
+    	}
+   	});
     
+    
+    </script>
+    
+    <script>
+    // 부동산 매물 부분 데이터 뿌리는 JavasScirpt
+    $('.resultBtn').click(function() {
+    	
+    	// 클릭한 골목상권 테이블에 뿌리기 위해 파싱 
+    	var alleyBizFullName = $(this).text().split(' ');
+    	$('#resultDistrict').text(alleyBizFullName[0]); 
+    	$('#resultVillage').text(alleyBizFullName[1]);
+    	$('#resultAlleyBiz').text(alleyBizFullName[2]);
+    	
+    	// 부동산 매물 분석 페이지에 지도 표시를 위한 변수 저장
+    	var clickedVillage = alleyBizFullName[1];
+    	
+    	// 부동산 매물 분석 부분 -> 지도 및 로드뷰 생성
+    	var mapWrapper = document.getElementById('mapWrapper'); //지도를 감싸고 있는 DIV태그
+     	
+    	var geocoder2 = new daum.maps.services.Geocoder(); // 주소-좌표 변환 객체를 생성합니다
+    	
+    	// 변환된 좌표를 저장할 좌표 객체 생성
+    	var coords2;
+    	var map2;
+    	console.log('선택된 Village 어디여?' + clickedVillage);
+    	// 구 값이 바뀌면, 해당 구 중심 좌표로 이동
+    	geocoder2.addressSearch(clickedVillage, function(result, status) {
+    	     // 정상적으로 검색이 완료됐으면 
+    	     if (status === daum.maps.services.Status.OK) {
+    	        coords2 = new daum.maps.LatLng(result[0].y, result[0].x);				// 정상적으로 검색이 완료된 지역의 결과를 위도, 경도 좌표로 저장
+    			
+    			// 지도를 띄울 Div 태그 mapContainer 변수에 저장
+    			// 지도 가운데 좌표 저장 변수 mapCenter
+    			$('#roadMap').empty();
+    			var mapContainer2 = document.getElementById('roadMap'), // 지도를 표시할 div 
+    		        mapCenter2 = new daum.maps.LatLng(coords2.jb, coords2.ib), // 지도의 가운데 좌표
+    		        mapOption2 = {
+    		            center: mapCenter2, // 지도의 중심좌표
+    		            level: 1// 지도의 확대 레벨
+    		        };
+    	        
+    		    map2 = new daum.maps.Map(mapContainer2, mapOption2); 					// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+    	        map2.setCenter(coords2); 												// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    	    	var mapTypeControl2 = new daum.maps.MapTypeControl(); 					// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성
+    			map2.addControl(mapTypeControl2, daum.maps.ControlPosition.TOPRIGHT); 	// 지도에 컨트롤을 추가해야 지도위에 표시됨
+    			
+    			var zoomControl2 = new daum.maps.ZoomControl(); 						// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+    			map2.addControl(zoomControl2, daum.maps.ControlPosition.RIGHT); 		// 위에서 생성한 줌 컨트롤 지도에 추가
+    		    map2.addOverlayMapTypeId(daum.maps.MapTypeId.ROADVIEW); 				//지도 위에 로드뷰 도로 올리기
+    		    
+    	        marker2 = new daum.maps.Marker({ 										// 결과값으로 받은 위치를 마커로 표시
+    	            map: map2,															// 마커를 표시할 지도 변수
+    	            position: coords2													// 마커를 표시할 지도의 좌표
+    	        });
+    		    
+    	     	
+    	    	var infowindow2 = new daum.maps.InfoWindow({zIndex:1}); 				// 마커를 클릭하면 장소명을 표출할 인포윈도우 생성
+    	        
+    	        var content2 = '<div style="width:150px;text-align:center;padding:6px 0;">'+ clickedVillage +'</div>'; // 인포윈도우로 장소에 대한 설명을 표시합니다
+    	        
+    	        infowindow2 = new daum.maps.InfoWindow({
+    	            content: content2
+    	        });
+    	        
+    	        infowindow2.open(map2, marker2); 										// marker2 인포윈도우를 map2에 표시
+    	        
+    	        var rvContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+    	        var rv = new daum.maps.Roadview(rvContainer); //로드뷰 객체
+    	        var rvClient = new daum.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
+    	       
+    	        toggleRoadview(mapCenter2);
+    	        
+    	        var markImage = new daum.maps.MarkerImage(								// 마커 이미지를 생성
+    	                'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/roadview_wk.png',
+    	                new daum.maps.Size(35,39),
+    	                {
+    	                    // 마커의 좌표에 해당하는 이미지의 위치를 설정
+    	                    // 이미지의 모양에 따라 값은 다를 수 있으나, 보통 width/2, height를 주면 좌표에 이미지의 하단 중앙이 올라가게 됨
+    	                    offset: new daum.maps.Point(14, 39)
+    	                }
+    	        );
+
+    	        // 드래그가 가능한 마커를 생성합니다.
+    	        var rvMarker = new daum.maps.Marker({
+    	            image : markImage,
+    	            position: mapCenter2,
+    	            draggable: true,
+    	            map: map2
+    	        });
+
+    	        //마커에 dragend 이벤트를 할당합니다
+    	        daum.maps.event.addListener(rvMarker, 'dragend', function(mouseEvent) {
+    	            var position = rvMarker.getPosition(); //현재 마커가 놓인 자리의 좌표
+    	            toggleRoadview(position); //로드뷰를 토글합니다
+    	        });
+
+    	        //지도에 클릭 이벤트를 할당합니다
+    	        daum.maps.event.addListener(map2, 'click', function(mouseEvent){
+    	            
+    	            // 현재 클릭한 부분의 좌표를 리턴 
+    	            var position = mouseEvent.latLng; 
+
+    	            rvMarker.setPosition(position);
+    	            toggleRoadview(position); //로드뷰를 토글합니다
+    	        });
+    	        
+    	      	//로드뷰 toggle함수
+    		    function toggleRoadview(position){
+    		        //전달받은 좌표(position)에 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄웁니다
+    		        rvClient.getNearestPanoId(position, 50, function(panoId) {
+    		            if (panoId === null) {
+    		                rvContainer.style.display = 'none'; //로드뷰를 넣은 컨테이너를 숨깁니다
+    		                mapWrapper.style.width = '100%';
+    		                map2.relayout();
+    		            } else {
+    		                mapWrapper.style.width = '50%';
+    		                map2.relayout(); //지도를 감싸고 있는 영역이 변경됨에 따라, 지도를 재배열합니다
+    		                rvContainer.style.display = 'block'; //로드뷰를 넣은 컨테이너를 보이게합니다
+    		                rv.setPanoId(panoId, position); //panoId를 통한 로드뷰 실행
+    		                rv.relayout(); //로드뷰를 감싸고 있는 영역이 변경됨에 따라, 로드뷰를 재배열합니다
+    		            }
+    		        });
+    		    }
+   	     	}
+    	})
+    }); // 버튼 클릭 이벤트 종료 부분
+    	
     </script>
 <!--===============================================================================================-->    
     <script type="text/javascript">
@@ -2385,7 +2517,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
             });
         	
             //소득금액 컨트롤
-                $("#inputYearMoney2").keyup(function() { 
+            $("#inputYearMoney2").keyup(function() { 
               var money = $("#inputYearMoney2").val();
               console.log(money); 
               $("#selectSecurityLoanForm input[name=resultRate]").val(money);
@@ -2410,6 +2542,10 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
               $("#selectSecurityLoanForm").submit();
             });
         });
+    </script>
+    
+    <script type="text/javascript">
+    
     </script>
 <!--===============================================================================================-->
 <!--===============================================================================================-->
