@@ -650,7 +650,6 @@
                                           <div id="creditLoan" class="card-body" onsubmit="return checkCreditLoanForm()">
                                           
                                    <!-- 대출 금액 입력 받는 부분 -->
-                                            <div style="font-size: 0.8em; color: darkgray;">금리산출을 위한 질문</div>
                                             <div class="fs-20"><b>필요하신 대출금액은 얼마인가요?</b><span style="color: orangered;">&nbsp;*</span></div>
                                             <div class="form-group" style="width: 100%; font-size: 1.2em;">
                                               <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="text" id="inputBorrowMoney1"/> 
@@ -667,7 +666,7 @@
                                             <br>
                                           
                                         <!-- 연소득 입력 -->
-                                            <div style="font-size: 0.8em; color: darkgray;">한도산출을 위한 질문</div>
+                                            <div style="font-size: 0.8em; color: darkgray;"> 한도산출을 위한 질문</div>
                                             <div class="fs-20"><b>연 소득은 얼마인가요?</b><span style="color: orangered;">&nbsp;*</span></div>
                                             <div class="form-group" style="width: 100%; font-size: 1.2em;">
                                               <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="text" id="inputYearMoney1" required/> <span style="font-size: 25px; width: 10%;">만원</span>
@@ -683,7 +682,7 @@
                                             <br>
                                           
                                            <!-- 직업 선택 Select -->
-                                            <div style="font-size: 0.8em; color: darkgray; clear: both;">대출대상을 위한 질문</div>
+                                            <div style="font-size: 0.8em; color: darkgray; clear: both;"> 대출대상을 위한 질문</div>
                                             <div class="fs-20"><b>현재 직업을 선택해주세요</b><span style="color: orangered;">&nbsp;*</span></div>
                                             <select class="form-control" style="height: 40px; display: inline-block;" id="creditJobSelect1">
                                               <option value="1">일반 회사원</option>
@@ -701,15 +700,31 @@
                                             <br>
                                             <div id="creditWorkingPeriod1" class="dis-none">
                                               <div class="fs-20"><b>재직(사업영위)기간을 입력하세요.</b><span style="color: orangered; font-size:10px;">&nbsp;(선택사항)</span></div>
-                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" id="inputTermService1" type="text" /> 
-                                              <span style="font-size: 25px; width: 10%;">개월</span> 
+                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" id="inputTermService1" type="text" value="0"/> 
+                                              <span style="font-size: 25px; width: 10%;">개월</span>
+                                              <div class="inputWokingPeriod1">
+                                                  <button class="analysisBtn3" value="1">1개월</button>
+                                                  <button class="analysisBtn3" value="6">6개월</button>
+                                                  <button class="analysisBtn3" value="12">1년</button>
+                                                  <button class="analysisBtn3" value="24">2년</button>
+                                                  <button class="analysisBtn3" value="36">3년</button>
+                                                  <button class="analysisBtn3" value="60">5년</button>
+                                                  <button class="analysisBtn3" value="120">10년</button>
+                                            </div>  
                                             </div>
                                             <br>
                                           
                                           
                                             <!-- 신용등급 입력 받는 부분 -->
-                                            <div style="font-size: 0.8em; color: darkgray; clear: both;">금리산출을 위한 질문</div>
-                                            <div class="fs-20"><b>신용등급을 선택해주세요</b><span style="color: orangered;">&nbsp;*</span></div>
+                                            <div style="font-size: 0.8em; color: darkgray; clear: both;"> 금리산출을 위한 질문</div>
+                                            <div class="fs-20"><b>신용등급을 선택해주세요</b>
+                                              <span style="color: orangered;">&nbsp;*</span>
+                                              <div class="tooltip">신용등급을 모르시나요 ?
+                                              <span class="tooltiptext">
+                                                * 모든 국민은 매년 무료 3회 신용평가사를 통해 신용등급을 확인할 수 있습니다.<br>
+                                                <a href="www.naver.com">등급확인하러 가기</a>        
+                                              </span></div>
+                                            </div>
                                             <select class="form-control" style="height: 40px; display: inline-block;" id="creditRankSelect1">
                                               <option value="1">1등급</option>
                                               <option value="2">2등급</option>
@@ -728,6 +743,8 @@
                                           <form id="selectCreditLoanForm" action="/loan/list" method="get">
                                             <div class="card-body loan" style="padding-top: 10px; padding-bottom: 10px; margin-left: 20px; margin-right: 20px; display: none">
                                               <div style="width: 100%; height: 3px; background-color: #27b2a5">&nbsp;</div>
+                                                  <h2>입력항목</h2>
+                                              <div style="width: 100%; height: 3px; background-color: #27b2a5">&nbsp;</div>
                                               
                                               <input type="hidden" name="loanCategory" value="신용"/>
                                               
@@ -744,7 +761,7 @@
                                               <input type="hidden" name="targetNum"></div>
                                               
                                               <div id="showTermService1" style="display:none;"><b>재직기간</b>
-                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeTerm1"></b></div>
+                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeTerm1"></b><b>개월</b></div>
                                               <input type="hidden" name="termService" value="0"></div>
                                               
                                               <div id="showRate1" ><b>예상 이율</b>
@@ -765,8 +782,8 @@
                                           
                                           <!-- 담보대출 부분 -->
                                         <div id="guaranteeLoan" class="card-body loan" style="display: none;">
-                                     <!-- 대출 금액 입력 받는 부분 -->
-                                            <div style="font-size: 0.8em; color: darkgray;">금리산출을 위한 질문</div>
+                                          <!-- 대출 금액 입력 받는 부분 -->
+                                            <div style="font-size: 0.8em; color: darkgray;">1. 금리산출을 위한 질문</div>
                                             <div class="fs-20"><b>필요하신 대출금액은 얼마인가요?</b><span style="color: orangered;">&nbsp;*</span></div>
                                             <div class="form-group" style="width: 100%; font-size: 1.2em;">
                                               <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="text" id="inputBorrowMoney2"/> <span style="font-size: 25px; width: 10%;">만원</span>
@@ -780,28 +797,10 @@
                                               <button class="analysisBtn1" value="10000">1억</button>
                                             </div>
                                             <br>
-                                            
-                                         <!-- 신용등급 입력 받는 부분 -->
-                                            <div style="font-size: 0.8em; color: darkgray; clear: both;">금리산출을 위한 질문</div>
-                                            <div class="fs-20"><b>신용등급을 선택해주세요</b><span style="color: orangered;">&nbsp;*</span></div>
-                                            <select class="form-control" style="height: 40px; display: inline-block;" id="creditRankSelect2">
-                                              <option value="1">1등급</option>
-                                              <option value="2">2등급</option>
-                                              <option value="3">3등급</option>
-                                              <option value="4">4등급</option>
-                                              <option value="5">5등급</option>
-                                              <option value="6">6등급</option>
-                                              <option value="7">7등급</option>
-                                              <option value="8">8등급</option>
-                                              <option value="9">9등급</option>
-                                              <option value="10">10등급</option>
-                                            </select>
-                                            <br>
-                                            <br>
                                         
                                             <!-- 직업 선택 Select -->
-                                            <div style="font-size: 0.8em; color: darkgray; clear: both;">금리산출을 위한 질문</div>
-                                            <div class="fs-20"><b>현재 직업을 선택해주세요</b><span style="color: orangered;">&nbsp;*</span></div>
+                                            <div style="font-size: 0.8em; color: darkgray; clear: both;">2. 고객 맞춤 상품을 위한 질문</div>
+                                            <div class="fs-20"><b>현재 직업을 선택해주세요.</b><span style="color: orangered;">&nbsp;*</span></div>
                                             <select class="form-control" style="height: 40px; display: inline-block;" id="guaranteeJobSelect">
                                               <option value="1">일반 회사원</option>
                                               <option value="2">자영업자/프리랜서</option>
@@ -817,21 +816,22 @@
                                             <br>
                                             <br>
                                             <div id="guaranteeWorkingPeriod2" class="dis-none">
-                                              <div class="fs-20"><b>재직(사업영위)기간을 입력하세요</b><span style="color: orangered;">&nbsp;*</span></div>
-                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="text"  value="0"  /> <span style="font-size: 25px; width: 10%;">개월</span>
-                                              <div class="inputWokingPeriod">
-                                                  <button class="analysisBtn3" value="300">1년</button>
-                                                  <button class="analysisBtn3" value="500">2년</button>
-                                                  <button class="analysisBtn3" value="1000">3년</button>
-                                                  <button class="analysisBtn3" value="3000">5년</button>
-                                                  <button class="analysisBtn3" value="5000">10년</button>
+                                              <div class="fs-20"><b>재직(사업영위)기간을 입력하세요.</b><span style="color: orangered;">&nbsp;*</span></div>
+                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="text"  value="0"  id="inputTermService2"/> <span style="font-size: 25px; width: 10%;">개월</span>
+                                              <div class="inputWokingPeriod2">
+                                                  <button class="analysisBtn3" value="1">1개월</button>
+                                                  <button class="analysisBtn3" value="6">6개월</button>
+                                                  <button class="analysisBtn3" value="12">1년</button>
+                                                  <button class="analysisBtn3" value="24">2년</button>
+                                                  <button class="analysisBtn3" value="36">3년</button>
+                                                  <button class="analysisBtn3" value="60">5년</button>
+                                                  <button class="analysisBtn3" value="120">10년</button>
                                             </div> 
                                             </div>
                                             <br>
                                             
                                              <!-- 담보 종류 입력 받는 부분 -->
-                                            <div style="font-size: 0.8em; color: darkgray; clear: both;">금리산출을 위한 질문</div>
-                                            <div class="fs-20"><b>담보 종류를 선택해주세요</b><span style="color: orangered;">&nbsp;*</span></div>
+                                            <div class="fs-20"><b>담보 종류를 선택해주세요.</b><span style="color: orangered;">&nbsp;*</span></div>
                                             <select class="form-control" style="height: 40px; display: inline-block;" id="guaranteeSelect">
                                               <option value="전체">전체</option>
                                               <option value="부동산">부동산</option>
@@ -841,15 +841,34 @@
                                             <br>
                                             <br>
                                             
+                                                                                   <!-- 신용등급 입력 받는 부분 -->
+                                            <div style="font-size: 0.8em; color: darkgray; clear: both;">3. 금리산출을 위한 질문</div>
+                                            <div class="fs-20">
+                                            <b>신용등급을 선택해주세요.</b><span style="color: orangered;">&nbsp;*</span>
+                                            <div class="tooltip">신용등급을 모르시나요 ?<span class="tooltiptext">Tooltip text</span></div>
+                                            </div>
+                                            <select class="form-control" style="height: 40px; display: inline-block;" id="creditRankSelect2">
+                                              <option value="1">1등급</option>
+                                              <option value="2">2등급</option>
+                                              <option value="3">3등급</option>
+                                              <option value="4">4등급</option>
+                                              <option value="5">5등급</option>
+                                              <option value="6">6등급</option>
+                                              <option value="7">7등급</option>
+                                              <option value="8">8등급</option>
+                                              <option value="9">9등급</option>
+                                              <option value="10">10등급</option>
+                                            </select>
+                                            <br>
+                                            <br>
+                                            
                                       <form id="selectSecurityLoanForm" action="/loan/list" method="get">
-                                            <div class="card-body" style="padding-top: 10px; padding-bottom: 10px; margin-left: 20px; margin-right: 20px;">
+                                            <div class="card-body loan" style="padding-top: 10px; padding-bottom: 10px; margin-left: 20px; margin-right: 20px; display: none;" >
+                                              <div style="width: 100%; height: 3px; background-color: #27b2a5">&nbsp;</div>
+                                              <h2>입력항목</h2>
                                               <div style="width: 100%; height: 3px; background-color: #27b2a5">&nbsp;</div>
                                               
                                               <input type="hidden" name="loanCategory" value="담보">
-                                              
-                                               <div><b>제공 담보</b></div>
-                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeSecurity"></b></div>
-                                              <input type="hidden" name="securityType">
                                               
                                               <div><b>대출 희망 금액</b></div>
                                               <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeBorrowMoney2"></b><b>만원</b></div>
@@ -858,6 +877,15 @@
                                               <div><b>직업</b></div>
                                               <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeJob2"></b></div>
                                               <input type="hidden" name="targetNum" >
+                                              
+                                              <div id="showTermService2" style="display:none;"><b>재직(사업영위)기간</b>
+                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeTerm2"></b><b>개월</b></div>
+                                              <input type="hidden" name="termService" value="0"></div>
+                                              
+                                               <div><b>제공 담보</b></div>
+                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeSecurity"></b></div>
+                                              <input type="hidden" name="securityType">
+
 
                                               <div><b>예상 이율</b></div>
                                               <div style="color: #27b2a5; font-size: 20px; font-weight: bold; text-align: right;"><b id="takeRate2">3</b><b>%</b></div>
@@ -870,7 +898,7 @@
                                              <div class="t-center">
                                               <br>
                                               <input type="submit" style="width:60%;" value="대출연계하기" id="loanSubmitBtn2">
-                                              <input type="reset" style="width:60%; background-color: gray" value="초기화">  
+                                              <input type="submit" style="width:60%; background-color: gray;" value="초기화">  
                                              </div>
                                           </form>
                                             
@@ -901,11 +929,11 @@
  * 지우지 마세요!!
  */
 
-  function getPropStep(topData,subData){
+  function getPropStep(topData,i,subData){
   	/*
   		동적 Property 접근을 위한 메서드
   	*/
-  	return topData[subData];
+  	return topData[i][subData];
   }
   
   function getPropStep2(topData,subData,subData2){
@@ -928,7 +956,7 @@
 		  /* 차트에 사용할 배열 만들기 */
 		  var result = new Array();
 		  
-		  if(getPropStep(topDataList,wishList[0]) == null){
+		  if(getPropStep(topDataList,i,wishList[0]) == null){
 			  for(var j = 1; j < wishList.length; j++){
 				  /* 결과값이 없으면 0을 넣어줍니다.*/
 				  result.push(0);
@@ -949,6 +977,44 @@
 	  return resultArr;
   }
   
+  /*
+  * 데이터 셋트 작성 메서드
+  */
+  
+  function makeDataSets(topDataList,curDataArr){
+	  
+	  var dataSets = [];
+	  for(var i = 0; i < topDataList.length; i++){
+		 var dataSet = {
+	                type: 'bar'
+	                    , label: topDataList[i].alleyBiz.alleybizCode_Name
+	                    , backgroundColor: chartbackcolor[i]
+	                    , borderWidth: 2
+	                    , fill: false
+	                    , data: curDataArr[i]
+	    			}
+		 dataSets.push(dataSet);
+	  }
+	  
+	  return dataSets;
+  }
+  
+function makeDataSets2(topDataList,curDataArr){
+	  
+	  var dataSets = [];
+	  for(var i = 0; i < topDataList.length; i++){
+		 var dataSet = {
+                 label: topDataList[i].alleyBiz.alleybizCode_Name
+                 , backgroundColor: chartbackcolor[i]
+                 , borderColor: 'rgb(255, 99, 132)'
+                 , data: curDataArr[i]
+     				}
+		 dataSets.push(dataSet);
+	  }
+	  
+	  return dataSets;
+  }
+  
   /* 
   	 배열의 0번째는 프로퍼티, 1번째부터는 프로퍼티 내 프로퍼티입니다.
   	 차트를 위한 배열 
@@ -961,12 +1027,13 @@
   var liveWishList = ['livingPerAlleybiz','totalLiving','maleLiving','femaleLiving','living10','living20','living30','living40','living50','living60'];
   var jobWishList = ['workerPerAlleybiz','total_work','male_work','female_work','work10','work20','work30','work40','work50','work60'];
   var lossWishList = ['outPerAlleybiz','food_out','cure_out','living_out','traffic_out','leisure_out','culture_out','edu_out','enjoy_out'];
-  var survivalWishList = ['survival1','survival1_2','survival2_3','survival3_5','survival5'];
+  var survivalWishList = ['salesPerCobb','survival1','survival1_2','survival2_3','survival3_5','survival5'];
   
   /*
    * 차트 색깔 변수
    */
    
+   var chartbackcolor = ['#2b90d9','#ef5285','#60c5ba'];
    var chartbackcolor1 = '#2b90d9';
    var chartbackcolor2 = '#ef5285';
    var chartbackcolor3 = '#60c5ba';
@@ -1006,10 +1073,9 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	
 	// 주소-좌표 변환 객체를 생성합니다
 	var geocoder = new daum.maps.services.Geocoder();
-
-	
 	var coords;
 	</script>
+  
 <script type="text/javascript">
      // 동 필터 선택 시 보이는 효과
     $('.js-show-filter').on('click',function(){
@@ -1132,7 +1198,6 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
  	});
         		
         		
-        		
 	$('#regionFilter').find('button').click(function(){
 		 if(!($(this).hasClass('active'))) { // 클릭을 했는데 active 되어 있지 않으면 -> 활성화
 			 if($(this).text() === '주택가') {
@@ -1219,7 +1284,10 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	         success : function(data) {
 	        	 topThreeList = [];
 	        	 for (var i = 0; i < 3; i++) {
+	        		if(data[i] != undefined){
+	        			/* 빈것 넣기 방지 : 호준*/
 	        	 	topThreeList.push(data[i]);
+	        		}
 	        	 }
 	        	 var target = document.getElementById('snackbar');
 				 target.innerHTML = '분석을 완료했습니다. 콘솔창에서 Data를 확인하세요';
@@ -1239,12 +1307,10 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 	        	 }
 	        	 
 	        	 /* 차트 만들기 */
-	        	 
 				 makeAllChart();
 	        	 
 	         },
 	         error : function(error) {
-	        	 
 	         }
 	      });
     })
@@ -1661,41 +1727,16 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
           $('#'+value).css('display', 'block');
       });
       </script>
-<!--===============================================================================================-->      
 <!--===============================================================================================-->    
 <script type="text/javascript">
     // 상권 상세 분석에 들어가는 chart 종류
      function makePopChart(topThreeList,popWishList){
         var curMarketArr = makeDataArr(topThreeList,popWishList);
-    
+    	
         var populationChartData = {
             labels: ['총 유동인구 수', '남성 유동인구 수', '여성 유동인구 수']
-            , datasets: [{
-                type: 'bar'
-                , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor1
-                , borderWidth: 2
-                , fill: false
-                , data: curMarketArr[0]
-			}, {
-                type: 'bar'
-                , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor2
-                , data: curMarketArr[1]
-                , borderColor: 'white'
-                , borderWidth: 2
-			},{
-                type: 'bar'
-                    , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                    , backgroundColor: chartbackcolor3
-                    , data: curMarketArr[2]
-                    , borderColor: 'white'
-                    , borderWidth: 2
-    		  }
-			]
+            , datasets: makeDataSets(topThreeList,curMarketArr)
         };
-        
-     };
         
         var population = document.getElementById('populationChart').getContext('2d');
         var populationChart = new Chart(population, {
@@ -1712,37 +1753,17 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                 }
             }
         });
-    }
+     };
+        
    	
     function makedayChart(topThreeList,dayWishList){
     	var dayCurDataArr = makeDataArr(topThreeList,dayWishList);
         
         var dayChartData = {
             labels: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']
-            , datasets: [{
-                type: 'bar'
-                , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor1
-                , borderWidth: 2
-                , fill: false
-                , data: dayCurDataArr[0]
-			}, {
-                type: 'bar'
-                , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor2
-                , data: dayCurDataArr[1]
-                , borderColor: 'white'
-                , borderWidth: 2
-			},{
-                type: 'bar'
-                    , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                    , backgroundColor: chartbackcolor3
-                    , data: dayCurDataArr[2]
-                    , borderColor: 'white'
-                    , borderWidth: 2
-    			}
-			]
+            , datasets: makeDataSets(topThreeList,dayCurDataArr)
         };
+        
         var day = document.getElementById('dayChart').getContext('2d');
         var dayChart = new Chart(day, {
             type: 'bar'
@@ -1765,28 +1786,7 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
          
          var timeChartData = {
              labels: ['00시 ~ 06시', '06시 ~ 11시', '11시 ~ 14시', '14시 ~ 17시', '17시 ~ 21시', '21시 ~ 24시']
-             , datasets: [{
-                 type: 'bar'
-                 , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                 , backgroundColor: chartbackcolor1
-                 , borderWidth: 2
-                 , fill: false
-                 , data: timeCurDataArr[0]
- 			}, {
-                 type: 'bar'
-                 , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                 , backgroundColor: chartbackcolor2
-                 , data: timeCurDataArr[1]
-                 , borderColor: 'white'
-                 , borderWidth: 2
- 			},{
-                type: 'bar'
-                    , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                    , backgroundColor: chartbackcolor3
-                    , data: timeCurDataArr[2]
-                    , borderColor: 'white'
-                    , borderWidth: 2
-    			}]
+             , datasets: makeDataSets(topThreeList,timeCurDataArr)
          };
          
          var time = document.getElementById('timeChart').getContext('2d');
@@ -1811,29 +1811,9 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
 
     	var ageChartData = {
             labels: ['10대', '20대', '30대', '40대', '50대', '60대']
-            , datasets: [{
-                type: 'bar'
-                , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor1
-                , borderWidth: 2
-                , fill: false
-                , data: ageCurDataArr[0]
-			}, {
-                type: 'bar'
-                , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor2
-                , data: ageCurDataArr[1]
-                , borderColor: 'white'
-                , borderWidth: 2
-			}, {
-                type: 'bar'
-                    , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                    , backgroundColor: chartbackcolor3
-                    , data: ageCurDataArr[2]
-                    , borderColor: 'white'
-                    , borderWidth: 2
-    			}]
+            , datasets: makeDataSets(topThreeList,ageCurDataArr)
         };
+    	
         var age = document.getElementById('ageChart').getContext('2d');
         var ageChart = new Chart(age, {
             type: 'bar'
@@ -1856,29 +1836,9 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
         
         var liveChartData = {
             labels: ['총 상주인구', '남성 상주인구 수', '여성 상주인구 수', '10대 상주인구 수', '20대 상주인구 수', '30대 상주인구 수', '40대 상주인구 수', '50대 상주인구 수', '60대 상주인구 수']
-            , datasets: [{
-                type: 'bar'
-                , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor1
-                , borderWidth: 2
-                , fill: false
-                , data: liveCurDataArr[0]
-			}, {
-                type: 'bar'
-                , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor2
-                , data: liveCurDataArr[1]
-                , borderColor: 'white'
-                , borderWidth: 2
-			}, {
-                type: 'bar'
-                , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor3
-                , data: liveCurDataArr[2]
-                , borderColor: 'white'
-                , borderWidth: 2
-			}]
+            , datasets: makeDataSets(topThreeList,liveCurDataArr)
         };
+        
         var live = document.getElementById('liveChart').getContext('2d');
         var liveChart = new Chart(live, {
             type: 'bar'
@@ -1898,29 +1858,9 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     	 
          var jobChartData = {
              labels: ['총 직장인구', '남성 직장인구 수', '여성 직장인구 수', '10대 직장인구 수', '20대 직장인구 수', '30대 직장인구 수', '40대 직장인구 수', '50대 직장인구 수', '60대 직장인구 수']
-             , datasets: [{
-                 type: 'bar'
-                 , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                 , backgroundColor: chartbackcolor1
-                 , borderWidth: 2
-                 , fill: false
-                 , data: jobCurDataArr[0]
- 			}, {
-                 type: 'bar'
-                 , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                 , backgroundColor: chartbackcolor2
-                 , data: jobCurDataArr[1]
-                 , borderColor: 'white'
-                 , borderWidth: 2
- 			}, {
-                 type: 'bar'
-                 , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                 , backgroundColor: chartbackcolor3
-                 , data: jobCurDataArr[2]
-                 , borderColor: 'white'
-                 , borderWidth: 2
- 			}]
+             , datasets: makeDataSets(topThreeList,jobCurDataArr)
          };
+         
          var job = document.getElementById('jobChart').getContext('2d');
          var jobChart = new Chart(job, {
              type: 'bar'
@@ -1940,29 +1880,9 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
         
         var lossChartData = {
             labels: ['지출 총 금액', '식료품 지출', '의료 지출', '생활용품 지출', '교통 지출', '여가 지출', '문화 지출', '교육 지출', '유흥 지출']
-            , datasets: [{
-                type: 'bar'
-                , label: topThreeList[0].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor1
-                , borderWidth: 2
-                , fill: false
-                , data: lossCurDataArr[0]
-			}, {
-                type: 'bar'
-                , label: topThreeList[1].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor2
-                , data: lossCurDataArr[1]
-                , borderColor: 'white'
-                , borderWidth: 2
-			}, {
-                type: 'bar'
-                , label: topThreeList[2].alleyBiz.alleybizCode_Name
-                , backgroundColor: chartbackcolor3
-                , data: lossCurDataArr[2]
-                , borderColor: 'white'
-                , borderWidth: 2
-			}]
+            , datasets: makeDataSets(topThreeList,lossCurDataArr)
         };
+        
         var loss = document.getElementById('lossChart').getContext('2d');
         var lossChart = new Chart(loss, {
             type: 'bar'
@@ -1987,23 +1907,8 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
            // The type of chart we want to create
            type: 'line', // The data for our dataset
            data: {
-               labels: ["2013", "2014", "2015", "2016", "2017", "2018"]
-               , datasets: [{
-                   label: topThreeList[0].alleyBiz.alleybizCode_Name
-                   , backgroundColor: 'rgb(255, 99, 132)'
-                   , borderColor: 'rgb(255, 99, 132)'
-                   , data: martCurDataArr[0]
-       },{
-           label: topThreeList[1].alleyBiz.alleybizCode_Name
-               , backgroundColor: 'rgb(255, 99, 132)'
-               , borderColor: 'rgb(255, 99, 132)'
-               , data: martCurDataArr[1]
-   },{
-       label: topThreeList[2].alleyBiz.alleybizCode_Name
-           , backgroundColor: 'rgb(255, 99, 132)'
-           , borderColor: 'rgb(255, 99, 132)'
-           , data: martCurDataArr[2]
-}]
+               labels: ["1년 이하", "1~2년", "2~3년", "3~5년", "5년 이상"]
+               , datasets: makeDataSets2(topThreeList,martCurDataArr)
            }, // Configuration options go here
            options: {}
        });
@@ -2041,22 +1946,6 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
     </script>
     
 <script>
-    // 상권 상세 정보 분석 탭 두번째 Chart들
-        var martRunningTime = document.getElementById('martRunningTimeChart').getContext('2d');
-        var martRunningTimeChart = new Chart(martRunningTime, {
-            // The type of chart we want to create
-            type: 'line', // The data for our dataset
-            data: {
-                labels: ["2013", "2014", "2015", "2016", "2017", "2018"]
-                , datasets: [{
-                    label: "1년 이하 생존율"
-                    , backgroundColor: 'rgb(255, 99, 132)'
-                    , borderColor: 'rgb(255, 99, 132)'
-                    , data: [0, 10, 5, 2, 20, 30]
-        }]
-            }, // Configuration options go here
-            options: {}
-        });
         
         var sumMart = document.getElementById('sumMartChart').getContext('2d');
         var sumMartChart = new Chart(sumMart, {
@@ -2291,10 +2180,6 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
         
      // 신용대출용 ------------------------------------------------------------------------------------------------------------------------
         $(function(){
-        	
-        	
-            
-            
             //소득금액 컨트롤
                 $("#inputYearMoney1").keyup(function() { 
             	var money = $("#inputYearMoney1").val();
@@ -2307,7 +2192,6 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
             $(".analysisBtn2" ).each(function(index) {
                 $(this).on("click", function(){
                     var money = parseInt($(this).val());
-                    console.log(money);
                 	$('#inputYearMoney1').val(money);
                     //var resultMoney = parseInt($("#inputBorrowMoney1").val()) + money;
                 	$("#takeYearMoney1").text(money);
@@ -2339,7 +2223,6 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
             $(".analysisBtn1" ).each(function(index) {
                 $(this).on("click", function(){
                     var money = parseInt($(this).val());
-                    console.log(money);
                     //var resultMoney = parseInt($("#inputBorrowMoney1").val()) + money;
                 	$("#inputBorrowMoney1").val(money);
                 	$('#takeBorrowMoney1').text(money);
@@ -2347,10 +2230,10 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                 });
             });	
         	
+            
         	//직업 선택
         $('#creditJobSelect1').on('click', function(){
         	var job = $('#creditJobSelect1 option:selected').val();
-        	/* $('#creditWorkingPeriod1').show(); */ //재직기간 오픈
         	
         	if($(this).val() != '8') {
         		$('#creditWorkingPeriod1').removeClass('dis-none');
@@ -2358,21 +2241,45 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
         	}else{
         		$('#creditWorkingPeriod1').removeClass('dis-block');
         		$('#creditWorkingPeriod1').addClass('dis-none');
-        		$('#inputTermService1').keyup(function(){
-        			
-        			//유효성 검증 포함해야함.
-        			var term = $('#inputTermService1').val();
-        			$('#showTermService1').show();
-        			$('#selectSecurityLoanForm input[name=termService]').val(term);
-                    $('#takeTerm1').text(term);
-        		});
         	}
         	
         	$('#takeJob1').text($('#creditJobSelect1 option:selected').text());
-        	/* $('#selectCreditLoanForm') */
         	$("#selectCreditLoanForm input[name=targetNum]").val(job);
-        	
         });
+        
+      
+        	
+       	/* 재직기간 입력 시작  */
+        	//재직기간 직접입력
+		$('#inputTermService1').keyup(function(){
+			//유효성 검증 포함해야함.
+			var term = $('#inputTermService1').val();
+			$('#showTermService1').show();
+			$('#inputTermService1').val(term);
+			$('#selectSecurityLoanForm input[name=termService]').val(term);
+            $('#takeTerm1').text(term);
+		});	
+        	
+			//버튼 입력
+        $(function(){ 	
+    	var result = 0;
+        $(".analysisBtn3" ).each(function(index) {
+        	var term = parseInt($(this).val());
+            $(this).on("click", function(){
+                console.log("기간 : " + term);
+                result += term;
+                console.log("누적기간 : " +  result);
+                //var resultMoney = parseInt($("#inputBorrowMoney1").val()) + money;
+                $('#inputTermService1').val(result);
+                $('#showTermService1').show();
+    			$('#selectSecurityLoanForm input[name=termService]').val(result);
+                $('#takeTerm1').text(result);
+            });
+        });
+        
+        });	
+        /* 재직기간 입력 끝  */
+        
         
         	//신용등급 선택
         $('#creditRankSelect1').on('click', function(){
@@ -2396,7 +2303,8 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
        	 	$(".card-body .loan")[0].style.display='block';
        	 	
        	 	
-    /*     	var money = $("#inputYearMoney1").val();
+    	/* 한도 산출을 위한 식
+    		var money = $("#inputYearMoney1").val();
         	var line = $('#takeCreditLine1')
         	switch (Rank) { 
                 	case '1' : line.text(money * 2); break;
@@ -2425,11 +2333,23 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
         
      // 담보 대출용----------------------------------------------------------------------------------------------------------------------- 
         $(function(){
+            var target = document.getElementById('snackbar');
+        	var reg = /^[0-9]*$/;
+        	
             //대출희망금액 컨트롤
             $("#inputBorrowMoney2").keyup(function() { 
               var money = $("#inputBorrowMoney2").val();
+              
+              if(!reg.test(money)){
+          		$(this).val(money.replace(reg,''));
+          		$(this).focus();
+          		target.innerHTML = "숫자만 입력해주세요.";
+          		toast();
+          		return;
+              }else{
               $('#selectSecurityLoanForm input[name=requiredMoney]').val(money+"0000");
               $('#takeBorrowMoney2').text(money);
+              }
             });
             
             $( ".analysisBtn1" ).each(function(index) {
@@ -2441,30 +2361,9 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
                 });
             });
             
-        	//신용등급별 이율 컨트롤
-            $('#creditRankSelect2').on('change', function(){
-              var Rank = $('#creditRankSelect2 option:selected').val();
-              console.log(Rank);
-         	 	$.ajax({
-        	        url : '/loan/' + Rank,
-        	        // 서버로 값을 성공적으로 넘기면 처리하는 코드부분 입니다.
-        	        success : function(data) {
-        	            // 변경된 태그 부분을 넘어온 index 값으로 찾은 뒤 on/off를 변경합니다.
-        	           var rate = data.rateLoan;
-        	            console.log(rate);
-        	        	$('#takeRate2').text(rate); // 동적으로 받은 값 넣어줘야 함. 비동기
-        	        	$("#selectSecurityLoanForm input[name=resultRate]").val(rate);
-        	        },
-        	        error : function(data){
-        	        	console.log("비동기 오류");
-        	        }
-        	    });
-            });
-            
         	//직업 컨트롤
             $('#guaranteeJobSelect').on('change', function(){
               var job = $('#guaranteeJobSelect option:selected').val(); //input에 담을 값
-              /* $('#guaranteeWorkingPeriod2').show(); //재직(사업)기간 오픈 */
               
           	if($(this).val() != '8') {
         		$('#guaranteeWorkingPeriod2').removeClass('dis-none');
@@ -2477,38 +2376,67 @@ var infowindow = new daum.maps.InfoWindow({zIndex:1});
               $('#takeJob2').text($('#guaranteeJobSelect option:selected').text());
               $("#selectSecurityLoanForm input[name=targetNum]").val(job);
             });
+        	
+           	/* 재직기간 입력 시작  */
+        	//재직기간 직접입력
+		$('#inputTermService2').keyup(function(){
+			//유효성 검증 포함해야함.
+			var term = $('#inputTermService2').val();
+			$('#showTermService2').show();
+			$('#selectSecurityLoanForm input[name=termService]').val(term);
+            $('#takeTerm2').text(term);
+		});
+        	
+			//버튼 입력
+        $(function(){ 	
+    	var result = 0;
+        $(".analysisBtn3" ).each(function(index) {
+        	var term = parseInt($(this).val());
+            $(this).on("click", function(){
+                console.log("기간 : " + term);
+                result += term;
+                console.log("누적기간 : " +  result);
+                //var resultMoney = parseInt($("#inputBorrowMoney1").val()) + money;
+                $('#inputTermService2').val(result);
+                $('#showTermService2').show();
+    			$('#selectSecurityLoanForm input[name=termService]').val(result);
+                $('#takeTerm2').text(result);
+            });
+        });
+        
+        });	
+        /* 재직기간 입력 끝  */
 
             
         	//담보종류 컨트롤
             $('#guaranteeSelect').on('change', function(){
                 var security = $('#guaranteeSelect option:selected').val();
-                console.log(security);
                 $('#takeSecurity').text(security);
                 $("#selectSecurityLoanForm input[name=securityType]").val(security);
             });
         	
-            //소득금액 컨트롤
-                $("#inputYearMoney2").keyup(function() { 
-              var money = $("#inputYearMoney2").val();
-              console.log(money); 
-              $("#selectSecurityLoanForm input[name=yearMoney]").val(money);
-              $('#takeYearMoney2').text(money);
-              
+        	//신용등급별 이율 컨트롤
+            $('#creditRankSelect2').on('change', function(){
+              var Rank = $('#creditRankSelect2 option:selected').val();
+         	 	$.ajax({
+        	        url : '/loan/' + Rank,
+        	        // 서버로 값을 성공적으로 넘기면 처리하는 코드부분 입니다.
+        	        success : function(data) {
+        	            // 변경된 태그 부분을 넘어온 index 값으로 찾은 뒤 on/off를 변경합니다.
+        	           var rate = data.rateLoan;
+        	        	$('#takeRate2').text(rate); // 동적으로 받은 값 넣어줘야 함. 비동기
+        	        	$("#selectSecurityLoanForm input[name=resultRate]").val(rate);
+        	        },
+        	        error : function(data){
+        	        	console.log("비동기 오류");
+        	        }
+        	    });
+         	 	
+           	 	$(".card-body .loan")[1].style.display='block';
             });
-            
-            $( ".analysisBtn2" ).each(function(index) {
-                $(this).on("click", function(){
-                  $('#inputYearMoney2').val(money);
-                    //var resultMoney = parseInt($("#inputBorrowMoney1").val()) + money;
-                  $("#takeYearMoney2").text(money);
-                  $("#selectSecurityLoanForm input[name=yearMoney]").val(money+"0000");
-                });
-            });
-            
             
             $("#loanSubmitBtn2").on("click", function(e){
               e.preventDefault();
-              
               $("#selectSecurityLoanForm").submit();
             });
         });
