@@ -110,24 +110,76 @@ desired effect
               class="accordion btn btn-primary btn-primary btn-flat"
                value="이름 수정">이름수정</button>
               <input type="button" style="margin:  0px 0px 0px 10px;"
-              class="btn btn-primary btn-warning btn-flat" value="회원 탈퇴"  
+              class="btn btn-primary btn-danger btn-flat" value="회원 탈퇴"  
               onclick="location.href = '/admin/notice/enrollForm' "/>
-              <input type="button" style="margin:  0px 0px 0px 10px;"
-              class="btn btn-primary btn-danger btn-flat" value="권한 관리"  
-              onclick="location.href = '/admin/notice/enrollForm' "/>
+              <button type="button" style="margin: 0px 0px 0px 10px;"
+              class="accordion2 btn btn-warning btn-primary btn-flat"
+               value="권한 관리">권한관리</button>
             </td>
 		  </tr>
-		  <!-- 아코디언영역 -->
-		  <tr class="panel">
+		  <!-- 첫번째아코디언영역 -->
+ 		  <tr class="panel">
 		  	<td colspan="8">
-		  		<h4>아코디언영역</h4>
-		  		아코디언으로 회원관리에 필요한 input값을 받을 예정
+		  		<h4>이름수정</h4>
+		  		<form action="">
+		  		회원아이디: <label>${user.userid }</label> <br>
+		  		수정할 이름: <input type="text" name="username"> <br>
+		  		<input type="submit" value="변경">
+		  		</form>
 		  	</td>
 		  </tr>
+		  <!-- 두번째아코디언영역 -->
+		  <tr class="panel2" style="display: none">
+		    <td colspan="8">
+				<h4>권한부여</h4>
+				<form action="">
+				회원아이디: <label>${user.userid }</label> <br>
+				수정할 이름: <input type="text" name="username"> <br>
+				<input type="submit" value="변경">
+				</form>
+		    </td>
+		  </tr>
+		  <!-- -------------- -->
 		</c:forEach>
 		</tbody>
 	</table>
 	<br>
+
+<!-- 변경 form -->
+<tr id="modName" style="display: none">
+<div style="display: none">	
+  <td colspan="8">
+	<h4>이름수정</h4>
+	<form action="">
+	회원아이디: <label>${user.userid }</label> <br>
+	수정할 이름: <input type="text" name="username"> <br>
+	<input type="submit" value="변경">
+	</form>
+  </td>
+</div>
+</tr>
+<tr class="panel" style="display: none">
+  <td colspan="8">
+	<h4>회원탈퇴</h4>
+	<form action="">
+	<strong>${user.userid }</strong> 회원을 <br>
+	정말로 탈퇴시키겠습니까?
+	<input type="submit" value="변경">
+	</form>
+  </td>
+</tr>
+
+<tr class="panel" style="display: none">
+  <td colspan="8">
+	<h4>권한부여</h4>
+	<form action="">
+	회원아이디: <label>${user.userid }</label> <br>
+	수정할 이름: <input type="text" name="username"> <br>
+	<input type="submit" value="변경">
+	</form>
+  </td>
+</tr>
+	
 	
 	<!-- pagination -->
 	<ul class="pagination">
@@ -216,25 +268,7 @@ $(document).ready(function() {
 
 <!-- 관리영역 아코디언 자바스크립트 -->
 <script type="text/javascript">
-
-/* var acc = document.getElementsByClassName("accordion"); //아코디언이벤트줄 버튼
-var panels = document.getElementsByClassName("panel");  //아코디언으로 내용이 보여질영역
-var i=0;
-for(i; i<acc.length; i++){
-	console.log("이벤트리스너등록");
-	var panel = panels[i];
-	acc[i].addEventListener("click", function() {
-		this.classList.toggle("active");
-		//var panel = document.getElementsByClassName("panel")[i];
-		if(panel.style.display === "block"){
-			panel.style.display = "none";
-		}else {
-			panel.style.display = "block";
-		}
-	});
-}
- */
-
+// 이름수정 아코디언이벤트	
 var panels = $(".panel"); //아코디언으로 보일영역
 var btns = $(".accordion"); //아코디언이벤트 버튼
 var i=0;
@@ -250,6 +284,24 @@ for(i=0; i<panels.length; i++){
 		}
 	});
 }
+
+// 권한관리 아코디언이벤트
+var panels2 = $(".panel2"); //아코디언으로 보일영역
+var btns2 = $(".accordion2"); //아코디언이벤트 버튼
+var j=0;
+
+for(j=0; j<panels2.length; j++){
+	panels2[j].style.display = "none";
+	btns2[j].addEventListener("click", function() {
+	    var panel2 = this.parentElement.parentElement.nextElementSibling.nextElementSibling;
+		if(panel2.style.display === "none"){
+			panel2.style.display = "table-row";
+		}else{
+			panel2.style.display = "none";
+		}
+	});
+}
+
 </script>
 
 </body>
