@@ -87,7 +87,8 @@ desired effect
 			<th>가입일</th>
 			<th>수정일</th>
 			<th>권한</th>
-			<th>탈퇴여부</th>
+			<th>회원여부</th>
+			<th>수정/탈퇴/권한관리</th>
 		</tr>
 		</thead><br>
 		<tbody>
@@ -98,8 +99,23 @@ desired effect
 		  	<td>${user.userName }</td>
 		  	<td>${user.regDate }</td>
 		  	<td>${user.updateDate }</td>
-		  	<td>${user.authList }</td>
+		  	<td>
+		  	<c:forEach items="${user.authList }" var="auth" varStatus="status">
+		  	${status.index+1 }: ${auth.auth }<br>
+		  	</c:forEach>
+		  	</td>
 		  	<td>${user.enabled }</td>
+		  	<td>
+              <input type="button" style="margin: 0px 0px 0px 10px;"
+              class="btn btn-primary btn-flat" value="이름 수정"  
+              onclick="location.href = '/admin/notice/enrollForm' "/>
+              <input type="button" style="margin:  0px 0px 0px 10px;"
+              class="btn btn-primary btn-warning btn-flat" value="회원 탈퇴"  
+              onclick="location.href = '/admin/notice/enrollForm' "/>
+              <input type="button" style="margin:  0px 0px 0px 10px;"
+              class="btn btn-primary btn-danger btn-flat" value="권한 관리"  
+              onclick="location.href = '/admin/notice/enrollForm' "/>
+            </td>
 		  </tr>
 		</c:forEach>
 		</tbody>
@@ -189,10 +205,7 @@ $(document).ready(function() {
 	//page이동
 	var actionForm = $('#actionForm');
 	$('.paginate_button a').on("click", function(e) {
-		console.log("들어왔니??????")
 		e.preventDefault(); //원래 a태그 동작 방지
-		
-		console.log('페이지눌림!!!');
 		
 		//form태그 내, pageNum은 href속성으로 변경
 		actionForm.find("input[name='pageNum']").val($(this).attr("href"));

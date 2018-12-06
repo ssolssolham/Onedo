@@ -3,12 +3,32 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.doo.auth.mapper.AuthMapper">
-	<!-- 가입시 등록되는 인증 -->
+	<!-- 가입시 등록되는 인증(tx) -->
 	<insert id="insert">
 		INSERT INTO USERAUTHS
 		(userid, auth)
 		VALUES	(#{userid},
-				 'ROLE_USER')
+				 #{auth})
 	</insert>
+	
+	<!-- 관리자: 회원탈퇴(권한제거) -->
+	<delete id="deleteAuth">
+		DELETE	FROM userauths
+		WHERE	userid = #{userid}
+	</delete>
+	
+	<!-- 관리자: 권한부여 -->
+	<insert id="addAuth">
+		INSERT INTO userauths
+		(userid, auth)
+		VALUES	(#{userid},
+				 #{role})
+	</insert>
+	
+	<update id="updateAuth">
+		UPDATE 	userauths
+		SET		auth = #{role}
+		WHERE	userid = #{userid}
+	</update>
 
 </mapper>

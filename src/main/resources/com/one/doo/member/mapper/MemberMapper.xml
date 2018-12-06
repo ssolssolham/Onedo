@@ -73,12 +73,18 @@
 					]]> 
 	</select>
 
+	<!-- 권한갯수에따른회원수 -->
 	<select id="getTotalCount" resultType="int">
 		SELECT count(mem.userid)
 		FROM users mem LEFT OUTER JOIN userauths auth on mem.userid =
 		auth.userid
 	</select>
-
+	
+	<!-- 권한생각X 회원수 -->
+	<select id="getMemCnt" resultType="int">
+		SELECT	COUNT(*)
+		FROM	users
+	</select>
 
 	<insert id="insert">
 		INSERT INTO users
@@ -96,5 +102,22 @@
 		FROM users
 		WHERE userid = #{userid}
 	</select>
+	
+	<!-- 관리자: 회원이름수정 -->
+	<update id="updateName">
+		UPDATE	users
+		SET		username = #{username}
+		WEHRE	userid = #{userid}		
+	</update>
+	
+	<!-- 관리자: 회원탈퇴 -->
+	<update id="updateEnabled">
+		UPDATE	users
+		SET		enabled = 'N'
+		WEHRE	userid = #{userid}
+	</update>
+	
+	<!-- 관리자: 권한부여 -->
+	<!-- auth매퍼쪽에 존재!! -->
 
 </mapper>
