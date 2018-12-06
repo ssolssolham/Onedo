@@ -106,9 +106,9 @@ desired effect
 		  	</td>
 		  	<td>${user.enabled }</td>
 		  	<td>
-              <input type="button" style="margin: 0px 0px 0px 10px;"
-              class="btn btn-primary btn-flat" value="이름 수정"  
-              onclick="location.href = '/admin/notice/enrollForm' "/>
+              <button type="button" style="margin: 0px 0px 0px 10px;"
+              class="accordion btn btn-primary btn-primary btn-flat"
+               value="이름 수정">이름수정</button>
               <input type="button" style="margin:  0px 0px 0px 10px;"
               class="btn btn-primary btn-warning btn-flat" value="회원 탈퇴"  
               onclick="location.href = '/admin/notice/enrollForm' "/>
@@ -117,9 +117,18 @@ desired effect
               onclick="location.href = '/admin/notice/enrollForm' "/>
             </td>
 		  </tr>
+		  <!-- 아코디언영역 -->
+		  <tr class="panel">
+		  	<td colspan="8">
+		  		<h4>아코디언영역</h4>
+		  		아코디언으로 회원관리에 필요한 input값을 받을 예정
+		  	</td>
+		  </tr>
 		</c:forEach>
 		</tbody>
-	</table><br>
+	</table>
+	<br>
+	
 	<!-- pagination -->
 	<ul class="pagination">
 		<c:if test="${pageMaker.prev }">
@@ -149,39 +158,6 @@ desired effect
 		<input type="hidden" name="type" value="${pageMaker.cri.type }">
 		<input type="hidden" name="keyword" value="${pageMaker.cri.keyword }">
 	</form>
-
-<!--               <table id="example2" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>순번</th>
-                  <th>회원이름</th>
-                  <th>이메일</th>
-                  <th>가입날짜</th>
-                  <th>수정날짜</th>
-                  <th>탈퇴여부</th>
-                  <th>수정 / 탈퇴</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>신상품 출시에 대한 공지
-                  </td>
-                  <td>박호준</td>
-                  <td>11.28</td>
-                  <td>11.28</td>
-                  <td>X</td>
-                  <td>
-                  <input type="button" style="margin: 0px 0px 0px 10px;"
-              class="btn btn-primary btn-flat" value="이름 수정"  onclick="location.href = '/admin/notice/enrollForm' "/>
-              <input type="button" style="margin:  0px 0px 0px 10px;"
-              class="btn btn-primary btn-warning btn-flat" value="회원 탈퇴"  onclick="location.href = '/admin/notice/enrollForm' "/>
-              모달을 부탁함니다 ^^..
-              </td>
-                </tr>
-                </tfoot>
-              </table>
- -->           
 	</div><!-- /.box-body -->
     </div>
          
@@ -200,6 +176,7 @@ desired effect
 
 <!-- ================================================================== -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!-- 페이지 및 검색 자바스크립트 -->
 <script type="text/javascript">
 $(document).ready(function() {
 	//page이동
@@ -235,6 +212,44 @@ $(document).ready(function() {
 		searchForm.submit();
 	});
 });
+</script>
+
+<!-- 관리영역 아코디언 자바스크립트 -->
+<script type="text/javascript">
+
+/* var acc = document.getElementsByClassName("accordion"); //아코디언이벤트줄 버튼
+var panels = document.getElementsByClassName("panel");  //아코디언으로 내용이 보여질영역
+var i=0;
+for(i; i<acc.length; i++){
+	console.log("이벤트리스너등록");
+	var panel = panels[i];
+	acc[i].addEventListener("click", function() {
+		this.classList.toggle("active");
+		//var panel = document.getElementsByClassName("panel")[i];
+		if(panel.style.display === "block"){
+			panel.style.display = "none";
+		}else {
+			panel.style.display = "block";
+		}
+	});
+}
+ */
+
+var panels = $(".panel"); //아코디언으로 보일영역
+var btns = $(".accordion"); //아코디언이벤트 버튼
+var i=0;
+
+for(i=0; i<panels.length; i++){
+	panels[i].style.display = "none";
+	btns[i].addEventListener("click", function() {
+	    var panel = this.parentElement.parentElement.nextElementSibling;
+		if(panel.style.display === "none"){
+			panel.style.display = "table-row";
+		}else{
+			panel.style.display = "none";
+		}
+	});
+}
 </script>
 
 </body>
