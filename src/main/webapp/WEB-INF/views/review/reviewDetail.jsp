@@ -281,6 +281,7 @@
 		     <li class='left clearfix' data-rno='n'>
 		     	<div>
 		     		<div class='header'>
+		     		//<span id='rno' value='list[i].rno' style='display:none'/>
 		     			<strong class='primary-font'>[i+1] 댓작성자</strong>
 		     			<small class='pull-right text-muted'>댓작성시간</small>
 		     		</div>
@@ -290,7 +291,7 @@
 */
 		     // 댓글리스트 크기만큼 li태그 추가(댓글 show)
 		     for (var i = 0, len = list.length || 0; i < len; i++) {
-		       str +="<li class='left clearfix' data-rno='"+(i+1)+"'>";
+		       str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
 		       str +="  <div><div class='header'><strong class='primary-font'>["
 		    	   +(i+1)+"] "+list[i].replyer+"</strong>"; 
 		       str +="    <small class='pull-right text-muted'>"
@@ -383,7 +384,6 @@
 		    
 		    // 댓글추가버튼(new Reply)
 		    $("#addReplyBtn").on("click", function(e){
-		      alert("댓글추가!!!");
 		      modal.find("input").val("");
 		      modalInputReplyDate.closest("div").hide();
 		      modal.find("button[id !='modalCloseBtn']").hide();
@@ -396,7 +396,6 @@
 		    
 			// 댓글등록 이벤트
 		    modalRegisterBtn.on("click",function(e){
-		      alert("댓추가할거"+modalInputReply.val()+"작성자: "+$('#replyer').val()+"게시글번호: "+articleNumVal);
 		      var reply = {
 		            reply: modalInputReply.val(),
 		            replyer:$('#replyer').attr('value'),
@@ -404,28 +403,19 @@
 		            //,_csrf.headerName:${_csrf.token}
 		          };
 		      replyService.add(reply, function(result){
-		        
-		        alert(result);
-		        
 		        modal.find("input").val("");
 		        modal.modal("hide");
-		        
-		        //showList(1);
 		        showList(1);
-		        
 		      });
-		      
 		    });
 
-
-		  //댓글 조회 클릭 이벤트 처리 
+		  //댓글 li클릭 이벤트 (댓글 get, 작성자와 로그인아이디 같으면 댓글영역 readonly풀고 수정버튼 보이게)
 		    $(".chat").on("click", "li", function(e){
 		      
 		      var rno = $(this).data("rno");
 		      replyService.get(rno, function(reply){
-		      	alert(reply.reply);
 		        modalInputReply.val(reply.reply);
-		        modalInputReplyer.val(reply.replyer);
+		        modalInputReplyer.val(reply.replyer).attr("readonly","readonly");
 		        modalInputReplyDate.val(replyService.displayTime(reply.replyDate))
 		        .attr("readonly","readonly");
 		        modal.data("rno", reply.rno);
@@ -433,16 +423,16 @@
 		        modal.find("button[id !='modalCloseBtn']").hide();
 		        // replyer와 loginId가 같으면 수정삭제버튼 show, 
 		        var loginId = '${loginId}';
-				alert("로그인아이디: "+loginId+"\n댓글작성자: "+reply.replyer);		        
 		        if(reply.replyer == loginId){
-		        	alert("댓작성자랑 로그인자랑 같아요");
+		        	alert("아이디같아");
+		        	modalInputReply.removeAttr("readonly");
 		        	modalModBtn.show();
-		        	$("#replyModal").modal("show");
 		        	// modalRemoveBtn.show();
+		        	$("#replyModal").modal("show");
 		        }else{
+		        	alert("아이디달라");
 		        	modalInputReply.attr("readonly", "readonly");
 		        }
-		        ///////////////
 		        $("#replyModal").modal("show");
 		            
 		      });
@@ -452,10 +442,8 @@
 		    modalModBtn.on("click", function(e){
 		    	  
 		   	  var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
-		   	  alert("댓수정:"+reply.relyer);
 		   	  replyService.update(reply, function(result){
 		   	        
-		   	    alert(result);
 		   	    modal.modal("hide");
 		   	    showList(pageNum);
 		   	  });
@@ -466,18 +454,12 @@
 		   	  var rno = modal.data("rno");
 		   		alert("댓글을 정말로 삭제하시겠습니까?" + rno);
 		   	  
-		   	  
 		   	  replyService.remove(rno, function(result){
 		   	        
-		   	      alert(result);
 		   	      modal.modal("hide");
 		   	      showList(pageNum);
-		   	      
 		   	  });
-		   	  
 		   	});
-
-		 
 		});
 	
 	</script>
@@ -508,6 +490,8 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/lightbox2/js/lightbox.min.js"></script>
 <!--===============================================================================================-->
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+<!-- toast msg영역 -->
+<div id="snackbar"></div>
 
 </body>
 </html>

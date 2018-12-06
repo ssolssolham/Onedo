@@ -6,8 +6,6 @@ var replyService = (function() {
 	var token = $("meta[name='_csrf']").attr("content");
 
 	function add(reply, callback, error) {
-		console.log("add reply...............");
-
 		$.ajax({
 			type : 'post',
 			url : '/replies/new',
