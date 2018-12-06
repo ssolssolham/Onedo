@@ -1003,6 +1003,36 @@
 	  return resultArr;
   }
   
+  // 배열
+  function makeDataArr2(topDataList){
+	  var resultArr = new Array();
+	  
+	  for(var i = 0; i < topDataList.length; i++){
+		  /* 차트에 사용할 배열 만들기 */
+		  var result = new Array();
+		  
+		  if(topDataList[i].hasOwnProperty('storePerAlleybizList') == null){
+			  for(var j = 1; j < wishList.length; j++){
+				  /* 결과값이 없으면 0을 넣어줍니다.*/
+				  result.push(0);
+			  }
+		  }else{
+    		  /* 기초데이터를 이용 */
+    		  for(var j = 0; j < topDataList[i].storePerAlleybizList.length; j++){
+    			  /* 원하는 데이터를 넣기 */
+    			  result.push(topThreeList[i].storePerAlleybizList[j].store_count);
+    		  }
+		  
+		  }
+		  /* 배열 내 배열 구조 */
+		  resultArr.push(result);
+		  
+	  }
+	  
+	  return resultArr;
+  }
+  
+  
   /*
   * 데이터 셋트 작성 메서드
   */
@@ -1040,6 +1070,8 @@ function makeDataSets2(topDataList,curDataArr){
 	  
 	  return dataSets;
   }
+
+  
   
   /* 
   	 배열의 0번째는 프로퍼티, 1번째부터는 프로퍼티 내 프로퍼티입니다.
@@ -2185,19 +2217,17 @@ function makeDataSets2(topDataList,curDataArr){
        });
    }
   
-   function makeSumMartChart(){
-   	var sumMart = document.getElementById('sumMartChart').getContext('2d');
+   function makeSumMartChart(topThreeList){
+	   var martSumMartDataArr = makeDataArr2(topThreeList);
+	   
+	   console.log(martSumMartDataArr);
+   	   var sumMart = document.getElementById('sumMartChart').getContext('2d');
        var sumMartChart = new Chart(sumMart, {
            // The type of chart we want to create
            type: 'line', // The data for our dataset
            data: {
-               labels: ["01", "02", "03", "04", "05", "06"]
-               , datasets: [{
-                   label: "월별 점포 수"
-                   , backgroundColor: 'rgb(255, 99, 132)'
-                   , borderColor: 'rgb(255, 99, 132)'
-                   , data: [0, 10, 5, 2, 20, 30]
-       }]
+               labels: ["1월", "2월", "3월", "4월", "5월", "6월","7월"]
+               , datasets: makeDataSets2(topThreeList,martSumMartDataArr)
            }, // Configuration options go here
            options: {}
        });
@@ -2213,27 +2243,14 @@ function makeDataSets2(topDataList,curDataArr){
 	        	 makeJobChart(topThreeList,jobWishList);
 	        	 makeLossChart(topThreeList,lossWishList);
 	        	 makeMartChart(topThreeList,survivalWishList);
+	        	 makeSumMartChart(topThreeList);
     }
     </script>
     
 <script>
-        
-        var sumMart = document.getElementById('sumMartChart').getContext('2d');
-        var sumMartChart = new Chart(sumMart, {
-            // The type of chart we want to create
-            type: 'line', // The data for our dataset
-            data: {
-                labels: ["01", "02", "03", "04", "05", "06"]
-                , datasets: [{
-                    label: "월별 점포 수"
-                    , backgroundColor: 'rgb(255, 99, 132)'
-                    , borderColor: 'rgb(255, 99, 132)'
-                    , data: [0, 10, 5, 2, 20, 30]
-        }]
-            }, // Configuration options go here
-            options: {}
-        });
-        
+function makeSumMartChart(topThreeList){
+	
+}
         var openMartCntDataArr = new Array();
         var closeMartCntDataArr = new Array();
         var opentCloseGapCntDataArr = new Array();

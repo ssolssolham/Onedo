@@ -153,7 +153,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 			SalesPerCobb salesPerCobb = salesPerCobbMapper.read(ALLEYBIZCODE);
 			StorePerAlleybiz storePerAlleybiz = storePerAlleybizMapper.read(ALLEYBIZCODE);
 			WorkerPerAlleybiz workerPerAlleybiz = workerPerAlleybizMapper.read(ALLEYBIZCODE);
-			
+			List<StorePerAlleybiz> storePerAlleybizList = storePerAlleybizMapper.readYear(ALLEYBIZCODE);
 			
 			realestateList = realestateMapper.getRealestateList(ALLEYBIZCODE);
 			memulList = realestateMapper.read(ALLEYBIZCODE);
@@ -170,6 +170,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 			hash.put("salesPerCobb", salesPerCobb);
 			hash.put("storePerAlleybiz", storePerAlleybiz);
 			hash.put("workerPerAlleybiz", workerPerAlleybiz);
+			hash.put("storePerAlleybizList", storePerAlleybizList);
 			
 			//부동산리스트 반환값이 없으면 null
 			if(realestateList != null) {
