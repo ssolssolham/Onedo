@@ -21,7 +21,7 @@ public interface MemberMapper {
 	
 	public int getMemCnt();
 	
-	public void updateName(String username, String userid);
+	public void updateName(Member member);
 	
 	public void updateEnabled(String userid);
 }

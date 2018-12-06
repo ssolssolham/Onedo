@@ -107,7 +107,10 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override  //회원이름수정
 	public void modifyName(String userid, String username) {
-		memberMapper.updateName(username, userid);
+		Member member = new Member();
+		member.setUserid(userid);
+		member.setUserName(username);
+		memberMapper.updateName(member);
 	}
 
 	@Transactional

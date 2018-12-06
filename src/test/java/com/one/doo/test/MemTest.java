@@ -34,13 +34,16 @@ public class MemTest {
 	public void testMapper() {
 		int cnt = mapper.getTotalCount();
 		log.info("총 회원수: "+cnt);
-		
+		/*		
 		Criteria cri = new Criteria(1, 3);
 		List<Member> list = mapper.getListWithCri(cri);
 		for (Member member : list) {
 			log.info(member+"\n");
 		}
 	
+		mapper.updateName("수정", "SD");
+		log.info("바뀐이름: "+mapper.read("SD"));
+*/	
 	}
 	
 	//@Test

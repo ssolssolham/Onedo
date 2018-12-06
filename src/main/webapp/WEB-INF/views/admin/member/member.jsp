@@ -111,7 +111,7 @@ desired effect
                value="이름 수정">이름수정</button>
               <input type="button" style="margin:  0px 0px 0px 10px;"
               class="btn btn-primary btn-danger btn-flat" value="회원 탈퇴"  
-              onclick="location.href = '/admin/notice/enrollForm' "/>
+              onclick="location.href = '/admin/notice/withdraw?userid=${user.userid}' "/>
               <button type="button" style="margin: 0px 0px 0px 10px;"
               class="accordion2 btn btn-warning btn-primary btn-flat"
                value="권한 관리">권한관리</button>
@@ -121,9 +121,10 @@ desired effect
  		  <tr class="panel">
 		  	<td colspan="8">
 		  		<h4>이름수정</h4>
-		  		<form action="">
+		  		<form action="/admin/member/modName" method="get">
 		  		회원아이디: <label>${user.userid }</label> <br>
-		  		수정할 이름: <input type="text" name="username"> <br>
+		  		수정할 이름: <input type="text" name="userName"> <br>
+		  		<input type="hidden" name="userid" value="${user.userid }">
 		  		<input type="submit" value="변경">
 		  		</form>
 		  	</td>
@@ -143,44 +144,7 @@ desired effect
 		</c:forEach>
 		</tbody>
 	</table>
-	<br>
-
-<!-- 변경 form -->
-<tr id="modName" style="display: none">
-<div style="display: none">	
-  <td colspan="8">
-	<h4>이름수정</h4>
-	<form action="">
-	회원아이디: <label>${user.userid }</label> <br>
-	수정할 이름: <input type="text" name="username"> <br>
-	<input type="submit" value="변경">
-	</form>
-  </td>
-</div>
-</tr>
-<tr class="panel" style="display: none">
-  <td colspan="8">
-	<h4>회원탈퇴</h4>
-	<form action="">
-	<strong>${user.userid }</strong> 회원을 <br>
-	정말로 탈퇴시키겠습니까?
-	<input type="submit" value="변경">
-	</form>
-  </td>
-</tr>
-
-<tr class="panel" style="display: none">
-  <td colspan="8">
-	<h4>권한부여</h4>
-	<form action="">
-	회원아이디: <label>${user.userid }</label> <br>
-	수정할 이름: <input type="text" name="username"> <br>
-	<input type="submit" value="변경">
-	</form>
-  </td>
-</tr>
-	
-	
+	<br>	
 	<!-- pagination -->
 	<ul class="pagination">
 		<c:if test="${pageMaker.prev }">
