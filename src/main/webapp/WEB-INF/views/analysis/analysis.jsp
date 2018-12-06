@@ -947,6 +947,98 @@
       </div> <!-- container 태그 끝 -->
     </section>
 <script type="text/javascript">
+function searchAndMark(){
+	var geocoder3 = new daum.maps.services.Geocoder();
+	var locArr = new Array();
+	var positions = [];
+	
+	for(var i = 0; i < realestateOwnerList.length; i++){
+		var temp = realestateOwnerList[i].AGENT_ADDRESS;
+		geocoder3.addressSearch(realestateOwnerList[i].AGENT_ADDRESS, function(result, status) {
+			// 내부 인자만 사용 가능! : 호준
+    		if(result != undefined){
+				loc = result[0];
+				locArr.push(loc);
+				
+				console.log(result);
+				var position = {
+						title: result[0].address_name,
+						latlng: new daum.maps.LatLng(result[0].y, result[0].x)
+				}
+				
+				positions.push(position);
+				
+			    var marker = new daum.maps.Marker({
+			        map: map2, // 마커를 표시할 지도
+			        position: position.latlng, // 마커를 표시할 위치
+			        title : position.title // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+			    });
+    		}
+    	});
+	}
+	
+}
+
+// 검색 후 좌표 반환
+function search(realestateOwner){
+	var geocoder3 = new daum.maps.services.Geocoder();
+	var loc;
+	var locArr = new Array();
+	
+	for(var i = 0; i < realestateOwnerList.length; i++){
+		geocoder3.addressSearch(realestateOwnerList[i].AGENT_ADDRESS, function(result, status) {
+    		if(result != undefined){
+				loc = result[0];
+				locArr.push(loc);
+    		}
+    	});
+	}
+	return locArr;
+}
+
+var Markers = new Array();
+
+function makeMarkers(realestateOwner,locArray,map2){
+	var positions = [];
+	console.log(locArray);
+	console.log(typeof locArray)
+	console.log(locArray[0]);
+
+	for(var j = 0; j < locArray.length; j++){
+		var position = {
+				title: realestateOwner[j].AGENT_ADDRESS,
+				latlng: new daum.maps.LatLng(locArray[j].y, locArray[j].x)
+		}
+		positions.push(position);
+	}
+	
+	console.log(positions);
+	// 마커 이미지의 이미지 주소입니다
+	
+	for (var i = 0; i < positions.length; i ++) {
+
+		// 마커를 생성합니다
+	    var marker = new daum.maps.Marker({
+	        map: map2, // 마커를 표시할 지도
+	        position: positions[i].latlng, // 마커를 표시할 위치
+	        title : positions[i].title // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+	    });
+	    
+	    marker.setMap(map2);
+	    Markers.push(marker);
+	}
+	
+	
+}
+
+	function updateMarkers(){
+		var locArray2 = search(realestateOwnerList); 
+		
+        console.log(realestateOwnerList);
+        console.log(map2);
+        makeMarkers(realestateOwnerList,locArray2,map2);
+	}
+var map2;
 /*
  * 선택된 객체의 인덱스를 나타내는 변수 
  */ 
@@ -1294,6 +1386,7 @@ function makeDataSets2(topDataList,curDataArr){
      			  		var infoHeaderText = $(this).text();
      			  		var marker;
      			  		var infowindow;
+     			  		
      			  		geocoder.addressSearch($(this).text(), function(result, status) {
      						
      					    // 정상적으로 검색이 완료됐으면 
@@ -1507,6 +1600,8 @@ function makeDataSets2(topDataList,curDataArr){
     			realestateList = topThreeList[i].memulList;
         	 	realestateOwnerList = topThreeList[i].realestateList;
         	 	
+        	 	searchAndMark();
+        	 	
     			// 상위 3개의 상권 리스트 배열에서 도로명이 일치하는 배열의 요소를 불러와 해당하는 예상 매출액을 태그의 text로 추가
     			$('#expectedSalesAccount').text(topThreeList[i].mlresult.estmt_SALES);
     			var marker;
@@ -1555,6 +1650,8 @@ function makeDataSets2(topDataList,curDataArr){
 					            content: content
 					        });
 					        infowindow.open(map, marker);
+					        
+
 					    }
 					    
 					}) // geoCoder 끝나는 부분
@@ -1865,13 +1962,17 @@ function makeDataSets2(topDataList,curDataArr){
     	}
    	});
     
-    
     </script>
     
     <script>
+    
+   
     // 부동산 매물 부분 데이터 뿌리는 JavasScirpt
     $('.resultBtn').click(function() {
     	
+        // 마커 찍기
+        // 호준
+
     	// 클릭한 골목상권 테이블에 뿌리기 위해 파싱 
     	var alleyBizFullName = $(this).text().split(' ');
     	$('#resultDistrict').text(alleyBizFullName[0]); 
@@ -1888,14 +1989,16 @@ function makeDataSets2(topDataList,curDataArr){
     	
     	// 변환된 좌표를 저장할 좌표 객체 생성
     	var coords2;
-    	var map2;
+
     	console.log('선택된 Village 어디여?' + clickedVillage);
     	// 구 값이 바뀌면, 해당 구 중심 좌표로 이동
+    	//for(var k = 0; k <  )
     	geocoder2.addressSearch(clickedVillage, function(result, status) {
+    		console.log(result);
     	     // 정상적으로 검색이 완료됐으면 
     	     if (status === daum.maps.services.Status.OK) {
     	        coords2 = new daum.maps.LatLng(result[0].y, result[0].x);				// 정상적으로 검색이 완료된 지역의 결과를 위도, 경도 좌표로 저장
-    			
+    			console.log(coords2);
     			// 지도를 띄울 Div 태그 mapContainer 변수에 저장
     			// 지도 가운데 좌표 저장 변수 mapCenter
     			$('#roadMap').empty();
@@ -1905,6 +2008,8 @@ function makeDataSets2(topDataList,curDataArr){
     		            center: mapCenter2, // 지도의 중심좌표
     		            level: 1// 지도의 확대 레벨
     		        };
+    			
+    			console.log(mapCenter2);
     	        
     		    map2 = new daum.maps.Map(mapContainer2, mapOption2); 					// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
     	        map2.setCenter(coords2); 												// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
@@ -1990,8 +2095,10 @@ function makeDataSets2(topDataList,curDataArr){
     		    }
    	     	}
     	})
+
     }); // 버튼 클릭 이벤트 종료 부분
     	
+    
     </script>
 <!--===============================================================================================-->    
 <script type="text/javascript">
