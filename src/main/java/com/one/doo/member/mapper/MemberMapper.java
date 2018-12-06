@@ -2,7 +2,7 @@ package com.one.doo.member.mapper;
 
 import java.util.List;
 
-import com.one.doo.board.domain.Criteria;
+import com.one.doo.article.domain.Criteria;
 import com.one.doo.member.domain.Member;
 
 public interface MemberMapper {
@@ -18,4 +18,10 @@ public interface MemberMapper {
 	public List<Member> getListWithCri(Criteria cri);
 	
 	public int getTotalCount();
+	
+	public int getMemCnt();
+	
+	public void updateName(Member member);
+	
+	public void updateEnabled(String userid);
 }

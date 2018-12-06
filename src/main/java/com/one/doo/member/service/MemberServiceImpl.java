@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.one.doo.auth.domain.Auth;
 import com.one.doo.auth.mapper.AuthMapper;
-import com.one.doo.board.domain.Criteria;
+import com.one.doo.article.domain.Criteria;
 import com.one.doo.member.domain.Member;
 import com.one.doo.member.mapper.MemberMapper;
 import com.one.doo.member.validate.MailCertify;
@@ -34,7 +34,6 @@ public class MemberServiceImpl implements MemberService {
 	@Inject
 	private MailCertify mail;
 	// 로그 등록을 위한 Mapper
-	
 	@Inject
 	private LogMapper logMapper;
 	@Inject
@@ -76,9 +75,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.getListWithCri(cri);
 	}
 
-	@Override
+	@Override // (권한-유저)수
 	public int getTotalCount() {
 		return memberMapper.getTotalCount();
+	}
+	
+	@Override  //회원의 수
+	public int getMemCnt() {
+		return memberMapper.getMemCnt();
 	}
 	
 	@Override
@@ -99,6 +103,29 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int sumUpLoginLog(int url_no, String log_day) {
 		return logMapper.update(url_no, log_day);
+	}
+
+	@Override  //회원이름수정
+	public void modifyName(String userid, String username) {
+		Member member = new Member();
+		member.setUserid(userid);
+		member.setUserName(username);
+		memberMapper.updateName(member);
+	}
+
+	@Transactional
+	@Override  // 회원권한삭제(강제탈퇴)
+	public void updateEnabled(String userid) {
+		// member의 enabled를 N으로 변경
+		// member가 갖고있던 모든권한을 delete
+		memberMapper.updateEnabled(userid);
+		authMapper.deleteAuth(userid);
+	}
+
+	@Override  // 회원권한부여
+	public void grantAuth(String userid, String role) {
+		Auth auth = new Auth(userid, role);
+		authMapper.insert(auth);
 	}
 
 }
