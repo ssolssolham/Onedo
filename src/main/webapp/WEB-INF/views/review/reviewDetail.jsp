@@ -169,7 +169,35 @@
 		  </div>
 		</div>
 	  </div>
-    
+	  
+     <!-- 후기 삭제 Modal HTML -->
+  <div id="deleteReviewModal" class="modal fade">
+    <div class="modal-dialog modal-login">
+      <div class="modal-content">
+      <div class="modal-header">        
+        <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;후기 삭제</h4>
+      </div>
+      <div class="modal-body">
+        <form action="/review/remove?article_num=${review.article_num }" method="get">
+        <div class="fs-20 t-center">후기 등록 시, 입력했던 비밀번호를 입력하세요</div><br>
+        <div class="fs-20 t-center" style="color: red; font-weight: bold;">&lt;주의&gt; 삭제 시, 복구할 수 없습니다!</div>
+        <br>
+        <br>
+        <div class="form-group">
+          <input type="hidden" name="article_num" value="${review.article_num }">
+          <input type="password" class="form-control " placeholder="비밀번호 입력" required="required" style="padding-left:10px;">         
+        </div>
+        <br>
+        <div class="form-group" style="display: flex; align-items: center; justify-content: center;">
+          <input type="submit" class="" value="삭제">&nbsp;
+          <button type="button" class="" value="취소"  data-dismiss="modal">취소</button>
+        </div>
+        </form>       
+      </div>
+      </div>
+    </div>
+    </div>
+
   <!-- 댓글 Modal HTML -->
   <div id="replyModal" class="modal fade">
     <div class="modal-dialog modal-login">
@@ -211,34 +239,6 @@
     </div>
    </div>
     
-     <!-- 후기 삭제 Modal HTML -->
-  <div id="deleteReviewModal" class="modal fade">
-    <div class="modal-dialog modal-login">
-      <div class="modal-content">
-      <div class="modal-header">        
-        <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;후기 삭제</h4>
-      </div>
-      <div class="modal-body">
-        <form action="/review/remove?article_num=${review.article_num }" method="get">
-        <div class="fs-20 t-center">후기 등록 시, 입력했던 비밀번호를 입력하세요</div><br>
-        <div class="fs-20 t-center" style="color: red; font-weight: bold;">&lt;주의&gt; 삭제 시, 복구할 수 없습니다!</div>
-        <br>
-        <br>
-        <div class="form-group">
-          <input type="hidden" name="article_num" value="${review.article_num }">
-          <input type="password" class="form-control " placeholder="비밀번호 입력" required="required" style="padding-left:10px;">         
-        </div>
-        <br>
-        <div class="form-group" style="display: flex; align-items: center; justify-content: center;">
-          <input type="submit" class="" value="삭제">&nbsp;
-          <button type="button" class="" value="취소"  data-dismiss="modal">취소</button>
-        </div>
-        </form>       
-      </div>
-      </div>
-    </div>
-    </div>
-
 
 
 
@@ -276,23 +276,40 @@
 		     if(list == null || list.length == 0){
 		       return;
 		     }
-		     
+
+/**		     
+		     <li class='left clearfix' data-rno='n'>
+		     	<div>
+		     		<div class='header'>
+		     			<strong class='primary-font'>[i+1] 댓작성자</strong>
+		     			<small class='pull-right text-muted'>댓작성시간</small>
+		     		</div>
+		     		<p>댓글내용</p>
+		     	</div>
+		     </li>
+*/
+		     // 댓글리스트 크기만큼 li태그 추가(댓글 show)
 		     for (var i = 0, len = list.length || 0; i < len; i++) {
 		       str +="<li class='left clearfix' data-rno='"+(i+1)+"'>";
 		       str +="  <div><div class='header'><strong class='primary-font'>["
-		    	   +list[i].rno+"] "+list[i].replyer+"</strong>"; 
+		    	   +(i+1)+"] "+list[i].replyer+"</strong>"; 
 		       str +="    <small class='pull-right text-muted'>"
 		           +replyService.displayTime(list[i].replyDate)+"</small></div>";
-		       str +="    <p>"+list[i].reply+"</p></div></li>";
+		       str +="<p>"+list[i].reply+"</p></div></li>";
 		     }
-		     
+/* for (var i = 0, len = list.length || 0; i < len; i++) {
+    str +="<li class='left clearfix' data-rno='"+(i+1)+"'>";
+    str +="  <div><div class='header'><strong class='primary-font'>["
+ 	   +list[i].rno+"] "+list[i].replyer+"</strong>"; 
+    str +="    <small class='pull-right text-muted'>"
+        +replyService.displayTime(list[i].replyDate)+"</small></div>";
+    str +="    <p>"+list[i].reply+"</p></div></li>";
+  }
+ */		     
 		     replyUL.html(str);
 		     
 		     showReplyPage(replyCnt);
-
-		 
 		   });//end function
-		     
 		 }//end showList
 		    
 		    var pageNum = 1;
@@ -313,17 +330,15 @@
 		      if(endNum * 10 < replyCnt){
 		        next = true;
 		      }
-		      
+
+		      // 댓글영역 페이지네이션
 		      var str = "<ul class='pagination pull-right'>";
-		      
 		      if(prev){
 		        str+= "<li class='page-item'><a class='page-link' href='"+(startNum -1)+"'>Previous</a></li>";
 		      }
 		      
 		      for(var i = startNum ; i <= endNum; i++){
-		        
 		        var active = pageNum == i? "active":"";
-		        
 		        str+= "<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"+i+"</a></li>";
 		      }
 		      
@@ -332,12 +347,11 @@
 		      }
 		      
 		      str += "</ul></div>";
-		      
 		      console.log(str);
-		      
 		      replyPageFooter.html(str);
 		    }
 		     
+		    // 페이지 클릭시 이벤트 추가
 		    replyPageFooter.on("click","li a", function(e){
 		       e.preventDefault();
 		       console.log("page click");
@@ -352,7 +366,7 @@
 		     });     
 
 		   
-		    var modal = $(".modal");
+		    var modal = $("#replyModal");
 		    var modalInputReply = modal.find("input[name='reply']");
 		    var modalInputReplyer = modal.find("input[name='replyer']");
 		    var modalInputReplyDate = modal.find("input[name='replyDate']");
@@ -369,7 +383,7 @@
 		    
 		    // 댓글추가버튼(new Reply)
 		    $("#addReplyBtn").on("click", function(e){
-		      
+		      alert("댓글추가!!!");
 		      modal.find("input").val("");
 		      modalInputReplyDate.closest("div").hide();
 		      modal.find("button[id !='modalCloseBtn']").hide();
@@ -438,15 +452,13 @@
 		    modalModBtn.on("click", function(e){
 		    	  
 		   	  var reply = {rno:modal.data("rno"), reply: modalInputReply.val()};
-		   	  //alert("댓..:"+reply.relyer);
+		   	  alert("댓수정:"+reply.relyer);
 		   	  replyService.update(reply, function(result){
 		   	        
 		   	    alert(result);
 		   	    modal.modal("hide");
 		   	    showList(pageNum);
-		   	    
 		   	  });
-		   	  
 		   	});
 
 			// 삭제버튼클릭이벤트
