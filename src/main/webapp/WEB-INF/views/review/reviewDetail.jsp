@@ -144,7 +144,7 @@
 			  <h4 class="modal-title">후기 내용 수정</h4>
 			</div>
 			<div class="modal-body">
-			  <form action="/review/modify" method="get">
+			  <form action="/review/modify" method="get" id="modForm">
 				<div class="form-group">
 				  <input type="text" name="title" class="form-control " required="required" style="padding-left:10px;" value="${review.title }">
 				</div>
@@ -178,14 +178,14 @@
         <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;후기 삭제</h4>
       </div>
       <div class="modal-body">
-        <form action="/review/remove?article_num=${review.article_num }" method="get">
+        <form action="/review/remove?article_num=${review.article_num }" method="get" id="removeForm">
         <div class="fs-20 t-center">후기 등록 시, 입력했던 비밀번호를 입력하세요</div><br>
         <div class="fs-20 t-center" style="color: red; font-weight: bold;">&lt;주의&gt; 삭제 시, 복구할 수 없습니다!</div>
         <br>
         <br>
         <div class="form-group">
           <input type="hidden" name="article_num" value="${review.article_num }">
-          <input type="password" class="form-control " placeholder="비밀번호 입력" required="required" style="padding-left:10px;">         
+          <input type="password" name="article_pw" id="inputPw" class="form-control " placeholder="비밀번호 입력" required="required" style="padding-left:10px;">         
         </div>
         <br>
         <div class="form-group" style="display: flex; align-items: center; justify-content: center;">
@@ -249,7 +249,7 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reply.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function () {
-		  
+		
 		  var articleNumVal = '<c:out value="${review.article_num}"/>';
 		  var replyUL = $(".chat");
 		  
@@ -277,18 +277,6 @@
 		       return;
 		     }
 
-/**		     
-		     <li class='left clearfix' data-rno='n'>
-		     	<div>
-		     		<div class='header'>
-		     		//<span id='rno' value='list[i].rno' style='display:none'/>
-		     			<strong class='primary-font'>[i+1] 댓작성자</strong>
-		     			<small class='pull-right text-muted'>댓작성시간</small>
-		     		</div>
-		     		<p>댓글내용</p>
-		     	</div>
-		     </li>
-*/
 		     // 댓글리스트 크기만큼 li태그 추가(댓글 show)
 		     for (var i = 0, len = list.length || 0; i < len; i++) {
 		       str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
@@ -298,15 +286,6 @@
 		           +replyService.displayTime(list[i].replyDate)+"</small></div>";
 		       str +="<p>"+list[i].reply+"</p></div></li>";
 		     }
-/* for (var i = 0, len = list.length || 0; i < len; i++) {
-    str +="<li class='left clearfix' data-rno='"+(i+1)+"'>";
-    str +="  <div><div class='header'><strong class='primary-font'>["
- 	   +list[i].rno+"] "+list[i].replyer+"</strong>"; 
-    str +="    <small class='pull-right text-muted'>"
-        +replyService.displayTime(list[i].replyDate)+"</small></div>";
-    str +="    <p>"+list[i].reply+"</p></div></li>";
-  }
- */		     
 		     replyUL.html(str);
 		     
 		     showReplyPage(replyCnt);
@@ -461,6 +440,44 @@
 		   	  });
 		   	});
 		});
+	
+	$("#modForm").submit(function() {
+		var passwd = "${review.article_pw}";
+		var inputPw = $("input[name=article_pw]").val();
+		if(passwd != inputPw){
+			/* var target = $('#snackbar');
+	    	target.text('비밀번호가 일치하지 않습니다:()');
+	    	toast(); */
+	    	alert("비밀번호가 일치하지 않습니다:(");
+			return false;
+		}else{
+			var target = $('#snackbar');
+	    	target.text('후기를 수정하였습니다:D');
+	    	toast();
+			return true;
+		}
+	});
+	
+	$("#removeForm").submit(function() {
+		var passwd = "${review.article_pw}";
+		var inputPw = $("#inputPw").val();
+		if(passwd != inputPw){
+			/* var target = $('#snackbar');
+	    	target.text('비밀번호가 일치하지 않습니다:()');
+	    	toast(); */
+	    	alert("비밀번호가 일치하지 않습니다:(");
+	    	
+			return false;
+		}else{
+			var target = $('#snackbar');
+	    	target.text('후기를 삭제하였습니다:D');
+	    	toast();
+			return true;
+		}
+	});
+	
+	
+
 	
 	</script>
 
