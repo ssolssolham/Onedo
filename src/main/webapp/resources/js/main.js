@@ -195,3 +195,7 @@
     
 
 })(jQuery);
+
+function logoutFormSubmit() {
+	$('#logoutForm').submit();
+}

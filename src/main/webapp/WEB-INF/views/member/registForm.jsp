@@ -25,80 +25,57 @@
   <section id="analysis_section">
     <div class="container" style="max-width: 1500px;">
       <div class="card">
-        <div class="card-body" style="text-align: center; margin:40px 40px 40px 40px;">
-          <div class="col-sm-8">
-            <section class="section-slide">
-              <div class="wrap-slick1">
-                <div class="slick1">
-                  <div class="item1-slick1" style="background-image: url(${pageContext.request.contextPath}/resources/images/master-slides-04.jpg);">
-                    <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150" style=" min-height: 700px; max-height:700px;">
-                    </div>
-                  </div>
-          
-                  <div class="item2-slick1" style="background-image: url(${pageContext.request.contextPath}/resources/images/master-slides-04.jpg);">
-                    <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150" style=" min-height: 700px; max-height:700px;">
-                    </div>
-                  </div>
-          
-                  <div class="item3-slick1" style="background-image: url(${pageContext.request.contextPath}/resources/images/master-slides-04.jpg);">
-                    <div class="wrap-content-slide1 sizefull flex-col-c-m p-l-15 p-r-15 p-t-150" style=" min-height: 700px; max-height:700px;">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-          <div class="col-sm-4" style="margin-top: 36px;">
-          <h1 style="font-weight: bold; font-family: a드림고딕4;">
+        <div class="card-body" style="text-align: center; ">
+          <div class="col-sm-12" style="margin-top: 36px;">
+          	<div style="margin: 65px 480px 133px;">
+          <h1 style="font-weight: bold; font-family: a드림고딕4; font-size: 40px;">
             <img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">
               회원가입
           </h1><br>
-          <h4 style="font-weight: bold; font-family: a드림고딕4;">
+          <h2 style="font-weight: bold; font-family: a드림고딕4;">
             회원가입을 진행 하시고, 서비스 혜택을 누리세요!
-          </h4>
+          </h2><br>
           <p>${error}</p>
           <p>${logout}</p>
           <form action="/member/regist" method="post" onsubmit="return beforeSubmit();">
             <div class="form-group">
               <input type="text" name="userid" id="userid"
-                class="form-control width-60 display-i"
+                class="width-60 display-i"
                 placeholder="ID 입력 (12자 이내의 영문, 숫자 조합)"
                 required="required"
-                style="padding-left: 10px; width:60%; display:inline;" /> 
+                style="padding-left: 10px; width:60%; display:inline; border-top: none; border-right: none; border-left: none; border-bottom: 2px solid lightgrey" /> 
                 &nbsp;
-                <input type="button" value="중복확인" id="dupCheck" style="width: 38%; vertical-align: bottom;"
+                <input type="button" value="중복확인" id="dupCheck" style="width: 38%; vertical-align: bottom; border: none;"
                 class="display-i btn btn-primary btn-lg width-37 height-40"/>
             </div>
             <br>
             <div class="form-group">
-              <input type="password" name="userpw" id="userpw"
-                class="form-control "
+              <input type="password" name="userpw" id="userpw" class="w-full"
                 placeholder="PW 입력 (12자 이내의 영문, 숫자 조합)"
-                required="required" style="padding-left: 10px;" />
+                required="required" style="padding-left: 10px; border-top: none; border-right: none; border-left: none; border-bottom: 2px solid lightgrey" />
             </div>
             <br>
             <div class="form-group">
               <input type="password" name="passConfirm"
-                class="form-control " placeholder="PW 확인"
-                required="required" style="padding-left: 10px;" />
+                 placeholder="PW 확인" class="w-full"
+                required="required" style="padding-left: 10px; border-top: none; border-right: none; border-left: none; border-bottom: 2px solid lightgrey" />
             </div>
             <br>
             <div class="form-group">
-              <input type="text" name="userName" class="form-control "
-                placeholder="이름 입력 (2~4 자리의 한글 이름)" required="required"
-                style="padding-left: 10px;" />
+              <input type="text" name="userName" class="w-full" placeholder="이름 입력 (2~4 자리의 한글 이름)" required="required"
+                style="padding-left: 10px; border-top: none; border-right: none; border-left: none; border-bottom: 2px solid lightgrey" />
             </div>
             <br>
             <div class="form-group">
               <input type="text" id="email"
-                class="display-i form-control width-50"
+                class="display-i width-50"
                 placeholder="이메일을 입력하세요" required="required"
-                style="padding-left: 10px; width:50%; display:inline;"> <span
-                class="fsize-16 width-8">&nbsp;@&nbsp;</span>&nbsp;<select
+                style="padding-left: 10px; width:50%; display:inline; border-top: none; border-right: none; border-left: none; border-bottom: 2px solid lightgrey"> <span
+                class="fsize-16 width-8">&nbsp;&nbsp;@&nbsp;&nbsp;</span>&nbsp;<select
                 id="emailHost"
-                class="display-i form-control vertical-align-t p-l-0 width-40"
+                class="display-i vertical-align-t p-l-0 width-40"
                 name="emailHost" id="emailHost"
-                style="padding-left: 10px; width:40%; display:inline; height: 40px;">
+                style="font-size: 20px; padding-left: 10px; width:40%; display:inline; height: 40px; border-top: none; border-right: none; border-left: none; border-bottom: 2px solid lightgrey">
                 <option selected>이메일선택</option>
                 <option>daum.net</option>
                 <option>gmail.com</option>
@@ -112,12 +89,12 @@
               <!-- <input type="text" class="display-i form-control width-40" placeholder="직접입력" required="required" style="padding-left:10px;"> -->
 
               <input type="text" id="certifyCodeInput"
-                class="display-i form-control width-60"
+                class="display-i width-60"
                 placeholder="인증번호를 입력하세요" disabled="disabled"
-                required="required" style="padding-left: 10px; width: 60%; display:inline;">&nbsp;
+                required="required" style="padding-left: 10px; width: 60%; display:inline; border-top: none; border-right: none; border-left: none; border-bottom: 2px solid lightgrey">&nbsp;
               <button type="button" id="emailCertify"
                 class="display-i btn btn-primary btn-block btn-lg width-37 height-40" 
-                style="width:38%; vertical-align: bottom; display:inline;">
+                style="width:38%; font-size: 20px; vertical-align: bottom; display:inline; border-top: none; border-right: none; border-left: none; border-bottom: 2px solid lightgrey">
               이메일인증
               </button>
             </div>
@@ -131,15 +108,16 @@
             </div>
 
           </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-  <%-- <!-- footer include 시작 -->
+  <!-- footer include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/footer.jsp"/>
-  <!-- footer include 종료 --> --%>
+  <!-- footer include 종료 -->
 
 <script type="text/javascript">
 // 아이디, 패스워드 찾기 전송
@@ -275,13 +253,39 @@ $(function() {
    });
 
 // 비밀번호확인
+$('#userpw').focusout(function() {
+	var pass = $('#userpw').val();
+	if(pass === '') {
+		var target = $('#snackbar');
+		target.text('비밀번호를 입력하세요');
+		toast();
+	}
+})
+
 $('input[name="passConfirm"]').focusout(function() {
 	var pass = $("#userpw").val();
 	var inputPass = $('input[name="passConfirm"]').val();
-	console.log(pass +" "+inputPass);
 	if(pass != inputPass){
 		var target = $('#snackbar');
 		target.text('입력한 비밀번호와 일치하지 않습니다!');
+		toast();
+	} else {
+		var target = $('#snackbar');
+		target.text('입력한 비밀번호와 일치합니다');
+		toast();
+	}
+})
+
+$('input[name="userName"]').focusout(function() {
+	var userName = $(this).val();
+	if (userName.length > 4) {
+		var target = $('#snackbar');
+		target.text('이름을 4자 이상 입력하실 수 없습니다');
+		$('input[name="userName"]').focus();
+		toast();
+	} else {
+		var target = $('#snackbar');
+		target.text('이름 입력이 확인되었습니다.');
 		toast();
 	}
 })
