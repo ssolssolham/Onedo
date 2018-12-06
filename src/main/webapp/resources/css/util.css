@@ -3897,14 +3897,15 @@ RESPONSIVE  RESPONSIVE  RESPONSIVE  RESPONSIVE   RESPONSIVE
 
     width: 100%;
 
-	height : 40px;
-
 	text-align: center;
 
-	color: white;
+	color: black;
 	
 	background: white;
+	
 	border-top: 3px solid #27b2a5;
+	
+	font-size: 16px;
 }
 
 

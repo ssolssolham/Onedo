@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.one.doo.loan.mapper.LPBUMapper">
+	
+	<select id="getLPBUList" resultType="Map" parameterType="Map">					
+	SELECT	*
+	FROM    LPBU l
+				JOIN users u
+				ON l.user_id = u.user_id
+				JOIN loan_product p
+         		ON p.loan_id = l.loan_id
+	</select>
+
+	<select id="getTotalLPBU" resultType="int">
+		SELECT count(*) FROM LPBU
+		<![CDATA[
+			WHERE loan_id > 0
+		]]>
+	</select>
+	
+	
+	
+	<insert id="insertLPBU">
+		INSERT INTO LPBU
+		             (lpbu_num,
+		              user_id,
+		              loan_id,
+		              reserve_time,
+		              request_bm,
+		              isAnswered,
+		              user_phone,
+		              requestTime,
+		              reasonM,
+		              birthdate)
+		VALUES  (seq_lpbu.nextval,
+		             #{userId},
+		             #{loanId},
+		             TO_DATE(#{reserveTime},'yyyy-mm-dd hh24:mi:ss'),
+		             #{requestBM},
+		             '0',
+		             #{userPhone},
+		             TO_DATE(sysdate,'yyyy-mm-dd hh24:mi:ss'),
+		             #{reasonLoan},
+		             TO_DATE(#{birthdate},'YYYY-MM-DD'))
+	</insert>
+
+	<update id="answerLPBU">
+		UPDATE LPBU
+		SET 		isAnswered = '1'
+		WHERE lpbu_num = #{lpbuId}
+	</update>
+	
+	<delete id="deleteLPBU">
+	DELETE LPBU
+	WHERE lpbu_num = #{lpbuId}
+	</delete>
+
+
+</mapper>

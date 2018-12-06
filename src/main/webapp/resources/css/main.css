@@ -100,7 +100,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 body, html {
   height: 100%;
-  font-family: '占쏙옙占쏙옙占쏙옙占�','占쏙옙占쏙옙', 'dotum', 'AppleGothic';
+  font-family: 'a드림고딕4', 'dotum', 'AppleGothic';
 	/*font-family: Montserrat, sans-serif;*/
   font-weight: 400;
   font-size: 2rem;
@@ -240,6 +240,12 @@ input[type="button"]:hover {
 input[type="text"], input[type="password"] {
 	font-size: 20px;
 	height: 40px;
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+	font-size: 20px;
+	height: 40px;
+	border: 2px solid #27b2a5;
 }
 
 select {
@@ -469,6 +475,7 @@ input[type="date" i] {
   border-radius: 3px;
   font-size: 15px;
   padding: 5px;
+  color : black;
 }
 .daterangepicker td {
     width: 60px;
@@ -658,7 +665,6 @@ td {
   width: 100%;
   height: 100%;
   background-color: transparent;
-  justify-content: space-between;
   align-items: center;
 }
 
@@ -691,6 +697,7 @@ td {
 /*[ Menu ]
 -----------------------------------------------------------
 */
+
 .wrap_menu {
   height: 100%;
 }
@@ -702,7 +709,6 @@ td {
   display: -ms-flexbox;
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 100%;
 }
 
@@ -730,12 +736,12 @@ td {
 }
 
 .main_menu > li > a {
-  font-family: Montserrat;
+  font-family: a드림고딕4;
   font-size: 20px;
   font-weight: bold;
   text-transform: uppercase;
   color: black;
-  padding: 15px;
+  padding: 8px;
 
 }
 

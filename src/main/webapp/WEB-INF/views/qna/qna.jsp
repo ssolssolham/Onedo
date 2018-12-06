@@ -6,8 +6,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <!-- header include 시작 -->
+    <!-- header config include 시작 -->
     <jsp:include page="${pageContext.request.contextPath}/resources/includes/headTagConfig.jsp"/>
+    <!-- header config include 종료 -->
 </head>
 <body class="animsition bg1-pattern">
 
@@ -18,15 +19,6 @@
   <!-- asideMenu include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/asideMenu.jsp"/>
   <!-- asideMenu include 종료 -->
-
-  <!-- 로그인 모달 include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/modal/loginModal.jsp"/>
-  <!-- 로그인 모달 include 종료 -->
-
-  <!-- 회원가입 모달 include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/modal/registModal.jsp"/>
-  <!-- 회원가입 모달 include 종료 -->
-
   <section class="section-review">
     <div class= "container" style="max-width:1500px;">
 				<div class="card">
