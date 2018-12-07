@@ -43,7 +43,7 @@
             <!-- 로그인 안했을 경우 -->
             <!-- 로그인한경우 -->
             <sec:authorize access="isAuthenticated()">
-              <li><a href="" id="loanHistory">대출 History</a></li>
+              <li><a href="/loan/reserveList?userId=${member.username}" id="loanHistory">대출 History</a></li>
               <form action="/logout" method="post" id="logoutForm">
               <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
               </form>

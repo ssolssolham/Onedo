@@ -37,8 +37,8 @@ public class LPBUServiceImpl implements LPBUService {
 	}
 
 	@Override
-	public List<HashMap<String, Object>> listLPBU(String userId){
-		return mapper.listLPBU(userId);
+	public List<HashMap<String, Object>> getLPBUList(String userId){
+		return mapper.getLPBUList(userId);
 	}
 
 
