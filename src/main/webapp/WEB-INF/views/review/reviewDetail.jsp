@@ -106,34 +106,34 @@
 					</div>
 					<br><br>
      <!-- /.panel -->
-<!-- 댓글영역 -->
-    <div class="panel panel-default">
-       <div class="panel-heading">
-        <i class="fa fa-comments fa-fw"></i> Reply
-      </div> 
-      
-      <div class="panel-heading">
-        <i class="fa fa-comments fa-fw"></i> Reply
-        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New Reply</button><br>
-      </div>      
-      
-      
-      <!-- /.panel-heading -->
-      <div class="panel-body">        
-      
-        <ul class="chat">
-
-        </ul>
-        <!-- ./ end ul -->
-      </div>
-      <!-- /.panel .chat-panel -->
-
-	<div class="panel-footer"></div>
- 
- 					
-				</div>
+			<!-- 댓글영역 -->
+		    <div class="panel panel-default">
+		       <div class="panel-heading">
+		        <i class="fa fa-comments fa-fw"></i> Reply
+		      </div> 
+		      
+		      <div class="panel-heading">
+		        <i class="fa fa-comments fa-fw"></i> Reply
+		        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New Reply</button><br>
+		      </div>      
+		      
+		      
+		      <!-- /.panel-heading -->
+		      <div class="panel-body">        
+		      
+		        <ul class="chat">
+		
+		        </ul>
+		        <!-- ./ end ul -->
+		      </div>
+		      <!-- /.panel .chat-panel -->
+		
+			<div class="panel-footer"></div>
+		 
+		 					
 			</div>
-	</div>
+		</div><!-- end of cardbody -->
+		</div>
 </section>
 
   <!-- 후기 수정 Modal HTML -->
@@ -239,11 +239,6 @@
     </div>
    </div>
     
-
-
-
-	
-
 
 <!-- 댓글처리 관련 js파일 추가 by sw -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reply.js"></script>
@@ -441,6 +436,7 @@
 		   	});
 		});
 	
+	// 게시글수정
 	$("#modForm").submit(function() {
 		var passwd = "${review.article_pw}";
 		var inputPw = $("input[name=article_pw]").val();
@@ -458,6 +454,7 @@
 		}
 	});
 	
+	//게시글삭제
 	$("#removeForm").submit(function() {
 		var passwd = "${review.article_pw}";
 		var inputPw = $("#inputPw").val();

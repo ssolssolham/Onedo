@@ -31,7 +31,7 @@ public class QnaController {
 	@Inject
 	private ArticleService service;
 	
-	@RequestMapping("/")
+	@GetMapping("/list")
 	public String list(Criteria cri, Model model) {
 		log.info("문의게시판 list요청");
 		
@@ -47,6 +47,7 @@ public class QnaController {
 					 Model model) {
 		log.info("문의게시판 상셉기 요청 컨트롤러");
 		model.addAttribute("qna", service.get(article_num));
+		log.info("되돌아갑니당");
 		return "qna/qnaDetail";
 	}
 	
@@ -55,7 +56,17 @@ public class QnaController {
 		log.info("문의 등록요청");
 		service.register(article);
 		rttr.addFlashAttribute("qnaRegiRes", "success");
-		return "redirect:/qna/";
+		return "redirect:/qna/list";
+	}
+	
+	@GetMapping("/modify")
+	public String modify(Article article, RedirectAttributes rttr) {
+		log.info("문의수정컨트롤러");
+		log.info("수정 article객체: "+article);
+		service.modify(article);
+		rttr.addFlashAttribute("qnaModRes", "success");
+		return "redirect:/qna/detail?article_num="+article.getArticle_num();
+		
 	}
 	
 }

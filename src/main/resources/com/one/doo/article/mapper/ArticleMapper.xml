@@ -57,7 +57,6 @@
 					FROM articles
 					WHERE 
 					bno = 3 AND
-					enabled = 'Y' AND
 	]]>				<include refid="criteria"></include>
 	<![CDATA[
 					ROWNUM <= #{pageNum} * #{amount}

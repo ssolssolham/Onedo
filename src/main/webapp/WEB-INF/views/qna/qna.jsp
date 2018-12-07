@@ -119,7 +119,7 @@
 							<c:forEach items="${list }" var="review" varStatus="status">
 								<tr>
 								  <td>${status.index +1 }</td>
-								  <td><a class="move" href="/qna/detail?article_num=${review.article_num }">${review.title }</a></td>
+								  <td><a class="move" href="detail?article_num=${review.article_num }">${review.title }</a></td>
 								  <td>${review.userid }</td>
 								  <td>${review.regdate }</td>
 								  <c:if test="${review.enabled eq 'Y' }">
@@ -155,7 +155,7 @@
 						</ul><!-- end pagination -->
 						</div>
 					<!-- page a태그 원래동작 방지 -->
-					<form id="actionForm" action="/qna/" method="get">
+					<form id="actionForm" action="/qna/list" method="get">
 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 						<!-- 검색에서도 페이징처리 -->
