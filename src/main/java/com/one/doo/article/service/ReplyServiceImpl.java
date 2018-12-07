@@ -5,10 +5,14 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.one.doo.article.domain.Article;
 import com.one.doo.article.domain.Criteria;
 import com.one.doo.article.domain.Reply;
+import com.one.doo.article.domain.ReplyCntVO;
 import com.one.doo.article.domain.ReplyPage;
+import com.one.doo.article.mapper.ArticleMapper;
 import com.one.doo.article.mapper.ReplyMapper;
 
 import lombok.AllArgsConstructor;
@@ -24,10 +28,18 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Inject
 	private ReplyMapper mapper;
+	@Inject
+	private ArticleMapper aMapper;
 	
+	@Transactional
 	@Override
 	public int register(Reply reply) {
 		log.info("댓글작성 서비스.."+reply);
+		Article article = aMapper.read(reply.getArticle_num());
+		ReplyCntVO vo = new ReplyCntVO();
+		vo.setArticle_num(reply.getArticle_num());
+		vo.setReplycnt(article.getReplycnt()+1);
+		aMapper.updateReplyCnt(vo);
 		return mapper.insert(reply);
 	}
 

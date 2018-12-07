@@ -38,7 +38,7 @@
               <sec:authorize access="isAuthenticated()">
                   <li><a href="/analysis/">상권분석</a></li>
               </sec:authorize>
-              <li><a href="/qna/">이용 문의</a></li>
+              <li><a href="/qna/list">이용 문의</a></li>
               <li><a href="/review/list">이용 후기</a></li>
             <!-- 로그인 안했을 경우 -->
             <!-- 로그인한경우 -->

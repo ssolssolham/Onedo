@@ -15,7 +15,7 @@ public class Article {
 	private String regdate;
 	private String updateDate;
 	
-	private int replyCnt;
+	private int replycnt;
 	private String enabled; //공지: 게시여부, 리뷰: 삭제여부
 	
 	private String article_pw;

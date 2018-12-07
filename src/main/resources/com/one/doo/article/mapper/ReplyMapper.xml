@@ -47,5 +47,4 @@
 		WHERE	article_num = #{article_num}
 	]]>
 	</select>
-
 </mapper>

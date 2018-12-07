@@ -21,15 +21,6 @@
   <!-- asideMenu include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/asideMenu.jsp"/>
   <!-- asideMenu include 종료 -->
-<%-- 
-  <!-- 로그인 모달 include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/modal/loginModal.jsp"/>
-  <!-- 로그인 모달 include 종료 -->
-
-  <!-- 회원가입 모달 include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/modal/registModal.jsp"/>
-  <!-- 회원가입 모달 include 종료 -->
- --%>
   <section class="section-review">
 		<div class= "container" style="max-width: 1500px;">
 
@@ -115,7 +106,6 @@
 							</c:if>
 						</ul><!-- end pagination -->
 					</div>
-					
 					<!-- page a태그 원래동작 방지 -->
 					<form id="actionForm" action="/review/list" method="get">
 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
@@ -177,8 +167,16 @@ $(document).ready(function() {
 	if(res ==='success'){
 		//alert("등록성공!");
 		var target = $('#snackbar');
-    	target.text('후기를 등록하였습니다:D');
+    	target.text('새 후기를 등록하였습니다:D');
     	toast();
+	}
+	
+	// 리뷰삭제 성공시 toast
+	var removeRes = '${removeRes}';
+	if(removeRes === 'success'){
+		var target = $("#snackbar");
+		target.text("후기를 성공적으로 삭제하였습니다!");
+		toast();
 	}
 	
 	// history back, 모달띄울필요X

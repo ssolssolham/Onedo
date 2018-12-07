@@ -50,11 +50,11 @@ public class ReviewController {
 		return "review/review";
 	}
 	
-	@GetMapping("/review")
+/*	@GetMapping("/review")
 	public String review() {
 		return "review/review";
 	}
-
+*/
 	@GetMapping("/detail")
 	public String get(@RequestParam("article_num") Long article_num, @ModelAttribute("cri")Criteria cri, Model model) {
 		log.info("후기게시판 상세보기요청");
@@ -70,7 +70,6 @@ public class ReviewController {
 		log.info("들어온 후기글객체: "+article);
 		service.register(article);
 		rttr.addFlashAttribute("reviewRegiRes", "success");
-		//등록 후 보내주는거 다시좀봐야해..
 		return "redirect:/review/list";
 	}
 	
@@ -87,9 +86,10 @@ public class ReviewController {
 	
 	// 후기삭제
 	@GetMapping("/remove")
-	public String remove(@RequestParam("article_num") Long article_num) {
+	public String remove(@RequestParam("article_num") Long article_num, RedirectAttributes rttr) {
 		log.info("삭제요청");
 		service.remove(article_num);
+		rttr.addFlashAttribute("removeRes", "success");
 		return "redirect:/review/list";
 	}
 	
