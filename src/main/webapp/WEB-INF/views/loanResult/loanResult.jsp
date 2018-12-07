@@ -829,7 +829,7 @@ var chartData = {
 <!--대출조건 상세보기 -->
 <script>
 $(function(){
-	$( ".infoButton_1Fb6y" ).each(function(index) {
+	$(".infoButton_1Fb6y").each(function(index) {
     $(this).on("click", function(){
     	$(".alert_1cYf2").show();
     });

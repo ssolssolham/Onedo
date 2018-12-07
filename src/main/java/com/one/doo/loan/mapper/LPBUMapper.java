@@ -13,5 +13,5 @@ public interface LPBUMapper {
 
 	public int answerLPBU(int lpbuNo);
 
-	public List<HashMap<String, Object>> listLPBU(String userId);
+	public List<HashMap<String, Object>> getLPBUList(String userId);
 }

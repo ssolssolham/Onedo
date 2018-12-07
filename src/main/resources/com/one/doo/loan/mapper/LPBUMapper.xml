@@ -7,9 +7,10 @@
 	SELECT	*
 	FROM    LPBU l
 				JOIN users u
-				ON l.user_id = u.user_id
+				ON l.user_id = u.userid
 				JOIN loan_product p
          		ON p.loan_id = l.loan_id
+	WHERE user_id = #{userId}         		
 	</select>
 
 	<select id="getTotalLPBU" resultType="int">
@@ -51,10 +52,15 @@
 		WHERE lpbu_num = #{lpbuId}
 	</update>
 	
+	<update id="modifyTimeLPBU">
+		UPDATE LPBU
+		SET 		isAnswered = '1'
+		WHERE lpbu_num = #{lpbuId}
+	</update>
+	
 	<delete id="deleteLPBU">
 	DELETE LPBU
 	WHERE lpbu_num = #{lpbuId}
 	</delete>
-
 
 </mapper>
