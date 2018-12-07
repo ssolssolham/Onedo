@@ -124,7 +124,7 @@
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" style="display:none;">
               <!-- The user image in the menu -->
               <li class="user-header" style="background-color: #008584">
                 <img src="${pageContext.request.contextPath}/resources/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
