@@ -51,6 +51,14 @@
           </a>
         </li>
         
+        <!-- 문의관리 -->
+        <li>
+          <a href="/admin/qna/"><i class="fa fa-edit"></i> <span>문의관리</span>
+            <span class="pull-right-container">
+              </span>
+          </a>
+        </li>
+        
         <!--  -->
         <li>
           <a href="/admin/member/"><i class="fa fa-book"></i> <span>회원관리</span>
