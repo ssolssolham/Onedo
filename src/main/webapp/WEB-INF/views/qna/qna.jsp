@@ -66,7 +66,7 @@
 						<br>
 						&nbsp;&nbsp;
  				<!-- 검색조건 -->
-					<form id="searchForm" action="/qna/" method="get">
+					<form id="searchForm" action="/qna/list" method="get">
 					<select name="type" id="optionSel" style="height: 35px; font-size: 20px; text-align: center; width: 15%; display: inline" class="form-control form-control-sm">
 					  <option value="" <c:out value="${pageMaker.cri.type == null?'selected':'' }"/>>--</option>
 					  <option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':'' }"/>>제목</option>
