@@ -40,21 +40,6 @@ public class MemberController{
 		model.addAttribute("auth", auth);
 	}
 	
-//	@RequestMapping("/customLogin")
-//	public void loginInput(String error, String logout, Model model){
-//		log.info("error: " + error);
-//		log.info("logout: " + logout);
-//		log.info(model);
-//		
-//		if(error != null) {
-//			model.addAttribute("error", "아이디와 비밀번호를 확인하세요.");			
-//		}
-//		
-//		if(logout != null) {
-//			model.addAttribute("logout", "로그아웃!!");			
-//		}
-//	}
-	
 	@GetMapping("/customLogout")
 	public void logoutGET(){
 		log.info("사용자 로그아웃 화면");

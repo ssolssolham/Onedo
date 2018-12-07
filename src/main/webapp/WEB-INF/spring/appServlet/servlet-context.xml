@@ -36,6 +36,6 @@
 	<context:component-scan base-package="com.one.doo.admin.notice.controller"/>
 	<context:component-scan base-package="com.one.doo.admin.stats.controller"/>
 	<context:component-scan base-package="com.one.doo.admin.qna.controller"/>
-	
+	<context:component-scan base-package="com.one.doo.admin.rest.controller"/>
 	
 </beans:beans>

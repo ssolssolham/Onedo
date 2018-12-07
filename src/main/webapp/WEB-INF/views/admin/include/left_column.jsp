@@ -80,6 +80,13 @@
               </span>
           </a>
         </li>
+        
+        <li>
+          <a href="/admin/rest/"><i class="fa fa-laptop"></i> <span>RESTful API</span>
+            <span class="pull-right-container">
+              </span>
+          </a>
+        </li>
       </ul>
       <!-- /.sidebar-menu -->
     </section>
