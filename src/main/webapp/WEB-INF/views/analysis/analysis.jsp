@@ -943,6 +943,7 @@ function searchAndMark(){
 			        title : position.title // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 			    });
 			    
+			    console.log(2);
 			    Markers.push(marker);
     		}
     	});
@@ -1022,6 +1023,7 @@ function makeMarkers(realestateOwner,locArray,map2){
 	        title : positions[i].title // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 	    });
 	    
+		console.log(10);
 	    marker.setMap(map2);
 	    Markers.push(marker);
 	}
@@ -2111,11 +2113,11 @@ function makeDataSets2(topDataList,curDataArr){
     	 	// 호준 : 여러 개 마커 생성, 골목상권 원 생성, 골목상권으로 이동
     	 	searchAndMark();
     	 	searchAlley($('#resultAlleyBiz').text());
-    		   }, 3000);
+    		   }, 1300);
 
     	setTimeout(function(){
  		addEventsMarkers(Markers,filter);
- 		   }, 4000);
+ 		   }, 3000);
 
     	console.log(Markers);
 
@@ -2485,9 +2487,10 @@ function makeDataSets2(topDataList,curDataArr){
    }
   
    function makeSumMartChart(topThreeList){
+	   console.log(1);
 	   var martSumMartDataArr = makeDataArr2(topThreeList);
-	   
 	   console.log(martSumMartDataArr);
+	   
    	   var sumMart = document.getElementById('sumMartChart').getContext('2d');
        var sumMartChart = new Chart(sumMart, {
            // The type of chart we want to create
@@ -2509,8 +2512,12 @@ function makeDataSets2(topDataList,curDataArr){
 	        	 makeLiveChart(topThreeList,liveWishList);
 	        	 makeJobChart(topThreeList,jobWishList);
 	        	 makeLossChart(topThreeList,lossWishList);
+	        	 
+	        	 setTimeout(function() {
 	        	 makeMartChart(topThreeList,survivalWishList);
 	        	 makeSumMartChart(topThreeList);
+	        		}, 800);
+
     }
     </script>
     
