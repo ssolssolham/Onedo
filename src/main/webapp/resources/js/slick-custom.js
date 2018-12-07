@@ -54,8 +54,9 @@
         });
 
         $('.slick1').on('afterChange', function(event, slick, currentSlide){ 
-            for(var i=0; i<itemSlick1.length; i++) {
-
+        
+        	for(var i=0; i<itemSlick1.length; i++) {
+            			
               clearTimeout(action1[i]);
               clearTimeout(action2[i]);
               clearTimeout(action3[i]);
@@ -117,7 +118,8 @@
         });
 
         $('.slick2').on('afterChange', function(event, slick, currentSlide){ 
-            for(var i=0; i<itemSlick2.length; i++) {
+    
+        	for(var i=0; i<itemSlick2.length; i++) {
 
               clearTimeout(action1s2[i]);
 
@@ -180,7 +182,8 @@
         });
 
         $('.slick3').on('afterChange', function(event, slick, currentSlide){ 
-            for(var i=0; i<itemSlick3.length; i++) {
+       
+        	for(var i=0; i<itemSlick3.length; i++) {
 
               clearTimeout(action1s3[i]);
               clearTimeout(action2s3[i]);
