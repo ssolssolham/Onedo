@@ -77,7 +77,7 @@
 						<br>
  -->				
  				<!-- 검색조건 -->
-					<form id="searchForm" action="/review/list" method="get">
+					<form id="searchForm" action="/qna/" method="get">
 					<select name="type" id="optionSel" style="height: 35px; font-size: 20px; text-align: center; width: 15%; display: inline" class="form-control form-control-sm">
 					  <option value="" <c:out value="${pageMaker.cri.type == null?'selected':'' }"/>>--</option>
 					  <option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':'' }"/>>제목</option>
@@ -155,7 +155,7 @@
 						</ul><!-- end pagination -->
 						</div>
 					<!-- page a태그 원래동작 방지 -->
-					<form id="actionForm" action="/review/list" method="get">
+					<form id="actionForm" action="/qna/" method="get">
 						<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 						<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
 						<!-- 검색에서도 페이징처리 -->
