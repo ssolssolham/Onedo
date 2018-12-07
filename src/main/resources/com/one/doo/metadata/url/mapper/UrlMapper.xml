@@ -4,10 +4,46 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.doo.metadata.url.mapper.UrlMapper">
 
+	<resultMap type="com.one.doo.metadata.url.domain.Param" id="paramMap">
+		<result property="param_no" 	column="param_no"/>
+		<result property="url_no" 		column="url_no"/>
+		<result property="key" 			column="key"/>
+		<result property="value"	 	column="value"/>
+		<result property="type" 		column="type"/>
+		<result property="description" 	column="description"/>
+	</resultMap>
+	
+	<resultMap type="com.one.doo.metadata.url.domain.Url" id="urlMap">
+		<result property="url_no" 		column="url_no"/>
+		<result property="url" 			column="url"/>
+		<result property="url_summary" 	column="url_summary"/>
+		<result property="method" 		column="method"/>
+		<result property="auth" 		column="auth"/>
+		<collection property="paramList" resultMap="paramMap"/>
+	</resultMap>
+
 	<!-- URL 번호 가져오기 url,method 입력 해야함. -->
 	<select id="readUrlNo" resultType="int">
 			select url_no 
 			from metadata_urls 
 			where url LIKE #{url} AND METHOD LIKE #{method}
+	</select>
+	
+	<!-- url매핑과 해당하는 param가져오기.. -->
+	<select id="getUrlListWithParams" resultMap="urlMap">
+		SELECT urls.url_no, 
+		       urls.url, 
+		       urls.url_summary, 
+		       urls.mvc_c_name, 
+		       urls.method, 
+		       urls.auth, 
+		       params.KEY, 
+		       params.value, 
+		       params.TYPE, 
+		       params.description 
+		FROM   metadata_urls urls 
+		       left outer join metadata_params params 
+		                    ON urls.url_no = params.url_no 
+		ORDER  BY url_no	
 	</select>
 </mapper>

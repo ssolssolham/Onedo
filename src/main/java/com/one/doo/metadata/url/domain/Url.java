@@ -1,6 +1,8 @@
 package com.one.doo.metadata.url.domain;
 
-import com.one.doo.metadata.log.domain.Log;
+import java.util.List;
+
+import com.one.doo.metadata.url.domain.Param;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,9 +16,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 public class Url {
- private int url_no;
- private String url;
- private String url_summary;
- private String mvc_c_name;
- private String method;
+	private Long url_no;
+	private String url;
+	private String url_summary;
+	private String method;
+	private String auth;
+	private List<Param> paramList;
 }

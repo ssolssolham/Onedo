@@ -20,7 +20,7 @@ import lombok.extern.log4j.Log4j;
 
 /**
  * 문의글 관리
- * @author kosta
+ * @author siwonPark
  */
 @Controller
 @Log4j
