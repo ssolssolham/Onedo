@@ -1490,8 +1490,7 @@ function makeDataSets2(topDataList,curDataArr){
     });
         
    	var village;		
-   	var pageOneMarkers = new Array();
-   	var pageOneCircles = new Array();
+   	var pageOnes = new Array();
  	$('#districtSelect').change(function() {
  		// 이벤트를 연결
  		
@@ -1545,11 +1544,12 @@ function makeDataSets2(topDataList,curDataArr){
      			$('#vilFilter').find('button').click(function(){
      				// 클릭을 했는데 active 되어 있지 않으면 -> 활성화
      				if(!($(this).hasClass('active'))) {
-     			  		$(this).addClass('active');
+     					$(this).addClass('active');
      			  		var infoHeaderText = $(this).text();
      			  		var marker;
      			  		var infowindow;
-     			  		
+					    
+					    
      			  		geocoder.addressSearch($(this).text(), function(result, status) {
      						
      					    // 정상적으로 검색이 완료됐으면 
@@ -1568,7 +1568,8 @@ function makeDataSets2(topDataList,curDataArr){
      					        });
      					        infowindow.open(map, marker);
      					        
-     					       pageOneMarkers.push(marker);
+     					       pageOnes.push(marker);
+     					       pageOnes.push(infowindow);
      					    }
      					    
      					  // 지도에 표시할 원을 생성
@@ -1582,16 +1583,35 @@ function makeDataSets2(topDataList,curDataArr){
      						 	    fillColor: '#27b2a5', // 채우기 색깔입니다
      						 	    fillOpacity: 0.7  // 채우기 불투명도 입니다   
      						 	});
+     					  
      						 	
      						 	// 지도에 원을 표시합니다 
      						 	circle.setMap(map);
+     						 	pageOnes.push(circle);
      						 	
-     						 	pageOneCircles.push(circle);
      					}) // geoCoder 끝나는 부분
+     					
+     					pageOnes.push($(this));
      				} // if 문 끝나는 부분
      				// 클릭을 했는데 활성화가 되어있으면,
      				else { 
-     			   		$(this).removeClass('active');
+     	   			   		for(var i = 0; i < pageOnes.length; i++){
+         			   			console.log('?');
+         			   			if($(this)[0] === pageOnes[i][0]){
+         			   				console.log(i);
+         			   				// 원과 마커 지우기
+         			   				pageOnes[i+1].setMap(null);
+         			   				pageOnes[i+2].setMap(null);
+         			   				pageOnes[i+3].setMap(null);
+         			   				pageOnes.splice(i+1,1);
+         			   				pageOnes.splice(i+1,1);
+         			   				pageOnes.splice(i+1,1);
+         			   				pageOnes.splice(i,1);
+         			   			}
+         			   			
+         			   		}
+         			   	$(this).removeClass('active');
+     						
      			  	}
      			}) 	 
  	         },
@@ -1813,6 +1833,7 @@ function makeDataSets2(topDataList,curDataArr){
 					        });
 					        infowindow.open(map, marker);
 					        
+					        pageOnes.push(infowindow);
 
 					    }
 					    
