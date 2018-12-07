@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.one.doo.article.domain.Article;
 import com.one.doo.article.domain.Criteria;
+import com.one.doo.article.domain.ReplyCntVO;
 
 /**
  * 게시판에들어가는 article에 대한 mapper
@@ -44,5 +45,8 @@ public interface ArticleMapper {
 	
 	// 문의게시판 총 게시글 수(with 검색조건)
 	public int getTotalQnaCount(Criteria cri);
+	
+	// 게시글에 댓글이달릴때함께실행
+	public void updateReplyCnt(ReplyCntVO vo);
 	
 }

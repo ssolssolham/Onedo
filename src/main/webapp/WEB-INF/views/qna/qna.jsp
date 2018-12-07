@@ -264,9 +264,17 @@ $(document).ready(function() {
 	
 	// 새 문의 등록시 toast
 	var res = '${qnaRegiRes}';
-	if(res == 'success'){
+	if(res === 'success'){
 		var target = $('#snackbar');
 		target.text('새 문의사항을 등록하였습니다 :D');
+		toast();
+	}
+	
+	// 문의 삭제시 toast
+	var delRes = '${qnaDelRes}';
+	if(delRes === 'success'){
+		var target = $('#snackbar');
+		target.text("문의사항을 성공적으로 삭제하였습니다.");
 		toast();
 	}
 

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <html lang="en">
 <head>
@@ -23,7 +24,7 @@
 
 			<div class="card">
 				<div class="card-body menu-title-div" >
-						<img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;&nbsp;<h3 style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">후기 상세</h3>
+						<img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;&nbsp;<h3 style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">문의 상세</h3>
 				</div>
 			    <!-- 후기 게시판 상단 Nav 바 (새글 등록, 검색 기능) -->
 				<div class="card-body m-lr-50" >
@@ -62,12 +63,14 @@
                         <td style="text-align: center; vertical-align: middle; color: #27b2a5;">
                           <b>답변여부</b>
                         </td>
-                        <c:if test="${qna.enabled eq 'Y' }">
+                        <c:set var="replycnt" value="${qna.replycnt }"/>
+                        <fmt:formatNumber value="${qna.replycnt }" type="number" var="replycnt" />
+                        <c:if test="${replycnt eq 0 }">
 						  <td>답변처리중</td>
-						  </c:if>
-						  <c:if test="${qna.enabled eq 'N' }">
-						  <td>답변완료</td>
-						  </c:if>
+						 </c:if>
+						 <c:if test="${replycnt gt 0 }">
+						   <td>답변완료</td>
+						 </c:if>
                       </tr>
                       
                       <tr>
@@ -91,7 +94,7 @@
 					<c:if test="${writer eq loginId }">
                         <!-- 해당 아이디인 경우에만 확인할 수 있도록 작성 -->
                         <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" id="updateQnaBtn" data-toggle="modal" data-target="#updateQnaModal">수정</a><span class="float-r">&nbsp;&nbsp;</span>
-                        <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton"id="deleteQnaBtn" data-toggle="modal" data-target="#deleteQnaModal">삭제</a>
+                        <!-- <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton"id="deleteQnaBtn" data-toggle="modal" data-target="#deleteQnaModal">삭제</a> -->
 					</c:if>
 					</div>
 					<br><br>
@@ -137,8 +140,7 @@
 				
 				<div class="form-group">
 					<textarea name="content" rows="10" cols="50" class="form-control" 
-					required="required" style="padding-left:10px; font-size: 20px;">
-					${qna.content }</textarea>
+					required="required" style="padding-left:10px; font-size: 20px;">${qna.content }</textarea>
 				</div>
 				
 				<input type="hidden" name="article_num" value="${qna.article_num }">		  
@@ -154,22 +156,22 @@
 		</div>
 	  </div>
  
-      <!-- 후기 삭제 Modal HTML -->
-  <div id="deleteReviewModal" class="modal fade">
+<%--       <!-- 문의 삭제 Modal HTML -->
+  <div id="deleteQnaModal" class="modal fade">
     <div class="modal-dialog modal-login">
       <div class="modal-content">
       <div class="modal-header">        
         <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;후기 삭제</h4>
       </div>
       <div class="modal-body">
-        <form action="/review/remove?article_num=${review.article_num }" method="get">
-        <div class="fs-20 t-center">후기 등록 시, 입력했던 비밀번호를 입력하세요</div><br>
+        <form action="/qna/remove?article_num=${qna.article_num }" method="get" id="removeForm">
+        <div class="fs-20 t-center">문의 등록 시, 입력했던 비밀번호를 입력하세요</div><br>
         <div class="fs-20 t-center" style="color: red; font-weight: bold;">&lt;주의&gt; 삭제 시, 복구할 수 없습니다!</div>
         <br>
         <br>
         <div class="form-group">
-          <input type="hidden" name="article_num" value="${review.article_num }">
-          <input type="password" class="form-control " placeholder="비밀번호 입력" required="required" style="padding-left:10px;">         
+          <input type="hidden" name="article_num" value="${qna.article_num }">
+          <input type="password" id="delInputPw" name="particle_pw" class="form-control " placeholder="비밀번호 입력" required="required" style="padding-left:10px;">         
         </div>
         <br>
         <div class="form-group" style="display: flex; align-items: center; justify-content: center;">
@@ -181,7 +183,7 @@
       </div>
     </div>
     </div>
- 
+ --%> 
     
   <!-- 댓글 Modal HTML -->
   <div id="replyModal" class="modal fade">
@@ -246,9 +248,23 @@
 			toast();
 			return true;
 		}
-	
 	});
 			
+/* 	// 문의글 삭제
+	$("#removeForm").submit(function() {
+		var passwd = "${qna.article_pw}";
+		var inputPw = $("#delInputPw").val();
+		if(passwd != inputPw){
+			alert("비밀번호가 일치하지 않습니다:(");
+			return false;
+		}else{
+			var target = $("#snackbar");
+			target.text("문의를 삭제하였습니다.:D");
+			toast();
+			return true;
+		}
+	});
+ */			
 });
 	</script>
 

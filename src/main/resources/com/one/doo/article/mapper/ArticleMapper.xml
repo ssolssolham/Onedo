@@ -118,4 +118,11 @@
 		SET		enabled = 'N'
 		WHERE	article_num = #{article_num}
 	</update>
+	
+	<!-- 게시글 댓글수 업데이트 -->
+	<update id="updateReplyCnt">
+		UPDATE	articles
+		SET		replycnt = #{replycnt}
+		WHERE	article_num = #{article_num}
+	</update>
 </mapper>

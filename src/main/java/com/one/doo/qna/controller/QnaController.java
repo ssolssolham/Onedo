@@ -66,7 +66,13 @@ public class QnaController {
 		service.modify(article);
 		rttr.addFlashAttribute("qnaModRes", "success");
 		return "redirect:/qna/detail?article_num="+article.getArticle_num();
-		
 	}
 	
+	@GetMapping("/remove")
+	public String remove(@RequestParam("article_num")Long article_num, RedirectAttributes rttr) {
+		log.info("문의삭제요청");
+		service.remove(article_num);
+		rttr.addFlashAttribute("qnaDelRes", "success");
+		return "redirect:/qna/list";
+	}
 }

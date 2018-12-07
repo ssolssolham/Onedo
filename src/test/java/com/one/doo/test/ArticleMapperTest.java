@@ -68,7 +68,7 @@ public class ArticleMapperTest {
 		article.setUserid("hi");
 		article.setTitle("후기후기");
 		article.setContent("후기글넣기 유닛테스트");
-		article.setReplyCnt(0);
+		article.setReplycnt(0);
 		log.info("----"+article);
 		mapper.insert(article);
 	}

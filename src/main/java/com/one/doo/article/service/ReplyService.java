@@ -29,6 +29,4 @@ public interface ReplyService {
 	// 게시글에 대한 댓글 페이징까지
 	public ReplyPage getListPage(Criteria cri, Long article_num);
 	
-	
-	
 }

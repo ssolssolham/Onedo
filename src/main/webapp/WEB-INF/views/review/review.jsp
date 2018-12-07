@@ -171,6 +171,14 @@ $(document).ready(function() {
     	toast();
 	}
 	
+	// 리뷰삭제 성공시 toast
+	var removeRes = '${removeRes}';
+	if(removeRes === 'success'){
+		var target = $("#snackbar");
+		target.text("후기를 성공적으로 삭제하였습니다!");
+		toast();
+	}
+	
 	// history back, 모달띄울필요X
 	history.replaceState({}, null, null);
 	

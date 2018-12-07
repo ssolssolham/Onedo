@@ -86,9 +86,10 @@ public class ReviewController {
 	
 	// 후기삭제
 	@GetMapping("/remove")
-	public String remove(@RequestParam("article_num") Long article_num) {
+	public String remove(@RequestParam("article_num") Long article_num, RedirectAttributes rttr) {
 		log.info("삭제요청");
 		service.remove(article_num);
+		rttr.addFlashAttribute("removeRes", "success");
 		return "redirect:/review/list";
 	}
 	
