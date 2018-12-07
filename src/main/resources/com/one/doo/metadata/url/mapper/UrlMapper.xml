@@ -19,7 +19,7 @@
 		<result property="url_summary" 	column="url_summary"/>
 		<result property="method" 		column="method"/>
 		<result property="auth" 		column="auth"/>
-		<result property="paramList" 	column="paramMap"/>
+		<collection property="paramList" resultMap="paramMap"/>
 	</resultMap>
 
 	<!-- URL 번호 가져오기 url,method 입력 해야함. -->

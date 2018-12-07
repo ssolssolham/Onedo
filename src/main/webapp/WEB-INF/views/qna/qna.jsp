@@ -6,24 +6,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>이용문의</title>
+	<title>One Do - 이용 문의</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <!-- header config include 시작 -->
     <jsp:include page="${pageContext.request.contextPath}/resources/includes/headTagConfig.jsp"/>
     <!-- header config include 종료 -->
+
 </head>
+
 <body class="animsition bg1-pattern">
 
   <!-- header include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/header.jsp"/>
   <!-- header include 종료 -->
-  
-  <!-- asideMenu include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/asideMenu.jsp"/>
-  <!-- asideMenu include 종료 -->
-  <section class="section-review">
+  <section class="section-review" style="font-family: a드림고딕4;">
     <div class= "container" style="max-width:1500px;">
 				<div class="card">
 					<div class="card-body menu-title-div" >
@@ -31,6 +29,7 @@
 					</div>
 				<!-- 후기 게시판 상단 Nav 바 (새글 등록, 검색 기능) -->
 					<div class="card-body">
+						<div class="card-body">
 							<span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">자주 묻는 질문(FAQ)</span>
 						<br>
 						<br>
@@ -58,6 +57,7 @@
 								</div>
 							</div>
 						</div>
+						</div>
 					</div>
 
 					<div class="card-body">
@@ -67,7 +67,7 @@
 						&nbsp;&nbsp;
  				<!-- 검색조건 -->
 					<form id="searchForm" action="/qna/list" method="get">
-					<select name="type" id="optionSel" style="height: 35px; font-size: 20px; text-align: center; width: 15%; display: inline" class="form-control form-control-sm">
+					<select name="type" id="optionSel" style="margin-left: 40px; height: 35px; font-size: 20px; text-align: center; width: 15%; display: inline" class="form-control form-control-sm">
 					  <option value="" <c:out value="${pageMaker.cri.type == null?'selected':'' }"/>>--</option>
 					  <option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':'' }"/>>제목</option>
                       <option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':'' }"/>>내용</option>
@@ -82,11 +82,11 @@
 					<button type="button" id="reviewSearchBtn" style="vertical-align: top; height:35px; width: 10%;">검색</button>
 				  </form>
 				<sec:authorize access="isAuthenticated()">
-					<button type="button" class="float-r" style="height:35px;" id="createReviewBtn" data-toggle="modal" data-target="#createQnaModal">문의작성</button>
+					<button type="button" class="float-r" style="margin-right: 40px; height:35px;" id="createReviewBtn" data-toggle="modal" data-target="#createQnaModal">문의작성</button>
 				</sec:authorize>
 					<br><br>
-						
-						<table style="font-size: 1.0em;">
+						<div style="margin-left:40px; margin-right: 40px;">
+						<table style="font-size: 1.9em; font-family: a드림고딕4;">
 							<colgroup>
 								<col width="10%" style="text-align: center;">
 								<col width="50%" >
@@ -106,27 +106,26 @@
 							<br>
 							<tbody>
 							<c:forEach items="${list }" var="review" varStatus="status">
-								<tr>
-								  <td>${status.index +1 }</td>
-								  <td><a class="move" href="detail?article_num=${review.article_num }">${review.title }</a></td>
-								  <td>${review.userid }</td>
-								  <td>${review.regdate }</td>
-								  <c:set var="replycnt" value="${qna.replycnt }"/>
-			                      <fmt:formatNumber value="${review.replycnt }" type="number" var="replycnt" />
-			                      <c:if test="${replycnt eq 0 }">
-								  	<td>답변처리중</td>
+								<tr class="move" style="cursor:pointer;" onclick="location.href='detail?article_num=${review.article_num }'" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff' ">
+								  <td style="text-align: center;">${status.index +1 }</td>
+								  <td>${review.title}</td>
+								  <td style="text-align: center;">${review.userid }</td>
+								  <td style="text-align: center;">${review.regdate }</td>
+								  <c:if test="${review.enabled eq 'Y' }">
+								  <td style="text-align: center;">답변처리중</td>
 								  </c:if>
-								  <c:if test="${replycnt gt 0 }">
-								    <td>답변완료</td>
+								  <c:if test="${review.enabled eq 'N' }">
+								  <td style="text-align: center;">답변완료</td>
 								  </c:if>
 								</tr>
 							</c:forEach>
 							</tbody>
 						</table>
+						</div>
 						<br>
-						<div class="table-nav-bar">
+						<div style="text-align: center;">
 						<!-- pagination -->
-						<ul class="pagination">
+						<ul class="pagination" style="display: inline-block;">
 							<c:if test="${pageMaker.prev }">
 								<li class="paginate_button">
 								<a href="${pageMaker.startPage -1 }">Previous</a>
@@ -159,14 +158,14 @@
 	</section>
 
       <!-- Modal HTML -->
-      <div id="createQnaModal" class="modal fade">
+      <div id="createQnaModal" class="modal fade" style="font-family: a드림고딕4;">
 		<div class="modal-dialog modal-login">
 		  <div class="modal-content">
 			<div class="modal-header">        
-			  <h4 class="modal-title">서비스 이용 문의</h4>
+			  <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">서비스 이용 문의</h4>
 			</div>
 			<div class="modal-body">
-			  <form action="/qna/register" method="get" id="registerForm">
+			  <form action="/qna/register" method="get" id="registerForm" >
 				<div class="form-group">
 				  <input type="text" name="title" class="form-control " placeholder="제목 입력" required="required" style="padding-left:10px;">
 				</div>
@@ -176,7 +175,7 @@
 				</div>
 				
 				<div class="form-group">
-					<textarea name="content" rows="10" cols="50" class="form-control" placeholder="서비스 이용에 궁금한 점을 자유롭게 작성해주세요" required="required" style="padding-left:10px;"></textarea>
+					<textarea name="content" rows="10" cols="50" class="form-control" placeholder="서비스 이용에 궁금한 점을 자유롭게 작성해주세요" required="required" style="font-size: 20px; padding-left:10px;"></textarea>
 				</div>
 				
 				<input type="hidden" name="bno" value="3">
@@ -198,7 +197,6 @@
 $(document).ready(function() {
 	//모달처리를 위한 javascript
 	var result = '<c:out value="${result}"/>';
-	console.log("result값"+result);
 	checkModal(result);
 	
 	// history back, 모달띄울필요X
@@ -223,7 +221,6 @@ $(document).ready(function() {
 	$('.paginate_button a').on("click", function(e) {
 		e.preventDefault(); //원래 a태그 동작 방지
 		
-		console.log('페이지눌림!!!');
 		
 		//form태그 내, pageNum은 href속성으로 변경
 		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
@@ -236,15 +233,17 @@ $(document).ready(function() {
 	
 	$("#reviewSearchBtn").on("click", function(e) {
 		
-		console.log("선택옵션: " + $('#optionSel option:selected').val());
-		console.log("입력키워드: " + $('#keyword').val());
 
 		if(!$('#optionSel option:selected').val()){
-			alert("검색종류를 선택해 주세요");
+			var target = $('#snackbar');
+			target.text('검색종류를 선택해 주세요');
+			toast();
 			return false;
 		}
 		if(!$('#keyword').val()){
-			alert("키워드를 입력하세요");
+			var target = $('#snackbar');
+			target.text('키워드를 입력하세요');
+			toast();
 			return false;
 		}
 		
@@ -305,6 +304,7 @@ $(document).ready(function() {
 		$('.ziehharmonika').ziehharmonika({collapsible: true,	prefix: '★'});
 	});
 </script>
+<!-- 
 <script type="text/javascript">
 
 	var _gaq = _gaq || [];

@@ -82,6 +82,13 @@
         </li>
         
         <li>
+          <a href="/admin/lpbu/"><i class="fa fa-laptop"></i> <span>상담 예약 관리</span>
+            <span class="pull-right-container">
+              </span>
+          </a>
+        </li>
+
+        <li>
           <a href="/admin/rest/"><i class="fa fa-laptop"></i> <span>RESTful API</span>
             <span class="pull-right-container">
               </span>

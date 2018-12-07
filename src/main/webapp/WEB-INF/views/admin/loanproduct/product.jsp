@@ -7,7 +7,219 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html>
+<head>
+<style>
+button.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+    margin-bottom : 15px;
+}
 
+button.accordion.active, button.accordion:hover {
+    background-color: #ddd;
+}
+
+button.accordion:after {
+    content: '\02795';
+    font-size: 13px;
+    color: #777;
+    float: right;
+    margin-left: 5px;
+}
+
+button.accordion.active:after {
+    content: "\2796";
+}
+
+div.panel {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.6s ease-in-out;
+    opacity: 0;
+}
+
+div.panel.show {
+    opacity: 1;
+    max-height: 500px;  
+}
+
+
+/* 어드민 FORM  */
+.form-style-2{
+  max-width: auto;
+  padding: 20px 12px 10px 20px;
+  font: 13px Arial, Helvetica, sans-serif;
+}
+.form-style-2-heading{
+  font-weight: bold;
+  font-style: italic;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 20px;
+  font-size: 15px;
+  padding-bottom: 3px;
+}
+.form-style-2 label{
+  display: block;
+  margin: 0px 0px 15px 0px;
+}
+.form-style-2 label > span{
+  width: 100px;
+  font-weight: bold;
+  float: left;
+  padding-top: 8px;
+  padding-right: 5px;
+}
+.form-style-2 span.required{
+  color:red;
+}
+.form-style-2 .tel-number-field{
+  width: 40px;
+  text-align: center;
+}
+.form-style-2 input.input-field, .form-style-2 .select-field{
+  width: 48%; 
+}
+.form-style-2 input.input-field, 
+.form-style-2 .tel-number-field, 
+.form-style-2 .textarea-field, 
+ .form-style-2 .select-field{
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  border: 1px solid #C2C2C2;
+  box-shadow: 1px 1px 4px #EBEBEB;
+  -moz-box-shadow: 1px 1px 4px #EBEBEB;
+  -webkit-box-shadow: 1px 1px 4px #EBEBEB;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  padding: 7px;
+  outline: none;
+}
+.form-style-2 .input-field:focus, 
+.form-style-2 .tel-number-field:focus, 
+.form-style-2 .textarea-field:focus,  
+.form-style-2 .select-field:focus{
+  border: 1px solid #0C0;
+}
+.form-style-2 .textarea-field{
+  height:100px;
+  width: 55%;
+}
+.form-style-2 input[type=submit],
+.form-style-2 input[type=button]{
+  border: none;
+  padding: 8px 15px 8px 15px;
+  background: #FF8500;
+  color: #fff;
+  box-shadow: 1px 1px 4px #DADADA;
+  -moz-box-shadow: 1px 1px 4px #DADADA;
+  -webkit-box-shadow: 1px 1px 4px #DADADA;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+.form-style-2 input[type=submit]:hover,
+.form-style-2 input[type=button]:hover{
+  background: #EA7B00;
+  color: #fff;
+}
+
+
+/* 테이블 스타일  */
+.table-style-2{
+  max-width: auto;
+  padding: 20px 12px 10px 20px;
+  font: 13px Arial, Helvetica, sans-serif;
+}
+.table-style-2-heading{
+  font-weight: bold;
+  font-style: italic;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 20px;
+  font-size: 15px;
+  padding-bottom: 3px;
+}
+.table-style-2 label{
+  display: block;
+  margin: 0px 0px 15px 0px;
+}
+.table-style-2 label > span{
+  width: 100px;
+  font-weight: bold;
+  float: left;
+  padding-top: 8px;
+  padding-right: 5px;
+}
+.table-style-2 span.required{
+  color:red;
+}
+.table-style-2 .tel-number-field{
+  width: 40px;
+  text-align: center;
+}
+.table-style-2 input.input-field, .form-style-2 .select-field{
+  width: 48%; 
+}
+.table-style-2 input.input-field, 
+.table-style-2 .tel-number-field, 
+.table-style-2 .textarea-field, 
+ .table-style-2 .select-field{
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  border: 1px solid #C2C2C2;
+  box-shadow: 1px 1px 4px #EBEBEB;
+  -moz-box-shadow: 1px 1px 4px #EBEBEB;
+  -webkit-box-shadow: 1px 1px 4px #EBEBEB;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  padding: 7px;
+  outline: none;
+}
+.table-style-2 .input-field:focus, 
+.table-style-2 .tel-number-field:focus, 
+.table-style-2 .textarea-field:focus,  
+.table-style-2 .select-field:focus{
+  border: 1px solid #0C0;
+}
+.table-style-2 .textarea-field{
+  height:100px;
+  width: 55%;
+}
+.table-style-2 input[type=submit],
+.table-style-2 input[type=button]{
+  border: none;
+  padding: 8px 15px 8px 15px;
+  background: #FF8500;
+  color: #fff;
+  box-shadow: 1px 1px 4px #DADADA;
+  -moz-box-shadow: 1px 1px 4px #DADADA;
+  -webkit-box-shadow: 1px 1px 4px #DADADA;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+}
+.table-style-2 input[type=submit]:hover,
+.table-style-2 input[type=button]:hover{
+  background: #EA7B00;
+  color: #fff;
+}
+</style>
+
+
+</head>
 <!-- HEAD -->
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/head.jsp"/>
 
@@ -58,129 +270,94 @@ desired effect
       <!--------------------------
         | Your Page Content Here |
         -------------------------->
-  <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">공지관리</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-              <table id="example2" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>순번</th>
-                  <th>제목</th>
-                  <th>작성자</th>
-                  <th>작성날짜</th>
-                  <th>게시여부</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>신상품 출시에 대한 공지
-                  </td>
-                  <td>박호준</td>
-                  <td>11.28</td>
-                  <td>X</td>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          <!-- /.box -->
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Striped Full Width Table</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body no-padding">
-              <table class="table table-striped">
-                <tr>
-                  <th style="width: 10px">#</th>
-                  <th>Task</th>
-                  <th>Progress</th>
-                  <th style="width: 40px">Label</th>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Update software</td>
-                  <td>
-                    <div class="progress progress-xs">
-                      <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-red">55%</span></td>
-                </tr>
-                <tr>
-                  <td>2.</td>
-                  <td>Clean database</td>
-                  <td>
-                    <div class="progress progress-xs">
-                      <div class="progress-bar progress-bar-yellow" style="width: 70%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-yellow">70%</span></td>
-                </tr>
-                <tr>
-                  <td>3.</td>
-                  <td>Cron job running</td>
-                  <td>
-                    <div class="progress progress-xs progress-striped active">
-                      <div class="progress-bar progress-bar-primary" style="width: 30%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-light-blue">30%</span></td>
-                </tr>
-                <tr>
-                  <td>4.</td>
-                  <td>Fix and squish bugs</td>
-                  <td>
-                    <div class="progress progress-xs progress-striped active">
-                      <div class="progress-bar progress-bar-success" style="width: 90%"></div>
-                    </div>
-                  </td>
-                  <td><span class="badge bg-green">90%</span></td>
-                </tr>
-              </table>
-            </div>
-            <!-- /.box-body -->
-          </div>
-          
+        
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Quick Example</h3>
+              
+              <button class="accordion">새 대출상품 등록</button>
+                <div class="panel">
+                  <div class="form-style-2">
+                    <div class="form-style-2-heading">Provide your information</div>
+                    <form action="" method="post">
+                        <label for="field1"><span>Name </span><input type="text" class="input-field" name="field1" value="" /></label>
+                        <label for="field2"><span>Email </span><input type="text" class="input-field" name="field2" value="" /></label>
+                        <label><span>Telephone</span><input type="text" class="tel-number-field" name="tel_no_1" value="" maxlength="4" />-<input type="text" class="tel-number-field" name="tel_no_2" value="" maxlength="4"  />-<input type="text" class="tel-number-field" name="tel_no_3" value="" maxlength="10"  /></label>
+                        <label for="field4"><span>Regarding</span><select name="field4" class="select-field">
+                          <option value="General Question">General</option>
+                          <option value="Advertise">Advertisement</option>
+                          <option value="Partnership">Partnership</option>
+                        </select></label>
+                        <label for="field5"><span>Message </span><textarea name="field5" class="textarea-field"></textarea></label>
+                        <label><span> </span><input type="submit" value="Submit" /></label>
+                    </form>
+                    </div>
+                </div>
+                
+                <button class="accordion">대출목록 관리</button>
+                <div class="panel">
+                  <div class="table-style-2">
+                    <div class="table-style-2-heading">
+                      <label for="field1">
+                      <select name="field4" class="select-field">
+                          <option value="General Question">General</option>
+                          <option value="Advertise">Advertisement</option>
+                          <option value="Partnership">Partnership</option>
+                        </select>
+                      <input type="text" class="input-field" name="field1" value="" />
+                      <button type="button">검색 </button>
+                      </label>
+                      </div>
+                   <table id="loanList">
+                        <colgroup>
+                           <col width="10%" style="text-align: center;">
+                           <col width="10%" style="text-align: center;">
+                           <col width="25%" style="text-align: center;">
+                           <col width="20%" style="text-align: center;">
+                           <col width="10%" style="text-align: center;">
+                           <col width="20%" style="text-align: center;">
+                           <col width="10%" style="text-align: center;">
+                           
+                        </colgroup>
+                        <thead>
+                           <tr>
+                              <th style="text-align: center;">상품번호</th>
+                              <th style="text-align: center;">상품유형</th>
+                              <th style="text-align: center;">상품구분</th>
+                              <th style="text-align: center;">상품이름</th>
+                              <th style="text-align: center;">업데이트날짜</th>
+                              <th style="text-align: center;">예약횟수</th>
+                              <th style="text-align: center;">판매변경</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                              <tr>
+                                <td style="text-align:center;">1</td>
+                                <td style="text-align:cdnter; padding-left: 7px;"></td>
+                                <td style="text-align:center;"></td>
+                                <td style="text-align:center;"></td>
+                                <td style="text-align:center;"></td>
+                                <td style="text-align:center;"></td>
+                                <td style="text-align:center;"><button type="button">able</button></td>
+                              </tr>
+                        </tbody>
+                     </table>
+                    </div>
+                </div>
+                
+                <button class="accordion">대출통계</button>
+                <div id="foo" class="panel">
+                  <div class="form-style-2">
+                    <div class="form-style-2-heading">
+                    <label for="field1"><span>Name <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" /></label>
+                    </div>
+                    
+
+
+                    </div>
+                </div>
+              
             </div>
             <!-- /.box-header -->
-            <!-- form start -->
-            <form role="form">
-              <div class="box-body">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputFile">File input</label>
-                  <input type="file" id="exampleInputFile">
-
-                  <p class="help-block">Example block-level help text here.</p>
-                </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox"> Check me out
-                  </label>
-                </div>
-              </div>
-              <!-- /.box-body -->
-
-              <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </div>
-            </form>
           </div>
     </section>
     <!-- /.content -->
@@ -197,5 +374,17 @@ desired effect
 
 <!-- REQUIRED JS SCRIPTS -->
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/plugin_js.jsp"/>
+
+<script>
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function(){
+        this.classList.toggle("active");
+        this.nextElementSibling.classList.toggle("show");
+  }
+}
+</script>
 </body>
 </html>

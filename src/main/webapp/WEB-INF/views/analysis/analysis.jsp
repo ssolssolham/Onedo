@@ -461,8 +461,8 @@
                     <span style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">부동산 매물 리스트</span>
                     <div class="" style="background-color: white; font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
                     	<div class="row">
-                        <div class="col-sm-12" style="height: 600px; padding: 20px;">
-                          <table>
+                        <div class="col-sm-12" style=" padding: 20px;">
+                          <table class="scrolltable"> 
                             <colgroup>
                               <col width="25%">
                               <col width="75%">
@@ -472,57 +472,14 @@
                                 <td colspan="2">
                                   <br>
                                   <div id="gongin" class="t-center" style="font-family: a드림고딕4; font-size: 20px;">
-                                    OOO 공인중개사의 매물정보
                                   </div>
                                   <br>
                                 </td>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'"> 
-                                <td>image1</td>
-                                <td>
-                                  <div>매물번호 : <span class="fs-18">12350</span></div>
-                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                <td>image1</td>
-                                <td>
-                                  <div>매물번호 : <span class="fs-18">12350</span></div>
-                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                <td>image1</td>
-                                <td>
-                                  <div>매물번호 : <span class="fs-18">12350</span></div>
-                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                <td>image1</td>
-                                <td>
-                                  <div>매물번호 : <span class="fs-18">12350</span></div>
-                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                <td>image1</td>
-                                <td>
-                                  <div>매물번호 : <span class="fs-18">12350</span></div>
-                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                  </div>
-                                </td>
+                              <tr style="height: 80px; width: 100%; border: none">
+                                <td colspan="2">로드맵의 마커를 클릭 하시면, 해당 공인 중개사의 상가 매물 리스트를 확인하실 수 있습니다.</td>
                               </tr>
                             </tbody>
                           </table>
@@ -986,6 +943,7 @@ function searchAndMark(){
 			        title : position.title // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 			    });
 			    
+			    console.log(2);
 			    Markers.push(marker);
     		}
     	});
@@ -1065,6 +1023,7 @@ function makeMarkers(realestateOwner,locArray,map2){
 	        title : positions[i].title // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 	    });
 	    
+		console.log(10);
 	    marker.setMap(map2);
 	    Markers.push(marker);
 	}
@@ -1138,7 +1097,7 @@ function makeMarkers(realestateOwner,locArray,map2){
 			var resultString = "";			
 			
 			resultString += '<tr style="height: 80px;" onclick="updateDetail(' + i + ')" onMouseOver="bgColor=\'#beeee9\'" onMouseOut="bgColor=\'#ffffff\'">'; 
-	        resultString += '<td>' + filter[index][i].img_url + '</td>';
+	        resultString += '<td style=\''+ filter[index][i].img_url +'\'></td>';
 	        resultString += '<td><div>매물번호 : <span class="fs-18 mamul_no">' + filter[index][i].mamul_no + '</span></div>';
 	        resultString += '<div>상가형태 : <span class="fs-18 mamul_type">' + filter[index][i].mamul_type + '</span></div>';  
 	        resultString += '<div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">';
@@ -1490,8 +1449,7 @@ function makeDataSets2(topDataList,curDataArr){
     });
         
    	var village;		
-   	var pageOneMarkers = new Array();
-   	var pageOneCircles = new Array();
+   	var pageOnes = new Array();
  	$('#districtSelect').change(function() {
  		// 이벤트를 연결
  		
@@ -1545,11 +1503,12 @@ function makeDataSets2(topDataList,curDataArr){
      			$('#vilFilter').find('button').click(function(){
      				// 클릭을 했는데 active 되어 있지 않으면 -> 활성화
      				if(!($(this).hasClass('active'))) {
-     			  		$(this).addClass('active');
+     					$(this).addClass('active');
      			  		var infoHeaderText = $(this).text();
      			  		var marker;
      			  		var infowindow;
-     			  		
+					    
+					    
      			  		geocoder.addressSearch($(this).text(), function(result, status) {
      						
      					    // 정상적으로 검색이 완료됐으면 
@@ -1568,7 +1527,8 @@ function makeDataSets2(topDataList,curDataArr){
      					        });
      					        infowindow.open(map, marker);
      					        
-     					       pageOneMarkers.push(marker);
+     					       pageOnes.push(marker);
+     					       pageOnes.push(infowindow);
      					    }
      					    
      					  // 지도에 표시할 원을 생성
@@ -1582,16 +1542,35 @@ function makeDataSets2(topDataList,curDataArr){
      						 	    fillColor: '#27b2a5', // 채우기 색깔입니다
      						 	    fillOpacity: 0.7  // 채우기 불투명도 입니다   
      						 	});
+     					  
      						 	
      						 	// 지도에 원을 표시합니다 
      						 	circle.setMap(map);
+     						 	pageOnes.push(circle);
      						 	
-     						 	pageOneCircles.push(circle);
      					}) // geoCoder 끝나는 부분
+     					
+     					pageOnes.push($(this));
      				} // if 문 끝나는 부분
      				// 클릭을 했는데 활성화가 되어있으면,
      				else { 
-     			   		$(this).removeClass('active');
+     	   			   		for(var i = 0; i < pageOnes.length; i++){
+         			   			console.log('?');
+         			   			if($(this)[0] === pageOnes[i][0]){
+         			   				console.log(i);
+         			   				// 원과 마커 지우기
+         			   				pageOnes[i+1].setMap(null);
+         			   				pageOnes[i+2].setMap(null);
+         			   				pageOnes[i+3].setMap(null);
+         			   				pageOnes.splice(i+1,1);
+         			   				pageOnes.splice(i+1,1);
+         			   				pageOnes.splice(i+1,1);
+         			   				pageOnes.splice(i,1);
+         			   			}
+         			   			
+         			   		}
+         			   	$(this).removeClass('active');
+     						
      			  	}
      			}) 	 
  	         },
@@ -1813,6 +1792,7 @@ function makeDataSets2(topDataList,curDataArr){
 					        });
 					        infowindow.open(map, marker);
 					        
+					        pageOnes.push(infowindow);
 
 					    }
 					    
@@ -2133,11 +2113,11 @@ function makeDataSets2(topDataList,curDataArr){
     	 	// 호준 : 여러 개 마커 생성, 골목상권 원 생성, 골목상권으로 이동
     	 	searchAndMark();
     	 	searchAlley($('#resultAlleyBiz').text());
-    		   }, 3000);
+    		   }, 1300);
 
     	setTimeout(function(){
  		addEventsMarkers(Markers,filter);
- 		   }, 4000);
+ 		   }, 3000);
 
     	console.log(Markers);
 
@@ -2507,9 +2487,10 @@ function makeDataSets2(topDataList,curDataArr){
    }
   
    function makeSumMartChart(topThreeList){
+	   console.log(1);
 	   var martSumMartDataArr = makeDataArr2(topThreeList);
-	   
 	   console.log(martSumMartDataArr);
+	   
    	   var sumMart = document.getElementById('sumMartChart').getContext('2d');
        var sumMartChart = new Chart(sumMart, {
            // The type of chart we want to create
@@ -2531,8 +2512,12 @@ function makeDataSets2(topDataList,curDataArr){
 	        	 makeLiveChart(topThreeList,liveWishList);
 	        	 makeJobChart(topThreeList,jobWishList);
 	        	 makeLossChart(topThreeList,lossWishList);
+	        	 
+	        	 setTimeout(function() {
 	        	 makeMartChart(topThreeList,survivalWishList);
 	        	 makeSumMartChart(topThreeList);
+	        		}, 800);
+
     }
     </script>
     
