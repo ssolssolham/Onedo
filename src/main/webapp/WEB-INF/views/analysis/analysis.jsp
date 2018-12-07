@@ -461,8 +461,8 @@
                     <span style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">부동산 매물 리스트</span>
                     <div class="" style="background-color: white; font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
                     	<div class="row">
-                        <div class="col-sm-12" style="height: 600px; padding: 20px;">
-                          <table>
+                        <div class="col-sm-12" style=" padding: 20px;">
+                          <table class="scrolltable"> 
                             <colgroup>
                               <col width="25%">
                               <col width="75%">
@@ -472,57 +472,14 @@
                                 <td colspan="2">
                                   <br>
                                   <div id="gongin" class="t-center" style="font-family: a드림고딕4; font-size: 20px;">
-                                    OOO 공인중개사의 매물정보
                                   </div>
                                   <br>
                                 </td>
                               </tr>
                             </thead>
                             <tbody>
-                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'"> 
-                                <td>image1</td>
-                                <td>
-                                  <div>매물번호 : <span class="fs-18">12350</span></div>
-                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                <td>image1</td>
-                                <td>
-                                  <div>매물번호 : <span class="fs-18">12350</span></div>
-                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                <td>image1</td>
-                                <td>
-                                  <div>매물번호 : <span class="fs-18">12350</span></div>
-                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                <td>image1</td>
-                                <td>
-                                  <div>매물번호 : <span class="fs-18">12350</span></div>
-                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                  </div>
-                                </td>
-                              </tr>
-                              <tr style="height: 80px;" onclick="location.href=''" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-                                <td>image1</td>
-                                <td>
-                                  <div>매물번호 : <span class="fs-18">12350</span></div>
-                                  <div>상가형태 : <span class="fs-18">빌딩, 고층, 역세권</span></div>
-                                  <div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20">3000 / 50</span>
-                                  </div>
-                                </td>
+                              <tr style="height: 80px; width: 100%; border: none">
+                                <td colspan="2">로드맵의 마커를 클릭 하시면, 해당 공인 중개사의 상가 매물 리스트를 확인하실 수 있습니다.</td>
                               </tr>
                             </tbody>
                           </table>
@@ -1138,7 +1095,7 @@ function makeMarkers(realestateOwner,locArray,map2){
 			var resultString = "";			
 			
 			resultString += '<tr style="height: 80px;" onclick="updateDetail(' + i + ')" onMouseOver="bgColor=\'#beeee9\'" onMouseOut="bgColor=\'#ffffff\'">'; 
-	        resultString += '<td>' + filter[index][i].img_url + '</td>';
+	        resultString += '<td style=\''+ filter[index][i].img_url +'\'></td>';
 	        resultString += '<td><div>매물번호 : <span class="fs-18 mamul_no">' + filter[index][i].mamul_no + '</span></div>';
 	        resultString += '<div>상가형태 : <span class="fs-18 mamul_type">' + filter[index][i].mamul_type + '</span></div>';  
 	        resultString += '<div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">';

@@ -31,6 +31,7 @@
 					</div>
 				<!-- 후기 게시판 상단 Nav 바 (새글 등록, 검색 기능) -->
 					<div class="card-body">
+						<div class="card-body">
 							<span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">자주 묻는 질문(FAQ)</span>
 						<br>
 						<br>
@@ -58,6 +59,7 @@
 								</div>
 							</div>
 						</div>
+						</div>
 					</div>
 
 					<div class="card-body">
@@ -65,19 +67,8 @@
 						<br>
 						<br>
 						&nbsp;&nbsp;
-<!-- 						
-						<select style="height: 35px; text-align: center; width: 10%; display: inline" class="form-control form-control-sm">
-							<option default>전체</option>
-							<option>최신순</option>
-							<option>조회순</option>
-						</select>
-						<input type="text" style="vertical-align: top; width: 15%; height: 35px; display: inline;" class="form-control" id="searchValue" name="searchValue">
-						<button type="button" style="vertical-align: top; height:35px; width: 10%;" class="" id="reviewSearchBtn" >검색</button>
-                        <button type="button" class="float-r" style="height: 35px;"id="createQnaBtn" data-toggle="modal" data-target="#createQnaModal">문의작성</button>
-						<br>
- -->				
  				<!-- 검색조건 -->
-					<form id="searchForm" action="/qna/" method="get">
+					<form id="searchForm" action="/qna/list" method="get">
 					<select name="type" id="optionSel" style="height: 35px; font-size: 20px; text-align: center; width: 15%; display: inline" class="form-control form-control-sm">
 					  <option value="" <c:out value="${pageMaker.cri.type == null?'selected':'' }"/>>--</option>
 					  <option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':'' }"/>>제목</option>
@@ -96,8 +87,7 @@
 					<button type="button" class="float-r" style="height:35px;" id="createReviewBtn" data-toggle="modal" data-target="#createQnaModal">문의작성</button>
 				</sec:authorize>
 					<br><br>
-						
-						<table>
+						<table style="font-size: 1.9em;">
 							<colgroup>
 								<col width="10%" style="text-align: center;">
 								<col width="50%" >
@@ -117,16 +107,16 @@
 							<br>
 							<tbody>
 							<c:forEach items="${list }" var="review" varStatus="status">
-								<tr>
-								  <td>${status.index +1 }</td>
-								  <td><a class="move" href="detail?article_num=${review.article_num }">${review.title }</a></td>
-								  <td>${review.userid }</td>
-								  <td>${review.regdate }</td>
+								<tr class="move" onclick="location.href='detail?article_num=${review.article_num }'" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
+								  <td style="text-align: center;">${status.index +1 }</td>
+								  <td>${review.title}</td>
+								  <td style="text-align: center;">${review.userid }</td>
+								  <td style="text-align: center;">${review.regdate }</td>
 								  <c:if test="${review.enabled eq 'Y' }">
-								  <td>답변처리중</td>
+								  <td style="text-align: center;">답변처리중</td>
 								  </c:if>
 								  <c:if test="${review.enabled eq 'N' }">
-								  <td>답변완료</td>
+								  <td style="text-align: center;">답변완료</td>
 								  </c:if>
 								</tr>
 							</c:forEach>
@@ -309,12 +299,12 @@ $(document).ready(function() {
 <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/ziehharmonika.js"></script>
-<!-- 
 <script>
 $(document).ready(function() {
 		$('.ziehharmonika').ziehharmonika({collapsible: true,	prefix: '★'});
 	});
 </script>
+<!-- 
 <script type="text/javascript">
 
 	var _gaq = _gaq || [];
