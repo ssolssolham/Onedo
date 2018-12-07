@@ -247,7 +247,7 @@ canvas {
 
                   <div class="alert_1cYf2">
                     <div class="title_2rL02">
-                      <h5>${loan.get('LOAN_CONTENT')} 가입조건</h5>
+                      <h5>${loan.get('LOAN_NAME')} 가입조건</h5>
                       <a>닫기</a>
                     </div>
                     <div class="scrollable_3JZtx">
@@ -534,9 +534,9 @@ canvas {
 				    if(repay3){
 				    	table += "<input type='radio' name='repay' value='3'><label for='3' class='ajaxTL'>원금균등상환</label>";
 				    };
-				    if(repayM){
+/* 				    if(repayM){
 				    	table += "<input type='radio' name='repay' value='4'><label for='4' class='ajaxTL'>통장대출</label>";
-				    };
+				    }; */
 				    table += "</td></tr>";
 				    table += "<tr><td><label class='ajaxTL'>연 소득 </label></td><td><input type='text' id='salary' name='salary' ><label class='ajaxTL'>만원</label>";
 				    table += "</table>";
@@ -586,26 +586,15 @@ $('#checkRepayment').on('click', function(){
 	var my_asset = $('#salary').val(); // 내 연소득(입력)
 	var my_amount_of_loans = amount_of_loans; // 대출잔액
 
-/* 	var amount_of_loans = 1000000; // 대출원금 (입력)
-	var lending_rate = 0.12; // 이율(입력)
-	var monthly_installment_plan = 12; // 상환기간(입력)
-	var holding_period = 6;  //거치기간(입력)
-	var holding = 6//보관용 거치기간(입력)
-	var type_repayment = "2"; //상환타입(입력)
-	var my_asset = ""; // 내 연소득(입력)
-	var my_amount_of_loans = amount_of_loans; // 대출잔액 */
-	
 	var repayments = new Array();
 	var interests = new Array();
 	var principals = new Array();
 	var balances = new Array();
 	var date = new Array();
-	console.log(type_repayment);  
 
  //if문이든 switch문으로 분기 시키기 만기일시상환
 if(type_repayment == "1"){
 for(var i=0; i<monthly_installment_plan - 1; i++) {
-    console.log("------------   "+Number(i+1)+"개월   ------------");
   if(holding_period != 0){
         var repayment = 0; //상환금액
         var interest = my_amount_of_loans * lending_rate / 12; //납입이자    
@@ -618,7 +607,6 @@ for(var i=0; i<monthly_installment_plan - 1; i++) {
         balances.push(Math.round(balance));
         
         holding_period--;
-        console.log(holding_period);
     }else{
     var power = Math.pow(1 + lending_rate/12, monthly_installment_plan);    
     var interest = my_amount_of_loans * lending_rate/12; //이자    
@@ -632,7 +620,6 @@ for(var i=0; i<monthly_installment_plan - 1; i++) {
     balances.push(Math.round(balance));
 
     my_amount_of_loans = balance;
-    console.log(balance);
     }
    //마지막 달에 만기상환, 잔액 초기화 시키기 위한 원금납입
   repayments.push(my_amount_of_loans);
@@ -647,7 +634,6 @@ for(var i=0; i<monthly_installment_plan - 1; i++) {
 
 }else if(type_repayment == "3"){
 //원금 균등상환
-//거치기간 설정했을 때
 for(var i=0; i < monthly_installment_plan; i++) {
   console.log("------------   "+Number(i+1)+"개월   ------------");
     if(holding_period != 0){
@@ -685,7 +671,6 @@ for(var i=0; i < monthly_installment_plan; i++) {
 //원리금 균등 상환
  for(var i=0; i<monthly_installment_plan; i++) {
   if(holding_period != 0){
-	    console.log("------------   "+Number(i+1)+"개월   ------------");
         var repayment = 0; //상환금액
         var interest = my_amount_of_loans * lending_rate / 12; //납입이자    
         var principal = 0;  //납입원금
@@ -699,19 +684,11 @@ for(var i=0; i < monthly_installment_plan; i++) {
         holding_period--;
         
     }else{
-    console.log("------------   "+Number(i+1)+"개월   ------------");
-    console.log(amount_of_loans);
     var power = Math.pow(1 + lending_rate / 12, monthly_installment_plan - holding);  
-	console.log("이자율 :" + power);
     var repayment = amount_of_loans * lending_rate/12 * power / (power-1); //상환금
-    console.log("상환금 : " + repayment);
     var interest = my_amount_of_loans * lending_rate/12; //이자
-    console.log("이자 : " + interest);
     var principal = repayment - interest;  //원금
-    console.log("원금 : " + principal);
     var balance = my_amount_of_loans - principal; //잔액
-    
-	console.log(lending_rate);
     
     repayments.push(Math.round(repayment));
     interests.push(Math.round(interest));
@@ -726,9 +703,7 @@ for(var i=0; i < monthly_installment_plan; i++) {
    $("#canvasDiv").show();
 	$("#canvas").show();
   
-}else{
-	console.log("마이너스는 나중에,,");
-}
+};
 
 
 function checkRepay(){
@@ -829,17 +804,16 @@ var chartData = {
 <!--대출조건 상세보기 -->
 <script>
 $(function(){
-	$(".infoButton_1Fb6y").each(function(index) {
-    $(this).on("click", function(){
-    	$(".alert_1cYf2").show();
+$(".infoButton_1Fb6y").each(function(index) {
+      $(this).on("click", function(){
+      	$(".alert_1cYf2").show();
     });
     
-    $(".title_2rL02 > a").on("click", function(){
-    	$(".alert_1cYf2").hide();
-    });
+      $(".title_2rL02 > a").on("click", function(){
+      	$(".alert_1cYf2").hide();
+      });
 	});
 });
-
 </script>
  
 
@@ -908,7 +882,7 @@ $(function(){
            });
               
            $('#numSelector2').keyup(function(){
-       			//유효성 검증 포함해야함.
+       		//유효성 검증 포함해야함.
        		number2 = $('#numSelector2').val();
                 if(!reg.test(number2)){
               		$(this).val(number2.replace(reg,''));
@@ -954,14 +928,12 @@ $(function(){
 		case '12':  time = "17:30:00"; break;
 		}
 		reserveTime = my_date_string + time;
-		console.log(reserveTime);
     	$("#reserveForm input[name=reserveTime]").val(reserveTime);
     });
     
 	  $('#loanSelector').on('click', function(){
 		  var loanId = $('#loanSelector option:selected').val();
 		  $("#reserveForm input[name=loanId]").val(loanId);
-		  console.log(loanId);
        });
 	
     $("#consultReserveBtn").on("click", function(e){
@@ -970,9 +942,6 @@ $(function(){
     });
 });   
 </script>
-
-
-
 
   <!--===============================================================================================-->
   <script type="text/javascript"
