@@ -19,20 +19,8 @@
   <!-- header include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/header.jsp"/>
   <!-- header include 종료 -->
-  
-  <!-- asideMenu include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/asideMenu.jsp"/>
-  <!-- asideMenu include 종료 -->
 
-  <!-- 로그인 모달 include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/modal/loginModal.jsp"/>
-  <!-- 로그인 모달 include 종료 -->
-
-  <!-- 회원가입 모달 include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/modal/registModal.jsp"/>
-  <!-- 회원가입 모달 include 종료 -->
-
-  <section class="section-review">
+  <section class="section-review" style="font-family: a드림고딕4;">
 		<div class= "container" style="max-width: 1500px;">
 
 			<div class="card">
@@ -41,7 +29,7 @@
 				</div>
 			    <!-- 후기 게시판 상단 Nav 바 (새글 등록, 검색 기능) -->
 				<div class="card-body m-lr-50" >
-                    <table class="table" style="font-size: 0.9em;">
+                    <table class="table" style="font-size: 1.9em;">
                       <colgroup>
                         <col width="18%">
                         <col width="32%">
@@ -91,36 +79,20 @@
                       </tr>
                     </table>
 					<br>
-					<div>
-					<!-- 글쓴이와 보고있는사람 아이디 일치할경우 -->
-                    <a href="/review/list"
-                       class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">목록</a><span class="float-r">&nbsp;&nbsp;</span>
 					
-					<sec:authentication var="loginId" property="principal.member.userid" /><!-- 로그인한사람 id값 변수로 저장 -->
-					<c:set var="writer" value="${review.userid }"/>
-					<c:if test="${writer eq loginId }">
-                        <!-- 해당 아이디인 경우에만 확인할 수 있도록 작성 -->
-                        <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" id="updateReviewBtn" data-toggle="modal" data-target="#updateReviewModal">수정</a><span class="float-r">&nbsp;&nbsp;</span>
-                        <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton"id="deleteReviewBtn" data-toggle="modal" data-target="#deleteReviewModal">삭제</a>
-					</c:if>
-					</div>
 					<br><br>
      <!-- /.panel -->
 			<!-- 댓글영역 -->
 		    <div class="panel panel-default">
-		       <div class="panel-heading">
-		        <i class="fa fa-comments fa-fw"></i> Reply
-		      </div> 
 		      
-		      <div class="panel-heading">
-		        <i class="fa fa-comments fa-fw"></i> Reply
-		        <button id='addReplyBtn' class='btn btn-primary btn-xs pull-right'>New Reply</button><br>
+		      <div class="panel-heading" style="color: #27b2a5; font-size:1.9em; font-weight: bold; height: 60px;">
+		        <i class="fa fa-comments fa-fw"></i> 댓글
+		        <button type="button" id="addReplyBtn" class='btn btn-primary btn-xs pull-right'>댓글 달기</button><br>
 		      </div>      
 		      
 		      
 		      <!-- /.panel-heading -->
 		      <div class="panel-body">        
-		      
 		        <ul class="chat">
 		
 		        </ul>
@@ -128,12 +100,23 @@
 		      </div>
 		      <!-- /.panel .chat-panel -->
 		
-			<div class="panel-footer"></div>
-		 
-		 					
+			</div>
+			<div class="float-r">
+			<!-- 글쓴이와 보고있는사람 아이디 일치할경우 -->
+                  <button type="button" onclick="location.href='/review/list'"
+                     class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">목록</button><span class="float-r">&nbsp;&nbsp;</span>
+			
+			<sec:authentication var="loginId" property="principal.member.userid" /><!-- 로그인한사람 id값 변수로 저장 -->
+			<c:set var="writer" value="${review.userid }"/>
+			<c:if test="${writer eq loginId }">
+                      <!-- 해당 아이디인 경우에만 확인할 수 있도록 작성 -->
+                      <button type="button" class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" id="updateReviewBtn" data-toggle="modal" data-target="#updateReviewModal">수정</button><span class="float-r">&nbsp;&nbsp;</span>
+                      <button type="button" class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton"id="deleteReviewBtn" data-toggle="modal" data-target="#deleteReviewModal">삭제</button>
+			</c:if>
 			</div>
 		</div><!-- end of cardbody -->
-		</div>
+	  </div>
+  </div>
 </section>
 
   <!-- 후기 수정 Modal HTML -->
@@ -275,11 +258,11 @@
 		     // 댓글리스트 크기만큼 li태그 추가(댓글 show)
 		     for (var i = 0, len = list.length || 0; i < len; i++) {
 		       str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
-		       str +="  <div><div class='header'><strong class='primary-font'>["
-		    	   +(i+1)+"] "+list[i].replyer+"</strong>"; 
-		       str +="    <small class='pull-right text-muted'>"
+		       str +="  <div><div class='header'><strong style='color:#27b2a5; font-size:20px;' class='primary-font'>["
+		    	   +(i+1)+"] 작성자 : "+list[i].replyer+"</strong>"; 
+		       str +="    <small style='font-size:16px;' class='pull-right text-muted'>"
 		           +replyService.displayTime(list[i].replyDate)+"</small></div>";
-		       str +="<p>"+list[i].reply+"</p></div></li>";
+		       str +="<p style='font-size: 17px; color: black;'>"+list[i].reply+"</p></div></li>";
 		     }
 		     replyUL.html(str);
 		     

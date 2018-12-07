@@ -5,7 +5,7 @@
 
 <html lang="en">
 <head>
-  <title>이용 후기</title>
+  <title>One Do - 이용 후기</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- header include 시작 -->
@@ -18,9 +18,6 @@
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/header.jsp"/>
   <!-- header include 종료 -->
   
-  <!-- asideMenu include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/asideMenu.jsp"/>
-  <!-- asideMenu include 종료 -->
   <section class="section-review">
 		<div class= "container" style="max-width: 1500px;">
 
@@ -36,7 +33,7 @@
 					<br>
 					&nbsp;&nbsp;
 					<form id="searchForm" action="/review/list" method="get">
-					<select name="type" id="optionSel" style="height: 35px; font-size: 20px; text-align: center; width: 15%; display: inline" class="form-control form-control-sm">
+					<select name="type" id="optionSel" style="margin-left: 40px; height: 35px; font-size: 20px; text-align: center; width: 15%; display: inline" class="form-control form-control-sm">
 					  <option value="" <c:out value="${pageMaker.cri.type == null?'selected':'' }"/>>--</option>
 					  <option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':'' }"/>>제목</option>
                       <option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':'' }"/>>내용</option>
@@ -48,13 +45,14 @@
 					<input type="text" name="keyword" id="keyword" value="${pageMaker.cri.keyword }" style="vertical-align: top; width: 15%; height: 35px; display: inline;" class="form-control"> <!--  id="searchValue" -->
 					<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
 					<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-					<button type="button" id="reviewSearchBtn" style="vertical-align: top; height:35px; width: 10%;">검색</button>
+					<button type="button" id="reviewSearchBtn" style="vertical-align: top; height:35px; width: 10%; margin-right: 40px;">검색</button>
 				  </form>
 				<sec:authorize access="isAuthenticated()">
-					<button type="button" class="float-r" style="height:35px;" id="createReviewBtn" data-toggle="modal" data-target="#createReviewModal">후기작성</button>
+					<button type="button" class="float-r" style="height:35px; margin-right: 40px;" id="createReviewBtn" data-toggle="modal" data-target="#createReviewModal">후기작성</button>
 				</sec:authorize>
 					<br><br>
-					<table>
+					<div style="margin-right:40px; margin-left:40px;">
+					<table style="font-size: 1.9em; font-family: a드림고딕4;">
 						<colgroup>
 							<col width="10%" style="text-align: center;">
 							<col width="50%" >
@@ -74,20 +72,21 @@
 						<br>
 						<tbody>
 						<c:forEach items="${list }" var="review" varStatus="status">
-							<tr>
-							  <td>${status.index +1 }</td>
-							  <td><a class="move" href="/review/detail?article_num=${review.article_num }">${review.title }</a></td>
-							  <td>${review.userid }</td>
-							  <td>${review.regdate }</td>
-							  <td>${review.enabled }</td>
+							<tr class="move" style="cursor:pointer;" onclick="location.href='detail?article_num=${review.article_num }'" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
+							  <td style="text-align: center;">${status.index +1 }</td>
+							  <td>${review.title }</td>
+							  <td style="text-align: center;">${review.userid}</td>
+							  <td style="text-align: center;">${review.regdate}</td>
+							  <td style="text-align: center;">${review.enabled}</td>
 							</tr>
 						</c:forEach>
 						</tbody>
 					</table>
+					</div>
 					<br>
-					<div class="table-nav-bar">
+					<div style="text-align: center;">
 						<!-- pagination -->
-						<ul class="pagination">
+						<ul class="pagination" style="display: inline-block;">
 							<c:if test="${pageMaker.prev }">
 								<li class="paginate_button">
 								<a href="${pageMaker.startPage -1 }">Previous</a>
@@ -120,11 +119,11 @@
 </section>
 
   <!-- 후기 작성(register) Modal HTML -->
-  <div id="createReviewModal" class="modal fade">
+  <div id="createReviewModal" class="modal fade" style="font-family: a드림고딕4;">
 		<div class="modal-dialog modal-login">
 		  <div class="modal-content">
-			<div class="modal-header">        
-			  <h4 class="modal-title">서비스 이용 후기</h4>
+			<div class="modal-header">       
+			  <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">서비스 이용 후기</h4>
 			</div>
 			<div class="modal-body">
 			  <form action="/review/register" method="get" id="registerForm">
@@ -229,11 +228,6 @@ $(document).ready(function() {
 		searchForm.find("input[name='pageNum']").val("1");
 		e.preventDefault();
 		searchForm.submit();
-	});
-	
-	$("#registerForm").submit(function() {
-		var checkRegister = confirm("후기를 등록하시겠습니까?");
-		return checkRegister;
 	});
 	
 });
