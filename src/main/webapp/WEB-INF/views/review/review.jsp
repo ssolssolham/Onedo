@@ -167,7 +167,7 @@ $(document).ready(function() {
 	if(res ==='success'){
 		//alert("등록성공!");
 		var target = $('#snackbar');
-    	target.text('후기를 등록하였습니다:D');
+    	target.text('새 후기를 등록하였습니다:D');
     	toast();
 	}
 	

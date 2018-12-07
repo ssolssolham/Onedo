@@ -70,7 +70,6 @@ public class ReviewController {
 		log.info("들어온 후기글객체: "+article);
 		service.register(article);
 		rttr.addFlashAttribute("reviewRegiRes", "success");
-		//등록 후 보내주는거 다시좀봐야해..
 		return "redirect:/review/list";
 	}
 	

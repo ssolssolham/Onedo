@@ -111,7 +111,7 @@
 									<th style="text-align: center;">제목</th>
 									<th style="text-align: center;">작성자</th>
 									<th style="text-align: center;">작성,수정일</th>
-									<th style="text-align: center;">조회수</th>
+									<th style="text-align: center;">답변여부</th>
 								</tr>
 							</thead>
 							<br>
@@ -122,7 +122,12 @@
 								  <td><a class="move" href="/qna/detail?article_num=${review.article_num }">${review.title }</a></td>
 								  <td>${review.userid }</td>
 								  <td>${review.regdate }</td>
-								  <td>${review.enabled }</td>
+								  <c:if test="${review.enabled eq 'Y' }">
+								  <td>답변처리중</td>
+								  </c:if>
+								  <c:if test="${review.enabled eq 'N' }">
+								  <td>답변완료</td>
+								  </c:if>
 								</tr>
 							</c:forEach>
 							</tbody>
@@ -170,18 +175,21 @@
 			  <h4 class="modal-title">서비스 이용 문의</h4>
 			</div>
 			<div class="modal-body">
-			  <form action="" method="post">
+			  <form action="/qna/register" method="get" id="registerForm">
 				<div class="form-group">
-				  <input type="text" class="form-control " placeholder="제목 입력" required="required" style="padding-left:10px;">
+				  <input type="text" name="title" class="form-control " placeholder="제목 입력" required="required" style="padding-left:10px;">
 				</div>
 				
 				<div class="form-group">
-				  <input type="password" class="form-control " placeholder="비밀번호 입력(수정, 삭제 시 이용)" required="required" style="padding-left:10px;">         
+				  <input type="password" name="article_pw" class="form-control " placeholder="비밀번호 입력(수정, 삭제 시 이용)" required="required" style="padding-left:10px;">         
 				</div>
 				
 				<div class="form-group">
-					<textarea rows="10" cols="50" class="form-control" placeholder="서비스 이용에 궁금한 점을 자유롭게 작성해주세요" required="required" style="padding-left:10px;"></textarea>
+					<textarea name="content" rows="10" cols="50" class="form-control" placeholder="서비스 이용에 궁금한 점을 자유롭게 작성해주세요" required="required" style="padding-left:10px;"></textarea>
 				</div>
+				
+				<input type="hidden" name="bno" value="3">
+				<input type="hidden" name="userid" value="<sec:authentication property="principal.member.userid"/>">
 						  
 				<div class="form-group" style="display: flex; align-items: center; justify-content: center;">
 				  <input type="submit" class="" value="등록">&nbsp;
@@ -197,6 +205,11 @@
 <!-- 검색처리관련 javascript by sw -->
 <script type="text/javascript">
 $(document).ready(function() {
+	//모달처리를 위한 javascript
+	var result = '<c:out value="${result}"/>';
+	console.log("result값"+result);
+	checkModal(result);
+	
 	// history back, 모달띄울필요X
 	history.replaceState({}, null, null);
 	
@@ -248,6 +261,14 @@ $(document).ready(function() {
 		e.preventDefault();
 		searchForm.submit();
 	});
+	
+	// 새 문의 등록시 toast
+	var res = '${qnaRegiRes}';
+	if(res == 'success'){
+		var target = $('#snackbar');
+		target.text('새 문의사항을 등록하였습니다 :D');
+		toast();
+	}
 
 });
 </script>
@@ -280,6 +301,7 @@ $(document).ready(function() {
 <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/js/ziehharmonika.js"></script>
+<!-- 
 <script>
 $(document).ready(function() {
 		$('.ziehharmonika').ziehharmonika({collapsible: true,	prefix: '★'});
@@ -298,5 +320,8 @@ $(document).ready(function() {
 		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
 </script>
+ -->
+ <!-- toast msg영역 -->
+<div id="snackbar"></div>
 </body>
 </html>

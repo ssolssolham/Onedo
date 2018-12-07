@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.one.doo.article.service.ArticleService;
+import com.one.doo.article.domain.Article;
 import com.one.doo.article.domain.Criteria;
 import com.one.doo.article.domain.Page;
 
@@ -46,6 +48,14 @@ public class QnaController {
 		log.info("문의게시판 상셉기 요청 컨트롤러");
 		model.addAttribute("qna", service.get(article_num));
 		return "qna/qnaDetail";
+	}
+	
+	@GetMapping("/register")
+	public String register(Article article, RedirectAttributes rttr) {
+		log.info("문의 등록요청");
+		service.register(article);
+		rttr.addFlashAttribute("qnaRegiRes", "success");
+		return "redirect:/qna/";
 	}
 	
 }
