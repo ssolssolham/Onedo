@@ -40,7 +40,3 @@ function gogogo3() {
 		cnt = 0;
 	}
 }
-
-gogogo1();
-gogogo2();
-gogogo3();

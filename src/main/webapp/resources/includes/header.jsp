@@ -16,13 +16,13 @@
         
       <div class="welcome" style="margin-top: 6px;">
        <sec:authorize access="isAnonymous()">
-     	<button type="button" style="height:40px; width:100px; border-radius: 16px;" onclick="location.href='/member/loginForm'">로그인</button>
-     	<button type="button" style="height:40px; width:100px; border-radius: 16px;" onclick="location.href='/member/registForm'">회원가입</button>
+     	<button type="button" style="height:40px; width:100px; border-radius: 50px;" onclick="location.href='/member/loginForm'">로그인</button>&nbsp;&nbsp;
+     	<button type="button" style="height:40px; width:100px; border-radius: 50px;" onclick="location.href='/member/registForm'">회원가입</button>
        </sec:authorize>
        <sec:authentication property="principal" var="member"/>
        <sec:authorize access="isAuthenticated()">
            <h3 style="font-size: 22px; font-family: a드림고딕4; font-weight: bold; display: inline;"> <span style="color: #27b2a5;">${member.username}</span> 님, 환영합니다.</h3>&nbsp;&nbsp;
-           <button type="button" style="height:40px; width:100px;  border-radius: 16px;" onclick="logoutFormSubmit()" id="logoutLink">로그아웃</button>
+           <button type="button" style="height:40px; width:100px;  border-radius: 50px;" onclick="logoutFormSubmit()" id="logoutLink">로그아웃</button>
        </sec:authorize>
        
    	  </div>
@@ -31,7 +31,7 @@
           <nav class="menu" style="display: inline-flex;">
             <ul class="main_menu">
               <li><a href="/">Home</a></li>
-              <li><a href="">이용 안내</a></li>
+              <li><a href="/guide">이용 안내</a></li>
               <sec:authorize access="isAnonymous()">
                 <li><a href="/member/loginForm">상권분석</a></li>
               </sec:authorize>

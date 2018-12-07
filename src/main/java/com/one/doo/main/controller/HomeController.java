@@ -33,8 +33,14 @@ public class HomeController {
 	
 	@RequestMapping("/noticePop")
 	public String popup(Model model) {
-		log.info("메인화면 요청시 공지팝업요청 컨트롤러");
+		log.info("메인화면 요청 -- 공지팝업요청 컨트롤러");
 		model.addAttribute("notices", service.getNoticeList());
 		return "/includes/notices";
+	}
+	
+	@RequestMapping("/guide")
+	public String userguide() {
+		log.info("이용 가이드 페이지 요청");
+		return "/guide/userGuide";
 	}
 }
