@@ -24,31 +24,28 @@
 			<div class="card-body menu-title-div" >
 		      <div class="col-sm-12">
 		        <div class="" style="text-align: center;">
-		          <div style="margin: 180px 510px 400px;">
+		          <div style="margin: 180px 500px 400px;">
 		          <h1 style="font-weight: bold; font-family: a드림고딕4; font-size: 40px;">
 		            <img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">
 		              로그인
 		          </h1><br>
 		          <h2 style="font-weight: bold; font-family: a드림고딕4;">
 		            OneDo 홈페이지에 오신 것을 환영합니다
-		          </h2>
-		          <!-- 스낵바(토스트 메시지) -->
-		          <div id="snackbar"></div>
-		          
+		          </h2><br>
 		            <form id="loginForm" action="/login" method="post">
 		              <div class="form-group">
-		                <input type="text"
-		                       class="form-control"
+		                <input type="text" id="inputIdField"
+		                		class="w-full"
 		                       placeholder="ID 입력" required 
-		                        name="username">
+		                        name="username" style="border-top: none; border-right: none; border-left: none; border-bottom: 2px solid lightgrey">
 		              </div>
 		              <div class="form-group">
 		                <input type="password"
-		                       class="form-control"
+		                		class="w-full"
 		                       placeholder="PW입력" required 
-		                        name="password">
+		                        name="password" style="border-top: none; border-right: none; border-left: none; border-bottom: 2px solid lightgrey">
 		              </div>
-		  
+		  				<br>
 		              <div class="form-group">
 		                <input type="hidden" name="${_csrf.parameterName}"
 		                  value="${_csrf.token}" /> <input type="submit"
@@ -115,6 +112,14 @@ $('#findInfo').click(function(){
 <!-- 회원가입관련 javascript -->
 <!-- 모달띄우고 form제출 -->
 <script type="text/javascript">
+$(function(){
+	var target = document.getElementById('snackbar');
+	target.innerHTML = "로그인 후 이용하세요 ^^";
+	toast();
+});
+</script>
+
+<script type="text/javascript">
 // before submit, make phoneNum, email
 function beforeSubmit() {
   var memberPhoneNum = $('#memberPhone1').val()
@@ -172,8 +177,29 @@ function beforeSubmit() {
         alert("통신불가");
       }
     });
+    
+    
     $(':input[name=username]').focus();
   });
+ </script>
+ <script type="text/javascript">
+ function is_hangul_char(ch) {
+	  c = ch.charCodeAt(0);
+	  if( 0x1100<=c && c<=0x11FF ) return true;
+	  if( 0x3130<=c && c<=0x318F ) return true;
+	  if( 0xAC00<=c && c<=0xD7A3 ) return true;
+	  return false;
+	}
+ // 아이디 한글인 경우 유효성 검증
+$('inputIdField').focusout(function() {
+	var userId = $(this).val();
+	console.log('하이하이' + userId);
+	if(is_hangul_char(userId) === false) {
+		var target = document.getElementById('snackbar');
+		target.innerHTML = '아이디는 영어, 숫자 조합으로 입력하세요!';
+		toast();
+	}
+})
  </script>
 <script src="${pageContext.request.contextPath}/resources/js/toastMessage.js"></script>
 <!-- 스낵바(토스트 메시지) -->

@@ -1025,7 +1025,7 @@ function searchAlley(locName){
 
 
 // 검색 후 좌표 반환
-function search(realestateOwner){
+function search(realestateOwnerList){
 	var geocoder3 = new daum.maps.services.Geocoder();
 	var loc;
 	var locArr = new Array();
@@ -1045,9 +1045,6 @@ function search(realestateOwner){
 
 function makeMarkers(realestateOwner,locArray,map2){
 	var positions = [];
-	console.log(locArray);
-	console.log(typeof locArray)
-	console.log(locArray[0]);
 
 	for(var j = 0; j < locArray.length; j++){
 		var position = {
@@ -1057,7 +1054,6 @@ function makeMarkers(realestateOwner,locArray,map2){
 		positions.push(position);
 	}
 	
-	console.log(positions);
 	// 마커 이미지의 이미지 주소입니다
 	
 	for (var i = 0; i < positions.length; i ++) {
@@ -1154,30 +1150,43 @@ function makeMarkers(realestateOwner,locArray,map2){
 	}
 	
 
-	//function
+	/* 
+		부동산 중개업자별 부동산 매물을 보여주는 배열
+	*/
 	var filter = new Array();
+	
+	/*
+		마커에 이벤트 추가하기
+	*/
 	function addEventsMarkers(Markers,filter){
+		
+		// 배열 비우기
 		if(filter.length != 0){
 				filter.length = 0;
 		}
 		
-		//updateMarkers();
-		console.log(Markers.length);
-		
+		/* 
+			3번 매물 페이지에 저장된 마커 갯수(Markers.length)가 
+			부동산 중개업자 수(realestateOwnerList.length)와 같다는 가정하에
+			filter에 부동산 중개업자의 총 매물을 넣어줍니다.
+		*/
 		for(var i = 0; i < Markers.length; i++){
 			var subfilter = new Array();
+			// 배열 내 배열 구조 만들기
 			
 			for(var j = 0; j < realestateList.length; j++){
+				/*
+					매물과 중개업자의 이름을 비교하여 같으면 subfilter에 넣습니다.
+				*/
 				if(realestateOwnerList[i].AGENT_NAME === realestateList[j].agent_name){
 					subfilter.push(realestateList[j]);
 				}
      	   }
-				// 10번만 넣어야함
-				console.log(subfilter);				
 				filter.push(subfilter);	
 			
-			
-			// 클로저로 인자 전달
+			/* 마커에 이벤트 걸기 : 클로저로 인자(Markers,i,filter)를 전달하여 
+				3번 매물 페이지 내 마커들을 클릭할 경우 매물을 보여주게 합니다.
+			*/
 			(function(Markers, i,filter) {
 		               daum.maps.event.addListener(Markers[i], 'click', function() {
 		            	   updateGongin(filter,i);
@@ -1189,6 +1198,7 @@ function makeMarkers(realestateOwner,locArray,map2){
 	  }
 			console.log(filter);
 	}
+	
 var map2;
 /*
  * 선택된 객체의 인덱스를 나타내는 변수 
@@ -1480,6 +1490,8 @@ function makeDataSets2(topDataList,curDataArr){
     });
         
    	var village;		
+   	var pageOneMarkers = new Array();
+   	var pageOneCircles = new Array();
  	$('#districtSelect').change(function() {
  		// 이벤트를 연결
  		
@@ -1555,6 +1567,8 @@ function makeDataSets2(topDataList,curDataArr){
      					            content: content
      					        });
      					        infowindow.open(map, marker);
+     					        
+     					       pageOneMarkers.push(marker);
      					    }
      					    
      					  // 지도에 표시할 원을 생성
@@ -1571,6 +1585,8 @@ function makeDataSets2(topDataList,curDataArr){
      						 	
      						 	// 지도에 원을 표시합니다 
      						 	circle.setMap(map);
+     						 	
+     						 	pageOneCircles.push(circle);
      					}) // geoCoder 끝나는 부분
      				} // if 문 끝나는 부분
      				// 클릭을 했는데 활성화가 되어있으면,
@@ -2133,7 +2149,9 @@ function makeDataSets2(topDataList,curDataArr){
     
     <script>
     
-   
+   $(window).load(function(){
+	   
+
     // 부동산 매물 부분 데이터 뿌리는 JavasScirpt
     $('.resultBtn').click(function() {
     	
@@ -2260,11 +2278,9 @@ function makeDataSets2(topDataList,curDataArr){
     		        });
     		    }
    	     	}
-    	})
-
-    }); // 버튼 클릭 이벤트 종료 부분
-    	
-    
+    	}) // 버튼 클릭 이벤트 종료 부분
+    })
+   })
     </script>
 <!--===============================================================================================-->    
 <script type="text/javascript">

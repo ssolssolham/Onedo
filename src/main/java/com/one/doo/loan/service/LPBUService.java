@@ -13,5 +13,5 @@ public interface LPBUService {
 
 	public int deleteLPBU(int lpbuNo);
 
-	public List<HashMap<String, Object>> listLPBU(String userId);
+	public List<HashMap<String, Object>> getLPBUList(String userId);
 }

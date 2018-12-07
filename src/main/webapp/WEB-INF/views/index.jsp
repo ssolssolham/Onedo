@@ -54,8 +54,8 @@
   <!-- footer include 종료 -->
 
 <!-- ================================= 자바스크립트(JavaScript) ================================== -->
-<!-- 메인페이지 홈페이지 소개 타이핑 메시지 JavaScript -->
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/typingMessage.js"></script>
+<script src="http://code.jquery.com/jquery-1.6.3.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery.shuffleLetters.js"></script>
 <!--===============================================================================================-->
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
