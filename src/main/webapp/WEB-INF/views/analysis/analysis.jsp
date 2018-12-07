@@ -471,7 +471,7 @@
                               <tr>
                                 <td colspan="2">
                                   <br>
-                                  <div class="t-center" style="font-family: a드림고딕4; font-size: 20px;">
+                                  <div id="gongin" class="t-center" style="font-family: a드림고딕4; font-size: 20px;">
                                     OOO 공인중개사의 매물정보
                                   </div>
                                   <br>
@@ -552,7 +552,7 @@
                                           <td colspan="2">
                                             <br>
                                             <div class="t-center" style="font-family: a드림고딕4; font-size: 24px;">
-                                              OOOOO 상세정보
+                                              상세정보
                                             </div>
                                             <br>
                                             <br>
@@ -947,10 +947,23 @@
       </div> <!-- container 태그 끝 -->
     </section>
 <script type="text/javascript">
+var Markers = new Array();
+
+function setCenter(Lat,Lng) {            
+    // 이동할 위도 경도 위치를 생성합니다 
+    var moveLatLon = new daum.maps.LatLng(Lat, Lng);
+    
+    // 지도 중심을 이동 시킵니다
+    map2.setCenter(moveLatLon);
+}
+
 function searchAndMark(){
 	var geocoder3 = new daum.maps.services.Geocoder();
 	var locArr = new Array();
 	var positions = [];
+	if(Markers.length === 0){
+		Markers.length = 0;
+	}
 	
 	for(var i = 0; i < realestateOwnerList.length; i++){
 		var temp = realestateOwnerList[i].AGENT_ADDRESS;
@@ -960,7 +973,6 @@ function searchAndMark(){
 				loc = result[0];
 				locArr.push(loc);
 				
-				console.log(result);
 				var position = {
 						title: result[0].address_name,
 						latlng: new daum.maps.LatLng(result[0].y, result[0].x)
@@ -973,11 +985,44 @@ function searchAndMark(){
 			        position: position.latlng, // 마커를 표시할 위치
 			        title : position.title // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 			    });
+			    
+			    Markers.push(marker);
     		}
     	});
 	}
 	
 }
+
+var selectedAlley;
+function searchAlley(locName){
+	var geocoder3 = new daum.maps.services.Geocoder();
+		geocoder3.addressSearch(locName, function(result, status) {
+    		if(result != undefined){
+    			selectedAlley = result;
+				
+				 // 지도에 표시할 원을 생성
+				 	var circle = new daum.maps.Circle({
+				 	    center : new daum.maps.LatLng(result[0].y, result[0].x),  // 원의 중심좌표 입니다 
+				 	    radius: 200, // 미터 단위의 원의 반지름입니다 
+				 	    strokeWeight: 3, // 선의 두께입니다 
+				 	    strokeColor: '#27b2a5', // 선의 색깔입니다
+				 	    strokeOpacity: 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+				 	    strokeStyle: 'solid', // 선의 스타일 입니다
+				 	    fillColor: '#27b2a5', // 채우기 색깔입니다
+				 	    fillOpacity: 0.7  // 채우기 불투명도 입니다   
+				 	});
+				 	
+				 	// 지도에 원을 표시합니다 
+				 	circle.setMap(map2);
+				 	
+		            setCenter(parseFloat(selectedAlley[0].y),parseFloat(selectedAlley[0].x));
+    		}
+    	});
+		
+	}
+	
+	
+
 
 // 검색 후 좌표 반환
 function search(realestateOwner){
@@ -996,7 +1041,7 @@ function search(realestateOwner){
 	return locArr;
 }
 
-var Markers = new Array();
+
 
 function makeMarkers(realestateOwner,locArray,map2){
 	var positions = [];
@@ -1033,10 +1078,116 @@ function makeMarkers(realestateOwner,locArray,map2){
 
 	function updateMarkers(){
 		var locArray2 = search(realestateOwnerList); 
-		
-        console.log(realestateOwnerList);
-        console.log(map2);
         makeMarkers(realestateOwnerList,locArray2,map2);
+	}
+	
+	function makeClickListener(Markers) {
+	    return function(i) {
+	        infowindow.open(map, marker);
+	    };
+	}
+	
+	function updateDetail(subindex){
+		$($('tbody')[2]).children().remove();
+		
+		console.log(filter[selectedGongin][subindex]);
+		var resultStr = '';
+      	
+		resultStr += '<tr style="font-family: a드림고딕4;" >'; 
+		resultStr += '<td style="color: #27b2a5;" class="fs-18">매물번호</td>'
+		resultStr += '<td><div><span class="fs-20">' + filter[selectedGongin][subindex].mamul_no + '</span></div>';
+		resultStr += '</tr><tr style="font-family: a드림고딕4;" > <td style="color: #27b2a5;" class="fs-18">상가 형태</td>';
+		resultStr += '<td><div><span class="fs-20">' + filter[selectedGongin][subindex].mamul_type + '</span></div></tr><tr style="font-family: a드림고딕4;" >'; 
+		resultStr += '<td style="color: #27b2a5;" class="fs-18">보증금/월세</td>';
+		resultStr += '<td><div><span class="fs-20">' + filter[selectedGongin][subindex].bozeung + '</span></div>';
+		resultStr += '</tr><tr style="font-family: a드림고딕4;" > <td style="color: #27b2a5;" class="fs-18">주차</td>';
+		resultStr += '<td><div><span class="fs-20">' + filter[selectedGongin][subindex].parking + '</span></div></tr><tr style="font-family: a드림고딕4;" >';
+		resultStr += '<td style="color: #27b2a5;" class="fs-18">화장실</td><td>';
+		resultStr += '<div><span class="fs-20">' + filter[selectedGongin][subindex].toilet + '</span></div>';
+		resultStr += '</tr><tr style="font-family: a드림고딕4;" > <td style="color: #27b2a5;" class="fs-18">인테리어(시설)</td>';
+		resultStr += '<td><div><span class="fs-20">' + filter[selectedGongin][subindex].interior + '</span></div>';
+		resultStr += '</tr><tr style="font-family: a드림고딕4;" > <td style="color: #27b2a5;" class="fs-18">입주가능일</td>';
+		resultStr += '<td><div><span class="fs-20">' + filter[selectedGongin][subindex].live_possible + '</span></div>';
+		resultStr += '</tr><tr style="font-family: a드림고딕4;" > <td style="color: #27b2a5;" class="fs-18">준공년도</td><td>';
+		resultStr += '<div><span class="fs-20">' + filter[selectedGongin][subindex].made_date + '</span></div></tr>';
+		resultStr += '<tr style="font-family: a드림고딕4;" > <td style="color: #27b2a5;" class="fs-18">옵션</td><td>';
+		resultStr += '<div><span class="fs-20">' + filter[selectedGongin][subindex].options + '</span></div>';
+		resultStr += '</tr><tr style="font-family: a드림고딕4;" > <td style="color: #27b2a5;" class="fs-18">난방종류</td>';
+		resultStr += '<td><div><span class="fs-20">' + filter[selectedGongin][subindex].heating_type + '</span></div>';
+		resultStr += '</tr><tr style="font-family: a드림고딕4;" ><td style="color: #27b2a5;" class="fs-18">엘리베이터</td>';
+		resultStr += '<td><div><span class="fs-20">' + filter[selectedGongin][subindex].elevator + '</span></div>';
+		resultStr += '</tr><tr style="font-family: a드림고딕4;" > <td style="color: #27b2a5;" class="fs-18">권리금</td>';
+		resultStr += '<td><div><span class="fs-20">' + filter[selectedGongin][subindex].privilege_money + '</span></div>';
+		resultStr += '</tr><tr style="font-family: a드림고딕4;" ><td style="color: #27b2a5;" class="fs-18">해당층/건물층</td>';
+		resultStr += '<td><div><span class="fs-20">' + filter[selectedGongin][subindex].floor + '</span></div>';
+		resultStr += '</tr><tr style="font-family: a드림고딕4;" ><td style="color: #27b2a5;" class="fs-18">계약면적/전용면적</td>';
+		resultStr += '<td><div><span class="fs-20">' + filter[selectedGongin][subindex].square + '</span></div>';
+		resultStr += '</tr><tr style="font-family: a드림고딕4;" ><td style="color: #27b2a5;" class="fs-18">추천업종</td>';
+		resultStr += '<td><div><span class="fs-20">' + filter[selectedGongin][subindex].recommand + '</span></div></tr>';
+      	
+		$($('tbody')[2]).append(resultStr);
+	}
+	
+	
+	var selectedGongin = 0;
+	function updateGongin(filter,index){
+		
+		selectedGongin = index;
+		$('#gongin').text(realestateOwnerList[index].AGENT_NAME.split(' (')[0].trim() + '의 매물정보');
+
+		$($('tbody')[1]).children().remove();
+		
+		for(var i = 0; i < filter[index].length; i++){
+			// 부동산 Owner의 순서에 맞게끔
+			var resultString = "";			
+			
+			resultString += '<tr style="height: 80px;" onclick="updateDetail(' + i + ')" onMouseOver="bgColor=\'#beeee9\'" onMouseOut="bgColor=\'#ffffff\'">'; 
+	        resultString += '<td>' + filter[index][i].img_url + '</td>';
+	        resultString += '<td><div>매물번호 : <span class="fs-18 mamul_no">' + filter[index][i].mamul_no + '</span></div>';
+	        resultString += '<div>상가형태 : <span class="fs-18 mamul_type">' + filter[index][i].mamul_type + '</span></div>';  
+	        resultString += '<div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">';
+	        resultString += '&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20 bozeung">' + filter[index][i].bozeung + '</span></div>'; 
+	        resultString += '</td></tr>'  
+			
+			$($('tbody')[1]).append(resultString);
+		}
+	}
+	
+
+	//function
+	var filter = new Array();
+	function addEventsMarkers(Markers,filter){
+		if(filter.length != 0){
+				filter.length = 0;
+		}
+		
+		//updateMarkers();
+		console.log(Markers.length);
+		
+		for(var i = 0; i < Markers.length; i++){
+			var subfilter = new Array();
+			
+			for(var j = 0; j < realestateList.length; j++){
+				if(realestateOwnerList[i].AGENT_NAME === realestateList[j].agent_name){
+					subfilter.push(realestateList[j]);
+				}
+     	   }
+				// 10번만 넣어야함
+				console.log(subfilter);				
+				filter.push(subfilter);	
+			
+			
+			// 클로저로 인자 전달
+			(function(Markers, i,filter) {
+		               daum.maps.event.addListener(Markers[i], 'click', function() {
+		            	   updateGongin(filter,i);
+		            	    
+			    })
+		    })(Markers, i,filter);
+			
+			
+	  }
+			console.log(filter);
 	}
 var map2;
 /*
@@ -1393,7 +1544,6 @@ function makeDataSets2(topDataList,curDataArr){
      					     if (status === daum.maps.services.Status.OK) {
 
      					        coords = new daum.maps.LatLng(result[0].y, result[0].x);
-     							console.log(coords);
      					        // 결과값으로 받은 위치를 마커로 표시합니다
      					        marker = new daum.maps.Marker({
      					            map: map,
@@ -1538,7 +1688,6 @@ function makeDataSets2(topDataList,curDataArr){
 	        	 var target = document.getElementById('snackbar');
 				 target.innerHTML = '분석을 완료했습니다. 콘솔창에서 Data를 확인하세요';
 				 toast();
-	        	 console.log('상위 3개 상권' + topThreeList);
 
 	        	 /* 유효성 검증 추가 : 호준 */
 	        	 if(topThreeList[0] != undefined){
@@ -1560,7 +1709,6 @@ function makeDataSets2(topDataList,curDataArr){
 	         }
 	      });
     })
-    
     
     // 분석 결과로 나온 버튼 클릭 시, 분석 결과 리포트 부분 활성화
     $('.resultBtn').click(function(e) {
@@ -1599,8 +1747,6 @@ function makeDataSets2(topDataList,curDataArr){
     			
     			realestateList = topThreeList[i].memulList;
         	 	realestateOwnerList = topThreeList[i].realestateList;
-        	 	
-        	 	searchAndMark();
         	 	
     			// 상위 3개의 상권 리스트 배열에서 도로명이 일치하는 배열의 요소를 불러와 해당하는 예상 매출액을 태그의 text로 추가
     			$('#expectedSalesAccount').text(topThreeList[i].mlresult.estmt_SALES);
@@ -1958,8 +2104,29 @@ function makeDataSets2(topDataList,curDataArr){
 	                    }
 	                }
 	            }); // 매출액 차트 끝나는 부분
+	            
+
+	            
    			}
     	}
+    	
+
+    	setTimeout(function(){
+    	 	
+    		   // 1초 후 작동해야할 코드
+    	 	// 호준 : 여러 개 마커 생성, 골목상권 원 생성, 골목상권으로 이동
+    	 	searchAndMark();
+    	 	searchAlley($('#resultAlleyBiz').text());
+    		   }, 3000);
+
+    	setTimeout(function(){
+ 		addEventsMarkers(Markers,filter);
+ 		   }, 4000);
+
+    	console.log(Markers);
+
+
+
    	});
     
     </script>
@@ -1994,7 +2161,6 @@ function makeDataSets2(topDataList,curDataArr){
     	// 구 값이 바뀌면, 해당 구 중심 좌표로 이동
     	//for(var k = 0; k <  )
     	geocoder2.addressSearch(clickedVillage, function(result, status) {
-    		console.log(result);
     	     // 정상적으로 검색이 완료됐으면 
     	     if (status === daum.maps.services.Status.OK) {
     	        coords2 = new daum.maps.LatLng(result[0].y, result[0].x);				// 정상적으로 검색이 완료된 지역의 결과를 위도, 경도 좌표로 저장
@@ -2006,7 +2172,7 @@ function makeDataSets2(topDataList,curDataArr){
     		        mapCenter2 = new daum.maps.LatLng(coords2.jb, coords2.ib), // 지도의 가운데 좌표
     		        mapOption2 = {
     		            center: mapCenter2, // 지도의 중심좌표
-    		            level: 1// 지도의 확대 레벨
+    		            level: 5// 지도의 확대 레벨
     		        };
     			
     			console.log(mapCenter2);
