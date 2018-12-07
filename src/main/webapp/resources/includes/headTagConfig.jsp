@@ -22,13 +22,13 @@
 <!--===============================================================================================-->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/vendor/lightbox2/css/lightbox.min.css">
 <!--===============================================================================================-->
-
 <!-- 사용자 정의 CSS -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/util.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/modal.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/ziehharmonika.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/tooltip.css">
+
 
 <!--===============================================================================================-->
 <!-- 홈페이지 Favicon SearchBar-->
@@ -53,3 +53,18 @@
 <!-- review.jsp Config 파일 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!--  페이지네이션 CSS (건들지 마세여) -->
+<style type="text/css">
+  .pagination>.active>a, 
+  .pagination>.active>a:focus, 
+  .pagination>.active>a:hover, 
+  .pagination>.active>span, 
+  .pagination>.active>span:focus, 
+  .pagination>.active>span:hover {
+    z-index: 3;
+    color: #fff;
+    cursor: default;
+    background-color: #27b2a5;
+    border-color: #27b2a5;
+</style>

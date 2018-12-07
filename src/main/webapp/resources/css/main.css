@@ -323,7 +323,7 @@ button[type="button"]:hover {
 }
 
 .table-nav-bar {
-  max-width: 1200px;
+  max-width: 1500px;
 }
 
 .slick-slide {
@@ -1958,3 +1958,4 @@ body {padding-right: 0px !important;}
     display: block;
     overflow: auto;
 }
+
