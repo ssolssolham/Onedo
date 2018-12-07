@@ -28,7 +28,7 @@
 				</div>
 			    <!-- 후기 게시판 상단 Nav 바 (새글 등록, 검색 기능) -->
 				<div class="card-body m-lr-50" >
-                    <table class="table" style="font-size: 0.9em;">
+                    <table class="table" style="font-size: 1.9em;">
                       <colgroup>
                         <col width="18%">
                         <col width="32%">
@@ -83,26 +83,13 @@
                       </tr>
                     </table>
 					<br>
-					<div>
-					<!-- 글쓴이와 보고있는사람 아이디 일치할경우 -->
-                    <a href="/qna/list"
-                       class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">목록
-                       </a><span class="float-r">&nbsp;&nbsp;</span>
 					
-					<sec:authentication var="loginId" property="principal.member.userid" /><!-- 로그인한사람 id값 변수로 저장 -->
-					<c:set var="writer" value="${qna.userid }"/>
-					<c:if test="${writer eq loginId }">
-                        <!-- 해당 아이디인 경우에만 확인할 수 있도록 작성 -->
-                        <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" id="updateQnaBtn" data-toggle="modal" data-target="#updateQnaModal">수정</a><span class="float-r">&nbsp;&nbsp;</span>
-                        <!-- <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton"id="deleteQnaBtn" data-toggle="modal" data-target="#deleteQnaModal">삭제</a> -->
-					</c:if>
-					</div>
-					<br><br>
-     <!-- /.panel -->
+					
+    		 <!-- /.panel -->
 			<!-- 댓글영역 -->
 		    <div class="panel panel-default">
-		       <div class="panel-heading">
-		        <i class="fa fa-comments fa-fw"></i> Reply
+		       <div class="panel-heading" style="color: #27b2a5; font-size:1.9em; font-weight: bold;">
+		        <i class="fa fa-comments fa-fw"></i> 관리자 답변
 		      </div> 
 		      
 		      <!-- /.panel-heading -->
@@ -111,8 +98,22 @@
 		        </ul><!-- ./ end ul -->
 		      </div><!-- /.panel .chat-panel -->
 		
-			<div class="panel-footer"></div>
 			</div> <!-- panel끝 -->
+			
+			<div class="float-r">
+			<!-- 글쓴이와 보고있는사람 아이디 일치할경우 -->
+                <button type="button" onclick="location.href='/qna/list'"
+                   class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto">목록
+                   </button><span class="float-r">&nbsp;&nbsp;</span>
+			
+			<sec:authentication var="loginId" property="principal.member.userid" /><!-- 로그인한사람 id값 변수로 저장 -->
+			<c:set var="writer" value="${qna.userid }"/>
+			<c:if test="${writer eq loginId }">
+                <!-- 해당 아이디인 경우에만 확인할 수 있도록 작성 -->
+                <button type="button" class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton" id="updateQnaBtn" data-toggle="modal" data-target="#updateQnaModal">수정</button><span class="float-r">&nbsp;&nbsp;</span>
+                <!-- <a class="reviewDetailBtn btn1 flex-c-m size13 txt11 trans-0-4 m-l-r-auto" class="triggerButton"id="deleteQnaBtn" data-toggle="modal" data-target="#deleteQnaModal">삭제</a> -->
+			</c:if>
+			</div>
 		</div> <!-- end of cardbody -->
 		</div>
 		</div>
