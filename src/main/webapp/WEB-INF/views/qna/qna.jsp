@@ -111,12 +111,14 @@
 								  <td>${review.title}</td>
 								  <td style="text-align: center;">${review.userid }</td>
 								  <td style="text-align: center;">${review.regdate }</td>
-								  <c:if test="${review.enabled eq 'Y' }">
-								  <td style="text-align: center;">답변처리중</td>
-								  </c:if>
-								  <c:if test="${review.enabled eq 'N' }">
-								  <td style="text-align: center;">답변완료</td>
-								  </c:if>
+								<c:set var="replycnt" value="${review.replycnt }"/>
+		                        <fmt:formatNumber value="${review.replycnt }" type="number" var="replycnt" />
+		                        <c:if test="${replycnt eq 0 }">
+								  <td>답변처리중</td>
+								</c:if>
+								<c:if test="${replycnt gt 0 }">
+								   <td>답변완료</td>
+								</c:if>
 								</tr>
 							</c:forEach>
 							</tbody>
