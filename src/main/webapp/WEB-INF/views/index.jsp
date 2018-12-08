@@ -12,7 +12,7 @@
   <!-- header include 종료 -->
 </head>
 
-<body onload="window.open('/noticePop','','width=500px, height=300px, left=0px, top=0px, toolbar=0, status=yes, menubars=0, scrollbars=0, resizable=0, location=0, directories=0')" 
+<body onload="window.open('/noticePop','','width=490px, height=580px, left=400px, top=100px, toolbar=0, status=yes, menubars=0, scrollbars=0, resizable=0, location=no, directories=0')" 
 		class="animsition" style="overflow-y: hidden; overflow-x: hidden;">
 
   <!-- header include 시작 -->
