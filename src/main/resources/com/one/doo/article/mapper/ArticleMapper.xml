@@ -65,15 +65,30 @@
 	]]>
 	</select>
 
-	<!-- 문의게시판 총 게시글 수 -->
+	<!-- 문의게시판 총 게시글 수 with 검색조건 -->
 	<select id="getTotalQnaCount" resultType="int">
 		SELECT	count(*) 
 		FROM	articles
 		WHERE	<include refid="criteria"/>
 		bno = 3
 	</select>
+	
+	<select id="totalQArticleNum" resultType="int">
+		SELECT	COUNT(*)
+		FROM	articles
+		WHERE	bno = 3 AND
+				enabled = 'Y'
+	</select>
+	
+	<!-- 게시처리된 모든 후기게시글 수 -->
+	<select id="totalRArticleNum" resultType="int">
+		SELECT	COUNT(*)
+		FROM	articles
+		WHERE	bno = 2 AND
+				enabled = 'Y'
+	</select>
 
-	<!-- 후기게시판 총 게시글 수 -->
+	<!-- 후기게시판 총 게시글 수 with 검색조건 -->
 	<select id="getTotalCount" resultType="int">
 		SELECT	count(*) 
 		FROM	articles

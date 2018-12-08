@@ -21,6 +21,9 @@ public interface ArticleMapper {
 	
 	// 후기게시판 검색조건에 맞는 게시글 숫자
 	public int getTotalCount(Criteria cri);
+
+	// 문의게시판 총 게시글 수(with 검색조건)
+	public int getTotalQnaCount(Criteria cri);
 	
 	// 게시판별 게시글작성
 	public void insert(Article article);
@@ -43,10 +46,14 @@ public interface ArticleMapper {
 	// 문의게시판 글목록 with paging
 	public List<Article> getQnaListWithPaging(Criteria cri);
 	
-	// 문의게시판 총 게시글 수(with 검색조건)
-	public int getTotalQnaCount(Criteria cri);
-	
 	// 게시글에 댓글이달릴때함께실행
 	public void updateReplyCnt(ReplyCntVO vo);
+	
+	// 후기게시판 총 게시글 수(enabled='Y'인..)
+	public int totalRArticleNum();
+	
+	// 문의게시판 총 게시글 수(검색조건X)
+	public int totalQArticleNum();
+	
 	
 }
