@@ -6,11 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.one.doo.loan.domain.CreditRank;
+import com.one.doo.board.domain.Criteria;
 import com.one.doo.loan.domain.Loan;
 import com.one.doo.loan.domain.Parameter;
 import com.one.doo.loan.mapper.LoanMapper;
-
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -43,6 +42,30 @@ public class LoanServiceImpl implements LoanService{
 		return mapper.readLoan(loanId);
 	}
 
+	@Override
+	public int getTotal(Criteria cri) {
+		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public int updateCnt(int loanId) {
+		return mapper.updateCnt(loanId);
+	}
+
+	@Override
+	public List<Loan> getListWithPaging(Criteria cri) {
+		return mapper.getListWithPaging(cri);
+	}
+
+	@Override
+	public int getTotalCount(Criteria cri) {
+		return mapper.getTotalCount(cri);
+	}
+
+	@Override
+	public boolean remove(int loanId) {
+		return false;
+	}
 
 
 }

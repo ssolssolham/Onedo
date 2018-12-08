@@ -3,6 +3,7 @@ package com.one.doo.loan.service;
 import java.util.HashMap;
 import java.util.List;
 
+import com.one.doo.board.domain.Criteria;
 import com.one.doo.loan.domain.CreditRank;
 import com.one.doo.loan.domain.Loan;
 import com.one.doo.loan.domain.Parameter;
@@ -21,4 +22,17 @@ public interface LoanService {
 	//대출상품 정보 상세읽기
 	public Loan readLoan(int loanId);
 	
+	
+	public int getTotal(Criteria cri);
+	
+	// 상품갯수 카운트 업데이트
+	public int updateCnt(int loanId);
+	
+	public List<Loan> getListWithPaging(Criteria cri);
+	
+	//전체 대출상품 개수
+	public int getTotalCount(Criteria cri);
+	
+	//판매중지
+	public boolean remove(int loanId);
 }
