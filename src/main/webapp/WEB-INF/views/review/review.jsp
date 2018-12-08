@@ -66,7 +66,7 @@
 								<th style="text-align: center;">제목</th>
 								<th style="text-align: center;">작성자</th>
 								<th style="text-align: center;">작성,수정일</th>
-								<th style="text-align: center;">댓글수 ${totalCnt }</th>
+								<th style="text-align: center;">댓글수</th>
 							</tr>
 						</thead>
 						<br>
