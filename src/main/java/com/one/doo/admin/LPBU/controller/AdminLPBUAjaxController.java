@@ -15,41 +15,30 @@ import com.one.doo.loan.service.LPBUService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-@RequestMapping("/admin")
+@RequestMapping("/admin/lpbu")
 @RestController
 @Log4j
 @AllArgsConstructor
 public class AdminLPBUAjaxController {
 	private LPBUService service;
 
-/*	@GetMapping(value = "/{rno}", 
+	@GetMapping(value = "/{lpbuNo}", 
 			produces = { MediaType.APPLICATION_XML_VALUE,  MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<LPBU> get(@PathVariable("lpbuNo") int lpbuNo) {
+	public ResponseEntity<LPBU> read(@PathVariable("lpbuNo") int lpbuNo) {
 		log.info("get: " + lpbuNo);
 		return null; 
-				//new ResponseEntity<>(service.toString(), HttpStatus.OK);
-	}*/
+				//new ResponseEntity<>(service.answerLPBU(lpbuNo), HttpStatus.OK);
+	}
 
-/*	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH }, 
+	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH }, 
 								value = "/{lpbuNo}", consumes = "application/json", 
 								produces = {MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> answerLpbu(@RequestBody LPBU lpbu,  @PathVariable("lpbuId") int lpbuId) {
-		lpbu.setLpbuNum(lpbuId);
-		return service.answerLPBU(lpbuId) 
+	public ResponseEntity<String> answerLpbu(@RequestBody LPBU lpbu,  @PathVariable("lpbuNo") int lpbuNo) {
+		lpbu.setLpbuNo(lpbuNo);
+		return service.answerLPBU(lpbuNo) 
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
-	}*/
-
-/*	@DeleteMapping(value = "/{lpbuNo}", produces = { MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> remove(@PathVariable("lpbuId") int lpbuId) {
-		
-		log.info("remove: " + lpbuId);
-
-		return service.deleteLPBU(lpbuId) 
-				? new ResponseEntity<>("success", HttpStatus.OK)
-				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	}*/
-
+	}
 }
 
