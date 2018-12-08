@@ -66,10 +66,6 @@ desired effect
           <div class="box-header"></div>
           <!-- /.box-header -->
           <div class="box-body">
-          <div>
-            <input type="button" style="margin: 10px;"
-              class="btn btn-primary btn-flat" value="공지 등록" onclick="location.href = '/admin/notice/enrollForm' "/>
-          </div>
             <table id="example2"
               class="table table-bordered table-hover">
               <thead>
