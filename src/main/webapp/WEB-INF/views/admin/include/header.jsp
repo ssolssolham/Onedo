@@ -3,7 +3,7 @@
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="/" class="logo" style="background-color: #222d32">
+    <a href="/" class="logo" style="background-color: #222d32;">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini" style="background-color: #222d32;"><img src="${pageContext.request.contextPath}/resources/images/KEBLogo.png" style="width: 50px;" /><!-- <b>KEB</b>하나 --></span>
       <!-- logo for regular state and mobile devices -->
@@ -11,9 +11,9 @@
     </a>
 
     <!-- Header Navbar -->
-    <nav class="navbar navbar-static-top" role="navigation" style="background-color: #008584">
+    <nav class="navbar navbar-static-top" role="navigation" style="background-color: #222d32">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" style="background-color: #008584">
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button" style="background-color: #222d32">
         <span class="sr-only">Toggle navigation</span>
       </a>
       <!-- Navbar Right Menu -->

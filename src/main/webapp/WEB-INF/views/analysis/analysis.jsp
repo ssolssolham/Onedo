@@ -2558,6 +2558,10 @@ var closePercentArr = [];
 function makeOpenMartChart(topThreeList,selectedObject){
 	
 	for(var i = 0; i < topThreeList[selectedObject].storePerAlleybizList.length; i++){
+		if(topThreeList[selectedObject].storePerAlleybizList[i].open_count == 0){
+			//
+		}
+		
 		openMartCntDataArr.push(topThreeList[selectedObject].storePerAlleybizList[i].open_count);
 		openPercentArr.push(topThreeList[selectedObject].storePerAlleybizList[i].open_percent);
 		closeMartCntDataArr.push(topThreeList[selectedObject].storePerAlleybizList[i].close_count);
