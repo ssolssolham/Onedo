@@ -914,6 +914,48 @@ function setCenter(Lat,Lng) {
     map2.setCenter(moveLatLon);
 }
 
+/*
+ * 1페이지 레이더차트 
+ */
+function mainRadarDataSet(topThreeList,index){
+	var BackgroundColorList = ['rgba(239, 82, 133, 0.3)','rgba(96, 197, 186, 0.3)','rgba(254, 238, 125, 0.3)'];
+	var RadarDataSet = {
+            label: topThreeList[index].alleyBiz.alleybizCode_Name
+            , data: [topThreeList[index].mlresult.estmt_ROF_VALUE, 
+     		   		 topThreeList[index].mlresult.estmt_OI_VALUE, 
+            		 topThreeList[index].mlresult.estmt_AI_VALUE,
+            		 topThreeList[index].mlresult.estmt_GI_VALUE,
+            		 topThreeList[index].mlresult.estmt_SI_VALUE]
+            , backgroundColor: BackgroundColorList[index]
+            , borderColor: BackgroundColorList[index]
+    }
+	return RadarDataSet;
+}
+
+function mainRadarDataSets(dataArr,topThreeList){
+	var RadarDataSets = [{
+        label: '현재 상권'
+            , data : dataArr
+            , backgroundColor: 'rgba(165, 223, 249, 0.3)'
+            , borderColor: 'rgba(165, 223, 249)'
+    }];
+	for(var i = 0; i < topThreeList.length; i++){
+		RadarDataSets.push(mainRadarDataSet(topThreeList,i));
+	}
+	return RadarDataSets;            	
+}
+
+function salesLabels(topThreeList){
+	var salesLabel = [];
+	salesLabel.push("현재 상권");
+	
+	for(var i = 0; i < topThreeList.length ; i++){
+	salesLabel.push(topThreeList[i].alleyBiz.alleybizCode_Name);
+	}
+	
+	return salesLabel;
+}
+
 function searchAndMark(){
 	var geocoder3 = new daum.maps.services.Geocoder();
 	var locArr = new Array();
@@ -1820,26 +1862,44 @@ function makeDataSets2(topDataList,curDataArr){
 	            /*
 	            	workerPerAlleybiz.total_work 없는 경우를 판단하여 다르게 저장
 	            */
-	            if(topThreeList[i] != undefined && topThreeList[i].workerPerAlleybiz.total_work != null){
-	            dataArrSub = [topThreeList[i].livingPerAlleybiz.totalLiving, 
+	            if(topThreeList[i].workerPerAlleybiz != null){
+	            	// topThreeList[i].workerPerAlleybiz가 있으면
+	            	if(topThreeList[i].workerPerAlleybiz.total_work != null){
+	            	// topThreeList[i].workerPerAlleybiz.total_work가 비어 있지 않으면 
+	            	dataArrSub = [topThreeList[i].livingPerAlleybiz.totalLiving, 
            		 			  topThreeList[i].flowPerAlleybiz.total_flow, 
            					  topThreeList[i].workerPerAlleybiz.total_work, 
            		 		      topThreeList[i].storePerAlleybiz.open_percent,
            		 			  topThreeList[i].storePerAlleybiz.store_count];
-	            }else if(topThreeList[i].workerPerAlleybiz.total_work == null){
+	            		
+	            	}else{
+	            		// topThreeList[i].workerPerAlleybiz.total_work가 비어 있으면
+		            	// topThreeList[i].workerPerAlleybiz.total_work가 비어 있지 않으면 
+		            	dataArrSub = [topThreeList[i].livingPerAlleybiz.totalLiving, 
+	           		 			  topThreeList[i].flowPerAlleybiz.total_flow,
+	           		 			  0,
+	           		 		      topThreeList[i].storePerAlleybiz.open_percent,
+	           		 			  topThreeList[i].storePerAlleybiz.store_count];
+	            	}
+	            }else if(topThreeList[i].workerPerAlleybiz == null){
 	            	dataArrSub = [topThreeList[i].livingPerAlleybiz.totalLiving, 
-     		 			  topThreeList[i].flowPerAlleybiz.total_flow, 
-     		 		      topThreeList[i].storePerAlleybiz.open_percent,
-     		 			  topThreeList[i].storePerAlleybiz.store_count];
+   		 			  topThreeList[i].flowPerAlleybiz.total_flow,
+   		 			  0,
+   		 		      topThreeList[i].storePerAlleybiz.open_percent,
+   		 			  topThreeList[i].storePerAlleybiz.store_count];
 	            }else{
 	            	
 	            }
 	            
-	            dataEstimatedArr = [topThreeList[i].mlresult.estmt_SALES,
-	            					topThreeList[0].mlresult.estmt_SALES,
-	            					topThreeList[1].mlresult.estmt_SALES,
-	            					topThreeList[2].mlresult.estmt_SALES]
-	            					
+	            dataEstimatedArr = [topThreeList[i].mlresult.estmt_SALES];
+	            
+	            for(var i = 0; i < topThreeList.length; i++){
+		            if(topThreeList[i].mlresult != null){
+		            	dataEstimatedArr.push(topThreeList[i].mlresult.estmt_SALES);
+		            	console.log(dataEstimatedArr);
+		            }
+	            }
+
 	            // 종합 평가 점수 구하는 함수
 	            var totalEstimatedScore = 0;
 	            for (var i = 0; i < dataArr.length; i++) {
@@ -2005,45 +2065,14 @@ function makeDataSets2(topDataList,curDataArr){
 	                }
 	            });
 	         	
+	            
 	         // 메인 레이더 차트
 	            var mainRadarChart = document.getElementById("mainRadarChart").getContext('2d');
 	            var mainRadarChartA = new Chart(mainRadarChart, {
 	                type: 'radar'
 	                , data: {
 	                    labels: ['창업위험지수', '과밀지수', '활성도', '성장가능성', '안전도']
-	                    , datasets: [{
-	                        label: '현재 상권'
-	                        , data : dataArr
-	                        , backgroundColor: 'rgba(165, 223, 249, 0.3)'
-	                        , borderColor: 'rgba(165, 223, 249)'
-	                }, {
-	                        label: topThreeList[0].alleyBiz.alleybizCode_Name
-	                        , data: [topThreeList[0].mlresult.estmt_ROF_VALUE, 
-	 	            		   		 topThreeList[0].mlresult.estmt_OI_VALUE, 
-				            		 topThreeList[0].mlresult.estmt_AI_VALUE,
-				            		 topThreeList[0].mlresult.estmt_GI_VALUE,
-				            		 topThreeList[0].mlresult.estmt_SI_VALUE]
-	                        , backgroundColor: 'rgba(239, 82, 133, 0.3)'
-	                        , borderColor: 'rgba(239, 82, 133)'
-	                }, {
-	                        label: topThreeList[1].alleyBiz.alleybizCode_Name
-	                        , data: [topThreeList[1].mlresult.estmt_ROF_VALUE, 
-		            		   		 topThreeList[1].mlresult.estmt_OI_VALUE, 
-				            		 topThreeList[1].mlresult.estmt_AI_VALUE,
-				            		 topThreeList[1].mlresult.estmt_GI_VALUE,
-				            		 topThreeList[1].mlresult.estmt_SI_VALUE]
-	                        , backgroundColor: 'rgba(96, 197, 186, 0.3)'
-	                        , borderColor: 'rgba(96, 197, 186)'
-	                }, {
-	                        label: topThreeList[2].alleyBiz.alleybizCode_Name
-	                        , data: [topThreeList[2].mlresult.estmt_ROF_VALUE, 
-	            		   		 	 topThreeList[2].mlresult.estmt_OI_VALUE, 
-			            		 	 topThreeList[2].mlresult.estmt_AI_VALUE,
-			            		 	 topThreeList[2].mlresult.estmt_GI_VALUE,
-			            		 	 topThreeList[2].mlresult.estmt_SI_VALUE]
-	                        , backgroundColor: 'rgba(254, 238, 125, 0.3)'
-	                        , borderColor: 'rgba(254, 238, 125)'
-	                }]
+	                    , datasets: mainRadarDataSets(dataArr,topThreeList)
 	                }
 	                , options: {
 	                    legend: {
@@ -2064,15 +2093,13 @@ function makeDataSets2(topDataList,curDataArr){
 	                }
 	            });
 	            
+	            
 	            // 매출액 차트
 	            var salesAmount = document.getElementById("salesAmountChart").getContext('2d');
 	            var salesAmountChart = new Chart(salesAmount, {
 	                type: 'bar'
 	                , data: {
-	                    labels: ["현재 상권", 
-	                    		 topThreeList[0].alleyBiz.alleybizCode_Name, 
-           						 topThreeList[1].alleyBiz.alleybizCode_Name, 
-           						 topThreeList[2].alleyBiz.alleybizCode_Name]
+	                    labels: salesLabels(topThreeList)
 	                    , datasets: [{
 	                        label: '매출액'
 	                        , data: dataEstimatedArr
@@ -2120,9 +2147,6 @@ function makeDataSets2(topDataList,curDataArr){
  		   }, 3000);
 
     	console.log(Markers);
-
-
-
    	});
     
     </script>
