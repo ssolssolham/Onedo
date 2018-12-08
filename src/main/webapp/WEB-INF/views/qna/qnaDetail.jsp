@@ -359,9 +359,6 @@
 			alert("비밀번호가 일치하지 않습니다:(");
 			return false;
 		}else{
-			var target = $("#snackbar");
-			target.text("문의글을 수정하였습니다:D");
-			toast();
 			return true;
 		}
 	});

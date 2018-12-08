@@ -157,7 +157,8 @@
   <div id="deleteReviewModal" class="modal fade">
     <div class="modal-dialog modal-login">
       <div class="modal-content">
-      <div class="modal-header">        
+      <div class="modal-header">    
+          
         <h4 class="modal-title"><img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;후기 삭제</h4>
       </div>
       <div class="modal-body">
@@ -175,7 +176,7 @@
           <input type="submit" class="" value="삭제">&nbsp;
           <button type="button" class="" value="취소"  data-dismiss="modal">취소</button>
         </div>
-        </form>       
+        </form>  
       </div>
       </div>
     </div>
@@ -442,16 +443,9 @@
 		var passwd = "${review.article_pw}";
 		var inputPw = $("#inputPw").val();
 		if(passwd != inputPw){
-			/* var target = $('#snackbar');
-	    	target.text('비밀번호가 일치하지 않습니다:()');
-	    	toast(); */
-	    	alert("비밀번호가 일치하지 않습니다:(");
-	    	
+			alert("비밀번호가 일치하지 않습니다:(")	    	
 			return false;
 		}else{
-			var target = $('#snackbar');
-	    	target.text('후기를 삭제하였습니다:D');
-	    	toast();
 			return true;
 		}
 	});
