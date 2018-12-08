@@ -151,7 +151,7 @@
 				  <input type="submit" class="" value="수정">&nbsp;
 				  <button type="button" class="" value="취소"  data-dismiss="modal">취소</button>
 				</div>
-			  </form>       
+			  </form> 
 			</div>
 		  </div>
 		</div>
@@ -321,11 +321,7 @@
 		       console.log("page click");
 		       
 		       var targetPageNum = $(this).attr("href");
-		       
-		       console.log("targetPageNum: " + targetPageNum);
-		       
 		       pageNum = targetPageNum;
-		       
 		       showList(pageNum);
 		     });     
 
@@ -341,7 +337,6 @@
 		    
 		    // 닫기버튼
 		    $("#modalCloseBtn").on("click", function(e){
-		    	
 		    	modal.modal('hide');
 		    });
 		    
@@ -350,11 +345,8 @@
 		      modal.find("input").val("");
 		      modalInputReplyDate.closest("div").hide();
 		      modal.find("button[id !='modalCloseBtn']").hide();
-		      
 		      modalRegisterBtn.show();
-		      
 		      $("#replyModal").modal("show");
-		      
 		    });
 		
 
@@ -373,22 +365,13 @@
 			return true;
 		}
 	});
-			
-/* 	// 문의글 삭제기능 없음
-	$("#removeForm").submit(function() {
-		var passwd = "${qna.article_pw}";
-		var inputPw = $("#delInputPw").val();
-		if(passwd != inputPw){
-			alert("비밀번호가 일치하지 않습니다:(");
-			return false;
-		}else{
-			var target = $("#snackbar");
-			target.text("문의를 삭제하였습니다.:D");
-			toast();
-			return true;
-		}
-	});
- */			
+
+	var modRes = '${qnaModRes}';
+	if(modRes === 'success'){
+		var target = $("#snackbar");
+		target.text("문의글을 수정하였습니다:D");
+		toast();
+	}
 });
 	</script>
 
@@ -420,5 +403,6 @@
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 <!-- toast msg영역 -->
 <div id="snackbar"></div>
+
 </body>
 </html>
