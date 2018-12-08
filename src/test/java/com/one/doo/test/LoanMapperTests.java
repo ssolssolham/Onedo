@@ -1,12 +1,18 @@
 package com.one.doo.test;
+import java.util.HashMap;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.one.doo.board.domain.Criteria;
 import com.one.doo.loan.domain.Loan;
 import com.one.doo.loan.domain.Parameter;
 import com.one.doo.loan.mapper.LoanMapper;
+
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -32,7 +38,7 @@ public class LoanMapperTests {
 		log.info(loan);
 	}
 	
-	@Test
+	//@Test
 	public void testRead() {
 		Loan loan = mapper.readLoan(52);
 		log.info(loan);
@@ -43,5 +49,12 @@ public class LoanMapperTests {
 		Loan loan = new Loan();
 		int count = mapper.updateLoan(loan);
 		log.info("UPDATE COUNT: " + count);
+	}
+	
+	@Test
+	public void testList() {
+		Criteria cri = new Criteria();
+		List<HashMap<String, Object>> loans = mapper.getListWithPaging(cri);
+		loans.forEach(loan -> log.info(loan));
 	}
 }

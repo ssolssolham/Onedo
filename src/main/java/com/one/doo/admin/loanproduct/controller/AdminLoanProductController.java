@@ -19,7 +19,7 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/admin/loanproduct")
+@RequestMapping("/admin/loanProduct")
 @AllArgsConstructor
 public class AdminLoanProductController {
 
@@ -29,10 +29,11 @@ public class AdminLoanProductController {
 	public String list(Criteria cri, Model model) {
 		log.info("list : " + cri);
 		int total = service.getTotal(cri);
-		
+		System.out.println(total);
 		model.addAttribute("list", service.getListWithPaging(cri));
 		model.addAttribute("pageMaker", new Page(cri, total));
-		return "admin/loanproduct/product";
+		System.out.println("들어왔니?");
+		return "admin/loanProduct/product";
 	}
 		
 	@PreAuthorize("isAuthenticated()")
@@ -47,7 +48,7 @@ public class AdminLoanProductController {
 	@GetMapping({"/get", "/modify"})
 	public void get(@RequestParam("loanId") int loanId, @ModelAttribute("cri") Criteria cri, Model model) {
 		log.info("/get or modify");
-		model.addAttribute("board", service.readLoan(loanId));
+		model.addAttribute("loan", service.readLoan(loanId));
 	}
 	
 	@PostMapping("/modify")

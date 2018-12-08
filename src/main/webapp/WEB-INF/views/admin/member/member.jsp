@@ -93,7 +93,7 @@ desired effect
 		</tr>
 		</thead><br>
 		<tbody>
-		<c:forEach items="${users }" var="user" varStatus="idx">
+		<c:forEach items="${users}" var="user" varStatus="idx">
 		  <tr>
 		  	<td>${idx.index +1 }</td>
 		  	<td>${user.userid }</td>

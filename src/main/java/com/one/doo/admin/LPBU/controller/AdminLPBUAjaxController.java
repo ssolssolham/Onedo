@@ -22,15 +22,15 @@ import lombok.extern.log4j.Log4j;
 public class AdminLPBUAjaxController {
 	private LPBUService service;
 
-	@GetMapping(value = "/{rno}", 
+/*	@GetMapping(value = "/{rno}", 
 			produces = { MediaType.APPLICATION_XML_VALUE,  MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public ResponseEntity<LPBU> get(@PathVariable("lpbuNo") int lpbuNo) {
 		log.info("get: " + lpbuNo);
 		return null; 
 				//new ResponseEntity<>(service.toString(), HttpStatus.OK);
-	}
+	}*/
 
-	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH }, 
+/*	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH }, 
 								value = "/{lpbuNo}", consumes = "application/json", 
 								produces = {MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> answerLpbu(@RequestBody LPBU lpbu,  @PathVariable("lpbuId") int lpbuId) {
@@ -39,9 +39,9 @@ public class AdminLPBUAjaxController {
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
-	}
+	}*/
 
-	@DeleteMapping(value = "/{lpbuNo}", produces = { MediaType.TEXT_PLAIN_VALUE })
+/*	@DeleteMapping(value = "/{lpbuNo}", produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> remove(@PathVariable("lpbuId") int lpbuId) {
 		
 		log.info("remove: " + lpbuId);
@@ -49,7 +49,7 @@ public class AdminLPBUAjaxController {
 		return service.deleteLPBU(lpbuId) 
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	}
+	}*/
 
 }
 
