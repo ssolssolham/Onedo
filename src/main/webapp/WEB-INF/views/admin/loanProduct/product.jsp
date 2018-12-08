@@ -69,8 +69,9 @@ div.panel.show {
   padding-bottom: 3px;
 }
 .form-style-2 label{
-  display: block;
+  display: inline-block;
   margin: 0px 0px 15px 0px;
+  width : auto;
 }
 .form-style-2 label > span{
   width: 100px;
@@ -79,6 +80,11 @@ div.panel.show {
   padding-top: 8px;
   padding-right: 5px;
 }
+.form-style-2-input{
+  
+  display : inline-block;
+}
+
 .form-style-2 span.required{
   color:red;
 }
@@ -274,12 +280,149 @@ desired effect
           <div class="box box-primary">
             <div class="box-header with-border">
               
-                <button class="accordion">예약상담 관리</button>
+              <button class="accordion">새 대출상품 등록</button>
                 <div class="panel">
-                                    <div class="table-style-2">
+                  <div class="form-style-2">
+                    <div class="form-style-2-heading">신규 대출상품 등록</div>
+                    <form action="" method="post">
+                    
+                        <div class="form-style-2-div">
+                         <div class="form-style-2-input">
+                        <label for="field4"><span>취급기간</span><select name="field4" class="select-field">
+                          <option value="1">하나은행</option>
+                          <option value="2">하나저축은행</option>
+                          <option value="3">하나캐피탈</option>
+                        </select>
+                        </label>
+                        </div>
+                         <div class="form-style-2-input">
+                        <label for="field4"><span>대출유형</span><select name="field4" class="select-field">
+                          <option value="0">전체</option>
+                          <option value="1">직장인</option>
+                          <option value="2">자영업자/프리랜서</option>
+                          <option value="3">군인/군무원/임관(예정자)</option>
+                          <option value="4">경찰/소속공무원/임관(예정)자</option>
+                          <option value="5">공무원</option>
+                          <option value="6">의료계 직종</option>
+                          <option value="7">교직원</option>
+                          <option value="8">무직</option>
+                          <option value="9">기타(연금 수령자 등)</option>
+                          <option value="10">전문직</option>
+                        </select></label>
+                        </div>
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                            <div class="form-style-2-input">
+                            <label for="field4"><span>상품구분</span><select name="field4" class="select-field">
+                                <option value="" selected>선택</option>
+                              <option value="소호대출">소호대출</option>
+                              <option value="신용대출">신용대출</option>
+                              <option value="담보대출">담보대출</option>
+                            </select></label>
+                            </div>
+                            <div class="form-style-2-input">
+                            <label for="field4"><span>상품유형</span><select name="field4" class="select-field">
+                            <option value="" selected>선택</option>
+                              <option value="신용">신용</option>
+                              <option value="담보">담보</option>
+                              </select></label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                            <div class="form-style-2-input">
+                            <label for="field1"><span>상품이름 </span><input type="text" class="input-field" name="field1" value="" /></label>
+                            </div>
+                            <div class="form-style-2-input">
+                            <label for="field2"><span>상품설명 </span><input type="text" class="input-field" name="field2" value="" /></label>
+                            </div>
+                        </div>
+                        
+                        <label for="field2"><span>대출대상 </span><input type="text" class="input-field" name="field2" value="" /></label>
+                        
+                        <div class="form-style-2-div">
+                            <div class="form-style-2-input">
+                            <label for="field2"><span>재직기간제한</span><input type="checkbox" class="input-field" name="field2" value="" /></label>
+                            </div>
+                            <div class="form-style-2-input">
+                            <label for="field2"><input type="number" class="input-field" name="field2" value="" /><span>년</span></label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                        <div class="form-style-2-input">
+                          <label for="field2"><span>한도설명</span><input type="text" class="input-field" name="field2" value="" /></label>
+                          <label for="field2"><span>한도기간</span><input type="number" class="input-field" name="field2" value="" /> 
+                          <span>~</span><input type="number" class="input-field" name="field2" value="" /></label>
+                        </div> 
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                          <div class="form-style-2-input" style="display:inline-block">
+                            <span style="display:inline-block"><label>금리유형 </label><input type="text" class="input-field" name="field2" value="" /></span>
+                            <span style="display:inline-block"><label>금리구간</label><input type="number" class="input-field" name="field2" value="" /> 
+                           <label> ~ </label><input type="number" class="input-field" name="field2" value="" /><label>년</label></span>
+                          </div>
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                        <div class="form-style-2-input">
+                        <label for="field2"><span>한도설명</span><input type="text" class="input-field" name="field2" value="" /></label>
+                        </div>w
+                        <div class="form-style-2-input">
+                          <label for="field2"><span>한도구간</span><input type="number" class="input-field" name="field2" value="" /> 
+                          <span> ~</span><input type="number" class="input-field" name="field2" value="" /><span>만원</span></label>
+                        </div>
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                        <div class="form-style-2-input">
+                          <label for="field2"><span>대출기간설명</span><input type="text" class="input-field" name="field2" value="" /></label>
+                          </div>
+                          <div class="form-style-2-input">
+                          <label for="field2"><span>대출기간</span><input type="number" class="input-field" name="field2" value="" /> 
+                          <span>년 ~</span><input type="number" class="input-field" name="field2" value="" /><span>년</span></label>
+                        </div>
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                        <div class="form-style-2-input">
+                        <label for="field2"><span>거치여부</span><input type="checkbox" class="input-field" name="field2" value="" /></label>
+                        </div>
+                        <div class="form-style-2-input">
+                          <label for="field2"><span>거치기간</span><input type="number" class="input-field" name="field2" value="" /> 
+                          <span> ~</span><input type="number" class="input-field" name="field2" value="" /><span>개월</span></label>
+                        </div>
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                          <div class="form-style-2-input">
+                            <label for="field2"><span>상환방식설명</span><input type="text" class="input-field" name="field2" value="" /></label>
+                            </div>
+                            <div class="form-style-2-input">
+                            <label for="field2">
+                            <input type="checkbox" class="input-field" name="repay1" />만기일시
+                            <input type="checkbox" class="input-field" name="repay2" />원리금균등분할
+                            <input type="checkbox" class="input-field" name="repay3" />원금균등분할
+                            <input type="checkbox" class="input-field" name="repayM" />통장대출</label>
+                          </div>
+                        </div>
+                        
+                        <label for="field2"><span>상세주소</span><input type="text" class="input-field" name="field2" value="" /></label>
+                        
+                        <label for="field2"><span>담보종류</span><input type="text" class="input-field" name="field2" value="" /></label>
+                        <label><span> </span><input type="submit" value="Submit" /></label>
+                    </form>
+                    </div>
+                </div>
+                
+                <button class="accordion">대출목록 관리</button>
+                <div class="panel">
+                  <div class="table-style-2">
                     <div class="table-style-2-heading">
-                      <form id='searchForm' action="/admin/lpbu/" method='get'>
                       <label for="field1">
+                       <form id='searchForm' action="/admin/loanProduct/" method='get'>
                       <select name="type" class="select-field">
                                   <option value=""
                                     <c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
@@ -304,9 +447,10 @@ desired effect
                                   value='<c:out value="${pageMaker.cri.pageNum}"/>' /> <input
                                   type='hidden' name='amount'
                                   value='<c:out value="${pageMaker.cri.amount}"/>' />
-                      <button type="button" style="display:inline;">검색 </button>
-                      </label>
                       </form>
+                      <button type="button" style="display:inline;">검색 </button>
+                              
+                      </label>
                       </div>
                    <table id="loanList">
                         <colgroup>
@@ -332,14 +476,14 @@ desired effect
                         </thead>
                         <tbody>
                         
-                          <c:forEach items="${list}" var="lpbu">
+                          <c:forEach items="${list}" var="loan">
                               <tr>
                                 <td style="text-align:center;">${loan.get('LOAN_ID')}</td>
-                                <td style="text-align:cdnter; padding-left: 7px;"></td>
-                                <td style="text-align:center;"></td>
-                                <td style="text-align:center;"></td>
-                                <td style="text-align:center;"></td>
-                                <td style="text-align:center;"></td>
+                                <td style="text-align:cdnter; padding-left: 7px;">${loan.get('LOAN_ID')}</td>
+                                <td style="text-align:center;">${loan.get('LOAN_CATEGORY')}</td>
+                                <td style="text-align:center;">${loan.get('LOAN_ID')}</td>
+                                <td style="text-align:center;">${loan.get('UPDATE_DATE')}</td>
+                                <td style="text-align:center;">${loan.get('LOAN_ID')}</td>
                                 <td style="text-align:center;"><button type="button">able</button></td>
                               </tr>
                          </c:forEach>
@@ -368,14 +512,22 @@ desired effect
                         </ul>
                       </div>
         <!--  end Pagination -->
+                     
                     </div>
                 </div>
                 
-                <button class="accordion">대출예약 통계</button>
-                <div class="panel">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <button class="accordion">대출통계</button>
+                <div id="foo" class="panel">
+                  <div class="form-style-2">
+                    <div class="form-style-2-heading">
+                    <label for="field1"><span>Name <span class="required">*</span></span><input type="text" class="input-field" name="field1" value="" /></label>
+                    </div>
+                    
+
+
+                    </div>
                 </div>
-                
+              
             </div>
             <!-- /.box-header -->
           </div>

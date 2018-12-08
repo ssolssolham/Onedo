@@ -32,6 +32,7 @@
 	<context:component-scan base-package="com.one.doo.reserve.controller"/>
 	<context:component-scan base-package="com.one.doo.admin.common.controller"/>
 	<context:component-scan base-package="com.one.doo.admin.loanproduct.controller"/>
+	<context:component-scan base-package="com.one.doo.admin.LPBU.controller"/>
 	<context:component-scan base-package="com.one.doo.admin.member.controller"/>
 	<context:component-scan base-package="com.one.doo.admin.notice.controller"/>
 	<context:component-scan base-package="com.one.doo.admin.stats.controller"/>

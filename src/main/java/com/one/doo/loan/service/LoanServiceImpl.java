@@ -53,7 +53,7 @@ public class LoanServiceImpl implements LoanService{
 	}
 
 	@Override
-	public List<Loan> getListWithPaging(Criteria cri) {
+	public List<HashMap<String,Object>> getListWithPaging(Criteria cri) {
 		return mapper.getListWithPaging(cri);
 	}
 

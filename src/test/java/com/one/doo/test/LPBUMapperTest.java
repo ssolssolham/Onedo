@@ -1,12 +1,18 @@
 package com.one.doo.test;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import com.one.doo.board.domain.Criteria;
 import com.one.doo.loan.domain.LPBU;
 import com.one.doo.loan.mapper.LPBUMapper;
+
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
@@ -24,7 +30,7 @@ public class LPBUMapperTest {
 		log.info(mapper);
 	}
 	
-	@Test
+	//@Test
 	public void testCreate() {
 			LPBU lpbu = new LPBU();
 			//상담번호
@@ -60,9 +66,9 @@ public class LPBUMapperTest {
 
 	//@Test
 	public void testList() {
-		//Criteria cri = new Criteria();
-		/*List<HashMAP<String, Object>> lpbus = mapper.getListWithPaging(cri, bnoArr[0]);
-		replies.forEach(reply -> log.info(reply));*/
+		Criteria cri = new Criteria();
+		List<HashMap<String, Object>> lpbus = mapper.getLPBUListWithPaging(cri);
+		lpbus.forEach(lpbu -> log.info(lpbu));
 	}
 	
 	

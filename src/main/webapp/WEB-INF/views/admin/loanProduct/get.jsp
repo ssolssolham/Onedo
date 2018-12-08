@@ -50,7 +50,7 @@ div.panel {
 
 div.panel.show {
     opacity: 1;
-    max-height: 500px;  
+    max-height: none;  
 }
 
 
@@ -71,6 +71,7 @@ div.panel.show {
 .form-style-2 label{
   display: block;
   margin: 0px 0px 15px 0px;
+  width : auto;
 }
 .form-style-2 label > span{
   width: 100px;
@@ -79,6 +80,11 @@ div.panel.show {
   padding-top: 8px;
   padding-right: 5px;
 }
+.form-style-2-input{
+  
+  display : inline-block;
+}
+
 .form-style-2 span.required{
   color:red;
 }
@@ -276,9 +282,8 @@ desired effect
               
               <button class="accordion">새 대출상품 등록</button>
                 <div class="panel">
-                  <div class="form-style-2">
+                   <div class="form-style-2">
                     <div class="form-style-2-heading">신규 대출상품 등록</div>
-                    <form action="" method="post">
                     
                         <div class="form-style-2-div">
                          <div class="form-style-2-input">
@@ -308,25 +313,109 @@ desired effect
                         
                         <div class="form-style-2-div">
                             <div class="form-style-2-input">
-                            <label for="field4"><span>Regarding</span><select name="field4" class="select-field">
+                            <label for="field4"><span>상품구분</span><select name="field4" class="select-field">
+                                <option value="" selected>선택</option>
                               <option value="소호대출">소호대출</option>
                               <option value="신용대출">신용대출</option>
                               <option value="담보대출">담보대출</option>
                             </select></label>
                             </div>
                             <div class="form-style-2-input">
-                            <label for="field4"><span>Regarding</span><select name="field4" class="select-field">
+                            <label for="field4"><span>상품유형</span><select name="field4" class="select-field">
+                            <option value="" selected>선택</option>
                               <option value="신용">신용</option>
                               <option value="담보">담보</option>
                               </select></label>
                             </div>
                         </div>
-                        <label for="field1"><span>상품이름 </span><input type="text" class="input-field" name="field1" value="" /></label>
-                        <label for="field2"><span>Email </span><input type="text" class="input-field" name="field2" value="" /></label>
-                        <label for="field5"><span>Message </span><textarea name="field5" class="textarea-field"></textarea></label>
+                        
+                        <div class="form-style-2-div">
+                            <div class="form-style-2-input">
+                            <label for="field1"><span>상품이름 </span><input type="text" class="input-field" name="field1" value="" /></label>
+                            </div>
+                            <div class="form-style-2-input">
+                            <label for="field2"><span>상품설명 </span><input type="text" class="input-field" name="field2" value="" /></label>
+                            </div>
+                        </div>
+                        
+                        <label for="field2"><span>대출대상 </span><input type="text" class="input-field" name="field2" value="" /></label>
+                        
+                        <div class="form-style-2-div">
+                            <div class="form-style-2-input">
+                            <label for="field2"><span>재직기간제한</span><input type="checkbox" class="input-field" name="field2" value="" /></label>
+                            </div>
+                            <div class="form-style-2-input">
+                            <label for="field2"><input type="number" class="input-field" name="field2" value="" /><span>년</span></label>
+                            </div>
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                        <div class="form-style-2-input">
+                          <label for="field2"><span>한도설명</span><input type="text" class="input-field" name="field2" value="" /></label>
+                          <label for="field2"><span>한도기간</span><input type="number" class="input-field" name="field2" value="" /> 
+                          <span>~</span><input type="number" class="input-field" name="field2" value="" /></label>
+                        </div> 
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                          <div class="form-style-2-input">
+                          <label for="field2"><span>금리유형 </span><input type="text" class="input-field" name="field2" value="" /></label>
+                          </div>
+                          <div class="form-style-2-input">
+                          <label for="field2"><span>금리구간</span><input type="number" class="input-field" name="field2" value="" /> 
+                          <span>년 ~</span><input type="number" class="input-field" name="field2" value="" /><span>년</span></label>
+                          </div>
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                        <div class="form-style-2-input">
+                        <label for="field2"><span>한도설명</span><input type="text" class="input-field" name="field2" value="" /></label>
+                        </div>
+                        <div class="form-style-2-input">
+                          <label for="field2"><span>한도구간</span><input type="number" class="input-field" name="field2" value="" /> 
+                          <span> ~</span><input type="number" class="input-field" name="field2" value="" /><span>만원</span></label>
+                        </div>
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                        <div class="form-style-2-input">
+                          <label for="field2"><span>대출기간설명</span><input type="text" class="input-field" name="field2" value="" /></label>
+                          </div>
+                          <div class="form-style-2-input">
+                          <label for="field2"><span>대출기간</span><input type="number" class="input-field" name="field2" value="" /> 
+                          <span>년 ~</span><input type="number" class="input-field" name="field2" value="" /><span>년</span></label>
+                        </div>
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                        <div class="form-style-2-input">
+                        <label for="field2"><span>거치여부</span><input type="checkbox" class="input-field" name="field2" value="" /></label>
+                        </div>
+                        <div class="form-style-2-input">
+                          <label for="field2"><span>거치기간</span><input type="number" class="input-field" name="field2" value="" /> 
+                          <span> ~</span><input type="number" class="input-field" name="field2" value="" /><span>개월</span></label>
+                        </div>
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                          <div class="form-style-2-input">
+                            <label for="field2"><span>상환방식설명</span><input type="text" class="input-field" name="field2" value="" /></label>
+                            </div>
+                            <div class="form-style-2-input">
+                            <label for="field2">
+                            <input type="checkbox" class="input-field" name="repay1" />만기일시
+                            <input type="checkbox" class="input-field" name="repay2" />원리금균등분할
+                            <input type="checkbox" class="input-field" name="repay3" />원금균등분할
+                            <input type="checkbox" class="input-field" name="repayM" />통장대출</label>
+                          </div>
+                        </div>
+                        
+                        <label for="field2"><span>상세주소</span><input type="text" class="input-field" name="field2" value="" /></label>
+                        
+                        <label for="field2"><span>담보종류</span><input type="text" class="input-field" name="field2" value="" /></label>
                         <label><span> </span><input type="submit" value="Submit" /></label>
-                    </form>
                     </div>
+                    
                 </div>
                 
                 <button class="accordion">대출목록 관리</button>
@@ -334,13 +423,34 @@ desired effect
                   <div class="table-style-2">
                     <div class="table-style-2-heading">
                       <label for="field1">
-                      <select name="field4" class="select-field">
-                          <option value="General Question">General</option>
-                          <option value="Advertise">Advertisement</option>
-                          <option value="Partnership">Partnership</option>
-                        </select>
-                      <input type="text" class="input-field" name="field1" value="" />
-                      <button type="button">검색 </button>
+                       <form id='searchForm' action="/admin/loanProduct/" method='get'>
+                      <select name="type" class="select-field">
+                                  <option value=""
+                                    <c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
+                                  <option value="T"
+                                    <c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
+                                  <option value="C"
+                                    <c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
+                                  <option value="W"
+                                    <c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자</option>
+                                  <option value="TC"
+                                    <c:out value="${pageMaker.cri.type eq 'TC'?'selected':''}"/>>제목
+                                    or 내용</option>
+                                  <option value="TW"
+                                    <c:out value="${pageMaker.cri.type eq 'TW'?'selected':''}"/>>제목
+                                    or 작성자</option>
+                                  <option value="TWC"
+                                    <c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>제목
+                                    or 내용 or 작성자</option>
+                                </select> <input type='text' class="input-field" name='keyword'
+                                  value='<c:out value="${pageMaker.cri.keyword}"/>' /> <input
+                                  type='hidden' name='pageNum'
+                                  value='<c:out value="${pageMaker.cri.pageNum}"/>' /> <input
+                                  type='hidden' name='amount'
+                                  value='<c:out value="${pageMaker.cri.amount}"/>' />
+                      </form>
+                      <button type="button" style="display:inline;">검색 </button>
+                              
                       </label>
                       </div>
                    <table id="loanList">
@@ -366,17 +476,44 @@ desired effect
                            </tr>
                         </thead>
                         <tbody>
+                        
+                          <c:forEach items="${list}" var="loan">
                               <tr>
-                                <td style="text-align:center;">1</td>
-                                <td style="text-align:cdnter; padding-left: 7px;"></td>
-                                <td style="text-align:center;"></td>
-                                <td style="text-align:center;"></td>
-                                <td style="text-align:center;"></td>
-                                <td style="text-align:center;"></td>
+                                <td style="text-align:center;">${loan.get('LOAN_ID')}</td>
+                                <td style="text-align:cdnter; padding-left: 7px;">${loan.get('LOAN_ID')}</td>
+                                <td style="text-align:center;">${loan.get('LOAN_CATEGORY')}</td>
+                                <td style="text-align:center;">${loan.get('LOAN_ID')}</td>
+                                <td style="text-align:center;">${loan.get('UPDATE_DATE')}</td>
+                                <td style="text-align:center;">${loan.get('LOAN_ID')}</td>
                                 <td style="text-align:center;"><button type="button">able</button></td>
                               </tr>
+                         </c:forEach>
                         </tbody>
                      </table>
+                     
+                     <div class='pull-right'>
+                        <ul class="pagination">
+                          <c:if test="${pageMaker.prev}">
+                            <li class="paginate_button previous"><a
+                              href="${pageMaker.startPage -1}">Previous</a></li>
+                          </c:if>
+              
+                          <c:forEach var="num" begin="${pageMaker.startPage}"
+                            end="${pageMaker.endPage}">
+                            <li class="paginate_button  ${pageMaker.cri.pageNum == num ? "active":""} ">
+                              <a href="${num}">${num}</a>
+                            </li>
+                          </c:forEach>
+              
+                          <c:if test="${pageMaker.next}">
+                            <li class="paginate_button next"><a
+                              href="${pageMaker.endPage +1 }">Next</a></li>
+                          </c:if>
+              
+                        </ul>
+                      </div>
+        <!--  end Pagination -->
+                     
                     </div>
                 </div>
                 

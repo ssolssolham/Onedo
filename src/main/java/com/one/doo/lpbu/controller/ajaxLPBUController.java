@@ -35,21 +35,21 @@ public class ajaxLPBUController {
 	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH }, 
 								value = "/{lpbuNo}", consumes = "application/json", 
 								produces = {MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> answerLpbu(@RequestBody LPBU lpbu,  @PathVariable("lpbuId") int lpbuId) {
-		lpbu.setLpbuNum(lpbuId);
+	public ResponseEntity<String> answerLpbu(@RequestBody LPBU lpbu,  @PathVariable("lpbuNo") int lpbuNo) {
+		lpbu.setLpbuNo(lpbuNo);
 
-		return service.answerLPBU(lpbuId) 
+		return service.answerLPBU(lpbuNo) 
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
 	}
 
 	@DeleteMapping(value = "/{lpbuNo}", produces = { MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> remove(@PathVariable("lpbuId") int lpbuId) {
+	public ResponseEntity<String> remove(@PathVariable("lpbuNo") int lpbuNo) {
 		
-		log.info("remove: " + lpbuId);
+		log.info("remove: " + lpbuNo);
 
-		return service.deleteLPBU(lpbuId) 
+		return service.deleteLPBU(lpbuNo) 
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

@@ -106,11 +106,14 @@ desired effect
               	     	<label>문의내용: </label>
               	     	${qna.content }<br><br>
               	    <form action="/admin/qna/addReply" method="get">
-              	     	답변<br><textarea type="text" name="reply" cols="20" rows="5"></textarea>
-              	     	
+                    <div class="form-group">
+                        <label for="exampleFormControlTextarea1">답변</label>
+                        <textarea class="form-control" name="reply" cols="20" rows="5"></textarea>
+                    </div>
               	     	<input type="hidden" name="article_num" value="${qna.article_num }">
               	     	<input type="hidden" name="replyer" value="${loginId }">
-              	     	<br><input type="submit" value="답변등록">
+                        <input type="submit" class="btn btn-primary" value="답변등록">
+                        <br />
               	    </form>
               	  </td>
               	</tr>
