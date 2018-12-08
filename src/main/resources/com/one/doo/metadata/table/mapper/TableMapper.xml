@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.one.doo.metadata.table.mapper.TableMapper">
+
+	<!-- 테이블별 컬럼리스트를 가져오기위한 column객체 resultMap -->
+	<resultMap type="com.one.doo.metadata.table.domain.Column" id="columnMap">
+		<result property="col_no"		column="col_no"/>
+		<result property="tbl_no"		column="tbl_no"/>
+		<result property="col_log_name"	column="col_log_name"/>
+		<result property="col_phy_name"	column="col_phy_name"/>
+		<result property="col_summary"	column="col_summary"/>
+	</resultMap>
+	
+	<resultMap type="com.one.doo.metadata.table.domain.Table" id="tableMap">
+		<result property="tbl_no" 			column="tbl_no"/>
+		<result property="tbl_log_name" 	column="tbl_log_name"/>
+		<result property="tbl_phy_name" 	column="tbl_phy_name"/>
+		<result property="tbl_summary" 		column="tbl_summary"/>
+		<collection property="columnList" 	resultMap="columnMap"/>
+	</resultMap>
+	
+	<!-- 영속 테이블 정보에 대한 리스트 get -->
+	<select id="getTableList" resultMap="tableMap">
+		SELECT	tbl.tbl_no, 
+				tbl.tbl_log_name, 
+				tbl.tbl_phy_name, 
+				tbl.tbl_summary, 
+				col.col_no, 
+				col.col_log_name, 
+				col.col_phy_name, 
+				col.col_summary
+		FROM	metadata_tables tbl
+				LEFT OUTER JOIN metadata_columns col
+				ON tbl.tbl_no = col.tbl_no
+		ORDER BY tbl_no
+	</select>
+
+</mapper>
