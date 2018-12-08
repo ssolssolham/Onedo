@@ -117,7 +117,7 @@
 								  <td>답변처리중</td>
 								</c:if>
 								<c:if test="${replycnt gt 0 }">
-								   <td>답변완료</td>
+								   <td>답변완료(${replycnt })</td>
 								</c:if>
 								</tr>
 							</c:forEach>
