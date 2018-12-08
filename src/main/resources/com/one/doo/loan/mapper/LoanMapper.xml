@@ -126,12 +126,20 @@ FROM    loan_product p
 					</trim>
 			</sql>
 
-<!-- 	<select id="getListWithPaging" resultType="com.one.doo.loan.domain.Loan">
+	<select id="getListWithPaging" resultType="Map">
 		<![CDATA[
-		SELECT bno, title, content, writer, regdate, updatedate, replycnt 
-		FROM (SELECT /* + INDEX_DESC(tbl_board pk board) */
-					rownum rn, bno, title, content, writer, regdate, updatedate, replycnt
-					FROM loan_product
+		SELECT *
+		FROM (SELECT /* + INDEX_DESC(loan_product loan_product_pk) */
+					rownum rn, loan_id, loan_name, loan_content, loan_division, loan_category, interestRate_category, creditLine_desc,
+		           	loanPeriod_desc, repayment_way, detail_url,  target_description, 
+		           	TO_CHAR(loanUpdate_date, 'MM-DD-YYYY') "UPDATE_DATE", target_detail1,  target_detail2, target_detail3, 
+		           	holding, holding_min, holding_max, repay1, repay2, repay3, repayM, 
+		           	t.target_name, c.loancomp_name, c.present_num, c.sub_num, loanperiod_min, loanperiod_max
+					FROM loan_product p
+					JOIN loan_target t
+					ON 	p.target_id = t.target_id
+					JOIN loan_company c
+		         	ON 	p.loanComp_id = c.loanComp_id
 					WHERE 	]]>
 						<include refid="criteria"></include>
 					<![CDATA[
@@ -139,7 +147,7 @@ FROM    loan_product p
 					)
 				WHERE rn > (#{pageNum} -1) * #{amount}
 					]]>
-	</select> -->
+	</select>
 
 	<select id="getTotalCount" resultType="int">
 		SELECT count(*) FROM loan_product WHERE 

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class LPBU {
-	private int lpbuNum;
+	private int lpbuNo;
 	private String userId;
 	private int loanId;
 	private String reserveTime;

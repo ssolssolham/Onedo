@@ -22,7 +22,7 @@ import lombok.extern.log4j.Log4j;
 public class AdminLoanProductAjaxController {
 	private LPBUService service;
 
-	@GetMapping(value = "/{rno}", 
+/*	@GetMapping(value = "/{rno}", 
 			produces = { MediaType.APPLICATION_XML_VALUE,  MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public ResponseEntity<LPBU> get(@PathVariable("lpbuNo") int lpbuNo) {
 		log.info("get: " + lpbuNo);
@@ -34,7 +34,7 @@ public class AdminLoanProductAjaxController {
 								value = "/{lpbuNo}", consumes = "application/json", 
 								produces = {MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> answerLpbu(@RequestBody LPBU lpbu,  @PathVariable("lpbuId") int lpbuId) {
-		lpbu.setLpbuNum(lpbuId);
+		lpbu.setLpbuNo(lpbuId);;
 		return service.answerLPBU(lpbuId) 
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -49,7 +49,7 @@ public class AdminLoanProductAjaxController {
 		return service.deleteLPBU(lpbuId) 
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	}
+	}*/
 
 }
 

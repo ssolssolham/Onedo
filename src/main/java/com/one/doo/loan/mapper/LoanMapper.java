@@ -27,7 +27,7 @@ public interface LoanMapper {
 	// 게시판의 게시글 카운트 업데이트
 	public int updateCnt(int loanId);
 	
-	public List<Loan> getListWithPaging(Criteria cri);
+	public List<HashMap<String, Object>> getListWithPaging(Criteria cri);
 	
 	//전체 게시글 숫자
 	public int getTotalCount(Criteria cri);

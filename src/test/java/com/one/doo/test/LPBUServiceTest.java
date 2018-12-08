@@ -42,7 +42,7 @@ public class LPBUServiceTest {
 		lpbu.setReasonLoan("테스트입니다.");
 		lpbu.setBirthdate("1992-08-28");
 		service.insertLPBU(lpbu);
-		log.info("대출예약 번호 : " + lpbu.getLpbuNum());
+		log.info("대출예약 번호 : " + lpbu.getLpbuNo());
 	}
 	
 	@Test
