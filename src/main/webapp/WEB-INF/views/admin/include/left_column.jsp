@@ -36,7 +36,7 @@
         </li>         
         <!-- 공지관리 -->
         <li>
-          <a href="/admin/notice/"><i class="fa fa-edit"></i> <span>공지관리</span>
+          <a href="/admin/notice/"><i class="fa fa-th-list"></i> <span>공지관리</span>
             <span class="pull-right-container">
               </span>
           </a>
@@ -59,7 +59,7 @@
         </li>
         
         <li>
-          <a href="/admin/stats/"><i class="fa fa-pie-chart"></i> <span>사용자 통계 조회</span>
+          <a href="/admin/stats/"><i class="fa fa-bar-chart"></i> <span>사용자 통계 조회</span>
             <span class="pull-right-container">
               </span>
           </a>
@@ -81,6 +81,13 @@
 
         <li>
           <a href="/admin/rest/"><i class="fa fa-laptop"></i> <span>RESTful API</span>
+            <span class="pull-right-container">
+              </span>
+          </a>
+        </li>
+		<!-- table관리 -->
+        <li>
+          <a href="/admin/table/"><i class="fa fa-archive"></i> <span>영속 테이블 관리</span>
             <span class="pull-right-container">
               </span>
           </a>

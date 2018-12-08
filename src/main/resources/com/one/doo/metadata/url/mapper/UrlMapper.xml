@@ -14,6 +14,7 @@
 	</resultMap>
 	
 	<resultMap type="com.one.doo.metadata.url.domain.Url" id="urlMap">
+		<id		property="url_no" 		column="url_no"/>
 		<result property="url_no" 		column="url_no"/>
 		<result property="url" 			column="url"/>
 		<result property="url_summary" 	column="url_summary"/>
@@ -37,9 +38,10 @@
 		       urls.mvc_c_name, 
 		       urls.method, 
 		       urls.auth, 
-		       params.KEY, 
+		       params.param_no,
+		       params.key, 
 		       params.value, 
-		       params.TYPE, 
+		       params.type, 
 		       params.description 
 		FROM   metadata_urls urls 
 		       left outer join metadata_params params 
