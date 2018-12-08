@@ -20,19 +20,19 @@ public interface LoanService {
 	public boolean updateLoan(Loan loan);
 	
 	//대출상품 정보 상세읽기
-	public Loan readLoan(int loanId);
+	public Loan readLoan(int lpbuNo);
 	
 	
 	public int getTotal(Criteria cri);
 	
 	// 상품갯수 카운트 업데이트
-	public int updateCnt(int loanId);
+	public int updateCnt(int lpbuNo);
 	
-	public List<Loan> getListWithPaging(Criteria cri);
+	public List<HashMap<String,Object>> getListWithPaging(Criteria cri);
 	
 	//전체 대출상품 개수
 	public int getTotalCount(Criteria cri);
 	
 	//판매중지
-	public boolean remove(int loanId);
+	public boolean remove(int lpbuNo);
 }

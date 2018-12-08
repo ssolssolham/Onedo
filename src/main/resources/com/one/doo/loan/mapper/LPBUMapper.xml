@@ -62,9 +62,10 @@
 	<!-- 관리자용 기능  -->
 	<select id="getLPBUListWithPaging" resultType="Map">
 		<![CDATA[
-		SELECT bno, title, content, writer, regdate, updatedate, replycnt 
-		FROM (SELECT /* + INDEX_DESC(tbl_board pk board) */
-					rownum rn, bno, title, content, writer, regdate, updatedate, replycnt
+		SELECT * 
+		FROM (SELECT /* + INDEX_DESC(LPBU pk_lpbu) */
+					rownum rn, l.lpbu_num, l.user_id, p.loan_id, l.reserve_time, l.request_bm, l.isanswered,
+					l.requesttime, l.reasonm, l.birthdate, u.username, p.loan_name 
 					FROM LPBU l
 					JOIN users u
 					ON l.user_id = u.userid
