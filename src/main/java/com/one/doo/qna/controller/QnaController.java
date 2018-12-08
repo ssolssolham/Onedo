@@ -36,8 +36,10 @@ public class QnaController {
 		log.info("문의게시판 list요청");
 		
 		model.addAttribute("list", service.getQnaList(cri));
-		int total = service.getQnaTotal(cri);
+		int totalNum = service.getQArticleNum();
+		int total = service.getQnaTotal(cri); //with 검색조건
 		model.addAttribute("pageMaker", new Page(cri, total));
+		model.addAttribute("totalCnt", totalNum);
 		return "qna/qna";
 	}
 	
