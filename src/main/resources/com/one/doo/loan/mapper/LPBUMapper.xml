@@ -3,6 +3,27 @@
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.doo.loan.mapper.LPBUMapper">
 	
+			<sql id="criteria">
+					<trim prefix="(" suffix= ") AND " prefixOverrides ="OR">
+						<foreach item='type' collection="typeArr">
+							<trim prefix="OR">
+							<choose>
+								<when test="type == 'T'.toString()">
+									title like '%'||#{keyword}||'%'
+								</when>
+								<when test="type == 'C'.toString()">
+									title like '%'||#{keyword}||'%'
+								</when>
+								<when test="type == 'W'.toString()">
+									title like '%'||#{keyword}||'%'
+								</when>
+							</choose>
+							</trim>
+						</foreach>
+					</trim>
+			</sql>
+	
+	
 	<select id="getLPBUList" resultType="Map" parameterType="Map">					
 	SELECT	*
 	FROM    LPBU l
@@ -13,15 +34,6 @@
 	WHERE user_id = #{userId}         		
 	</select>
 
-	<select id="getTotalLPBU" resultType="int">
-		SELECT count(*) FROM LPBU
-		<![CDATA[
-			WHERE loan_id > 0
-		]]>
-	</select>
-	
-	
-	
 	<insert id="insertLPBU">
 		INSERT INTO LPBU
 		             (lpbu_num,
@@ -45,6 +57,33 @@
 		             #{reasonLoan},
 		             TO_DATE(#{birthdate},'YYYY-MM-DD'))
 	</insert>
+	
+	
+	<!-- 관리자용 기능  -->
+	<select id="getLPBUListWithPaging" resultType="Map">
+		<![CDATA[
+		SELECT bno, title, content, writer, regdate, updatedate, replycnt 
+		FROM (SELECT /* + INDEX_DESC(tbl_board pk board) */
+					rownum rn, bno, title, content, writer, regdate, updatedate, replycnt
+					FROM LPBU l
+					JOIN users u
+					ON l.user_id = u.userid
+					JOIN loan_product p
+         			ON p.loan_id = l.loan_id
+					WHERE 	]]>
+						<include refid="criteria"></include>
+					<![CDATA[
+					rownum <= #{pageNum} * #{amount}
+					)
+				WHERE rn > (#{pageNum} -1) * #{amount}
+					]]>
+	</select>
+	
+<!-- 	<update id="modifyTimeLPBU">
+		UPDATE LPBU
+		SET 		isAnswered = '1'
+		WHERE lpbu_num = #{lpbuId}
+	</update> -->
 
 	<update id="answerLPBU">
 		UPDATE LPBU
@@ -52,15 +91,12 @@
 		WHERE lpbu_num = #{lpbuId}
 	</update>
 	
-	<update id="modifyTimeLPBU">
-		UPDATE LPBU
-		SET 		isAnswered = '1'
-		WHERE lpbu_num = #{lpbuId}
-	</update>
 	
-	<delete id="deleteLPBU">
-	DELETE LPBU
-	WHERE lpbu_num = #{lpbuId}
-	</delete>
+	<select id="getTotalLPBU" resultType="int">
+		SELECT count(*) FROM LPBU
+		<![CDATA[
+			WHERE loan_id > 0
+		]]>
+	</select>
 
 </mapper>

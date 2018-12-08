@@ -55,15 +55,99 @@ FROM    loan_product p
          	ORDER BY interestRate_min
 	</select>
 
-	<select id="getTotalCount" resultType="int">
-		SELECT count(*) FROM loan_product 
-		<![CDATA[
-			WHERE loan_id > 0
-		]]>
+<!-- 신용도에 따른 대출 이율 읽기  -->
+  <resultMap type="com.one.doo.loan.domain.Loan" id="loanMap">
+    <id property="loanId" column="loan_id"/>
+    <result property="loanCompId" column="loanComp_id"/>
+    <result property="targetId" column="target_id"/>
+    <result property="loanDivision" column="loan_division"/>
+    <result property="loanCategory" column="loan_category"/>
+    <result property="loanName" column="loan_name"/>
+    <result property="loanContent" column="loan_content"/>
+    <result property="loanUpdateDate" column="loanUpdate_date"/>
+    <result property="termService" column="term_service"/>
+    <result property="moneyConditionMin" column="money_condition_min"/>
+    <result property="moneyConditionMax" column="money_condition_max"/>
+    <result property="targetDescription" column="target_description"/>
+    <result property="targetDetail1" column="target_detail1"/>
+    <result property="targetDetail2" column="target_detail2"/>
+    <result property="targetDetail3" column="target_detail3"/>
+    
+    <result property="interestRateCategory" column="interestRate_category"/>
+    <result property="interestRateMin" column="interestRate_min"/>
+    <result property="interestRateMax" column="interestRate_max"/>
+    
+    <result property="creditLineMin" column="creditLine_min"/>
+    <result property="creditLineMax" column="creditLine_max"/>
+    <result property="creditLineDesc" column="creditLine_desc"/>
+    
+    <result property="loanPeriodMin" column="loanPeriod_min"/>
+    <result property="loanPeriodMax" column="loanPeriod_max"/>
+   <result property="loanPeriodDesc" column="loanPeriod_desc"/>
+    <result property="repaymentWay" column="repayment_way"/> 
+    
+    <result property="holding" column="holding"/>
+    <result property="holdingMin" column="holding_min"/>
+    <result property="holdingMax" column="holding_max"/>
+    <result property="repay1" column="repay1"/>
+    <result property="repay2" column="repay2"/>
+    <result property="repay3" column="repay3"/>
+    <result property="repayM" column="repayM"/>
+    <result property="detailUrl" column="detail_url"/>
+    <result property="securityType" column="security_type"/>
+  </resultMap>	
+
+	<select id="readLoan" resultMap="loanMap">
+		SELECT *
+		FROM loan_product 
+		WHERE loan_id = #{loanId}
 	</select>
-	
-	
-	
+
+
+
+<!-- 관리자 기능용 쿼리  -->
+		<sql id="criteria">
+					<trim prefix="(" suffix= ") AND " prefixOverrides ="OR">
+						<foreach item='type' collection="typeArr">
+							<trim prefix="OR">
+							<choose>
+								<when test="type == 'T'.toString()">
+									title like '%'||#{keyword}||'%'
+								</when>
+								<when test="type == 'C'.toString()">
+									title like '%'||#{keyword}||'%'
+								</when>
+								<when test="type == 'W'.toString()">
+									title like '%'||#{keyword}||'%'
+								</when>
+							</choose>
+							</trim>
+						</foreach>
+					</trim>
+			</sql>
+
+<!-- 	<select id="getListWithPaging" resultType="com.one.doo.loan.domain.Loan">
+		<![CDATA[
+		SELECT bno, title, content, writer, regdate, updatedate, replycnt 
+		FROM (SELECT /* + INDEX_DESC(tbl_board pk board) */
+					rownum rn, bno, title, content, writer, regdate, updatedate, replycnt
+					FROM loan_product
+					WHERE 	]]>
+						<include refid="criteria"></include>
+					<![CDATA[
+					rownum <= #{pageNum} * #{amount}
+					)
+				WHERE rn > (#{pageNum} -1) * #{amount}
+					]]>
+	</select> -->
+
+	<select id="getTotalCount" resultType="int">
+		SELECT count(*) FROM loan_product WHERE 
+		<include refid="criteria"></include>
+		loan_id > 0
+	</select>
+
+
 	<insert id="insertLoan">
 		INSERT INTO loan_product 
 		             (loan_id,
@@ -136,10 +220,6 @@ FROM    loan_product p
 		             #{securityType})
 	</insert>
 
-<!-- 	<select id="readLoan" resultType="com.one.doo.loan.domain.Loan">
-	 	SELECT * FROM loan_product WHERE loan_id = #{loanId}
-	</select> -->
-
 	<update id="updateLoan">
 		UPDATE loan_product
 		SET 		loan_name=#{loanName},
@@ -163,55 +243,6 @@ FROM    loan_product p
 			   		security_type = #{securityType}
 		WHERE loan_id = #{loanId}
 	</update>
-
-
-<!-- 신용도에 따른 대출 이율 읽기  -->
-  <resultMap type="com.one.doo.loan.domain.Loan" id="loanMap">
-    <id property="loanId" column="loan_id"/>
-    <result property="loanCompId" column="loanComp_id"/>
-    <result property="targetId" column="target_id"/>
-    <result property="loanDivision" column="loan_division"/>
-    <result property="loanCategory" column="loan_category"/>
-    <result property="loanName" column="loan_name"/>
-    <result property="loanContent" column="loan_content"/>
-    <result property="loanUpdateDate" column="loanUpdate_date"/>
-    <result property="termService" column="term_service"/>
-    <result property="moneyConditionMin" column="money_condition_min"/>
-    <result property="moneyConditionMax" column="money_condition_max"/>
-    <result property="targetDescription" column="target_description"/>
-    <result property="targetDetail1" column="target_detail1"/>
-    <result property="targetDetail2" column="target_detail2"/>
-    <result property="targetDetail3" column="target_detail3"/>
-    
-    <result property="interestRateCategory" column="interestRate_category"/>
-    <result property="interestRateMin" column="interestRate_min"/>
-    <result property="interestRateMax" column="interestRate_max"/>
-    
-    <result property="creditLineMin" column="creditLine_min"/>
-    <result property="creditLineMax" column="creditLine_max"/>
-    <result property="creditLineDesc" column="creditLine_desc"/>
-    
-    <result property="loanPeriodMin" column="loanPeriod_min"/>
-    <result property="loanPeriodMax" column="loanPeriod_max"/>
-   <result property="loanPeriodDesc" column="loanPeriod_desc"/>
-    <result property="repaymentWay" column="repayment_way"/> 
-    
-    <result property="holding" column="holding"/>
-    <result property="holdingMin" column="holding_min"/>
-    <result property="holdingMax" column="holding_max"/>
-    <result property="repay1" column="repay1"/>
-    <result property="repay2" column="repay2"/>
-    <result property="repay3" column="repay3"/>
-    <result property="repayM" column="repayM"/>
-    <result property="detailUrl" column="detail_url"/>
-    <result property="securityType" column="security_type"/>
-  </resultMap>	
-
-	<select id="readLoan" resultMap="loanMap">
-		SELECT *
-		FROM loan_product 
-		WHERE loan_id = #{loanId}
-	</select>
-
+	
 
 </mapper>

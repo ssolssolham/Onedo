@@ -9,13 +9,12 @@ import com.one.doo.board.domain.Criteria;
 
 public interface BoardMapper {
 
-	// 게시판의 게시글 카운트 업데이트
-	public int updateCnt(Long bno);
-	
 	// 게시판 목록 조회
 	public List<Board> getList();
 	
-	// 페이징 처리한 게시판 목록
+	// 게시판의 게시글 카운트 업데이트
+	public int updateCnt(Long bno);
+	
 	public List<Board> getListWithPaging(Criteria cri);
 	
 	//전체 게시글 숫자
@@ -35,7 +34,6 @@ public interface BoardMapper {
 	
 	//글 수정
 	public int update(Board board);
-	
 	
 	//댓글 수 가져오기
 	public void updateReplyCnt(@Param("bno") Long bno, @Param("amount") int amount);
