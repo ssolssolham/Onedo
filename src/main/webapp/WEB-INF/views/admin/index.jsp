@@ -17,7 +17,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Left side column. contains the logo and sidebar -->
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/left_column.jsp"/>
   <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="margin-left: 240px;">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1> 관리자 메인 페이지  </h1>
