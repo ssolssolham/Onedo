@@ -960,7 +960,7 @@ function searchAndMark(){
 	var geocoder3 = new daum.maps.services.Geocoder();
 	var locArr = new Array();
 	var positions = [];
-	if(Markers.length === 0){
+	if(Markers.length !== 0){
 		Markers.length = 0;
 	}
 	
@@ -2547,55 +2547,26 @@ function makeDataSets2(topDataList,curDataArr){
        });
    }     
    
-    /* 차트 만드는 기능 : 호준 */
-    
-    function makeAllChart(){
-	        	 setTimeout(function() {
-    	         makePopChart(topThreeList,popWishList);
-	        	 makedayChart(topThreeList,dayWishList);
-	        	 makeTimeChart(topThreeList,timeWishList);
-	        	 makeAgeChart(topThreeList,ageWishList);
-	        	 makeLiveChart(topThreeList,liveWishList);
-	        	 makeJobChart(topThreeList,jobWishList);
-	        	 makeLossChart(topThreeList,lossWishList);
-	        	 makeMartChart(topThreeList,survivalWishList);
-	        	 makeSumMartChart(topThreeList);
-	        		}, 800);
-
-    }
     </script>
     
 <script>
-function makeOpenMartChart(topThreeList){
+var openMartCntDataArr = [];
+var closeMartCntDataArr = [];
+var opentCloseGapCntDataArr = [];
+var openPercentArr = [];
+var closePercentArr = [];
+function makeOpenMartChart(topThreeList,selectedObject){
 	
-}
-        var openMartCntDataArr = new Array();
-        var closeMartCntDataArr = new Array();
-        var opentCloseGapCntDataArr = new Array();
-        openMartCntDataArr = [
-          100
-          , 200
-          , 100
-          , 200
-          , 150
-          , 100
-          , 70
-        ];
-        closeMartCntDataArr = [
-          40
-          ,50
-          , 70
-          , 28
-          , 88
-          , 220
-          , 11
-        ]
-        
-        for(var i = 0; i < openMartCntDataArr.length; i++) {
-            opentCloseGapCntDataArr[i] = openMartCntDataArr[i] - closeMartCntDataArr[i];
-        }
-        var openCloseChartData = {
-            labels: ['01', '02', '03', '04', '05', '06', '07']
+	for(var i = 0; i < topThreeList[selectedObject].storePerAlleybizList.length; i++){
+		openMartCntDataArr.push(topThreeList[selectedObject].storePerAlleybizList[i].open_count);
+		openPercentArr.push(topThreeList[selectedObject].storePerAlleybizList[i].open_percent);
+		closeMartCntDataArr.push(topThreeList[selectedObject].storePerAlleybizList[i].close_count);
+		closePercentArr.push(topThreeList[selectedObject].storePerAlleybizList[i].close_percent);
+		opentCloseGapCntDataArr.push(topThreeList[selectedObject].storePerAlleybizList[i].store_count);
+	}
+	
+    var openCloseChartData = {
+            labels: ['1월', '2월', '3월', '4월', '5월', '6월', '7월']
             , datasets: [{
                 type: 'bar'
                 , label: '개업 점포 수'
@@ -2612,23 +2583,23 @@ function makeOpenMartChart(topThreeList){
                 , borderWidth: 2
       }, {
                 type: 'bar'
-                , label: '해당월 개업 후 잔존 점포 수'
+                , label: '잔존 점포 수'
                 , backgroundColor: '#60c5ba'
                 , data: opentCloseGapCntDataArr
       }, {
                 type: 'line'
-                , label: '개업'
+                , label: '개업률'
                 , borderColor: '#a5dff9'
                 , borderWidth: 2
                 , fill: false
-                , data: openMartCntDataArr
+                , data: openPercentArr
       }, {
                 type: 'line'
-                , label: '폐업'
+                , label: '폐업률'
                 , borderColor: '#ef5285'
                 , borderWidth: 2
                 , fill: false
-                , data: closeMartCntDataArr
+                , data: closePercentArr
       }]
         };
         var openClose = document.getElementById('openCloseChart').getContext('2d');
@@ -2643,6 +2614,26 @@ function makeOpenMartChart(topThreeList){
                 }
             }
         });
+
+}
+
+/* 차트 만드는 기능 : 호준 */
+
+function makeAllChart(){
+        	 setTimeout(function() {
+	         makePopChart(topThreeList,popWishList);
+        	 makedayChart(topThreeList,dayWishList);
+        	 makeTimeChart(topThreeList,timeWishList);
+        	 makeAgeChart(topThreeList,ageWishList);
+        	 makeLiveChart(topThreeList,liveWishList);
+        	 makeJobChart(topThreeList,jobWishList);
+        	 makeLossChart(topThreeList,lossWishList);
+        	 makeMartChart(topThreeList,survivalWishList);
+        	 makeSumMartChart(topThreeList);
+        	 makeOpenMartChart(topThreeList,selectedObject);
+        		}, 800);
+
+}
     </script>
 
 
