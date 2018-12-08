@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.one.doo.board.domain.Criteria;
 import com.one.doo.loan.domain.LPBU;
 import com.one.doo.loan.mapper.LPBUMapper;
 
@@ -27,22 +28,29 @@ public class LPBUServiceImpl implements LPBUService {
 	}
 
 	@Override
-	public int answerLPBU(int lpbuNo) {
-		return mapper.answerLPBU(lpbuNo);
-	}
-
-	@Override
-	public int deleteLPBU(int lpbuNo) {
-		return mapper.deleteLPBU(lpbuNo);
-	}
-
-	@Override
 	public List<HashMap<String, Object>> getLPBUList(String userId){
 		return mapper.getLPBUList(userId);
 	}
 
-
+	@Override
+	public boolean deleteLPBU(int lpbuNo) {
+		return mapper.deleteLPBU(lpbuNo) == 1;
+	}
 	
+	@Override
+	public boolean answerLPBU(int lpbuNo) {
+		return mapper.answerLPBU(lpbuNo) == 1;
+	}
+
+	@Override
+	public List<HashMap<String, Object>> getLPBUListWithPaging(Criteria cri) {
+		return mapper.getLPBUListWithPaging(cri);
+	}
+
+	@Override
+	public int getTotalLPBU(Criteria cri) {
+		return mapper.getTotalLPBU(cri);
+	}
 
 
 }

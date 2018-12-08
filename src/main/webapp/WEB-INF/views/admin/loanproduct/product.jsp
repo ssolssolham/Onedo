@@ -169,12 +169,12 @@ div.panel.show {
   text-align: center;
 }
 .table-style-2 input.input-field, .form-style-2 .select-field{
-  width: 48%; 
+  width: 25%; 
 }
 .table-style-2 input.input-field, 
 .table-style-2 .tel-number-field, 
 .table-style-2 .textarea-field, 
- .table-style-2 .select-field{
+.table-style-2 .select-field{
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -277,16 +277,52 @@ desired effect
               <button class="accordion">새 대출상품 등록</button>
                 <div class="panel">
                   <div class="form-style-2">
-                    <div class="form-style-2-heading">Provide your information</div>
+                    <div class="form-style-2-heading">신규 대출상품 등록</div>
                     <form action="" method="post">
-                        <label for="field1"><span>Name </span><input type="text" class="input-field" name="field1" value="" /></label>
-                        <label for="field2"><span>Email </span><input type="text" class="input-field" name="field2" value="" /></label>
-                        <label><span>Telephone</span><input type="text" class="tel-number-field" name="tel_no_1" value="" maxlength="4" />-<input type="text" class="tel-number-field" name="tel_no_2" value="" maxlength="4"  />-<input type="text" class="tel-number-field" name="tel_no_3" value="" maxlength="10"  /></label>
-                        <label for="field4"><span>Regarding</span><select name="field4" class="select-field">
-                          <option value="General Question">General</option>
-                          <option value="Advertise">Advertisement</option>
-                          <option value="Partnership">Partnership</option>
+                    
+                        <div class="form-style-2-div">
+                         <div class="form-style-2-input">
+                        <label for="field4"><span>취급기간</span><select name="field4" class="select-field">
+                          <option value="1">하나은행</option>
+                          <option value="2">하나저축은행</option>
+                          <option value="3">하나캐피탈</option>
+                        </select>
+                        </label>
+                        </div>
+                         <div class="form-style-2-input">
+                        <label for="field4"><span>대출유형</span><select name="field4" class="select-field">
+                          <option value="0">전체</option>
+                          <option value="1">직장인</option>
+                          <option value="2">자영업자/프리랜서</option>
+                          <option value="3">군인/군무원/임관(예정자)</option>
+                          <option value="4">경찰/소속공무원/임관(예정)자</option>
+                          <option value="5">공무원</option>
+                          <option value="6">의료계 직종</option>
+                          <option value="7">교직원</option>
+                          <option value="8">무직</option>
+                          <option value="9">기타(연금 수령자 등)</option>
+                          <option value="10">전문직</option>
                         </select></label>
+                        </div>
+                        </div>
+                        
+                        <div class="form-style-2-div">
+                            <div class="form-style-2-input">
+                            <label for="field4"><span>Regarding</span><select name="field4" class="select-field">
+                              <option value="소호대출">소호대출</option>
+                              <option value="신용대출">신용대출</option>
+                              <option value="담보대출">담보대출</option>
+                            </select></label>
+                            </div>
+                            <div class="form-style-2-input">
+                            <label for="field4"><span>Regarding</span><select name="field4" class="select-field">
+                              <option value="신용">신용</option>
+                              <option value="담보">담보</option>
+                              </select></label>
+                            </div>
+                        </div>
+                        <label for="field1"><span>상품이름 </span><input type="text" class="input-field" name="field1" value="" /></label>
+                        <label for="field2"><span>Email </span><input type="text" class="input-field" name="field2" value="" /></label>
                         <label for="field5"><span>Message </span><textarea name="field5" class="textarea-field"></textarea></label>
                         <label><span> </span><input type="submit" value="Submit" /></label>
                     </form>

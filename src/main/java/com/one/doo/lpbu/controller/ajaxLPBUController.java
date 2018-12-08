@@ -38,7 +38,7 @@ public class ajaxLPBUController {
 	public ResponseEntity<String> answerLpbu(@RequestBody LPBU lpbu,  @PathVariable("lpbuId") int lpbuId) {
 		lpbu.setLpbuNum(lpbuId);
 
-		return service.answerLPBU(lpbuId) == 1 
+		return service.answerLPBU(lpbuId) 
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
@@ -49,7 +49,7 @@ public class ajaxLPBUController {
 		
 		log.info("remove: " + lpbuId);
 
-		return service.deleteLPBU(lpbuId) == 1 
+		return service.deleteLPBU(lpbuId) 
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

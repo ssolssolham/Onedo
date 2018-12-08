@@ -1,78 +1,83 @@
 package com.one.doo.admin.loanproduct.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-/**
- * Handles requests for the application home page.
- */
+import com.one.doo.board.domain.Criteria;
+import com.one.doo.board.domain.Page;
+import com.one.doo.loan.domain.Loan;
+import com.one.doo.loan.service.LoanService;
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+
 @Controller
-@RequestMapping("/admin/loanProduct")
+@Log4j
+@RequestMapping("/admin/loanproduct")
+@AllArgsConstructor
 public class AdminLoanProductController {
+
+	private LoanService service;
 	
-	private static final Logger logger = LoggerFactory.getLogger(AdminLoanProductController.class);
-	
-	@RequestMapping("/")
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	@GetMapping("/")
+	public String list(Criteria cri, Model model) {
+		log.info("list : " + cri);
+		int total = service.getTotal(cri);
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
+		model.addAttribute("list", service.getListWithPaging(cri));
+		model.addAttribute("pageMaker", new Page(cri, total));
 		return "admin/loanproduct/product";
 	}
-	
-	//@RequestMapping("/enroll")
-	public String enroll(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/register")
+	public String register(Loan loan, RedirectAttributes rttr) {
+		log.info("등록된 글 : " + loan);
+		service.insertLoan(loan);
+		rttr.addFlashAttribute("result", loan.getLoanId());
+		return "redirect:/board/list";
 	}
 	
-	//@RequestMapping("/modify")
-	public String modify(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
+	@GetMapping({"/get", "/modify"})
+	public void get(@RequestParam("loanId") int loanId, @ModelAttribute("cri") Criteria cri, Model model) {
+		log.info("/get or modify");
+		model.addAttribute("board", service.readLoan(loanId));
 	}
 	
-	//@RequestMapping("/delete")
-	public String delete(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+	@PostMapping("/modify")
+	public String modify(Loan loan, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+		log.info("수정 게시글 : " + loan);
 		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+		if(service.updateLoan(loan)) {
+			rttr.addFlashAttribute("result", "수정 성공");
+		}
 		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
-		
-		return "home";
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());
+		return "redirect:/board/list" + cri.getListLink();
 	}
+	
+	@PostMapping("/remove")
+	public String remove (@RequestParam("loanId") int loanId, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+		log.info("판매종료된 상품 : " + loanId);
+		if(service.remove(loanId)) {
+			rttr.addFlashAttribute("result", "success");
+		}
+		
+/*		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("type", cri.getType());
+		rttr.addAttribute("keyword", cri.getKeyword());*/
+		
+		return "redirect:/board/list" + cri.getListLink();
+	}
+	
 }
