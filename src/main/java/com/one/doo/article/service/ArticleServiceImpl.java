@@ -97,4 +97,14 @@ public class ArticleServiceImpl implements ArticleService {
 		return mapper.getTotalQnaCount(cri);
 	}
 
+	@Override
+	public int getRArticleNum() {
+		return mapper.totalRArticleNum();
+	}
+
+	@Override
+	public int getQArticleNum() {
+		return mapper.totalQArticleNum();
+	}
+
 }

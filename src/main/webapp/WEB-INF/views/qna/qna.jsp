@@ -105,18 +105,29 @@
 							</thead>
 							<br>
 							<tbody>
+							<c:choose>
+								<c:when test="${pageMaker.cri.pageNum eq 1 }">
+									<c:set var="num" value="${totalCnt }" />
+								</c:when>
+								<c:otherwise>
+									<c:set var="num" value="${totalCnt -(pageMaker.cri.pageNum-1)*10 }"/>
+								</c:otherwise>
+							</c:choose>
 							<c:forEach items="${list }" var="review" varStatus="status">
 								<tr class="move" style="cursor:pointer;" onclick="location.href='detail?article_num=${review.article_num }'" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff' ">
-								  <td style="text-align: center;">${status.index +1 }</td>
+								  <td style="text-align: center;">${num }</td>
+								  <c:set var="num" value="${num-1 }"/>
 								  <td>${review.title}</td>
 								  <td style="text-align: center;">${review.userid }</td>
 								  <td style="text-align: center;">${review.regdate }</td>
-								  <c:if test="${review.enabled eq 'Y' }">
-								  <td style="text-align: center;">답변처리중</td>
-								  </c:if>
-								  <c:if test="${review.enabled eq 'N' }">
-								  <td style="text-align: center;">답변완료</td>
-								  </c:if>
+								<c:set var="replycnt" value="${review.replycnt }"/>
+		                        <fmt:formatNumber value="${review.replycnt }" type="number" var="replycnt" />
+		                        <c:if test="${replycnt eq 0 }">
+								  <td>답변처리중</td>
+								</c:if>
+								<c:if test="${replycnt gt 0 }">
+								   <td>답변완료(${replycnt })</td>
+								</c:if>
 								</tr>
 							</c:forEach>
 							</tbody>

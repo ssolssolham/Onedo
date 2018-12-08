@@ -151,7 +151,7 @@
 				  <input type="submit" class="" value="수정">&nbsp;
 				  <button type="button" class="" value="취소"  data-dismiss="modal">취소</button>
 				</div>
-			  </form>       
+			  </form> 
 			</div>
 		  </div>
 		</div>
@@ -233,7 +233,122 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reply.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function () {
+	
+		  var articleNumVal = '<c:out value="${qna.article_num}"/>';
+		  var replyUL = $(".chat");
 		  
+		    showList(1);
+		    
+		function showList(page){
+			
+			console.log("show list " + page);
+		    
+		    replyService.getList({article_num:articleNumVal,page: page|| 1 }, function(replyCnt, list) {
+		      
+		    console.log("replyCnt: "+ replyCnt );
+		    console.log("list: " + list);
+		    console.log(list);
+		    
+		    if(page == -1){
+		      pageNum = Math.ceil(replyCnt/10.0);
+		      showList(pageNum);
+		      return;
+		    }
+		      
+		     var str="";
+		     
+		     if(list == null || list.length == 0){
+		       return;
+		     }
+
+		     // 댓글리스트 크기만큼 li태그 추가(댓글 show)
+		     for (var i = 0, len = list.length || 0; i < len; i++) {
+		       str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
+		       str +="  <div><div class='header'><strong style='color:#27b2a5; font-size:20px;' class='primary-font'>["
+		    	   +(i+1)+"] 작성자 : "+list[i].replyer+"</strong>"; 
+		       str +="    <small style='font-size:16px;' class='pull-right text-muted'>"
+		           +replyService.displayTime(list[i].replyDate)+"</small></div>";
+		       str +="<p style='font-size: 17px; color: black;'>"+list[i].reply+"</p></div></li>";
+		     }
+		     replyUL.html(str);
+		     
+		     showReplyPage(replyCnt);
+		   });//end function
+		 }//end showList
+		    
+		    var pageNum = 1;
+		    var replyPageFooter = $(".panel-footer");
+		    
+		    function showReplyPage(replyCnt){
+		      
+		      var endNum = Math.ceil(pageNum / 10.0) * 10;  
+		      var startNum = endNum - 9; 
+		      
+		      var prev = startNum != 1;
+		      var next = false;
+		      
+		      if(endNum * 10 >= replyCnt){
+		        endNum = Math.ceil(replyCnt/10.0);
+		      }
+		      
+		      if(endNum * 10 < replyCnt){
+		        next = true;
+		      }
+
+		      // 댓글영역 페이지네이션
+		      var str = "<ul class='pagination pull-right'>";
+		      if(prev){
+		        str+= "<li class='page-item'><a class='page-link' href='"+(startNum -1)+"'>Previous</a></li>";
+		      }
+		      
+		      for(var i = startNum ; i <= endNum; i++){
+		        var active = pageNum == i? "active":"";
+		        str+= "<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"+i+"</a></li>";
+		      }
+		      
+		      if(next){
+		        str+= "<li class='page-item'><a class='page-link' href='"+(endNum + 1)+"'>Next</a></li>";
+		      }
+		      
+		      str += "</ul></div>";
+		      console.log(str);
+		      replyPageFooter.html(str);
+		    }
+		     
+		    // 페이지 클릭시 이벤트 추가
+		    replyPageFooter.on("click","li a", function(e){
+		       e.preventDefault();
+		       console.log("page click");
+		       
+		       var targetPageNum = $(this).attr("href");
+		       pageNum = targetPageNum;
+		       showList(pageNum);
+		     });     
+
+		   
+		    var modal = $("#replyModal");
+		    var modalInputReply = modal.find("input[name='reply']");
+		    var modalInputReplyer = modal.find("input[name='replyer']");
+		    var modalInputReplyDate = modal.find("input[name='replyDate']");
+		    
+		    var modalModBtn = $("#modalModBtn");
+		    var modalRemoveBtn = $("#modalRemoveBtn");
+		    var modalRegisterBtn = $("#modalRegisterBtn");
+		    
+		    // 닫기버튼
+		    $("#modalCloseBtn").on("click", function(e){
+		    	modal.modal('hide');
+		    });
+		    
+		    // 댓글추가버튼(new Reply)
+		    $("#addReplyBtn").on("click", function(e){
+		      modal.find("input").val("");
+		      modalInputReplyDate.closest("div").hide();
+		      modal.find("button[id !='modalCloseBtn']").hide();
+		      modalRegisterBtn.show();
+		      $("#replyModal").modal("show");
+		    });
+		
 
 	// 문의글 수정
 	$("#qnaModForm").submit(function() {
@@ -244,28 +359,16 @@
 			alert("비밀번호가 일치하지 않습니다:(");
 			return false;
 		}else{
-			var target = $("#snackbar");
-			target.text("문의글을 수정하였습니다:D");
-			toast();
 			return true;
 		}
 	});
-			
-/* 	// 문의글 삭제
-	$("#removeForm").submit(function() {
-		var passwd = "${qna.article_pw}";
-		var inputPw = $("#delInputPw").val();
-		if(passwd != inputPw){
-			alert("비밀번호가 일치하지 않습니다:(");
-			return false;
-		}else{
-			var target = $("#snackbar");
-			target.text("문의를 삭제하였습니다.:D");
-			toast();
-			return true;
-		}
-	});
- */			
+
+	var modRes = '${qnaModRes}';
+	if(modRes === 'success'){
+		var target = $("#snackbar");
+		target.text("문의글을 수정하였습니다:D");
+		toast();
+	}
 });
 	</script>
 
@@ -297,5 +400,6 @@
 	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
 <!-- toast msg영역 -->
 <div id="snackbar"></div>
+
 </body>
 </html>

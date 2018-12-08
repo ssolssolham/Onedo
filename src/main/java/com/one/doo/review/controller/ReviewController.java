@@ -43,10 +43,10 @@ public class ReviewController {
 		log.info("후기게시판 list요청..");
 		
 		model.addAttribute("list", service.getReviewList(cri));
-		//model.addAttribute("pageMaker", new Page(cri, 123)); //임의로 123(total값)
-		
+		int totalNum = service.getRArticleNum();
 		int total = service.getTotal(cri);
 		model.addAttribute("pageMaker", new Page(cri, total));
+		model.addAttribute("totalCnt", totalNum);
 		return "review/review";
 	}
 	

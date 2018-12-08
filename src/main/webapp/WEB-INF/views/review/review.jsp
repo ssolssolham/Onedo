@@ -66,18 +66,27 @@
 								<th style="text-align: center;">제목</th>
 								<th style="text-align: center;">작성자</th>
 								<th style="text-align: center;">작성,수정일</th>
-								<th style="text-align: center;">조회수</th>
+								<th style="text-align: center;">댓글수 ${totalCnt }</th>
 							</tr>
 						</thead>
 						<br>
 						<tbody>
+						<c:choose>
+							<c:when test="${pageMaker.cri.pageNum eq 1 }">
+							<c:set var="num" value="${totalCnt }" />
+							</c:when>
+							<c:otherwise>
+								<c:set var="num" value="${totalCnt -(pageMaker.cri.pageNum-1)*10 }"/>
+							</c:otherwise>
+						</c:choose>
 						<c:forEach items="${list }" var="review" varStatus="status">
 							<tr class="move" style="cursor:pointer;" onclick="location.href='detail?article_num=${review.article_num }'" onMouseOver="bgColor='#beeee9'" onMouseOut="bgColor='#ffffff'">
-							  <td style="text-align: center;">${status.index +1 }</td>
+							  <td style="text-align: center;">${num }</td>
+							  <c:set var="num" value="${num-1 }" />
 							  <td>${review.title }</td>
 							  <td style="text-align: center;">${review.userid}</td>
 							  <td style="text-align: center;">${review.regdate}</td>
-							  <td style="text-align: center;">${review.enabled}</td>
+							  <td style="text-align: center;">${review.replycnt}</td>
 							</tr>
 						</c:forEach>
 						</tbody>

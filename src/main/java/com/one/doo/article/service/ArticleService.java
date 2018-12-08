@@ -40,4 +40,10 @@ public interface ArticleService {
 	
 	// 검색조건에 맞는 총 게시글 수 (문의 bno=3)
 	public int getQnaTotal(Criteria cri);
+	
+	// 검색조건없이 게시글 수(후기)
+	public int getRArticleNum();
+	
+	// 검색조건없이 게시글 수(문의)
+	public int getQArticleNum();
 }
