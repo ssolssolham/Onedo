@@ -14,7 +14,7 @@ public interface LoanService {
 	
 	/* 관리자용 기능 */
 	//새로운 대출상품 등록
-	public void insertLoan(Loan loan);
+	public boolean insertLoan(Loan loan);
 
 	//대출상품 정보 수정
 	public boolean updateLoan(Loan loan);

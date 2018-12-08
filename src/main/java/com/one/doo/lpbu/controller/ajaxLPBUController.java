@@ -22,30 +22,8 @@ import lombok.extern.log4j.Log4j;
 public class ajaxLPBUController {
 	private LPBUService service;
 
-/*	@GetMapping(value = "/{rno}", 
-			produces = { MediaType.APPLICATION_XML_VALUE, 
-					     MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<LPBU> get(@PathVariable("lpbuNo") int lpbuNo) {
-		log.info("get: " + lpbuNo);
-		return new ResponseEntity<>(service.toString()(lpbuNo), HttpStatus.OK);
-	}*/
-
-	
-	
-	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH }, 
-								value = "/{lpbuNo}", consumes = "application/json", 
-								produces = {MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> answerLpbu(@RequestBody LPBU lpbu,  @PathVariable("lpbuNo") int lpbuNo) {
-		lpbu.setLpbuNo(lpbuNo);
-
-		return service.answerLPBU(lpbuNo) 
-				? new ResponseEntity<>("success", HttpStatus.OK)
-				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-
-	}
-
 	@DeleteMapping(value = "/{lpbuNo}", produces = { MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> remove(@PathVariable("lpbuNo") int lpbuNo) {
+	public ResponseEntity<String> cancle(@PathVariable("lpbuNo") int lpbuNo) {
 		
 		log.info("remove: " + lpbuNo);
 

@@ -80,23 +80,27 @@
 					]]>
 	</select>
 	
-<!-- 	<update id="modifyTimeLPBU">
-		UPDATE LPBU
-		SET 		isAnswered = '1'
-		WHERE lpbu_num = #{lpbuId}
-	</update> -->
+	<select id="readLPBU" resultType="Map" parameterType="Map">					
+	SELECT	*
+	FROM    LPBU l
+				JOIN users u
+				ON l.user_id = u.userid
+				JOIN loan_product p
+         		ON p.loan_id = l.loan_id
+	WHERE lpbu_num = #{lpbuNo}         		
+	</select>
 
 	<update id="answerLPBU">
 		UPDATE LPBU
 		SET 		isAnswered = '1'
-		WHERE lpbu_num = #{lpbuId}
+		WHERE lpbu_num = #{lpbuNo}
 	</update>
 	
 	
 	<select id="getTotalLPBU" resultType="int">
 		SELECT count(*) FROM LPBU
 		<![CDATA[
-			WHERE loan_id > 0
+			WHERE loan_num > 0
 		]]>
 	</select>
 
