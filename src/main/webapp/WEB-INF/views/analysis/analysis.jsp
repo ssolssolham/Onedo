@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>분석</title>
+  <title>One Do - 분석</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- header include 시작 -->
@@ -14,18 +14,6 @@
   <!-- header include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/header.jsp"/>
   <!-- header include 종료 -->
-  
-  <!-- asideMenu include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/asideMenu.jsp"/>
-  <!-- asideMenu include 종료 -->
-
-  <!-- 로그인 모달 include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/modal/loginModal.jsp"/>
-  <!-- 로그인 모달 include 종료 -->
-
-  <!-- 회원가입 모달 include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/modal/registModal.jsp"/>
-  <!-- 회원가입 모달 include 종료 -->
   
 	<section id="analysis_section">
 		<div class="container" style="max-width: 1500px;">
@@ -618,8 +606,8 @@
                                     <div id="innerWrapper">
                                       <div id="innerNavigation">
                                         <ul id="innerPrimary">
-                                          <li><a href="#creditLoan" class="active">신용 대출</a></li>
-                                          <li><a href="#guaranteeLoan" class="">담보 대출</a></li>
+                                          <li><a href="#creditLoan" class="active dreamGothic">신용 대출</a></li>
+                                          <li><a href="#guaranteeLoan" class=" dreamGothic">담보 대출</a></li>
                                         </ul>
                                       </div>
                                     
@@ -629,59 +617,59 @@
                                           <div id="creditLoan" class="card-body" onsubmit="return checkCreditLoanForm()">
                                           
                                    <!-- 대출 금액 입력 받는 부분 -->
-                                            <div class="fs-20"><b>필요하신 대출금액은 얼마인가요?</b><span style="color: orangered;">&nbsp;*</span></div>
-                                            <div class="form-group" style="width: 100%; font-size: 1.2em; border-bottom: 2px solid #27b2a5;">
-                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="text" id="inputBorrowMoney1" class="loanInput"/> 
-                                              <span style="font-size: 25px; width: 10%;">만원</span>
+                                            <div class="fs-20"><b class="dreamGothic">필요하신 대출금액은 얼마인가요?</b><span style="color: orangered;">&nbsp;*</span></div>
+                                            <div class="form-group" style="width: 100%; font-size: 1.2em; ">
+                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="text" id="inputBorrowMoney1" class="loanInput dreamGothic"/> 
+                                              <span class="dreamGothic" style="font-size: 25px; width: 10%;">만원</span>
                                             </div>
-                                            <div class="inputBorrowMoney1" id="BorrowMoney1">
-                                              <button class="analysisBtn1" value="300">300만</button>
-                                              <button class="analysisBtn1" value="500">500만</button>
-                                              <button class="analysisBtn1" value="1000">1000만</button>
-                                              <button class="analysisBtn1" value="3000">3000만</button>
-                                              <button class="analysisBtn1" value="5000">5000만</button>
-                                              <button class="analysisBtn1" value="10000">1억</button>
+                                            <div class="inputBorrowMoney1 dreamGothic" id="BorrowMoney1">
+                                              <button  class="analysisBtn1" value="300">300만</button>
+                                              <button  class="analysisBtn1" value="500">500만</button>
+                                              <button  class="analysisBtn1" value="1000">1000만</button>
+                                              <button  class="analysisBtn1" value="3000">3000만</button>
+                                              <button  class="analysisBtn1" value="5000">5000만</button>
+                                              <button  class="analysisBtn1" value="10000">1억</button>
                                             </div>
                                             <br>
                                           
                                         <!-- 연소득 입력 -->
                                             <div style="font-size: 0.8em; color: darkgray;"> 한도산출을 위한 질문</div>
-                                            <div class="fs-20"><b>연 소득은 얼마인가요?</b><span style="color: orangered;">&nbsp;*</span></div>
-                                            <div class="form-group" style="width: 100%; font-size: 1.2em; border-bottom: 2px solid #27b2a5;">
-                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" class="loanInput" type="text" id="inputYearMoney1" required /> <span style="font-size: 25px; width: 10%;">만원</span>
+                                            <div class="fs-20"><b class="dreamGothic">연 소득은 얼마인가요?</b><span style="color: orangered;">&nbsp;*</span></div>
+                                            <div class="form-group dreamGothic" style="width: 100%; font-size: 1.2em; ">
+                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" class="loanInput dreamGothic" type="text" id="inputYearMoney1" required /> <span style="font-size: 25px; width: 10%;">만원</span>
                                             </div>
-                                            <div class="inputYearMoney1">
-                                              <button class="analysisBtn2" value="300">300만</button>
-                                              <button class="analysisBtn2" value="500">500만</button>
-                                              <button class="analysisBtn2" value="1000">1000만</button>
-                                              <button class="analysisBtn2" value="3000">3000만</button>
-                                              <button class="analysisBtn2" value="5000">5000만</button>
-                                              <button class="analysisBtn2" value="10000">1억</button>
+                                            <div class="inputYearMoney1 dreamGothic">
+                                              <button  class="analysisBtn2" value="300">300만</button>
+                                              <button  class="analysisBtn2" value="500">500만</button>
+                                              <button  class="analysisBtn2" value="1000">1000만</button>
+                                              <button  class="analysisBtn2" value="3000">3000만</button>
+                                              <button  class="analysisBtn2" value="5000">5000만</button>
+                                              <button  class="analysisBtn2" value="10000">1억</button>
                                             </div>
                                             <br>
                                           
                                            <!-- 직업 선택 Select -->
                                             <div style="font-size: 0.8em; color: darkgray; clear: both;"> 대출대상을 위한 질문</div>
-                                            <div class="fs-20"><b>현재 직업을 선택해주세요</b><span style="color: orangered;">&nbsp;*</span></div>
-                                            <select class="form-control" style="height: 40px; display: inline-block;" id="creditJobSelect1">
-                                              <option value="1" selected>일반 회사원</option>
+                                            <div class="fs-20"><b class="dreamGothic">현재 직업을 선택해주세요</b><span style="color: orangered;">&nbsp;*</span></div>
+                                            <select class="form-control fs-20 dreamGothic" style="font-size: 18px; height: 40px; display: inline-block;" id="creditJobSelect1">
+                                              <option value="1" selected>무직</option>
                                               <option value="2">자영업자/프리랜서</option>
                                               <option value="3">군인/군무원/임관(예정)자</option>
                                               <option value="4">경찰/소속공무원/임관(예정)자</option>
                                               <option value="5">공무원</option>
                                               <option value="6">의료계 직종</option>
                                               <option value="7">교직원</option>
-                                              <option value="8">무직</option>
+                                              <option value="8">일반 회사원</option>
                                               <option value="9">기타(연금 수령자 등)</option>
                                               <option value="10">전문직</option>
                                             </select>
                                             <br>
                                             <br>
                                             <div id="creditWorkingPeriod1" class="dis-none">
-                                              <div class="fs-20"><b>재직(사업영위)기간을 입력하세요.</b><span style="color: orangered; font-size:10px;">&nbsp;(선택사항)</span></div>
-                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" class="loanInput" id="inputTermService1" type="text" value="0"/> 
-                                              <span style="font-size: 25px; width: 10%;">개월</span>
-                                              <div class="inputWokingPeriod1">
+                                              <div class="fs-20"><b class="dreamGothic">재직(사업영위)기간을 입력하세요.</b><span style="color: orangered; font-size:10px;">&nbsp;(선택사항)</span></div>
+                                              <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" class="loanInput dreamGothic" id="inputTermService1" type="text" value="0"/> 
+                                              <span class="dreamGothic" style="font-size: 25px; width: 10%;">개월</span>
+                                              <div class="inputWokingPeriod1 dreamGothic">
                                                   <button class="analysisBtn3" value="1">1개월</button>
                                                   <button class="analysisBtn3" value="6">6개월</button>
                                                   <button class="analysisBtn3" value="12">1년</button>
@@ -696,7 +684,7 @@
                                           
                                             <!-- 신용등급 입력 받는 부분 -->
                                             <div style="font-size: 0.8em; color: darkgray; clear: both;"> 금리산출을 위한 질문</div>
-                                            <div class="fs-20"><b>신용등급을 선택해주세요</b>
+                                            <div class="fs-20"><b class="dreamGothic">신용등급을 선택해주세요</b>
                                               <span style="color: orangered;">&nbsp;*</span>
                                               <div class="tooltip">신용등급을 모르시나요 ?
                                               <span class="tooltiptext">
@@ -704,7 +692,7 @@
                                                 <a href="www.naver.com">등급확인하러 가기</a>        
                                               </span></div>
                                             </div>
-                                            <select class="form-control" style="height: 40px; display: inline-block;" id="creditRankSelect1">
+                                            <select class="form-control fs-20 dreamGothic" style="font-size: 18px; height: 40px; display: inline-block;" id="creditRankSelect1">
                                               <option value="1" selected>1등급</option>
                                               <option value="2">2등급</option>
                                               <option value="3">3등급</option>
@@ -719,41 +707,38 @@
                                             <br>
                                             
                                             
-                                          <form id="selectCreditLoanForm" action="/loan/list" method="get">
-                                            <div class="card-body loan" style="padding-top: 10px; padding-bottom: 10px; margin-left: 20px; margin-right: 20px; display: none">
-                                              <div style="width: 100%; height: 3px; background-color: #27b2a5">&nbsp;</div>
-                                                  <h2>입력항목</h2>
+                                          <form id="selectCreditLoanForm" action="/loan/list" method="get" style="font-family: a드림고딕4;">
+                                            <div class="card-body loan" style="padding-top: 10px; padding-bottom: 10px; display: none">
+                                                  <h2 style="font-family: a드림고딕4;">입력항목</h2>
                                               <div style="width: 100%; height: 3px; background-color: #27b2a5">&nbsp;</div>
                                               
                                               <input type="hidden" name="loanCategory" value="신용"/>
                                               
-                                              <div id="showBorrowMoney1" ><b>대출 희망 금액</b>
-                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeBorrowMoney1"></b><b>만원</b></div>
+                                              <div id="showBorrowMoney1" ><b class="fs-16 dreamGothic">대출 희망 금액</b>
+                                              <div style="font-size: 20px; font-weight: bold; text-align: right;"><b id="takeBorrowMoney1"></b><b>만원</b></div>
                                               <input type="hidden" name="requiredMoney" ></div>
                                               
-                                              <div id="showYearMoney1" ><b>연 소득</b>
-                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeYearMoney1"></b><b>만원</b></div>
+                                              <div id="showYearMoney1" ><b class="fs-16 dreamGothic">연 소득</b>
+                                              <div style="font-size: 20px; font-weight: bold; text-align: right;"><b id="takeYearMoney1"></b><b>만원</b></div>
                                               <input type="hidden" name="yearMoney"></div>
                                               
-                                              <div id="showJob1" ><b>직업</b>
-                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeJob1"></b></div>
+                                              <div id="showJob1" ><b class="fs-16 dreamGothic">직업</b>
+                                              <div style="font-size: 20px; font-weight: bold; text-align: right;"><b id="takeJob1"></b></div>
                                               <input type="hidden" name="targetNum"></div>
                                               
-                                              <div id="showTermService1" style="display:none;"><b>재직기간</b>
-                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeTerm1"></b><b>개월</b></div>
+                                              <div id="showTermService1" style="display:none;"><b class="fs-16">재직기간</b>
+                                              <div style="font-size: 20px; font-weight: bold; text-align: right;"><b id="takeTerm1"></b><b>개월</b></div>
                                               <input type="hidden" name="termService" value="0"></div>
                                               
-                                              <div id="showRate1" ><b>예상 이율</b>
+                                              <div id="showRate1" ><b class="fs-16 dreamGothic">예상 이율</b>
                                               <div style="color: #27b2a5; font-size: 20px; font-weight: bold; text-align: right;"><b id="takeRate1"></b><b>%</b></div>
                                               <input type="hidden" name="resultRate" ></div>
                                           </div>
-<!--                                               <div><b>예상 한도</b></div>
-                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeCreditLine1"></b><b>만원</b></div> -->
                                               
                                              <div class="t-center">
                                               <br>
-                                              <input type="submit" style="width:40%;" value="대출조회" class="loanSubmitBtn">  
-                                              <input type="submit" style="width:40%; background-color: gray;" name="reset2" value="초기화">  
+                                              <input type="submit" style="width:40%;" value="대출조회" class="loanSubmitBtn dreamGothic">  
+                                              <input type="button" style="border: gray; font-family: a드림고딕4; width:40%; background-color: gray;" name="reset2" value="초기화">  
                                              </div>
                                           </form>
                                           </div>
@@ -763,12 +748,12 @@
                                         <div id="guaranteeLoan" class="card-body loan" style="display: none;">
                                           <!-- 대출 금액 입력 받는 부분 -->
                                             <div style="font-size: 0.8em; color: darkgray;">1. 금리산출을 위한 질문</div>
-                                            <div class="fs-20"><b>필요하신 대출금액은 얼마인가요?</b><span style="color: orangered;">&nbsp;*</span></div>
-                                            <div class="form-group" style="width: 100%; font-size: 1.2em; border-bottom: 2px solid #27b2a5;">
+                                            <div class="fs-20"><b class="dreamGothic">필요하신 대출금액은 얼마인가요?</b><span style="color: orangered;">&nbsp;*</span></div>
+                                            <div class="form-group" style="width: 100%; font-size: 1.2em;">
                                               <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" type="text" class="loanInput" id="inputBorrowMoney2"/> 
-                                              <span style="font-size: 25px; width: 10%;">만원</span>
+                                              <span class="dreamGothic" style="font-size: 25px; width: 10%;">만원</span>
                                             </div>
-                                            <div class="inputBorrowMoney">
+                                            <div class="inputBorrowMoney dreamGothic">
                                               <button class="analysisBtn1" value="300">300만</button>
                                               <button class="analysisBtn1" value="500">500만</button>
                                               <button class="analysisBtn1" value="1000">1000만</button>
@@ -780,23 +765,23 @@
                                         
                                             <!-- 직업 선택 Select -->
                                             <div style="font-size: 0.8em; color: darkgray; clear: both;">2. 고객 맞춤 상품을 위한 질문</div>
-                                            <div class="fs-20"><b>현재 직업을 선택해주세요.</b><span style="color: orangered;">&nbsp;*</span></div>
-                                            <select class="form-control" style="height: 40px; display: inline-block;" id="guaranteeJobSelect">
-                                              <option value="1" selected>일반 회사원</option>
+                                            <div class="fs-20"><b class="dreamGothic">현재 직업을 선택해주세요.</b><span style="color: orangered;">&nbsp;*</span></div>
+                                            <select class="form-control dreamGothic" style="font-size: 18px; height: 40px; display: inline-block;" id="guaranteeJobSelect">
+                                              <option value="1" selected>무직</option>
                                               <option value="2">자영업자/프리랜서</option>
                                               <option value="3">군인/군무원/임관(예정)자</option>
                                               <option value="4">경찰/소속공무원/임관(예정)자</option>
                                               <option value="5">공무원</option>
                                               <option value="6">의료계 직종</option>
                                               <option value="7">교직원</option>
-                                              <option value="8">무직</option>
+                                              <option value="8">일반 회사원</option>
                                               <option value="9">기타(연금 수령자 등)</option>
                                               <option value="10">전문직</option>
                                             </select>
                                             <br>
                                             <br>
                                             <div id="guaranteeWorkingPeriod2" class="dis-none">
-                                              <div class="fs-20"><b>재직(사업영위)기간을 입력하세요.</b><span style="color: orangered;">&nbsp;*</span></div>
+                                              <div class="fs-20"><b class="dreamGothic">재직(사업영위)기간을 입력하세요.</b><span style="color: orangered;">&nbsp;*</span></div>
                                               <input style="border: 0; font-size: 25px; width: 88%; text-align: right; display: inline-block;" class="loanInput" type="text"  value="0"  id="inputTermService2"/> <span style="font-size: 25px; width: 10%;">개월</span>
                                               <div class="inputWokingPeriod2">
                                                   <button class="analysisBtn3" value="1">1개월</button>
@@ -811,8 +796,8 @@
                                             <br>
                                             
                                              <!-- 담보 종류 입력 받는 부분 -->
-                                            <div class="fs-20"><b>담보 종류를 선택해주세요.</b><span style="color: orangered;">&nbsp;*</span></div>
-                                            <select class="form-control" style="height: 40px; display: inline-block;" id="guaranteeSelect">
+                                            <div class="fs-20"><b class="dreamGothic">담보 종류를 선택해주세요.</b><span style="color: orangered;">&nbsp;*</span></div>
+                                            <select class="form-control fs-20 dreamGothic" style="font-size: 20px; height: 40px; display: inline-block;" id="guaranteeSelect">
                                               <option value="전체" selected>전체</option>
                                               <option value="부동산">부동산</option>
                                               <option value="주택">주택</option>
@@ -821,13 +806,13 @@
                                             <br>
                                             <br>
                                             
-                                                                                   <!-- 신용등급 입력 받는 부분 -->
+                                                                               <!-- 신용등급 입력 받는 부분 -->
                                             <div style="font-size: 0.8em; color: darkgray; clear: both;">3. 금리산출을 위한 질문</div>
                                             <div class="fs-20">
-                                            <b>신용등급을 선택해주세요.</b><span style="color: orangered;">&nbsp;*</span>
+                                            <b class="dreamGothic">신용등급을 선택해주세요.</b><span style="color: orangered;">&nbsp;*</span>
                                             <div class="tooltip">신용등급을 모르시나요 ?<span class="tooltiptext">Tooltip text</span></div>
                                             </div>
-                                            <select class="form-control" style="height: 40px; display: inline-block;" id="creditRankSelect2">
+                                            <select class="form-control fs-20 dreamGothic" style="font-size: 18px; height: 40px; display: inline-block;" id="creditRankSelect2">
                                               <option value="1" selected>1등급</option>
                                               <option value="2">2등급</option>
                                               <option value="3">3등급</option>
@@ -843,42 +828,39 @@
                                             <br>
                                             
                                       <form id="selectSecurityLoanForm" action="/loan/list" method="get" onsubmit="return checkSecurityLoanForm()">
-                                            <div class="card-body loan" style="padding-top: 10px; padding-bottom: 10px; margin-left: 20px; margin-right: 20px; display: none;" >
-                                              <div style="width: 100%; height: 1px; background-color: #27b2a5">&nbsp;</div>
-                                              <h2>입력항목</h2>
+                                            <div class="card-body loan" style="padding-top: 10px; padding-bottom: 10px; display: none;" >
+                                              <h2 style="font-family: a드림고딕4;">입력항목</h2>
                                               <div style="width: 100%; height: 3px; background-color: #27b2a5">&nbsp;</div>
                                               
                                               <input type="hidden" name="loanCategory" value="담보">
                                               
-                                              <div><b>대출 희망 금액</b></div>
-                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeBorrowMoney2"></b><b>만원</b></div>
+                                              <div><b class="fs-16 dreamGothic">대출 희망 금액</b></div>
+                                              <div class="dreamGothic" style="font-size: 20px; font-weight: bold; text-align: right;"><b class="dreamGothic" id="takeBorrowMoney2"></b><b class="dreamGothic">만원</b></div>
                                               <input type="hidden" name="requiredMoney">
                                               
-                                              <div><b>직업</b></div>
-                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeJob2"></b></div>
+                                              <div><b class="fs-16 dreamGothic">직업</b></div>
+                                              <div class="dreamGothic" style="font-size: 20px; font-weight: bold; text-align: right;"><b class="dreamGothic" id="takeJob2"></b></div>
                                               <input type="hidden" name="targetNum" >
                                               
-                                              <div id="showTermService2" style="display:none;"><b>재직(사업영위)기간</b>
-                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeTerm2"></b><b>개월</b></div>
+                                              <div id="showTermService2" style="display:none;"><b class="fs-16 dreamGothic">재직(사업영위)기간</b>
+                                              <div class="dreamGothic" style="font-size: 20px; font-weight: bold; text-align: right;"><b class="dreamGothic" id="takeTerm2"></b><b class="dreamGothic">개월</b></div>
                                               <input type="hidden" name="termService" value="0"></div>
                                               
-                                               <div><b>제공 담보</b></div>
-                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeSecurity"></b></div>
+                                               <div><b class="fs-16 dreamGothic">제공 담보</b></div>
+                                              <div class="dreamGothic" style="font-size: 20px; font-weight: bold; text-align: right;"><b class="dreamGothic" id="takeSecurity"></b></div>
                                               <input type="hidden" name="securityType">
 
 
-                                              <div><b>예상 이율</b></div>
+                                              <div><b class="fs-16 dreamGothic">예상 이율</b></div>
                                               <div style="color: #27b2a5; font-size: 20px; font-weight: bold; text-align: right;"><b id="takeRate2">3</b><b>%</b></div>
                                               <input type="hidden" name="resultRate" >
                                               
-<!--                                        <div><b>예상 한도</b></div>
-                                              <div style="font-size: 16px; font-weight: bold; text-align: right;"><b id="takeCreditLine2"></b><b>만원</b></div> -->
                                               
                                              </div>
                                              <div class="t-center">
                                               <br>
                                               <input type="submit" style="width:40%;" value="상품조회" id="loanSubmitBtn2">
-                                              <input type="submit" style="width:40%; background-color: gray;" name="reset2" value="초기화">  
+                                              <input type="button" style="width:40%; background-color: gray;" name="reset2" value="초기화">  
                                              </div>
                                           </form>
                                             
@@ -2819,7 +2801,7 @@ function makeSumMartChart(topThreeList){
         $('#creditJobSelect1').on('click', function(){
         	var job = $('#creditJobSelect1 option:selected').val();
         	
-        	if($(this).val() != '8') {
+        	if($(this).val() != '1') {
         		$('#creditWorkingPeriod1').removeClass('dis-none');
         		$('#creditWorkingPeriod1').addClass('dis-block');
         	}else{
@@ -2947,7 +2929,7 @@ function makeSumMartChart(topThreeList){
             $('#guaranteeJobSelect').on('change', function(){
               var job = $('#guaranteeJobSelect option:selected').val(); //input에 담을 값
               
-          	if($(this).val() != '8') {
+          	if($(this).val() != '1') {
         		$('#guaranteeWorkingPeriod2').removeClass('dis-none');
         		$('#guaranteeWorkingPeriod2').addClass('dis-block');
         	}else{
