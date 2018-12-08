@@ -1678,6 +1678,10 @@ function makeDataSets2(topDataList,curDataArr){
     
     // 분석하기 버튼 클릭 시, 발생하는 이벤트(필터에서 검색한 변수들을 Ajax 통신을 위해 변수로 저장)
     $('#analysisStartBtn').click(function() {
+    	
+    	$('#analysisStartBtn').attr('disabled','true');
+    	$('#analysisStartBtn').css('backgroundColor','#ffb2a5');
+    	
     	// 분석 결과 동적으로 출력
     	$('#analysisResult').removeClass('dis-none');
     	$('#analysisResult').addClass('dis-block');
@@ -1715,6 +1719,8 @@ function makeDataSets2(topDataList,curDataArr){
 	        	'regionType' : activeRegionType
 	         },
 	         success : function(data) {
+	        	 $('#analysisStartBtn').removeAttr('disabled');
+	        	 $('#analysisStartBtn').css('backgroundColor','#27b2a5');
 	        	 topThreeList = [];
 	        	 for (var i = 0; i < 3; i++) {
 	        		if(data[i] != undefined){
@@ -1728,14 +1734,28 @@ function makeDataSets2(topDataList,curDataArr){
 
 	        	 /* 유효성 검증 추가 : 호준 */
 	        	 if(topThreeList[0] != undefined){
+	        		 // 1번째 객체가 있는 경우
 	        	 $('#analysisResultBtnList #firstBtn').text(topThreeList[0].areaCode.administrativeDistrictCodeName + ' ' + topThreeList[0].areaCode.areaCode_Name + ' ' +  topThreeList[0].alleyBiz.alleybizCode_Name);
+	        	 $('#firstBtn').css('display','inline-block');
+	        	 }else{
+	        		// 1번째 객체가 없는
+	        		 $('#firstBtn').css('display','none');
+	        		 $('#secondBtn').css('display','none');
+	        		 $('#thirdBtn').css('display','none');
 	        	 }
 	        	 if(topThreeList[1] != undefined){
 	        	 $('#analysisResultBtnList #secondBtn').text(topThreeList[1].areaCode.administrativeDistrictCodeName + ' ' + topThreeList[1].areaCode.areaCode_Name + ' ' +  topThreeList[1].alleyBiz.alleybizCode_Name);
+	        	 $('#secondBtn').css('display','inline-block');
+	        	 }else{
+	        		 $('#secondBtn').css('display','none');
+	        		 $('#thirdBtn').css('display','none');
 	        	 }
 	        	 
 	        	 if(topThreeList[2] != undefined){
 	        	 $('#analysisResultBtnList #thirdBtn').text(topThreeList[2].areaCode.administrativeDistrictCodeName + ' ' + topThreeList[2].areaCode.areaCode_Name + ' ' +  topThreeList[2].alleyBiz.alleybizCode_Name);
+	        	 $('#thirdBtn').css('display','inline-block');
+	        	 }else{
+	        		 $('#thirdBtn').css('display','none'); 
 	        	 }
 	        	 
 	        	 /* 차트 만들기 */
@@ -2526,9 +2546,11 @@ function makeDataSets2(topDataList,curDataArr){
            options: {}
        });
    }     
+   
     /* 차트 만드는 기능 : 호준 */
     
     function makeAllChart(){
+	        	 setTimeout(function() {
     	         makePopChart(topThreeList,popWishList);
 	        	 makedayChart(topThreeList,dayWishList);
 	        	 makeTimeChart(topThreeList,timeWishList);
@@ -2536,8 +2558,6 @@ function makeDataSets2(topDataList,curDataArr){
 	        	 makeLiveChart(topThreeList,liveWishList);
 	        	 makeJobChart(topThreeList,jobWishList);
 	        	 makeLossChart(topThreeList,lossWishList);
-	        	 
-	        	 setTimeout(function() {
 	        	 makeMartChart(topThreeList,survivalWishList);
 	        	 makeSumMartChart(topThreeList);
 	        		}, 800);
@@ -2546,7 +2566,7 @@ function makeDataSets2(topDataList,curDataArr){
     </script>
     
 <script>
-function makeSumMartChart(topThreeList){
+function makeOpenMartChart(topThreeList){
 	
 }
         var openMartCntDataArr = new Array();
