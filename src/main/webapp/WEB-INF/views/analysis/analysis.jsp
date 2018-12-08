@@ -8,7 +8,11 @@
   <!-- header include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/headTagConfig.jsp"/>
   <!-- header include 종료 -->
-    
+
+<!--===============================================================================================-->
+<!-- 다음 지도 API Script -->
+<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85fa2226a5b3318b6ed8f59fb0e16f4e&libraries=services,clusterer,drawing"></script>    
 </head>
 <body class="animsition bg1-pattern">
   <!-- header include 시작 -->
@@ -136,7 +140,7 @@
                 <ul id="primary">
                   <li><a href="#Navigation" class="active">상권 종합 분석</a></li>
                   <li><a href="#Navigation" class="">상권 상세 분석</a></li>
-                  <li><a href="#Navigation" class="">부동산 매물 확인</a></li>
+                  <li><a href="#Navigation" class="" id="mamulCertify">부동산 매물 확인</a></li>
                 </ul>
               </div>
             <div class="tab-bottom-bar"></div>
@@ -1180,6 +1184,7 @@ function makeMarkers(realestateOwner,locArray,map2){
 			
 	  }
 			console.log(filter);
+			map2.relayout();
 	}
 	
 var map2;
@@ -1425,12 +1430,10 @@ function makeDataSets2(topDataList,curDataArr){
   }
 </script>            
 
-<!--===============================================================================================-->
-<!-- 다음 지도 API Script -->
-<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=85fa2226a5b3318b6ed8f59fb0e16f4e&libraries=services,clusterer,drawing"></script>
+
 <!--===============================================================================================-->	
 <script type="text/javascript">
+// 첫번째 지도
 // 분석 관련 필터 입력 시, 동적으로 보이는 지도(분석 첫페이지 지도)
 	 
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -2142,11 +2145,12 @@ function makeDataSets2(topDataList,curDataArr){
     	 	// 호준 : 여러 개 마커 생성, 골목상권 원 생성, 골목상권으로 이동
     	 	searchAndMark();
     	 	searchAlley($('#resultAlleyBiz').text());
-    		   }, 1300);
+    		   }, 500);
 
     	setTimeout(function(){
  		addEventsMarkers(Markers,filter);
- 		   }, 3000);
+ 		map2.relayout();
+ 		   }, 1100);
 
     	console.log(Markers);
    	});
@@ -2156,7 +2160,26 @@ function makeDataSets2(topDataList,curDataArr){
     <script>
     
    $(window).load(function(){
-	   
+	   var mapContainer2 = document.getElementById('roadMap'), // 지도를 표시할 div 
+       mapOption2 = {
+           center: new daum.maps.LatLng(37.566826, 126.9786567), // 지도의 중심좌표
+           level: 5// 지도의 확대 레벨
+       };
+	
+   
+	// 두번째 지도 
+   map2 = new daum.maps.Map(mapContainer2, mapOption2); 					// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+
+   var mapTypeControl2 = new daum.maps.MapTypeControl(); 					// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성
+	map2.addControl(mapTypeControl2, daum.maps.ControlPosition.TOPRIGHT); 	// 지도에 컨트롤을 추가해야 지도위에 표시됨
+	
+	var zoomControl2 = new daum.maps.ZoomControl(); 						// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+	map2.addControl(zoomControl2, daum.maps.ControlPosition.RIGHT); 		// 위에서 생성한 줌 컨트롤 지도에 추가
+   map2.addOverlayMapTypeId(daum.maps.MapTypeId.ROADVIEW); 				//지도 위에 로드뷰 도로 올리기
+   
+   var rvContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
+   var rv = new daum.maps.Roadview(rvContainer); //로드뷰 객체
+   var rvClient = new daum.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
 
     // 부동산 매물 부분 데이터 뿌리는 JavasScirpt
     $('.resultBtn').click(function() {
@@ -2187,28 +2210,16 @@ function makeDataSets2(topDataList,curDataArr){
     	geocoder2.addressSearch(clickedVillage, function(result, status) {
     	     // 정상적으로 검색이 완료됐으면 
     	     if (status === daum.maps.services.Status.OK) {
+    	    	 
     	        coords2 = new daum.maps.LatLng(result[0].y, result[0].x);				// 정상적으로 검색이 완료된 지역의 결과를 위도, 경도 좌표로 저장
     			console.log(coords2);
     			// 지도를 띄울 Div 태그 mapContainer 변수에 저장
     			// 지도 가운데 좌표 저장 변수 mapCenter
-    			$('#roadMap').empty();
-    			var mapContainer2 = document.getElementById('roadMap'), // 지도를 표시할 div 
-    		        mapCenter2 = new daum.maps.LatLng(coords2.jb, coords2.ib), // 지도의 가운데 좌표
-    		        mapOption2 = {
-    		            center: mapCenter2, // 지도의 중심좌표
-    		            level: 5// 지도의 확대 레벨
-    		        };
+    			//$('#roadMap').empty();
     			
-    			console.log(mapCenter2);
-    	        
-    		    map2 = new daum.maps.Map(mapContainer2, mapOption2); 					// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-    	        map2.setCenter(coords2); 												// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-    	    	var mapTypeControl2 = new daum.maps.MapTypeControl(); 					// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성
-    			map2.addControl(mapTypeControl2, daum.maps.ControlPosition.TOPRIGHT); 	// 지도에 컨트롤을 추가해야 지도위에 표시됨
-    			
-    			var zoomControl2 = new daum.maps.ZoomControl(); 						// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-    			map2.addControl(zoomControl2, daum.maps.ControlPosition.RIGHT); 		// 위에서 생성한 줌 컨트롤 지도에 추가
-    		    map2.addOverlayMapTypeId(daum.maps.MapTypeId.ROADVIEW); 				//지도 위에 로드뷰 도로 올리기
+    			mapCenter2 = new daum.maps.LatLng(coords2.jb, coords2.ib);
+    	        // map2.setCenter(coords2); 												// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+    	    	
     		    
     	        marker2 = new daum.maps.Marker({ 										// 결과값으로 받은 위치를 마커로 표시
     	            map: map2,															// 마커를 표시할 지도 변수
@@ -2225,10 +2236,6 @@ function makeDataSets2(topDataList,curDataArr){
     	        });
     	        
     	        infowindow2.open(map2, marker2); 										// marker2 인포윈도우를 map2에 표시
-    	        
-    	        var rvContainer = document.getElementById('roadview'); //로드뷰를 표시할 div
-    	        var rv = new daum.maps.Roadview(rvContainer); //로드뷰 객체
-    	        var rvClient = new daum.maps.RoadviewClient(); //좌표로부터 로드뷰 파노ID를 가져올 로드뷰 helper객체
     	       
     	        toggleRoadview(mapCenter2);
     	        
@@ -2250,7 +2257,27 @@ function makeDataSets2(topDataList,curDataArr){
     	            map: map2
     	        });
 
-    	        //마커에 dragend 이벤트를 할당합니다
+    	      	//로드뷰 toggle함수
+    		    function toggleRoadview(position){
+    		        //전달받은 좌표(position)에 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄웁니다
+    		        rvClient.getNearestPanoId(position, 50, function(panoId) {
+    		            if (panoId === null) {
+    		                rvContainer.style.display = 'none'; //로드뷰를 넣은 컨테이너를 숨깁니다
+    		                mapWrapper.style.width = '100%';
+    		                console.log('들어옴여');
+    		                map2.relayout();
+    		            } else {
+    		            	console.log('들어옴여2');
+    		                mapWrapper.style.width = '50%';
+    		                map2.relayout(); //지도를 감싸고 있는 영역이 변경됨에 따라, 지도를 재배열합니다
+    		                rvContainer.style.display = 'block'; //로드뷰를 넣은 컨테이너를 보이게합니다
+    		                rv.setPanoId(panoId, position); //panoId를 통한 로드뷰 실행
+    		                rv.relayout(); //로드뷰를 감싸고 있는 영역이 변경됨에 따라, 로드뷰를 재배열합니다
+    		            }
+    		        });
+    		    }
+    	      	
+    		  //마커에 dragend 이벤트를 할당합니다
     	        daum.maps.event.addListener(rvMarker, 'dragend', function(mouseEvent) {
     	            var position = rvMarker.getPosition(); //현재 마커가 놓인 자리의 좌표
     	            toggleRoadview(position); //로드뷰를 토글합니다
@@ -2265,28 +2292,20 @@ function makeDataSets2(topDataList,curDataArr){
     	            rvMarker.setPosition(position);
     	            toggleRoadview(position); //로드뷰를 토글합니다
     	        });
-    	        
-    	      	//로드뷰 toggle함수
-    		    function toggleRoadview(position){
-    		        //전달받은 좌표(position)에 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄웁니다
-    		        rvClient.getNearestPanoId(position, 50, function(panoId) {
-    		            if (panoId === null) {
-    		                rvContainer.style.display = 'none'; //로드뷰를 넣은 컨테이너를 숨깁니다
-    		                mapWrapper.style.width = '100%';
-    		                map2.relayout();
-    		            } else {
-    		                mapWrapper.style.width = '50%';
-    		                map2.relayout(); //지도를 감싸고 있는 영역이 변경됨에 따라, 지도를 재배열합니다
-    		                rvContainer.style.display = 'block'; //로드뷰를 넣은 컨테이너를 보이게합니다
-    		                rv.setPanoId(panoId, position); //panoId를 통한 로드뷰 실행
-    		                rv.relayout(); //로드뷰를 감싸고 있는 영역이 변경됨에 따라, 로드뷰를 재배열합니다
-    		            }
-    		        });
-    		    }
+
    	     	}
     	}) // 버튼 클릭 이벤트 종료 부분
     })
    })
+   
+   // 3페이지 relayout
+	   
+   $("#mamulCertify").on("click", function(){
+		console.log(map2);
+		 setTimeout(function() {
+	   			map2.relayout();	   
+		 },300);
+   	});
     </script>
 <!--===============================================================================================-->    
 <script type="text/javascript">
