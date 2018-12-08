@@ -222,6 +222,10 @@
       </div>
     </div>
    </div>
+
+  <!-- footer include 시작 -->
+  <jsp:include page="${pageContext.request.contextPath}/resources/includes/footer.jsp"/>
+  <!-- footer include 종료 -->
     
 
 <!-- 댓글처리 관련 js파일 추가 by sw -->

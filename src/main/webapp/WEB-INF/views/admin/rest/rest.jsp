@@ -76,46 +76,39 @@ desired effect
 		</tr>
 		</thead><br>
 		<tbody>
+		<c:forEach items="${urls}" var="url" varStatus="idx">
 		  <tr>
 		  	<td>${idx.index +1 }</td>
-		  	<td>${user.userid }</td>
-		  	<td>${user.userName }</td>
-		  	<td>${user.regDate }</td>
-		  	<td>${user.updateDate }</td>
+		  	<td>${url.url }</td>
+		  	<td>${url.url_summary }</td>
+		  	<td>${url.method }</td>
+		  	<td>${url.auth }</td>
 		  </tr>
-		  <!-- 첫번째아코디언영역: 회원이름수정 -->
- 		  <tr class="panel">
-		  	<td colspan="8">
-		  		<h4>이름수정</h4>
-		  		<form action="/admin/member/modName" method="get">
-		  		회원아이디: <label>${user.userid }</label> <br>
-		  		수정할 이름: <input type="text" name="userName"> <br>
-		  		<input type="hidden" name="userid" value="${user.userid }">
-		  		<input type="submit" value="변경">
-		  		</form>
-		  	</td>
-		  </tr>
-		  <!-- 두번째아코디언영역: 회원권한부여 -->
-		  <tr class="panel2" style="display: none">
-		    <td colspan="8">
-				<h4>권한부여</h4>
-				<form name="authList" action="/admin/member/grantAuth" method="get">
-				회원아이디: <label>${user.userid }</label> <br>
-				<input type="hidden" name="userid" value="${user.userid }">
-				<input type="checkbox" name="authList" value="ROLE_USER">일반회원</input><br>
-				<input type="checkbox" name="authList" value="ROLE_ADMIN">관리자</input><br>
-				<input type="checkbox" name="authList" value="ROLE_MANAGER">매니저</input><br>
-				<input type="checkbox" name="authList" value="ROLE_ENGINEER">엔지니어</input><br>
-				<input type="submit" value="변경">
-				</form>
-		    </td>
-		  </tr>
+		  <c:if test="${fn:length(url.paramList) gt 1 }">
+ 		  	<tr>
+		  		<th style="text-align: center; background-color: gray;" rowspan="${fn:length(url.paramList)+2}">요청 파라미터</th>
+		  	</tr>
+ 			<tr>
+		  		<th>key</th>
+		  		<th>value</th>
+		  		<th>type</th>
+		  		<th>설명</th>
+		  	</tr>
+		  	<c:forEach items="${url.paramList}" var="param" varStatus="status">
+		  		<tr>
+		  		  <td>${url.paramList[status.index].key}</td>
+		  		  <td>${url.paramList[status.index].value}</td>
+		  		  <td>${url.paramList[status.index].type}</td>
+		  		  <td>${url.paramList[status.index].description}</td>
+		  		</tr>
+		  	</c:forEach>
+		  </c:if>
+		  </c:forEach>
 		</tbody>
 	</table>
 	<br>	
 	</div><!-- /.box-body -->
     </div>
-         
     </section>
     <!-- /.content -->
   </div>
@@ -169,7 +162,7 @@ $(document).ready(function() {
 });
 </script>
 
-<!-- 관리영역 아코디언 자바스크립트 -->
+<!-- 파람영역 아코디언 자바스크립트 -->
 <script type="text/javascript">
 // 이름수정 아코디언이벤트	
 var panels = $(".panel"); //아코디언으로 보일영역
@@ -188,21 +181,6 @@ for(i=0; i<panels.length; i++){
 	});
 }
 
-// 권한관리 아코디언이벤트
-var panels2 = $(".panel2"); //아코디언으로 보일영역
-var btns2 = $(".accordion2"); //아코디언이벤트 버튼
-var j=0;
-
-for(j=0; j<panels2.length; j++){
-	panels2[j].style.display = "none";
-	btns2[j].addEventListener("click", function() {
-	    var panel2 = this.parentElement.parentElement.nextElementSibling.nextElementSibling;
-		if(panel2.style.display === "none"){
-			panel2.style.display = "table-row";
-		}else{
-			panel2.style.display = "none";
-		}
-	});
 }
 
 </script>

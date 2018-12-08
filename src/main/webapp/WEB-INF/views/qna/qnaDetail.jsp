@@ -226,8 +226,6 @@
       </div>
     </div>
    </div>
-    
-
 
 <!-- 댓글처리 관련 js파일 추가 by sw -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reply.js"></script>
