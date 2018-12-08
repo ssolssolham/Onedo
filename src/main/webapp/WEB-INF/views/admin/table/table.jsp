@@ -84,9 +84,9 @@ desired effect
 		  </tr>
 		  <c:if test="${fn:length(table.columnList) gt 1 }">
 		    <tr>
-		  	<th style="text-align: center;" rowspan="${fn:length(table.columnList)+2 }">columns</th>
+		  	<th style="background-color: #EAEAEA; text-align: center;" rowspan="${fn:length(table.columnList)+2 }">columns</th>
 		    </tr>
-		    <tr>
+		    <tr style="background-color: #EAEAEA;">
 		      <th>물리적컬럼명</th>
 		      <th>논리적컬럼명</th>
 		      <th>컬럼설명요약</th>
