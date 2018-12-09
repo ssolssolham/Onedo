@@ -67,7 +67,7 @@ desired effect
     <div class="box-body">
 	<table id="example2" class="table table-bordered table-hover">
 		<thead>
-		<tr>
+		<tr style="background-color: gray;">
 			<th>번호</th>
 			<th>URL</th>
 			<th>URL설명</th>
@@ -77,7 +77,7 @@ desired effect
 		</thead><br>
 		<tbody>
 		<c:forEach items="${urls}" var="url" varStatus="idx">
-		  <tr>
+		  <tr style="background-color: #d2d6de;">
 		  	<td>${idx.index +1 }</td>
 		  	<td>${url.url }</td>
 		  	<td>${url.url_summary }</td>
@@ -86,9 +86,9 @@ desired effect
 		  </tr>
 		  <c:if test="${fn:length(url.paramList) gt 1 }">
  		  	<tr>
-		  		<th style="text-align: center; background-color: #d2d6de;" rowspan="${fn:length(url.paramList)+2}">요청 파라미터</th>
+		  		<th style="text-align: center; background-color: #EAEAEA;" rowspan="${fn:length(url.paramList)+2}">요청 파라미터</th>
 		  	</tr>
- 			<tr style="background-color: #d2d6de;">
+ 			<tr style="background-color: #EAEAEA;">
 		  		<th>key</th>
 		  		<th>value</th>
 		  		<th>type</th>
