@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.one.doo.adbd.mapper.ADBDMapper;
 import com.one.doo.alleybiz.domain.AlleyBiz;
 import com.one.doo.alleybiz.mapper.AlleyBizMapper;
 import com.one.doo.areacode.domain.AreaCode;
@@ -83,6 +84,9 @@ public class AnalysisServiceImpl implements AnalysisService {
 	@Inject
 	WorkerPerAlleybizMapper workerPerAlleybizMapper;
 	
+	@Inject
+	ADBDMapper adbdMapper;
+	
 	@Transactional
 	@Override
 	public String getVillageList(String selectedDistrict) {
@@ -103,7 +107,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 	
 	@Transactional
 	@Override
-	public List<HashMap<String,Object>> firstStep(List<String> Areas,String regionType) {
+	public List<HashMap<String,Object>> firstStep(List<String> Areas, String regionType) {
 		log.info(regionType);
 		List<HashMap> list = null;
 		
@@ -135,10 +139,8 @@ public class AnalysisServiceImpl implements AnalysisService {
 		}
 		
 		List<HashMap<String,Object>> returnList = new ArrayList();
-		
 		for (HashMap hashMap : list) {
 			int ALLEYBIZCODE = Integer.parseInt(String.valueOf(hashMap.get("ALLEYBIZCODE")));
-			
 			HashMap<String,Object> hash = new HashMap<String,Object>();
 			// 보낼 객체들 준비(상일)
 			Mlresult mlresult = mlresultMapper.read(ALLEYBIZCODE);
@@ -171,6 +173,7 @@ public class AnalysisServiceImpl implements AnalysisService {
 			hash.put("storePerAlleybiz", storePerAlleybiz);
 			hash.put("workerPerAlleybiz", workerPerAlleybiz);
 			hash.put("storePerAlleybizList", storePerAlleybizList);
+			hash.put("abz", ALLEYBIZCODE);
 			
 			//부동산리스트 반환값이 없으면 null
 			if(realestateList != null) {
@@ -183,10 +186,8 @@ public class AnalysisServiceImpl implements AnalysisService {
 				hash.put("realestateList", null);
 				hash.put("memulList", null);
 			}
-		
 			returnList.add(hash);
 		}
-		
 		return returnList;
 	}
 

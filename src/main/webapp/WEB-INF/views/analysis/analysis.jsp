@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,7 +86,12 @@
     page="${pageContext.request.contextPath}/resources/includes/header.jsp" />
   <!-- header include 종료 -->
 
+
   <section id="analysis_section">
+         <sec:authentication property="principal" var="member"/>
+       <sec:authorize access="isAuthenticated()">
+    <input type="hidden" id="takeId" value="${member.username}">
+      </sec:authorize>
     <div class="container" style="max-width: 1500px;">
       <div class="card">
         <div class="card-body menu-title-div">
@@ -2377,10 +2383,10 @@
 			var realestateList;
 
 			// 분석하기 버튼 클릭 시, 발생하는 이벤트(필터에서 검색한 변수들을 Ajax 통신을 위해 변수로 저장)
-			$('#analysisStartBtn')
-					.click(
+			$('#analysisStartBtn').click(
 							function() {
-
+	
+								var userId = $('#takeId').val();	
 								$('#analysisStartBtn').attr('disabled', 'true');
 								$('#analysisStartBtn').css('backgroundColor',
 										'#ffb2a5');
@@ -2421,6 +2427,7 @@
 										.getElementById('snackbar');
 								target.innerHTML = '필터에 입력하신 값을 바탕으로 지도에 표시된 영역 골목 상권 분석을 진행합니다';
 								toast();
+								
 								// 상권 분석 결과를 가져오기 위한 Ajax 통신
 								$
 										.ajax({
@@ -2428,6 +2435,7 @@
 											url : '/analysis/analysisstart/',
 											dataType : 'json',
 											data : {
+												'userId' : userId,
 												'villageList' : activeVillageList,
 												'regionType' : activeRegionType
 											},
