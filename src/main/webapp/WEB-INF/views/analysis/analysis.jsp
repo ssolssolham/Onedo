@@ -1356,6 +1356,8 @@
   </section>
   <script type="text/javascript">
 			var Markers = new Array();
+			var InfoWindows = new Array();
+			var Circles = new Array();
 
 			function setCenter(Lat, Lng) {
 				// 이동할 위도 경도 위치를 생성합니다 
@@ -1407,25 +1409,63 @@
 
 				return salesLabel;
 			}
-
+			
+			function makeInfos(Markers){
+				for(var i = 0; i < Markers.length; i++){
+					console.log(131313131);
+					var content = '<div style="width:150px;text-align:center;padding:6px 0;">'
+						+ realestateOwnerList[i].AGENT_NAME.split(' ')[0]
+						+ '</div>';
+						
+					// 인포윈도우로 장소에 대한 설명을 표시합니다
+					infowindow = new daum.maps.InfoWindow(
+							{
+								content : content
+							});
+					infowindow.open(map2,Markers[i]);
+					console.log(i);
+					console.log(Markers[i]);
+					
+					InfoWindows.push(infowindow);
+				}
+			}
+			
+			function removeMarkAndInfo(){
+				if (Markers.length !== 0) {
+					for(var i = 0; i < Markers.length; i++){
+						Markers[i].setMap(null);	
+					}
+					Markers.length = 0;
+				}
+				
+				if(InfoWindows.length !== 0){
+					for(var i = 0; i < InfoWindows.length; i++){
+						InfoWindows[i].setMap(null);
+					}
+					InfoWindows.length = 0;
+				}
+				
+				if(Circles.length !== 0){
+					for(var i = 0; i < Circles.length; i++){
+						Circles[i].setMap(null);
+					}
+					Circles.length = 0;
+				}
+			}
+			
 			function searchAndMark() {
+				// 2번째 페이지 마커 만들기 : 호준
 				var geocoder3 = new daum.maps.services.Geocoder();
 				var locArr = new Array();
 				var positions = [];
-				if (Markers.length !== 0) {
-					Markers.length = 0;
-				}
-
+				
 				for (var i = 0; i < realestateOwnerList.length; i++) {
-					var temp = realestateOwnerList[i].AGENT_ADDRESS;
-					geocoder3.addressSearch(
-							realestateOwnerList[i].AGENT_ADDRESS, function(
-									result, status) {
+					geocoder3.addressSearch(realestateOwnerList[i].AGENT_ADDRESS, function(result, status) {
 								// 내부 인자만 사용 가능! : 호준
 								if (result != undefined) {
 									loc = result[0];
 									locArr.push(loc);
-
+									
 									var position = {
 										title : result[0].address_name,
 										latlng : new daum.maps.LatLng(
@@ -1440,14 +1480,15 @@
 										title : position.title
 									// 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
 									});
-
-									console.log(2);
+									
 									Markers.push(marker);
 								}
 							});
 				}
-
+				
+				return true;
 			}
+
 
 			var selectedAlley;
 			function searchAlley(locName) {
@@ -1472,7 +1513,8 @@
 
 						// 지도에 원을 표시합니다 
 						circle.setMap(map2);
-
+						Circles.push(circle);
+						
 						setCenter(parseFloat(selectedAlley[0].y),
 								parseFloat(selectedAlley[0].x));
 					}
@@ -1676,6 +1718,7 @@
 							subfilter.push(realestateList[j]);
 						}
 					}
+					
 					filter.push(subfilter);
 
 					/* 마커에 이벤트 걸기 : 클로저로 인자(Markers,i,filter)를 전달하여 
@@ -1685,7 +1728,6 @@
 						daum.maps.event.addListener(Markers[i], 'click',
 								function() {
 									updateGongin(filter, i);
-
 								})
 					})(Markers, i, filter);
 
@@ -2267,6 +2309,17 @@
 				}
 
 				$('#regionFilter').children().removeClass('active');
+				
+				/*
+					초기화를 눌렀을시에 마커 제거
+				*/
+				for(var i = 0; i < pageOnes.length; i++){
+					if(pageOnes[i].hasOwnProperty('0') == false){
+					pageOnes[i].setMap(null);
+					}
+				}
+				
+				pageOnes.length = 0;
 			})
 
 			// 분석 후 도출되는 3개의 상권 리스트 담는 변수
@@ -2423,13 +2476,499 @@
 							})
 
 			// 분석 결과로 나온 버튼 클릭 시, 분석 결과 리포트 부분 활성화
-			$('.resultBtn')
-					.click(
+			$('.resultBtn').click(
 							function(e) {
-								
 								if ($('#analysisReport').hasClass('dis-none')) { // 보이지 않는 경우면
-									$('#analysisReport')
-											.removeClass('dis-none');
+									// 클릭한 골목상권 테이블에 뿌리기 위해 파싱 
+									var alleyBizFullName = $(this).text()
+											.split(' ');
+									$('#resultDistrict').text(alleyBizFullName[0]);
+									$('#resultVillage').text(alleyBizFullName[1]);
+									$('#resultAlleyBiz').text(alleyBizFullName[2]);
+
+									// 부동산 매물 분석 페이지에 지도 표시를 위한 변수 저장
+									clickedVillage = alleyBizFullName[1];
+
+									for (var i = 0; i < topThreeList.length; i++) {
+										if (topThreeList[i].alleyBiz.alleybizCode_Name == alleyBizFullName[2]) {
+
+											realestateList = topThreeList[i].memulList;
+											realestateOwnerList = topThreeList[i].realestateList;
+
+											// 상위 3개의 상권 리스트 배열에서 도로명이 일치하는 배열의 요소를 불러와 해당하는 예상 매출액을 태그의 text로 추가
+											$('#expectedSalesAccount').text(topThreeList[i].mlresult.estmt_SALES);
+											var marker;
+											var infowindow;
+											var geocoder = new daum.maps.services.Geocoder();
+											geocoder
+													.addressSearch(
+															alleyBizFullName[2],
+															function(result, status) {
+
+																// 정상적으로 검색이 완료됐으면 
+																if (status === daum.maps.services.Status.OK) {
+
+																	var coords = new daum.maps.LatLng(
+																			result[0].y,
+																			result[0].x);
+
+																	var mapContainer = document
+																			.getElementById('staticMap'), // 지도를 표시할 div 
+																	mapOption = {
+																		center : new daum.maps.LatLng(
+																				coords.jb,
+																				coords.ib), // 지도의 중심좌표
+																		level : 1
+																	// 지도의 확대 레벨
+																	};
+
+																	// 3개의 상권 탭에서 클릭 시, 지도 겹침 현상 제거 위한 하위태그 삭제 태그
+																	$('#staticMap')
+																			.empty();
+
+																	// 지도를 생성합니다    
+																	var map = new daum.maps.Map(
+																			mapContainer,
+																			mapOption);
+
+																	// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
+																	var mapTypeControl = new daum.maps.MapTypeControl();
+
+																	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+																	// daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+																	map
+																			.addControl(
+																					mapTypeControl,
+																					daum.maps.ControlPosition.TOPRIGHT);
+
+																	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+																	var zoomControl = new daum.maps.ZoomControl();
+																	map
+																			.addControl(
+																					zoomControl,
+																					daum.maps.ControlPosition.RIGHT);
+
+																	// 결과값으로 받은 위치를 마커로 표시합니다
+																	marker = new daum.maps.Marker(
+																			{
+																				map : map,
+																				position : coords
+																			});
+
+																	var content = '<div style="width:150px;text-align:center;padding:6px 0;">'
+																			+ alleyBizFullName[2]
+																			+ '</div>';
+																	// 인포윈도우로 장소에 대한 설명을 표시합니다
+																	infowindow = new daum.maps.InfoWindow(
+																			{
+																				content : content
+																			});
+																	infowindow
+																			.open(
+																					map,
+																					marker);
+
+																	pageOnes
+																			.push(infowindow);
+
+																}
+
+															}) // geoCoder 끝나는 부분
+
+											// 클릭 시, 동 이름을 가지고, 창업 관련 5대 지표 불러옴
+											// 0 ~ 25 : 매우위험, 26 ~ 50 : 위험, 51 ~ 75 : 보통, 76 ~ 100 : 좋음
+											// 백그라운드 컬러 배열
+											var backCol = new Array();
+											// 백그라운드 컬러 배열 모은 배열
+											var backColArr = new Array();
+											// 창업위험지수, 과밀지수, 활성도, 성장가능성, 안전도 순서로 각 번째에 맞게 무조건 데이터 삽입
+											var dataArr = new Array();
+
+											var dataArrSub = new Array();
+
+											var expected
+											// 등급 배열 >> 이것 또한 창업위험, 과밀, 활성, 성장, 안전도 순서로 배열에 등급이 들어감
+											var gradeArr = new Array();
+											dataArr = [
+													topThreeList[i].mlresult.estmt_ROF_VALUE,
+													topThreeList[i].mlresult.estmt_OI_VALUE,
+													topThreeList[i].mlresult.estmt_AI_VALUE,
+													topThreeList[i].mlresult.estmt_GI_VALUE,
+													topThreeList[i].mlresult.estmt_SI_VALUE ];
+											/*
+												workerPerAlleybiz.total_work 없는 경우를 판단하여 다르게 저장
+											 */
+											if (topThreeList[i].workerPerAlleybiz != null) {
+												// topThreeList[i].workerPerAlleybiz가 있으면
+												if (topThreeList[i].workerPerAlleybiz.total_work != null) {
+													// topThreeList[i].workerPerAlleybiz.total_work가 비어 있지 않으면 
+													dataArrSub = [
+															topThreeList[i].livingPerAlleybiz.totalLiving,
+															topThreeList[i].flowPerAlleybiz.total_flow,
+															topThreeList[i].workerPerAlleybiz.total_work,
+															topThreeList[i].storePerAlleybiz.open_percent,
+															topThreeList[i].storePerAlleybiz.store_count ];
+
+												} else {
+													// topThreeList[i].workerPerAlleybiz.total_work가 비어 있으면
+													// topThreeList[i].workerPerAlleybiz.total_work가 비어 있지 않으면 
+													dataArrSub = [
+															topThreeList[i].livingPerAlleybiz.totalLiving,
+															topThreeList[i].flowPerAlleybiz.total_flow,
+															0,
+															topThreeList[i].storePerAlleybiz.open_percent,
+															topThreeList[i].storePerAlleybiz.store_count ];
+												}
+											} else if (topThreeList[i].workerPerAlleybiz == null) {
+												dataArrSub = [
+														topThreeList[i].livingPerAlleybiz.totalLiving,
+														topThreeList[i].flowPerAlleybiz.total_flow,
+														0,
+														topThreeList[i].storePerAlleybiz.open_percent,
+														topThreeList[i].storePerAlleybiz.store_count ];
+											} else {
+
+											}
+
+											dataEstimatedArr = [ topThreeList[i].mlresult.estmt_SALES ];
+
+											for (var i = 0; i < topThreeList.length; i++) {
+												if (topThreeList[i].mlresult != null) {
+													dataEstimatedArr
+															.push(topThreeList[i].mlresult.estmt_SALES);
+													console.log(dataEstimatedArr);
+												}
+											}
+
+											// 종합 평가 점수 구하는 함수
+											var totalEstimatedScore = 0;
+											for (var i = 0; i < dataArr.length; i++) {
+												totalEstimatedScore += dataArr[i];
+											}
+
+											var avgEstimatedScore = totalEstimatedScore
+													/ dataArr.length;
+											$('#expectedTotalEstimateScore').text(
+													avgEstimatedScore);
+											for (var i = 0; i < 5; i++) {
+												backCol = [
+														'rgba(255, 255, 255, 0)',
+														'rgba(255, 255, 255, 0)',
+														'rgba(255, 255, 255, 0)',
+														'rgba(255, 255, 255, 0)' ];
+												if (0 <= dataArr[i]
+														&& dataArr[i] <= 25) {
+													backCol[0] = 'rgba(255, 99, 132)';
+													gradeArr.push("매우위험");
+												}
+												if (26 <= dataArr[i]
+														&& dataArr[i] <= 50) {
+													backCol[1] = 'rgba(255,166,80)';
+													gradeArr.push("위험");
+												}
+												if (51 <= dataArr[i]
+														&& dataArr[i] <= 75) {
+													backCol[2] = 'rgba(86,232,164)';
+													gradeArr.push("보통");
+												}
+												if (76 <= dataArr[i]
+														&& dataArr[i] <= 100) {
+													backCol[3] = 'rgba(43,143,239)';
+													gradeArr.push("좋음");
+												}
+												backColArr.push(backCol);
+											}
+											// 창업위험지수 그래프 >> 배열의 0번째
+											var dangerChart = document
+													.getElementById("dangerChart")
+													.getContext('2d');
+											var dangerChartA = new Chart(
+													dangerChart,
+													{
+														type : 'doughnut',
+														data : {
+															labels : [ "매우위험",
+																	"위험", "보통",
+																	"좋음" ],
+															datasets : [ {
+																data : [ 25, 25,
+																		25, 25 ],
+																backgroundColor : backColArr[0],
+																borderColor : '#000000'
+															} ]
+														},
+														options : {
+															tooltips : {
+																enabled : false
+															},
+															legend : {
+																display : false
+															},
+															circumference : 1 * Math.PI,
+															rotation : 1 * Math.PI,
+															title : {
+																display : true,
+																text : '창업위험지수'
+																		+ ': '
+																		+ gradeArr[0],
+																position : 'bottom',
+																fontColor : '#000000'
+															}
+														}
+													});
+											// 과밀지수 그래프 >> 배열의 1번째
+											var densityChart = document
+													.getElementById("densityChart")
+													.getContext('2d');
+											var densityChartA = new Chart(
+													densityChart,
+													{
+														type : 'doughnut',
+														data : {
+															labels : [ "매우위험",
+																	"위험", "보통",
+																	"좋음" ],
+															datasets : [ {
+																data : [ 25, 25,
+																		25, 25 ],
+																backgroundColor : backColArr[1],
+																borderColor : '#000000'
+															} ]
+														},
+														options : {
+															tooltips : {
+																enabled : false
+															},
+															legend : {
+																display : false
+															},
+															circumference : 1 * Math.PI,
+															rotation : 1 * Math.PI,
+															title : {
+																display : true,
+																text : '과밀지수'
+																		+ ': '
+																		+ gradeArr[1],
+																position : 'bottom',
+																fontColor : '#000000'
+															}
+														}
+													});
+											// 활성도 그래프 >> 배열의 2번째
+											var activationChart = document
+													.getElementById(
+															"activationChart")
+													.getContext('2d');
+											var activationChartA = new Chart(
+													activationChart,
+													{
+														type : 'doughnut',
+														data : {
+															labels : [ "매우위험",
+																	"위험", "보통",
+																	"좋음" ],
+															datasets : [ {
+																data : [ 25, 25,
+																		25, 25 ],
+																backgroundColor : backColArr[2],
+																borderColor : '#000000'
+															} ]
+														},
+														options : {
+															tooltips : {
+																enabled : false
+															},
+															legend : {
+																display : false
+															},
+															circumference : 1 * Math.PI,
+															rotation : 1 * Math.PI,
+															title : {
+																display : true,
+																text : '활성도'
+																		+ ': '
+																		+ gradeArr[2],
+																position : 'bottom',
+																fontColor : '#000000'
+															}
+														}
+													});
+
+											// 성장가능성 그래프 >> 배열의 3번째
+											var potentialChart = document
+													.getElementById(
+															"potentialChart")
+													.getContext('2d');
+											var potentialChartA = new Chart(
+													potentialChart,
+													{
+														type : 'doughnut',
+														data : {
+															labels : [ "매우위험",
+																	"위험", "보통",
+																	"좋음" ],
+															datasets : [ {
+																data : [ 25, 25,
+																		25, 25 ],
+																backgroundColor : backColArr[3],
+																borderColor : '#000000'
+															} ]
+														},
+														options : {
+															tooltips : {
+																enabled : false
+															},
+															legend : {
+																display : false
+															},
+															circumference : 1 * Math.PI,
+															rotation : 1 * Math.PI,
+															title : {
+																display : true,
+																text : '성장가능성'
+																		+ ': '
+																		+ gradeArr[3],
+																position : 'bottom',
+																fontColor : '#000000'
+															}
+														}
+													});
+											// 안전도 그래프 >> 배열의 4번째
+											var safeChart = document
+													.getElementById("safeChart")
+													.getContext('2d');
+											var safeChartA = new Chart(
+													safeChart,
+													{
+														type : 'doughnut',
+														data : {
+															labels : [ "매우위험",
+																	"위험", "보통",
+																	"좋음" ],
+															datasets : [ {
+																data : [ 25, 25,
+																		25, 25 ],
+																backgroundColor : backColArr[4],
+																borderColor : '#000000'
+															} ]
+														},
+														options : {
+															tooltips : {
+																enabled : false
+															},
+															legend : {
+																display : false
+															},
+															circumference : 1 * Math.PI,
+															rotation : 1 * Math.PI,
+															title : {
+																display : true,
+																text : '안전도'
+																		+ ': '
+																		+ gradeArr[4],
+																position : 'bottom',
+																fontColor : '#000000'
+															}
+														}
+													});
+
+											// 메인 레이더 차트
+											var mainRadarChart = document
+													.getElementById(
+															"mainRadarChart")
+													.getContext('2d');
+											var mainRadarChartA = new Chart(
+													mainRadarChart,
+													{
+														type : 'radar',
+														data : {
+															labels : [ '창업위험지수',
+																	'과밀지수', '활성도',
+																	'성장가능성', '안전도' ],
+															datasets : mainRadarDataSets(
+																	dataArr,
+																	topThreeList)
+														},
+														options : {
+															legend : {
+																display : true,
+																position : 'left',
+																labels : {
+																	fontColor : '#000000'
+																}
+															},
+															circumference : 1 * Math.PI,
+															rotation : 1 * Math.PI,
+															title : {
+																display : true,
+																text : 'MAIN CHART',
+																position : 'top',
+																fontColor : '#000000'
+															}
+														}
+													});
+
+											// 매출액 차트
+											var salesAmount = document
+													.getElementById(
+															"salesAmountChart")
+													.getContext('2d');
+											var salesAmountChart = new Chart(
+													salesAmount,
+													{
+														type : 'bar',
+														data : {
+															labels : salesLabels(topThreeList),
+															datasets : [ {
+																label : '매출액',
+																data : dataEstimatedArr,
+																backgroundColor : [
+																		'rgba(165, 223, 249, 0.3)',
+																		'rgba(239, 82, 133, 0.3)',
+																		'rgba(96, 197, 186, 0.3)',
+																		'rgba(254, 238, 125, 0.3)' ],
+																borderColor : [
+																		'rgba(165, 223, 249)',
+																		'rgba(239, 82, 133)',
+																		'rgba(96, 197, 186)',
+																		'rgba(254, 238, 125)' ],
+																borderWidth : 1
+															} ]
+														},
+														options : {
+															legend : {
+																display : false
+															},
+															circumference : 1 * Math.PI,
+															rotation : 1 * Math.PI,
+															title : {
+																display : true,
+																text : '매출액',
+																position : 'top'
+															}
+														}
+													}); // 매출액 차트 끝나는 부분
+										
+										}
+									}
+									setTimeout(function() {
+										// 1초 후 작동해야할 코드
+										// 호준 : 여러 개 마커 생성, 골목상권 원 생성, 골목상권으로 이동
+										var booltemp = false;
+										booltemp = searchAndMark();
+										searchAlley($('#resultAlleyBiz').text());
+										while(booltemp == false){
+											
+										}
+										makeInfos(Markers);
+										
+									}, 400);
+
+									setTimeout(function() {
+										addEventsMarkers(Markers, filter);
+									}, 1100);
+									
+									$('#analysisReport').removeClass('dis-none');
 									$('#analysisReport').addClass('dis-block');
 
 									// 선택된 객체 인덱스 저장
@@ -2445,499 +2984,13 @@
 									updateTable(topThreeList, selectedObject);
 
 								} else {
-									$('#analysisReport').removeClass(
-											'dis-block');
+									
+									removeMarkAndInfo();
+									
+									$('#analysisReport').removeClass('dis-block');
 									$('#analysisReport').addClass('dis-none');
 								}
 
-								// 클릭한 골목상권 테이블에 뿌리기 위해 파싱 
-								var alleyBizFullName = $(this).text()
-										.split(' ');
-								$('#resultDistrict').text(alleyBizFullName[0]);
-								$('#resultVillage').text(alleyBizFullName[1]);
-								$('#resultAlleyBiz').text(alleyBizFullName[2]);
-
-								// 부동산 매물 분석 페이지에 지도 표시를 위한 변수 저장
-								clickedVillage = alleyBizFullName[1];
-
-								for (var i = 0; i < topThreeList.length; i++) {
-									if (topThreeList[i].alleyBiz.alleybizCode_Name == alleyBizFullName[2]) {
-
-										realestateList = topThreeList[i].memulList;
-										realestateOwnerList = topThreeList[i].realestateList;
-
-										// 상위 3개의 상권 리스트 배열에서 도로명이 일치하는 배열의 요소를 불러와 해당하는 예상 매출액을 태그의 text로 추가
-										$('#expectedSalesAccount')
-												.text(
-														topThreeList[i].mlresult.estmt_SALES);
-										var marker;
-										var infowindow;
-										var geocoder = new daum.maps.services.Geocoder();
-										geocoder
-												.addressSearch(
-														alleyBizFullName[2],
-														function(result, status) {
-
-															// 정상적으로 검색이 완료됐으면 
-															if (status === daum.maps.services.Status.OK) {
-
-																var coords = new daum.maps.LatLng(
-																		result[0].y,
-																		result[0].x);
-
-																var mapContainer = document
-																		.getElementById('staticMap'), // 지도를 표시할 div 
-																mapOption = {
-																	center : new daum.maps.LatLng(
-																			coords.jb,
-																			coords.ib), // 지도의 중심좌표
-																	level : 1
-																// 지도의 확대 레벨
-																};
-
-																// 3개의 상권 탭에서 클릭 시, 지도 겹침 현상 제거 위한 하위태그 삭제 태그
-																$('#staticMap')
-																		.empty();
-
-																// 지도를 생성합니다    
-																var map = new daum.maps.Map(
-																		mapContainer,
-																		mapOption);
-
-																// 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
-																var mapTypeControl = new daum.maps.MapTypeControl();
-
-																// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-																// daum.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-																map
-																		.addControl(
-																				mapTypeControl,
-																				daum.maps.ControlPosition.TOPRIGHT);
-
-																// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-																var zoomControl = new daum.maps.ZoomControl();
-																map
-																		.addControl(
-																				zoomControl,
-																				daum.maps.ControlPosition.RIGHT);
-
-																// 결과값으로 받은 위치를 마커로 표시합니다
-																marker = new daum.maps.Marker(
-																		{
-																			map : map,
-																			position : coords
-																		});
-
-																var content = '<div style="width:150px;text-align:center;padding:6px 0;">'
-																		+ alleyBizFullName[2]
-																		+ '</div>';
-																// 인포윈도우로 장소에 대한 설명을 표시합니다
-																infowindow = new daum.maps.InfoWindow(
-																		{
-																			content : content
-																		});
-																infowindow
-																		.open(
-																				map,
-																				marker);
-
-																pageOnes
-																		.push(infowindow);
-
-															}
-
-														}) // geoCoder 끝나는 부분
-
-										// 클릭 시, 동 이름을 가지고, 창업 관련 5대 지표 불러옴
-										// 0 ~ 25 : 매우위험, 26 ~ 50 : 위험, 51 ~ 75 : 보통, 76 ~ 100 : 좋음
-										// 백그라운드 컬러 배열
-										var backCol = new Array();
-										// 백그라운드 컬러 배열 모은 배열
-										var backColArr = new Array();
-										// 창업위험지수, 과밀지수, 활성도, 성장가능성, 안전도 순서로 각 번째에 맞게 무조건 데이터 삽입
-										var dataArr = new Array();
-
-										var dataArrSub = new Array();
-
-										var expected
-										// 등급 배열 >> 이것 또한 창업위험, 과밀, 활성, 성장, 안전도 순서로 배열에 등급이 들어감
-										var gradeArr = new Array();
-										dataArr = [
-												topThreeList[i].mlresult.estmt_ROF_VALUE,
-												topThreeList[i].mlresult.estmt_OI_VALUE,
-												topThreeList[i].mlresult.estmt_AI_VALUE,
-												topThreeList[i].mlresult.estmt_GI_VALUE,
-												topThreeList[i].mlresult.estmt_SI_VALUE ];
-										/*
-											workerPerAlleybiz.total_work 없는 경우를 판단하여 다르게 저장
-										 */
-										if (topThreeList[i].workerPerAlleybiz != null) {
-											// topThreeList[i].workerPerAlleybiz가 있으면
-											if (topThreeList[i].workerPerAlleybiz.total_work != null) {
-												// topThreeList[i].workerPerAlleybiz.total_work가 비어 있지 않으면 
-												dataArrSub = [
-														topThreeList[i].livingPerAlleybiz.totalLiving,
-														topThreeList[i].flowPerAlleybiz.total_flow,
-														topThreeList[i].workerPerAlleybiz.total_work,
-														topThreeList[i].storePerAlleybiz.open_percent,
-														topThreeList[i].storePerAlleybiz.store_count ];
-
-											} else {
-												// topThreeList[i].workerPerAlleybiz.total_work가 비어 있으면
-												// topThreeList[i].workerPerAlleybiz.total_work가 비어 있지 않으면 
-												dataArrSub = [
-														topThreeList[i].livingPerAlleybiz.totalLiving,
-														topThreeList[i].flowPerAlleybiz.total_flow,
-														0,
-														topThreeList[i].storePerAlleybiz.open_percent,
-														topThreeList[i].storePerAlleybiz.store_count ];
-											}
-										} else if (topThreeList[i].workerPerAlleybiz == null) {
-											dataArrSub = [
-													topThreeList[i].livingPerAlleybiz.totalLiving,
-													topThreeList[i].flowPerAlleybiz.total_flow,
-													0,
-													topThreeList[i].storePerAlleybiz.open_percent,
-													topThreeList[i].storePerAlleybiz.store_count ];
-										} else {
-
-										}
-
-										dataEstimatedArr = [ topThreeList[i].mlresult.estmt_SALES ];
-
-										for (var i = 0; i < topThreeList.length; i++) {
-											if (topThreeList[i].mlresult != null) {
-												dataEstimatedArr
-														.push(topThreeList[i].mlresult.estmt_SALES);
-												console.log(dataEstimatedArr);
-											}
-										}
-
-										// 종합 평가 점수 구하는 함수
-										var totalEstimatedScore = 0;
-										for (var i = 0; i < dataArr.length; i++) {
-											totalEstimatedScore += dataArr[i];
-										}
-
-										var avgEstimatedScore = totalEstimatedScore
-												/ dataArr.length;
-										$('#expectedTotalEstimateScore').text(
-												avgEstimatedScore);
-										for (var i = 0; i < 5; i++) {
-											backCol = [
-													'rgba(255, 255, 255, 0)',
-													'rgba(255, 255, 255, 0)',
-													'rgba(255, 255, 255, 0)',
-													'rgba(255, 255, 255, 0)' ];
-											if (0 <= dataArr[i]
-													&& dataArr[i] <= 25) {
-												backCol[0] = 'rgba(255, 99, 132)';
-												gradeArr.push("매우위험");
-											}
-											if (26 <= dataArr[i]
-													&& dataArr[i] <= 50) {
-												backCol[1] = 'rgba(255,166,80)';
-												gradeArr.push("위험");
-											}
-											if (51 <= dataArr[i]
-													&& dataArr[i] <= 75) {
-												backCol[2] = 'rgba(86,232,164)';
-												gradeArr.push("보통");
-											}
-											if (76 <= dataArr[i]
-													&& dataArr[i] <= 100) {
-												backCol[3] = 'rgba(43,143,239)';
-												gradeArr.push("좋음");
-											}
-											backColArr.push(backCol);
-										}
-										// 창업위험지수 그래프 >> 배열의 0번째
-										var dangerChart = document
-												.getElementById("dangerChart")
-												.getContext('2d');
-										var dangerChartA = new Chart(
-												dangerChart,
-												{
-													type : 'doughnut',
-													data : {
-														labels : [ "매우위험",
-																"위험", "보통",
-																"좋음" ],
-														datasets : [ {
-															data : [ 25, 25,
-																	25, 25 ],
-															backgroundColor : backColArr[0],
-															borderColor : '#000000'
-														} ]
-													},
-													options : {
-														tooltips : {
-															enabled : false
-														},
-														legend : {
-															display : false
-														},
-														circumference : 1 * Math.PI,
-														rotation : 1 * Math.PI,
-														title : {
-															display : true,
-															text : '창업위험지수'
-																	+ ': '
-																	+ gradeArr[0],
-															position : 'bottom',
-															fontColor : '#000000'
-														}
-													}
-												});
-										// 과밀지수 그래프 >> 배열의 1번째
-										var densityChart = document
-												.getElementById("densityChart")
-												.getContext('2d');
-										var densityChartA = new Chart(
-												densityChart,
-												{
-													type : 'doughnut',
-													data : {
-														labels : [ "매우위험",
-																"위험", "보통",
-																"좋음" ],
-														datasets : [ {
-															data : [ 25, 25,
-																	25, 25 ],
-															backgroundColor : backColArr[1],
-															borderColor : '#000000'
-														} ]
-													},
-													options : {
-														tooltips : {
-															enabled : false
-														},
-														legend : {
-															display : false
-														},
-														circumference : 1 * Math.PI,
-														rotation : 1 * Math.PI,
-														title : {
-															display : true,
-															text : '과밀지수'
-																	+ ': '
-																	+ gradeArr[1],
-															position : 'bottom',
-															fontColor : '#000000'
-														}
-													}
-												});
-										// 활성도 그래프 >> 배열의 2번째
-										var activationChart = document
-												.getElementById(
-														"activationChart")
-												.getContext('2d');
-										var activationChartA = new Chart(
-												activationChart,
-												{
-													type : 'doughnut',
-													data : {
-														labels : [ "매우위험",
-																"위험", "보통",
-																"좋음" ],
-														datasets : [ {
-															data : [ 25, 25,
-																	25, 25 ],
-															backgroundColor : backColArr[2],
-															borderColor : '#000000'
-														} ]
-													},
-													options : {
-														tooltips : {
-															enabled : false
-														},
-														legend : {
-															display : false
-														},
-														circumference : 1 * Math.PI,
-														rotation : 1 * Math.PI,
-														title : {
-															display : true,
-															text : '활성도'
-																	+ ': '
-																	+ gradeArr[2],
-															position : 'bottom',
-															fontColor : '#000000'
-														}
-													}
-												});
-
-										// 성장가능성 그래프 >> 배열의 3번째
-										var potentialChart = document
-												.getElementById(
-														"potentialChart")
-												.getContext('2d');
-										var potentialChartA = new Chart(
-												potentialChart,
-												{
-													type : 'doughnut',
-													data : {
-														labels : [ "매우위험",
-																"위험", "보통",
-																"좋음" ],
-														datasets : [ {
-															data : [ 25, 25,
-																	25, 25 ],
-															backgroundColor : backColArr[3],
-															borderColor : '#000000'
-														} ]
-													},
-													options : {
-														tooltips : {
-															enabled : false
-														},
-														legend : {
-															display : false
-														},
-														circumference : 1 * Math.PI,
-														rotation : 1 * Math.PI,
-														title : {
-															display : true,
-															text : '성장가능성'
-																	+ ': '
-																	+ gradeArr[3],
-															position : 'bottom',
-															fontColor : '#000000'
-														}
-													}
-												});
-										// 안전도 그래프 >> 배열의 4번째
-										var safeChart = document
-												.getElementById("safeChart")
-												.getContext('2d');
-										var safeChartA = new Chart(
-												safeChart,
-												{
-													type : 'doughnut',
-													data : {
-														labels : [ "매우위험",
-																"위험", "보통",
-																"좋음" ],
-														datasets : [ {
-															data : [ 25, 25,
-																	25, 25 ],
-															backgroundColor : backColArr[4],
-															borderColor : '#000000'
-														} ]
-													},
-													options : {
-														tooltips : {
-															enabled : false
-														},
-														legend : {
-															display : false
-														},
-														circumference : 1 * Math.PI,
-														rotation : 1 * Math.PI,
-														title : {
-															display : true,
-															text : '안전도'
-																	+ ': '
-																	+ gradeArr[4],
-															position : 'bottom',
-															fontColor : '#000000'
-														}
-													}
-												});
-
-										// 메인 레이더 차트
-										var mainRadarChart = document
-												.getElementById(
-														"mainRadarChart")
-												.getContext('2d');
-										var mainRadarChartA = new Chart(
-												mainRadarChart,
-												{
-													type : 'radar',
-													data : {
-														labels : [ '창업위험지수',
-																'과밀지수', '활성도',
-																'성장가능성', '안전도' ],
-														datasets : mainRadarDataSets(
-																dataArr,
-																topThreeList)
-													},
-													options : {
-														legend : {
-															display : true,
-															position : 'left',
-															labels : {
-																fontColor : '#000000'
-															}
-														},
-														circumference : 1 * Math.PI,
-														rotation : 1 * Math.PI,
-														title : {
-															display : true,
-															text : 'MAIN CHART',
-															position : 'top',
-															fontColor : '#000000'
-														}
-													}
-												});
-
-										// 매출액 차트
-										var salesAmount = document
-												.getElementById(
-														"salesAmountChart")
-												.getContext('2d');
-										var salesAmountChart = new Chart(
-												salesAmount,
-												{
-													type : 'bar',
-													data : {
-														labels : salesLabels(topThreeList),
-														datasets : [ {
-															label : '매출액',
-															data : dataEstimatedArr,
-															backgroundColor : [
-																	'rgba(165, 223, 249, 0.3)',
-																	'rgba(239, 82, 133, 0.3)',
-																	'rgba(96, 197, 186, 0.3)',
-																	'rgba(254, 238, 125, 0.3)' ],
-															borderColor : [
-																	'rgba(165, 223, 249)',
-																	'rgba(239, 82, 133)',
-																	'rgba(96, 197, 186)',
-																	'rgba(254, 238, 125)' ],
-															borderWidth : 1
-														} ]
-													},
-													options : {
-														legend : {
-															display : false
-														},
-														circumference : 1 * Math.PI,
-														rotation : 1 * Math.PI,
-														title : {
-															display : true,
-															text : '매출액',
-															position : 'top'
-														}
-													}
-												}); // 매출액 차트 끝나는 부분
-									
-									}
-								}
-								setTimeout(function() {
-
-									// 1초 후 작동해야할 코드
-									// 호준 : 여러 개 마커 생성, 골목상권 원 생성, 골목상권으로 이동
-									searchAndMark();
-									searchAlley($('#resultAlleyBiz').text());
-								}, 500);
-
-								setTimeout(function() {
-									addEventsMarkers(Markers, filter);
-									map2.relayout();
-								}, 1100);
-
-								console.log(Markers);
 							});
 		</script>
 
@@ -2999,21 +3052,18 @@
 													var clickedVillage = alleyBizFullName[1];
 
 													// 부동산 매물 분석 부분 -> 지도 및 로드뷰 생성
-													var mapWrapper = document
-															.getElementById('mapWrapper'); //지도를 감싸고 있는 DIV태그
+													var mapWrapper = document.getElementById('mapWrapper'); //지도를 감싸고 있는 DIV태그
 
 													var geocoder2 = new daum.maps.services.Geocoder(); // 주소-좌표 변환 객체를 생성합니다
 
 													// 변환된 좌표를 저장할 좌표 객체 생성
 													var coords2;
 
-													console
-															.log('선택된 Village 어디여?'
+													console.log('선택된 Village 어디여?'
 																	+ clickedVillage);
 													// 구 값이 바뀌면, 해당 구 중심 좌표로 이동
 													//for(var k = 0; k <  )
-													geocoder2
-															.addressSearch(
+													geocoder2.addressSearch(
 																	clickedVillage,
 																	function(
 																			result,
@@ -3056,8 +3106,7 @@
 																						content : content2
 																					});
 
-																			infowindow2
-																					.open(
+																			infowindow2.open(
 																							map2,
 																							marker2); // marker2 인포윈도우를 map2에 표시
 
@@ -3087,28 +3136,20 @@
 																					});
 
 																			//로드뷰 toggle함수
-																			function toggleRoadview(
-																					position) {
+																			function toggleRoadview(position) {
 																				//전달받은 좌표(position)에 가까운 로드뷰의 panoId를 추출하여 로드뷰를 띄웁니다
-																				rvClient
-																						.getNearestPanoId(
-																								position,
-																								50,
-																								function(
-																										panoId) {
+																				rvClient.getNearestPanoId(position,50,
+																								function(panoId) {
 																									if (panoId === null) {
 																										rvContainer.style.display = 'none'; //로드뷰를 넣은 컨테이너를 숨깁니다
 																										mapWrapper.style.width = '100%';
-																										console
-																												.log('들어옴여');
+																										console.log('들어옴여');
 																										map2
 																												.relayout();
 																									} else {
-																										console
-																												.log('들어옴여2');
+																										console.log('들어옴여2');
 																										mapWrapper.style.width = '50%';
-																										map2
-																												.relayout(); //지도를 감싸고 있는 영역이 변경됨에 따라, 지도를 재배열합니다
+																										map2.relayout(); //지도를 감싸고 있는 영역이 변경됨에 따라, 지도를 재배열합니다
 																										rvContainer.style.display = 'block'; //로드뷰를 넣은 컨테이너를 보이게합니다
 																										rv
 																												.setPanoId(
@@ -3174,8 +3215,9 @@
 			$("#mamulCertify").on("click", function() {
 				console.log(map2);
 				setTimeout(function() {
+					makeInfos(Markers);
 					map2.relayout();
-				}, 300);
+				}, 350);
 			});
 		</script>
   <!--===============================================================================================-->
