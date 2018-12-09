@@ -42,36 +42,6 @@ public class LoanController{
 		return "/loanResult/loanResult";
 	}
 	
-	
-	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/register")
-	public String registerLoan(Loan loan, RedirectAttributes rttr) {
-		log.info("등록된 대출상품 : " + loan);
-		service.insertLoan(loan);
-		rttr.addFlashAttribute("result", loan.getLoanId());
-		return "redirect:/admin/loanlist";
-	}
-	
-	
-	@PostMapping("/update")
-	public String modifyLoan(Loan loan, RedirectAttributes rttr) {
-		log.info("수정된 대출상품 : " + loan + "번");
-		
-		if(service.updateLoan(loan)) {
-			rttr.addFlashAttribute("result", "수정 성공"); 
-		}
-		
-		return "redirect:/admin/loanlist";
-	}
-	
-	
-	@GetMapping(value="/loan/{loanId}", produces = {MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<Loan> getCreditRate(@PathVariable("loanId") int loanId) {
-		System.out.println("비동기 들어옴 ?");
-		log.info("get: " + loanId + "등급");
-		System.out.println("비동기 나감 ?");
-		return new ResponseEntity<>(service.readLoan(loanId), HttpStatus.OK);
-	}
 }
 
 

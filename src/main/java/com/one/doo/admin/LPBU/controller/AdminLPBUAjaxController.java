@@ -30,11 +30,9 @@ public class AdminLPBUAjaxController {
 				//new ResponseEntity<>(service.answerLPBU(lpbuNo), HttpStatus.OK);
 	}
 
-	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH }, 
-								value = "/{lpbuNo}", consumes = "application/json", 
-								produces = {MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> answerLpbu(@RequestBody LPBU lpbu,  @PathVariable("lpbuNo") int lpbuNo) {
-		lpbu.setLpbuNo(lpbuNo);
+	@RequestMapping(method = {RequestMethod.PUT}, 
+								value = "/{lpbuNo}", produces = {MediaType.TEXT_PLAIN_VALUE })
+	public ResponseEntity<String> answerLpbu(@PathVariable("lpbuNo") int lpbuNo) {
 		return service.answerLPBU(lpbuNo) 
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
