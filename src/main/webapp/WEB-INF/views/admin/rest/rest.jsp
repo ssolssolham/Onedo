@@ -84,24 +84,25 @@ desired effect
 		  	<td>${url.method }</td>
 		  	<td>${url.auth }</td>
 		  </tr>
-		  <c:if test="${fn:length(url.paramList) gt 1 }">
+		  <c:if test="${fn:length(url.paramList) ge 1 }">
  		  	<tr>
-		  		<th style="text-align: center; background-color: #EAEAEA;" rowspan="${fn:length(url.paramList)+2}">요청 파라미터</th>
+		  		<th style="text-align: center; background-color: #EAEAEA;" rowspan="${fn:length(url.paramList)+2}">파라미터</th>
 		  	</tr>
  			<tr style="background-color: #EAEAEA;">
+		  		<th>type</th>
 		  		<th>key</th>
 		  		<th>value</th>
-		  		<th>type</th>
 		  		<th>설명</th>
 		  	</tr>
 		  	<c:forEach items="${url.paramList}" var="param" varStatus="status">
 		  		<tr>
+		  		  <td>${url.paramList[status.index].type}</td>
 		  		  <td>${url.paramList[status.index].key}</td>
 		  		  <td>${url.paramList[status.index].value}</td>
-		  		  <td>${url.paramList[status.index].type}</td>
 		  		  <td>${url.paramList[status.index].description}</td>
 		  		</tr>
 		  	</c:forEach>
+		  	
 		  </c:if>
 		  </c:forEach>
 		</tbody>

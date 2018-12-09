@@ -77,21 +77,8 @@ public class MemberController{
 	@PostMapping("/regist") //회원가입요청
 	public String regist(@ModelAttribute("member") Member member, BindingResult bindingResult, Model model) {
 		log.info("--------regist------------");
-		// 유효성 체크
-		//this.validator.validate(member, bindingResult);
-		
-//		MemberValidator validator = new MemberValidator();
-//		validator.validate(member, bindingResult);
-//		if(bindingResult.hasErrors()) {
-//			log.info("서버단 유효성 걸림...");
-//			model.addAttribute("errors", bindingResult);
-//			return "redirect:/regist";
-//		}else {
-//			log.info("서버단 유효성 통과...");
-//			log.info("들어온 값으로 구성된 member객체: "+member);
 			memberService.regist(member);
 			return "index";
-//		}
 	}
 	
 	//아이디 중복체크
