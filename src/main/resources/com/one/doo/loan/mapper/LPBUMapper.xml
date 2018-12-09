@@ -100,7 +100,7 @@
 	<select id="getTotalLPBU" resultType="int">
 		SELECT count(*) FROM LPBU
 		<![CDATA[
-			WHERE loan_num > 0
+			WHERE lpbu_num > 0
 		]]>
 	</select>
 

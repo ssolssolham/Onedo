@@ -13,7 +13,6 @@ public interface LPBUMapper {
 
 	public List<HashMap<String, Object>> getLPBUList(String userId);
 	
-	
 	/* 관리자용 기능	*/
 	public int deleteLPBU(int lpbuNo);
 
