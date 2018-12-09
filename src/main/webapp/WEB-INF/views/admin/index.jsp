@@ -29,12 +29,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <!-- Main content -->
 <section class="content container-fluid">
+<div class="box">
+            <div class="box-header">
+            <h3 class="box-title">차트</h3>
+            <div class="box-body">
+<div class="chart-body"><canvas id="myChart" width="200px" height="50px"></canvas></div>
+</div>
+</div>
   <div class="box">
             <div class="box-header">
               <h3 class="box-title">공지관리</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
+            
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
@@ -54,7 +62,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <td>11.28</td>
                   <td>X</td>
                 </tr>
-                </tfoot>
               </table>
             </div>
             <!-- /.box-body -->
@@ -170,4 +177,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/plugin_js.jsp"/>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script>
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
 </html>

@@ -169,12 +169,13 @@ function beforeSubmit() {
         } else {
       	 var target = document.getElementById('snackbar');
 	  	 target.innerHTML = "아이디, 비밀번호를 확인하세요.";
-	  	//alert("아이디, 비밀번호를 확인하세요.");
 	  	 toast(); 
         }
       },
       error : function(xhr) {
-        alert("통신불가");
+    	 var target = document.getElementById('snackbar');
+ 	  	 target.innerHTML = "서버와의 연결이 끊겼습니다. 인터넷 연결 상태를 확인하세요";
+ 	  	 toast();
       }
     });
     
