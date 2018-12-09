@@ -65,7 +65,6 @@
 	<mybatis-spring:scan base-package="com.one.doo.metadata.url.mapper"/>
 	<mybatis-spring:scan base-package="com.one.doo.metadata.table.mapper"/>
 
-	<!-- 호준 -->	
 	<mybatis-spring:scan base-package="com.one.doo.alleybiz.mapper"/>
 	<mybatis-spring:scan base-package="com.one.doo.areacode.mapper"/>
 	<mybatis-spring:scan base-package="com.one.doo.cobb.mapper"/>
@@ -80,7 +79,7 @@
 	<mybatis-spring:scan base-package="com.one.doo.salespercobb.mapper"/>
 	<mybatis-spring:scan base-package="com.one.doo.storeperalleybiz.mapper"/>
 	<mybatis-spring:scan base-package="com.one.doo.workerperalleybiz.mapper"/>
-
+	<mybatis-spring:scan base-package="com.one.doo.adbd.mapper"/>
 	
 	
 	<!-- 서비스등록 -->	
@@ -92,6 +91,7 @@
 	<context:component-scan base-package="com.one.doo.board.service"/>
 	<context:component-scan base-package="com.one.doo.metadata.url.service"/>
 	<context:component-scan base-package="com.one.doo.metadata.table.service"/>
+	<context:component-scan base-package="com.one.doo.adbd.service"/>
 	<!-- <context:component-scan base-package="com.one.doo.member"/>-->
 	<!--AOP 프록시 설정-->
 	<aop:aspectj-autoproxy/>
