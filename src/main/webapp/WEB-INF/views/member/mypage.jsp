@@ -331,7 +331,7 @@ img {
                                        <li><label>요청시간 : &nbsp;</label></li>
                                        <li><label>업무 담당자 : &nbsp;</label>박의수</li>
                                        <c:if test="${reserve.get('ISANSWERED') == true}"/>
-                                       <li><label>상담완료시간 : &nbsp;</label>값을 넣어야 함.</li>                
+                                       <li><label>상담완료시간 : &nbsp;</label>값을 넣어야 함.</li>  <!--  관리자가 변경하는 순간 update -->               
                                        <c:if test="${reserve.get('ISANSWERED') == false}"/>
                                        <li><label>진행상태 : &nbsp;</label>대기 중</li>
                                        <li><label>상세보기 : &nbsp;</label><a href="${reserve.get('DETAIL_URL')}">상세보기</a></li>

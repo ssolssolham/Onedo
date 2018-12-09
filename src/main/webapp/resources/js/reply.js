@@ -16,13 +16,11 @@ var replyService = (function() {
 			},
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
-				alert("add..!"+result);
 				if (callback) {
 					callback(result);
 				}
 			},
 			error : function(xhr, status, er) {
-				alert("비동기오류.."+er);
 				if (error) {
 					error(er);
 				}
@@ -53,7 +51,6 @@ var replyService = (function() {
 
 	
 	function remove(rno, callback, error) {
-		alert("remove서비스들어옴");
 		$.ajax({
 			type : 'delete',
 			url : '/replies/' + rno,

@@ -16,7 +16,7 @@ public interface LoanMapper {
 	
 	/* 관리자용 기능 */
 	//새로운 대출상품 등록
-	public void insertLoan(Loan loan);
+	public int insertLoan(Loan loan);
 
 	//대출상품 정보 수정
 	public int updateLoan(Loan loan);

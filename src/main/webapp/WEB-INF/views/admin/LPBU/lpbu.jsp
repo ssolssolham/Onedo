@@ -216,8 +216,27 @@ div.panel.show {
   background: #EA7B00;
   color: #fff;
 }
-</style>
 
+
+/* 하이차트  */
+@import 'https://code.highcharts.com/css/highcharts.css';
+
+#container {
+  height: 400px;
+  max-width: 800px;
+  min-width: 320px;
+  margin: 0 auto;
+}
+.highcharts-pie-series .highcharts-point {
+  stroke: #EDE;
+  stroke-width: 2px;
+}
+.highcharts-pie-series .highcharts-data-label-connector {
+  stroke: silver;
+  stroke-dasharray: 2, 2;
+  stroke-width: 2px;
+}
+</style>
 
 </head>
 <!-- HEAD -->
@@ -321,26 +340,31 @@ desired effect
                         </colgroup>
                         <thead>
                            <tr>
-                              <th style="text-align: center;">상품번호</th>
-                              <th style="text-align: center;">상품유형</th>
-                              <th style="text-align: center;">상품구분</th>
-                              <th style="text-align: center;">상품이름</th>
-                              <th style="text-align: center;">업데이트날짜</th>
-                              <th style="text-align: center;">예약횟수</th>
-                              <th style="text-align: center;">판매변경</th>
+                              <th style="text-align: center;">번호</th>
+                              <th style="text-align: center;">상품명</th>
+                              <th style="text-align: center;">유저명</th>
+                              <th style="text-align: center;">대출금액</th>
+                              <th style="text-align: center;">요청시간</th>
+                              <th style="text-align: center;">예약시간</th>
+                              <th style="text-align: center;">답변처리</th>
                            </tr>
                         </thead>
                         <tbody>
                         
                           <c:forEach items="${list}" var="lpbu">
                               <tr>
-                                <td style="text-align:center;">${loan.get('LOAN_ID')}</td>
-                                <td style="text-align:cdnter; padding-left: 7px;"></td>
-                                <td style="text-align:center;"></td>
-                                <td style="text-align:center;"></td>
-                                <td style="text-align:center;"></td>
-                                <td style="text-align:center;"></td>
-                                <td style="text-align:center;"><button type="button">able</button></td>
+                                <td style="text-align:center;">${lpbu.get('RN')}</td>
+                                <td style="text-align:center;">${lpbu.get('LOAN_NAME')}</td>
+                                <td style="text-align:cdnter; padding-left: 7px;">${lpbu.get('REQUEST_BM')}</td>
+                                <td style="text-align:center;">${lpbu.get('USERNAME')}</td>
+                                <td style="text-align:center;">${lpbu.get('REQUESTTIME')}</td>
+                                <td style="text-align:center;">${lpbu.get('RESERVE_TIME')}</td>
+                                <c:if test="${lpbu.get('ISANSWERED') == false}">
+                                <td style="text-align:center;"><button type="button" name="commit" value="${lpbu.get('LPBU_NUM')}">완료하기</button></td>
+                                </c:if>
+                                <c:if test="${lpbu.get('ISANSWERED') == true}">
+                                <td style="text-align:center;"><input type="button" name="complete" disabled>처리완료</td>
+                                </c:if>
                               </tr>
                          </c:forEach>
                         </tbody>
@@ -374,6 +398,7 @@ desired effect
                 <button class="accordion">대출예약 통계</button>
                 <div class="panel">
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                      <div id="container"></div>
                 </div>
                 
             </div>
@@ -392,19 +417,82 @@ desired effect
 </div>
 <!-- ./wrapper -->
 
+<!-- 하이차트  -->
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script>
+Highcharts.chart('container', {
+
+    chart: {
+        styledMode: true
+    },
+
+    title: {
+        text: 'Pie point CSS'
+    },
+
+    xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
+
+    series: [{
+        type: 'pie',
+        allowPointSelect: true,
+        keys: ['name', 'y', 'selected', 'sliced'],
+        data: [
+            ['Apples', 29.9, false],
+            ['Pears', 71.5, false],
+            ['Oranges', 106.4, false],
+            ['Plums', 129.2, false],
+            ['Bananas', 144.0, false],
+            ['Peaches', 176.0, false],
+            ['Prunes', 135.6, true, true],
+            ['Avocados', 148.5, false]
+        ],
+        showInLegend: true
+    }]
+});
+
+</script>
 <!-- REQUIRED JS SCRIPTS -->
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/plugin_js.jsp"/>
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <script>
 var acc = document.getElementsByClassName("accordion");
 var i;
-
 for (i = 0; i < acc.length; i++) {
     acc[i].onclick = function(){
         this.classList.toggle("active");
         this.nextElementSibling.classList.toggle("show");
   }
 }
+</script>
+
+
+<!-- 상담완료 버튼  -->
+<script>
+var btn = $("button[name=commit]");
+var i;
+for (var i = 0; i < btn.length; i++) {
+	console.log("제발");
+	btn[i].onclick = function(){
+		var lpbuNo = 3;
+		console.log(lpbuNo);
+  	 	$.ajax({
+  	 		type : 'put',
+	        url : '/admin/lpbu' + lpbuNo,
+	        // 서버로 값을 성공적으로 넘기면 처리하는 코드부분 입니다.
+	        success : function(data) {
+	            console.log("성공");
+	        },
+	        error : function(data){
+	        	console.log("비동기 오류");
+	        }
+	    });
+		
+	}
+}
+
 </script>
 </body>
 </html>

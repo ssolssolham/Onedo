@@ -14,10 +14,10 @@ public interface LoanService {
 	
 	/* 관리자용 기능 */
 	//새로운 대출상품 등록
-	public boolean insertLoan(Loan loan);
+	public int insertLoan(Loan loan);
 
 	//대출상품 정보 수정
-	public boolean updateLoan(Loan loan);
+	public int updateLoan(Loan loan);
 	
 	//대출상품 정보 상세읽기
 	public Loan readLoan(int lpbuNo);
@@ -34,5 +34,5 @@ public interface LoanService {
 	public int getTotalCount(Criteria cri);
 	
 	//판매중지
-	public boolean remove(int lpbuNo);
+	public int remove(int lpbuNo);
 }

@@ -52,7 +52,7 @@
             <br>
             <div class="form-group">
               <input type="password" name="userpw" id="userpw" class="w-full" 
-              	pattern="/^[A-Za-z0-9]{4,12}$/"
+              	pattern="^[A-Za-z0-9]{4,12}$"
                 placeholder="PW 입력 (12자 이내의 영문, 숫자 조합)"
                 required="required" style="padding-left: 10px; border-top: none; border-right: none; border-left: none; border-bottom: 2px solid lightgrey" />
             </div>
@@ -64,7 +64,7 @@
             </div>
             <br>
             <div class="form-group">
-              <input type="text" pattern="/^[가-힣]{2,4}$/" name="userName" class="w-full" placeholder="이름 입력 (2~4 자리의 한글 이름)" required="required"
+              <input type="text" pattern="^[가-힣]{2,4}$" name="userName" class="w-full" placeholder="이름 입력 (2~4 자리의 한글 이름)" required="required"
                 style="padding-left: 10px; border-top: none; border-right: none; border-left: none; border-bottom: 2px solid lightgrey" />
             </div>
             <br>
@@ -165,7 +165,6 @@ $(function() {
             	}
          	},
          	error : function(error) {
-            	alert("비동기 오류!");
          	}
       	});
    	});
@@ -213,7 +212,6 @@ $(function() {
 			$certifyBtn.appendTo(emailDiv);   
 			$('#checkCertify').on('click', function(e) {
 				var inputCode = $('#certifyCodeInput').val();
-				alert();
 				// 코드값 입력 안했을 경우
 				if(inputCode === ''){
 					var target = $('#snackbar');
@@ -232,7 +230,6 @@ $(function() {
 			});
          },
          error : function(request,status,error) {
-        	 alert("에러");
         	 console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
          }
       });
@@ -280,12 +277,10 @@ $('input[name="userName"]').focusout(function() {
 function beforeSubmit() {
 	console.log("제출전, 중복체크, 이메일인증 했는지..");
 	if(emailck && idck){
-		alert('트루로 들어옴');
 		return true;
 	} else {
 		var target = $('#snackbar');
 		target.text('아이디 중복체크와 이메일인증을 먼저 진행해 주세요!');
-		alert('false로 들어옴 ?');
 		toast();
 		return false;
 	}
