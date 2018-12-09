@@ -2267,8 +2267,7 @@
 																	// 클릭을 했는데 활성화가 되어있으면,
 																	else {
 																		for (var i = 0; i < pageOnes.length; i++) {
-																			console
-																					.log('?');
+																			console.log('?');
 																			if ($(this)[0] === pageOnes[i][0]) {
 																				console
 																						.log(i);
@@ -3260,7 +3259,6 @@
 			지도 container의 영역을 재계산하도록 명령할 수 있습니다.
 			 */
 			$("#mamulCertify").on("click", function() {
-				console.log(map2);
 				setTimeout(function() {
 					makeInfos(Markers);
 					map2.relayout();

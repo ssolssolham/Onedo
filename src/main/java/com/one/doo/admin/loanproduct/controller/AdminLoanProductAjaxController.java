@@ -14,7 +14,7 @@ import com.one.doo.loan.service.LoanService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
-@RequestMapping("/admin")
+@RequestMapping("/admin/loanProductAjax")
 @RestController
 @Log4j
 @AllArgsConstructor

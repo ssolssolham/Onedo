@@ -22,7 +22,7 @@ import lombok.extern.log4j.Log4j;
 public class AdminLPBUAjaxController {
 	private LPBUService service;
 
-	@GetMapping(value = "/{lpbuNo}", 
+	@GetMapping(value = "/read/{lpbuNo}", 
 			produces = { MediaType.APPLICATION_XML_VALUE,  MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public ResponseEntity<LPBU> read(@PathVariable("lpbuNo") int lpbuNo) {
 		log.info("get: " + lpbuNo);
@@ -30,8 +30,7 @@ public class AdminLPBUAjaxController {
 				//new ResponseEntity<>(service.answerLPBU(lpbuNo), HttpStatus.OK);
 	}
 
-	@RequestMapping(method = {RequestMethod.PUT}, 
-								value = "/{lpbuNo}", produces = {MediaType.TEXT_PLAIN_VALUE })
+	@GetMapping( value = "/modify/{lpbuNo}", produces = {MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> answerLpbu(@PathVariable("lpbuNo") int lpbuNo) {
 		return service.answerLPBU(lpbuNo) 
 				? new ResponseEntity<>("success", HttpStatus.OK)
