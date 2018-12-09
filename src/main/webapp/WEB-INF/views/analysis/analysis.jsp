@@ -10,6 +10,48 @@
   <!-- header include 종료 -->
     
 </head>
+<style>
+.term {
+  position:relative;
+  border-bottom:1px dashed #555;
+  text-decoration:none;
+}
+
+.term:hover > .annotation, .term.active > .annotation, .term:hover > .arrow-down, .term.active > .arrow-down, .annotation:hover {
+  display:block;
+}
+
+.annotation {
+  width: 15rem;
+  position: absolute;
+  background: #333;
+  color: #fff;
+  padding: .5rem;
+  display: none;
+  top: -3.75rem;
+  left: 0rem;
+  font-size:.75rem;
+  height:2rem;
+}
+
+.arrow-down {
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #333;
+  position:absolute;
+  display:none;
+  top:-.75rem;
+  left:.5rem;
+}
+
+.term.warn .annotation {
+  background:#ed911a;
+}
+
+.term.warn .arrow-down {
+  border-top: 10px solid #ed911a;
+}
+</style>
 <body class="animsition bg1-pattern">
   <!-- header include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/header.jsp"/>
@@ -188,7 +230,8 @@
                         <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
                           <!-- 창업 안전도 차트 -->
                           <div class="col-sm-4">
-                              <canvas id="safeChart" width="100%;"></canvas>
+                          	  <a class="term" data-component="tooltip" href="#">information<span class="annotation">This is an annotation that explains the word below</span><span class="arrow-down"></span></a>
+                              <canvas id="safeChart" class="term" data-component="tooltip" width="100%;"></canvas>
                           </div>
                           
                           <!-- 성장 가능성 차트 -->
