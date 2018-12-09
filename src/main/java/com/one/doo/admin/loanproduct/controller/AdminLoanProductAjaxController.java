@@ -21,6 +21,8 @@ import lombok.extern.log4j.Log4j;
 public class AdminLoanProductAjaxController {
 	private LoanService service;
 
+	
+	
 /*	@PostMapping(value = "/new", consumes = "application/json", produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> create(@RequestBody Loan loan) {
 
@@ -40,16 +42,6 @@ public class AdminLoanProductAjaxController {
 				//new ResponseEntity<>(service.toString(), HttpStatus.OK);
 	}
 
-	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH }, 
-								value = "/{lpbuNo}", consumes = "application/json", 
-								produces = {MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> answerLpbu(@RequestBody LPBU lpbu,  @PathVariable("lpbuId") int lpbuId) {
-		lpbu.setLpbuNo(lpbuId);;
-		return service.answerLPBU(lpbuId) 
-				? new ResponseEntity<>("success", HttpStatus.OK)
-				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-
-	}
 
 	@DeleteMapping(value = "/{lpbuNo}", produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> remove(@PathVariable("lpbuId") int lpbuId) {

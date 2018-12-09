@@ -28,13 +28,13 @@ public class LoanServiceImpl implements LoanService{
 	}
 
 	@Override
-	public void insertLoan(Loan loan) {
-		mapper.insertLoan(loan);
+	public int insertLoan(Loan loan) {
+		return mapper.insertLoan(loan);
 	}
 
 	@Override
-	public boolean updateLoan(Loan loan) {
-		return mapper.updateLoan(loan) == 1;
+	public int updateLoan(Loan loan) {
+		return mapper.updateLoan(loan);
 	}
 
 	@Override
@@ -63,8 +63,8 @@ public class LoanServiceImpl implements LoanService{
 	}
 
 	@Override
-	public boolean remove(int loanId) {
-		return false;
+	public int remove(int loanId) {
+		return 1;
 	}
 
 
