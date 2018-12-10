@@ -2046,3 +2046,16 @@ to {
 .dreamGothic {
 	font-family: a드림고딕4;
 }
+
+.counter {
+  display: inline-grid;
+  margin:1.5%;	
+  font-size:50px;
+  background-color: #27b2a5;
+  color: white;
+  width:200px;
+  border-radius: 50%;
+  height:200px;
+  vertical-align: middle;
+  align-items: center;
+}
