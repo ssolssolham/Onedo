@@ -5,7 +5,7 @@
 <mapper namespace="com.one.doo.facilitiesperalleybiz.mapper.FacilitiesPerAlleybizMapper">
 <select id="read" resultType="com.one.doo.facilitiesperalleybiz.domain.FacilitiesPerAlleybiz">
 select * from facilitiesperalleybiz
-where alleybizcode = #{AlleyBizCode} AND fpd_date LIKE '201807'
+where alleybizcode = #{AlleyBizCode} AND fpd_date LIKE '201809'
 </select>
 
 </mapper>

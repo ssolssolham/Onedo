@@ -24,7 +24,7 @@
 			</sql>
 	
 	
-	<select id="getLPBUList" resultType="Map" parameterType="Map">					
+	<select id="getLPBUList" resultType="Map" parameterType="String">					
 	SELECT	*
 	FROM    LPBU l
 				JOIN users u
@@ -53,7 +53,7 @@
 		             #{requestBM},
 		             '0',
 		             #{userPhone},
-		             TO_DATE(sysdate,'yyyy-mm-dd hh24:mi:ss'),
+		             sysdate,
 		             #{reasonLoan},
 		             TO_DATE(#{birthdate},'YYYY-MM-DD'))
 	</insert>
@@ -74,7 +74,7 @@
 					WHERE 	]]>
 						<include refid="criteria"></include>
 					<![CDATA[
-					rownum <= #{pageNum} * #{amount}
+					rownum <= #{pageNum} * #{amount} AND ISANSWERED = '0'
 					)
 				WHERE rn > (#{pageNum} -1) * #{amount}
 					]]>

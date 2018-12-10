@@ -878,6 +878,8 @@ function checkAgree(){
 		return false;
 	};
 	
+	$('input[name=userPhone]').val($("#numSelector1").val() + '-' + $("#numSelector2").val() + '-' + $("#numSelector3").val());
+	
 	if($("#reserveTimeSelector option:selected").val() == "시간 선택"){
 		target.innerHTML = '원하시는 시간대를 설정해주세요.';
 		toast();
@@ -938,7 +940,21 @@ $(function(){
            
 	//예약 시간 설정
 	var reserveTime = "";
-	var my_date_string = "2018-12-06 ";
+	var my_date_string = new Date();
+	var dd = my_date_string.getDate();
+	var mm = my_date_string.getMonth()+1; //January is 0!
+	var yyyy = my_date_string.getFullYear();
+
+	if(dd<10) {
+	    dd='0'+dd
+	} 
+
+	if(mm<10) {
+	    mm='0'+mm
+	} 
+
+	my_date_string = yyyy +'-'+ mm +'-'+dd+ " ";
+	
     $('#reserveTimeSelector').on('click', function(){
     	var job = $('#reserveTimeSelector option:selected').val();
     	var time = "";

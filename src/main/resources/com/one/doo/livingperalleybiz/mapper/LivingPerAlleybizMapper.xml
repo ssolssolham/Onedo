@@ -5,6 +5,6 @@
 <mapper namespace="com.one.doo.livingperalleybiz.mapper.LivingPerAlleybizMapper">
 <select id="read" resultType="com.one.doo.livingperalleybiz.domain.LivingPerAlleybiz">
 select * from livingperalleybiz
-where lap_date LIKE '201807' AND alleybizcode = #{AlleyBizCode}
+where lap_date LIKE '201809' AND alleybizcode = #{AlleyBizCode}
 </select>
 </mapper>

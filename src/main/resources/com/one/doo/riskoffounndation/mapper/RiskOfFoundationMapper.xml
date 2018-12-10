@@ -6,6 +6,6 @@
 <select id="read" resultType="com.one.doo.riskoffounndation.domain.RiskOfFoundation">
 	select *
 	from riskoffoundation
-	where areacode = #{AreaCode} AND rofpd_date LIKE '201807'
+	where areacode = #{AreaCode} AND rofpd_date LIKE '201809'
 </select>
 </mapper>

@@ -7,6 +7,6 @@
 	select * 
 	from WorkerPerAlleybiz
 	where alleybizcode = #{AlleyBizCode} 
-	      AND wpa_date LIKE '201807'
+	      AND wpa_date LIKE '201809'
 </select>
 </mapper>

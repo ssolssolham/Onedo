@@ -1,5 +1,7 @@
 package com.one.doo.loan.controller;
 
+import java.util.Calendar;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +34,7 @@ public class LPBUController{
 		service.insertLPBU(lpbu);
 		rttr.addFlashAttribute("list", service.getLPBUList(lpbu.getUserId()));
 		rttr.addFlashAttribute("result", "상담예약이 완료되었습니다.");
-		return "redirect:/loan/reserveList";
+		return ("redirect:/loan/reserveList?userId=" + lpbu.getUserId());
 	}
 	
 	@GetMapping("/reserveList")

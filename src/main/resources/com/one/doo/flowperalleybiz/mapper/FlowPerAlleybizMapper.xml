@@ -5,6 +5,6 @@
 <mapper namespace="com.one.doo.flowperalleybiz.mapper.FlowPerAlleybizMapper">
 <select id="read" resultType="com.one.doo.flowperalleybiz.domain.FlowPerAlleybiz">
 select * from flowperalleybiz
-where alleybizcode = #{AlleyBizCode} AND fpa_date LIKE '201807' 
+where alleybizcode = #{AlleyBizCode} AND fpa_date LIKE '201809' 
 </select>
 </mapper>
