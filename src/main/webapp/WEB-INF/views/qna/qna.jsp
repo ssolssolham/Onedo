@@ -167,6 +167,9 @@
 				</div>
 		</div>
 	</section>
+  <!-- footer include 시작 -->
+  <jsp:include page="${pageContext.request.contextPath}/resources/includes/footer.jsp"/>
+  <!-- footer include 종료 -->
 
 
       <!-- Modal HTML -->

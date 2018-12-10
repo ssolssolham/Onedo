@@ -127,13 +127,13 @@
 		var pool = "";
 		
 		if (type == "lowerLetter"){
-			pool = "abcdefghijklmnopqrstuvwxyz0123456789";
+			pool = "";
 		}
 		else if (type == "upperLetter"){
-			pool = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+			pool = "";
 		}
 		else if (type == "symbol"){
-			pool = ",.?/\\(^)![]{}*&^%$#'\"";
+			pool = "";
 		}
 		
 		var arr = pool.split('');
