@@ -42,12 +42,12 @@ public class MemberController{
 	
 	@GetMapping("/customLogout")
 	public void logoutGET(){
-		log.info("사용자 로그아웃 화면");
+		log.info("사용자 로그아웃 화면(get매핑)");
 	}
 	
 	@PostMapping("/customLogout")
 	public void logoutPOST(){
-		log.info("사용자 로그아웃 처리");
+		log.info("사용자 로그아웃 처리(post매핑)");
 	}
 	
 	@GetMapping("/loginForm")
