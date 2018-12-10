@@ -11,7 +11,7 @@ var replyService = (function() {
 			url : '/replies/new',
 			data : JSON.stringify(reply),
 			beforeSend : function(xhr){   
-				/*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+				/*데이터를 전송하기 전에 헤더에 csrf값을 설정한다..spring security에서 post방식 사용할때 필요*/
 				xhr.setRequestHeader(header, token);
 			},
 			contentType : "application/json; charset=utf-8",
@@ -68,8 +68,6 @@ var replyService = (function() {
 	}
 
 	function update(reply, callback, error) {
-
-		console.log("RNO: " + reply.rno);
 
 		$.ajax({
 			type : 'put',

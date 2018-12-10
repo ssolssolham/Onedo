@@ -386,13 +386,10 @@
 		        // replyer와 loginId가 같으면 수정삭제버튼 show, 
 		        var loginId = '${loginId}';
 		        if(reply.replyer == loginId){
-		        	alert("아이디같아");
 		        	modalInputReply.removeAttr("readonly");
 		        	modalModBtn.show();
-		        	// modalRemoveBtn.show();
 		        	$("#replyModal").modal("show");
 		        }else{
-		        	alert("아이디달라");
 		        	modalInputReply.attr("readonly", "readonly");
 		        }
 		        $("#replyModal").modal("show");

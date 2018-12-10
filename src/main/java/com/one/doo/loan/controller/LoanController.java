@@ -32,6 +32,12 @@ public class LoanController{
 	
 	private LoanService service;
 	
+	/**
+	 * 사용자 조건에 맞게 추천된 대출상품 리스트 반환
+	 * @param param
+	 * @param model
+	 * @return 결과페이지
+	 */
 	@GetMapping("/list")
 	public String list(@ModelAttribute("param") Parameter param, Model model) {
 		log.info("list : " + param);
