@@ -28,7 +28,7 @@
 				</div>
 			    <!-- 후기 게시판 상단 Nav 바 (새글 등록, 검색 기능) -->
 				<div class="card-body m-lr-50" >
-                    <table class="table" style="font-size: 1.9em;">
+                    <table class="table" style="font-size: 1.9em; font-family: a드림고딕4;">
                       <colgroup>
                         <col width="18%">
                         <col width="32%">
@@ -76,7 +76,7 @@
                       <tr>
                         <td colspan="4">
                           <!-- 게시물 내용 동적으로 불러오는 부분 -->
-                          <div id="reviewDetailContent" style="height: 300px;">
+                          <div id="reviewDetailContent" style="margin-top: 15px; height: 300px; margin-left: 75px; margin-right: 75px; margin-bottom: 15px;">
                           ${qna.content }
                           </div>
                         </td>
@@ -267,7 +267,7 @@
 		     for (var i = 0, len = list.length || 0; i < len; i++) {
 		       str +="<li class='left clearfix' data-rno='"+list[i].rno+"'>";
 		       str +="  <div><div class='header'><strong style='color:#27b2a5; font-size:20px;' class='primary-font'>["
-		    	   +(i+1)+"] 작성자 : "+list[i].replyer+"</strong>"; 
+		    	   +(i+1)+"] 관리자 : "+list[i].replyer+"</strong>"; 
 		       str +="    <small style='font-size:16px;' class='pull-right text-muted'>"
 		           +replyService.displayTime(list[i].replyDate)+"</small></div>";
 		       str +="<p style='font-size: 17px; color: black;'>"+list[i].reply+"</p></div></li>";

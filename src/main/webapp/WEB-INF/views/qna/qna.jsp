@@ -174,10 +174,10 @@
 								<c:set var="replycnt" value="${review.replycnt }"/>
 		                        <fmt:formatNumber value="${review.replycnt }" type="number" var="replycnt" />
 		                        <c:if test="${replycnt eq 0 }">
-								  <td>답변처리중</td>
+								  <td style="text-align: center;">답변처리중</td>
 								</c:if>
 								<c:if test="${replycnt gt 0 }">
-								   <td>답변완료(${replycnt })</td>
+								   <td style="text-align: center;">답변완료(${replycnt })</td>
 								</c:if>
 								</tr>
 							</c:forEach>
