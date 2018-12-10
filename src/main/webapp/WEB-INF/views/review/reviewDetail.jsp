@@ -118,6 +118,10 @@
 	  </div>
   </div>
 </section>
+  <!-- footer include 시작 -->
+  <jsp:include page="${pageContext.request.contextPath}/resources/includes/footer.jsp"/>
+  <!-- footer include 종료 -->
+
 
   <!-- 후기 수정 Modal HTML -->
   <div id="updateReviewModal" class="modal fade">

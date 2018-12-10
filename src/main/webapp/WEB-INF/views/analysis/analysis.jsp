@@ -114,8 +114,8 @@
                 style="width: 100%; min-height: 670px; margin-left: 22px;">
                 <div class="card-body">
                   <div class="form-group">
-                    <h2 class="card-title fw-b">Step 1. 구 선택</h2>
-                    <select class="form-control" id="districtSelect">
+                    <h2 class="card-title fw-b dreamGothic fs-22">Step 1. 구 선택</h2>
+                    <select class="form-control dreamGothic" style="font-size:16px; height:40px;" id="districtSelect">
                       <option default>전체</option>
                       <option>강남구</option>
                       <option>강동구</option>
@@ -145,11 +145,8 @@
                     </select>
                   </div>
                   <br>
-                  <div
-                    style="width: 100%; height: 2px; background-color: #27b2a5">&nbsp;</div>
-                  <br>
                   <div class="form-group">
-                    <h2 class="card-title fw-b">Step 2. 동 선택</h2>
+                    <h2 class="card-title fw-b dreamGothic fs-22">Step 2. 동 선택</h2>
                     <!-- Filter -->
                     <div class="panel-filter w-full p-t-10">
                       <div
@@ -169,34 +166,31 @@
                       </div>
                     </div>
                   </div>
-                  <div
-                    style="width: 100%; height: 2px; background-color: #27b2a5">&nbsp;</div>
-                  <br>
                   <div class="form-group">
-                    <h2 class="card-title fw-b">Step 3. 상권 유형 선택</h2>
+                    <h2 class="card-title fw-b dreamGothic fs-22">Step 3. 상권 유형 선택</h2>
                     <br>
                     <div id="regionFilter">
-                      <button style="width: 100%;"
-                        class="m-b-10 villageBtn">주택가</button>
-                      <button style="width: 100%;"
-                        class="m-b-10 villageBtn">대학가</button>
-                      <button style="width: 100%;"
-                        class="m-b-10 villageBtn">유흥가</button>
-                      <button style="width: 100%;"
-                        class="m-b-10 villageBtn">역세권</button>
-                      <button style="width: 100%;"
-                        class="m-b-10 villageBtn">오피스</button>
-                    </div>
+                    	<div class="col-sm-4">
+                    		<button style="width: 100px; height: 100px; border-radius: 50%;" class="m-b-10 villageBtn dreamGothic">주택가</button>
+                    		<button style="width: 100px; height: 100px; border-radius: 50%;" class="m-b-10 villageBtn dreamGothic">유흥가</button>
+                        </div>
+                        
+                    	<div class="col-sm-4">
+                    		<button style="width: 100px; height: 100px; border-radius: 50%;" class="m-b-10 villageBtn dreamGothic">대학가</button>
+                    		<button style="width: 100px; height: 100px; border-radius: 50%;" class="m-b-10 villageBtn dreamGothic">역세권</button>
+                    	</div>
+                    	
+                    	<div class="col-sm-4">
+                    		<button style="width: 100px; height: 100px; border-radius: 50%;" class="m-b-10 villageBtn dreamGothic">오피스</button>	
+                    	</div>
+	                    </div>
                   </div>
-                  <div
-                    style="width: 100%; height: 2px; background-color: #27b2a5">&nbsp;</div>
-                  <br>
                   <div class="form-group">
                     <button type="button"
-                      style="width: 49%; float: left;"
-                      id="analysisStartBtn">분석하기</button>
+                      style="width: 100%; "
+                      id="analysisStartBtn">분석하기</button><br><br>
                     <button type="button"
-                      style="width: 49%; float: right;"
+                      style="width: 100%; background-color: grey;"
                       id="resetFilterBtn">초기화</button>
                   </div>
                 </div>
@@ -230,11 +224,11 @@
               확인하시고, 대출 연계 서비스 까지 진행해보세요!</span> <br> <br> <br>
             <div style="text-align: center;" id="analysisResultBtnList">
               <!-- 분석 결과로 나오는 버튼 3개 -->
-              <button style="width: 25%;" class="resultBtn"
+              <button style="font-family: a드림고딕4; width: 25%;" class="resultBtn"
                 type="button" id="firstBtn"></button>
-              <button style="width: 25%;" class="resultBtn m-lr-20"
+              <button style="font-family: a드림고딕4; width: 25%;" class="resultBtn m-lr-20"
                 type="button" id="secondBtn"></button>
-              <button style="width: 25%;" class="resultBtn"
+              <button style="font-family: a드림고딕4; width: 25%;" class="resultBtn"
                 type="button" id="thirdBtn"></button>
             </div>
             <br> <br>
@@ -245,356 +239,355 @@
                 <!-- 결과 분석 후 나온 상권3개 버튼 클릭 시, 나타나는 탭 메뉴 시작 부분 -->
                 <div id="Navigation">
                   <ul id="primary">
-                    <li><a href="#Navigation" class="active">상권
-                        종합 분석</a></li>
-                    <li><a href="#Navigation" class="">상권 상세 분석</a></li>
-                    <li><a href="#Navigation" class=""
-                      id="mamulCertify">부동산 매물 확인</a></li>
+                    <li><a style="font-family: a드림고딕4;" href="#Navigation" class="active">상권 종합 분석</a></li>
+                    <li><a style="font-family: a드림고딕4;" href="#Navigation" class="">상권 상세 통계</a></li>
+                    <li><a style="font-family: a드림고딕4;" href="#Navigation" class="" id="mamulCertify">부동산 매물 확인</a></li>
                   </ul>
                 </div>
                 <div class="tab-bottom-bar"></div>
-
+				
+				
 
                 <!-- 분석 후 동적으로 나타나는 3개의 탭 저장하는 Container -->
                 <div id="Container">
                   <div id="Content">
                     <!-- 상권 종합 분석 결과 tab -->
-                    <div id="totalAnalysis"
-                      class="card-body bg1-pattern">
-                      <br> <span id="complexAnalResult"
-                        style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
-                        style="font: bold 20px a드림고딕4; font-size: 18px;">종합
-                        분석 결과</span><br> <br> <br>
-                      <!-- 종합 분석 결과 수치 데이터 들어가는 곳 -->
-                      <div class=""
-                        style="font-family: a드림고딕4; padding: 20px; background-color: white; max-width: 1400px; height: 500px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
-                        <div class="t-center" style="font-size: 3.0em;">
-                          분석일자 : <span style="color: #27b2a5;">2018.12.12</span>
-                        </div>
-                        <br>
-                        <div class="t-center" style="font-size: 3.0em;">
-                          <b> ※ 예상 매출액은 해당 상권의 카페업종들에 대한 Data를 기반으로
-                            분석하였습니다.</b>
-                        </div>
-                        <br>
-                        <div class="t-center" style="font-size: 3.0em;">
-                          <span style="color: #27b2a5;"
-                            id="resultDistrict"></span> <span
-                            style="color: #27b2a5;" id="resultVillage"></span>
-                          <span style="color: #27b2a5;"
-                            id="resultAlleyBiz"></span> 골목상권 카페 업종
-                        </div>
-                        <br> <br>
-                        <div class="col-sm-6 t-center">
-                          <!-- 종합 분석 결과 수치데이터 Column 1 -->
-                          <div style="font-size: 4.0em;">
-                            <b>&lt;카페 컨셉 추천&gt;</b>
-                          </div>
-                          <br> <br>
-                          <div style="font-size: 3.0em;">
-                            <span style="color: #27b2a5;">강남</span>구 주택가
-                            지역 카페는<br> <span
-                              style="color: #27b2a5;">20</span>대 유동인구가
-                            많고, <br> 특히 00의 소득 매출이 높아<br> <span
-                              style="color: #27b2a5;">00, 00, 00</span>
-                            등의 컨셉을 추천합니다.
-                          </div>
-                        </div>
-
-                        <div class="col-sm-6 t-center">
-                          <!-- 종합 분석 결과 수치데이터 Column 2 -->
-                          <div style="font-size: 4.0em;">
-                            &lt;예상 매출액&gt;<br> <br> 월 <span
-                              style="color: #27b2a5;"
-                              id="expectedSalesAccount"></span> 만원
-                          </div>
-                        </div>
-                      </div>
-                      <br> <br> <span
-                        style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
-                        style="font: bold 20px a드림고딕4; font-size: 18px;">해당
-                        상권의 지도</span><br> <br> <br>
-                      <!-- 지도 API 들어가는 곳 -->
-                      <div
-                        style="background-color: white; height: 500px; border-radius: 5px; max-width: 1400px; margin-right: 20px; margin-left: 20px;"
-                        id="staticMap"></div>
-                      <br>
-                      <!-- 종합 분석 결과 5대 지표 확인 -->
-                      <br> <span
-                        style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
-                        style="font: bold 20px a드림고딕4; font-size: 18px;">창업
-                        5대 지표 사항 분석</span><br> <br> <br>
-                      <!-- 첫번째 행 도넛 형 차트 -->
-                      <div class=""
-                        style="font-family: a드림고딕4; padding: 20px; background-color: white; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
-                        <div class="row"
-                          style="margin-top: 20px; margin-bottom: 20px;">
-                          <!-- 창업 안전도 차트 -->
-                          <div class="col-sm-4">
-<<<<<<< HEAD
-                            <canvas id="safeChart" width="100%;"></canvas>
-=======
-                          	  <a class="term" data-component="tooltip" href="#">information<span class="annotation">This is an annotation that explains the word below</span><span class="arrow-down"></span></a>
-                              <canvas id="safeChart" class="term" data-component="tooltip" width="100%;"></canvas>
->>>>>>> feature/전체_CSS_작업_7차_uk
-                          </div>
-
-                          <!-- 성장 가능성 차트 -->
-                          <div class="col-sm-4">
-                            <canvas id="potentialChart" width="100%;"></canvas>
-                          </div>
-
-                          <!-- 종합 평가 점수 -->
-                          <div class="col-sm-4 t-center"
-                            style="font-family: a드림고딕4">
-                            <div style="font-size: 4.0em;">
-                              &lt;종합 평가 점수&gt;<br> <span
-                                style="color: #27b2a5;"
-                                id="expectedTotalEstimateScore"></span>
-                              점
-                            </div>
-                          </div>
-                        </div>
-
-                        <!-- 두번째 행 도넛 형 차트 -->
-                        <div class="row">
-                          <!-- 활성도 차트 -->
-                          <div class="col-sm-4">
-                            <canvas id="activationChart" width="100%;"></canvas>
-                          </div>
-
-                          <!-- 창업위험지수 차트 -->
-                          <div class="col-sm-4">
-                            <canvas id="dangerChart" width="100%;"></canvas>
-                          </div>
-
-                          <!-- 과밀지수 차트 -->
-                          <div class="col-sm-4">
-                            <canvas id="densityChart" width="100%;"></canvas>
-                          </div>
-                        </div>
-                      </div>
-                      <br> <br> <span
-                        style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
-                        style="font: bold 20px a드림고딕4; font-size: 18px;">창업
-                        시 5개의 지표 분석</span><br> <br> <br>
-                      <!-- 메인 방사형, 서브 방사형 지표 -->
-                      <div class=""
-                        style="background-color: white; font-family: a드림고딕4; padding: 20px; color: white; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
-                        <div class="container"
-                          style="margin-top: 20px; padding-top: 20px; border-radius: 5px; padding-bottom: 20px;">
-                          <div class="col-sm-12">
-                            <canvas id="mainRadarChart" width="100%;"></canvas>
-                          </div>
-                        </div>
-                      </div>
-                      <br> <br> <span
-                        style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
-                        style="font: bold 20px a드림고딕4; font-size: 18px;">분석
-                        결과 도출된 상권의 예상 매출액 분석</span><br> <br> <br>
-                      <!--  막대 그래프 -->
-                      <div class=""
-                        style="background-color: white; font-family: a드림고딕4; padding: 20px; color: white; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
-                        <div class="row" style="margin-top: 20px;">
-                          <!-- 3개 상권의 예상 매출액 막대형 그래프 -->
-                          <div class="col-sm-12">
-                            <canvas id="salesAmountChart" width="100%;"></canvas>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <div id="totalAnalysis" class="card-body bg1-pattern">
+					 <!-- 지도 API 들어가는 곳 -->
+                      	<br>
+                      	<span style="font: bold 20px a드림고딕4; color: #27b2a5; margin-left: 20px;">●</span>&nbsp;&nbsp;<span
+                            	style="font: bold 20px a드림고딕4; font-size: 18px;">해당
+                            상권의 지도</span> <br><br>
+                      	<div style="background-color: white; height: 500px; border-radius: 5px; max-width: 1400px; margin-right: 20px; margin-left: 20px;" id="staticMap"></div>
+                      	<br>
+                      <div class="container" style="max-width:1387px;">
+							<div class="ziehharmonika">
+								 <!-- 종합 분석 결과 수치 데이터 들어가는 곳 -->
+								<h3 style="border:2px solid #27b2a5">
+									<span style="font: bold 20px a드림고딕4; font-size: 18px;">종합 분석 결과 요약</span>
+								</h3>
+								<div>
+								  <p>
+								  <div class=""
+                        			style="font-family: a드림고딕4; padding: 20px; background-color: white; max-width: 1400px; height: 500px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
+                       			<div class="t-center" style="font-size: 3.0em;">
+                          			분석일자 : <span style="color: #27b2a5;">2018.12.13</span>
+                        		</div>
+		                        <br>
+		                        <div class="t-center" style="font-size: 3.0em;">
+		                          <b> ※ 예상 매출액은 해당 상권의 카페업종들에 대한 Data를 기반으로
+		                            분석하였습니다.</b>
+		                        </div>
+									<div class="t-center" style="font-size: 3.0em;">
+			                          <span style="color: #27b2a5;"
+			                            id="resultDistrict"></span> <span
+			                            style="color: #27b2a5;" id="resultVillage"></span>
+			                          <span style="color: #27b2a5;"
+			                            id="resultAlleyBiz"></span> 골목상권 카페 업종
+			                        </div>
+			                        <br><br>
+			                        <div class="col-sm-12 t-center" >
+			                        	<div class="t-center" style="font-size:4.0em;">&lt;쉽고! 빠르게! 예상 매출액 한눈에 이해하기!&gt;</div>
+			                        	<div class="col-sm-4 t-center">
+			                        		<div style="font-size:2.5em;">1. 월 <span style="color: #27b2a5;">예상 매출액</span>은요?</div>
+			                        		<div style="font-size:2.5em; color: white;">&nbsp;잔당 4000원 기준 &nbsp;</div>
+											<div class="counter" id="expectedSalesAccount" data-count="">0</div><span style="font-size: 2.0em;">만원</span>
+			                        	</div>
+			                        	<div class="col-sm-4 t-center dreamGothic">
+			                        		<div style="font-size:2.5em;">2. <span style="color: #27b2a5;">한 달</span>에 몇잔?<br>(잔 당 4000원 기준)</div>
+											<div class="counter" id="expectedSalesPerMonth" data-count="">0</div><span style="font-size: 2.0em;">잔</span>
+			                        	</div>
+			                        	<div class="col-sm-4 t-center">
+			                        		<div style="font-size:2.5em;">3. <span style="color: #27b2a5;">하루</span>에 몇잔?	<br>(잔 당 4000원 기준)</div>
+											<div class="counter" id="expectedSalesPerDay" data-count="">0</div><span style="font-size: 2.0em;">잔</span>	                          
+			                        	</div> 
+			                        </div>
+			
+			                        <div class="col-sm-6 t-center">
+			                          <!-- 종합 분석 결과 수치데이터 Column 2 -->
+		                        	</div>
+	                        	</p>
+		                      </div>
+							</div>
+							
+							
+							<h3 style="border:2px solid #27b2a5;">
+								<span style="font: bold 20px a드림고딕4; font-size: 18px;">창업 시 고려해야할 5대 지표 점수 분석</span>
+							</h3>
+							<div>
+								<p><div class="" 
+		                        style="font-family: a드림고딕4; padding: 20px; background-color: white; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
+		                        <div class="row"
+		                          style="margin-top: 20px; margin-bottom: 20px;">
+		                          <!-- 창업 안전도 차트 -->
+		                          <div class="col-sm-4">
+		                            <canvas id="safeChart" width="100%;"></canvas>
+		                          </div>
+		
+		                          <!-- 성장 가능성 차트 -->
+		                          <div class="col-sm-4">
+		                            <canvas id="potentialChart" width="100%;"></canvas>
+		                          </div>
+		
+		                          <!-- 종합 평가 점수 -->
+		                          <div class="col-sm-4 t-center"
+		                            style="font-family: a드림고딕4">
+		                            <div style="font-size: 4.0em;">
+		                              &lt;종합 평가 점수&gt;<br> <span
+		                                style="color: #27b2a5;"
+		                                id="expectedTotalEstimateScore"></span>
+		                              점
+		                            </div>
+		                          </div>
+		                        </div>
+		
+		                        <!-- 두번째 행 도넛 형 차트 -->
+		                        <div class="row">
+		                          <!-- 활성도 차트 -->
+		                          <div class="col-sm-4">
+		                            <canvas id="activationChart" width="100%;"></canvas>
+		                          </div>
+		
+		                          <!-- 창업위험지수 차트 -->
+		                          <div class="col-sm-4">
+		                            <canvas id="dangerChart" width="100%;"></canvas>
+		                          </div>
+		
+		                          <!-- 과밀지수 차트 -->
+		                          <div class="col-sm-4">
+		                            <canvas id="densityChart" width="100%;"></canvas>
+		                          </div>
+		                        </div>
+		                      </div>
+		                      </p>
+							</div>
+							<h3 style="border:2px solid #27b2a5;">
+								<span style="font: bold 20px a드림고딕4; font-size: 18px;">창업 시 고려해야할 5대 지표를 바탕으로 예측한 매출액 추세 그래프</span>
+							</h3>
+							<div>
+								<p>
+								<div class=""
+			                        style="background-color: white; font-family: a드림고딕4; padding: 20px; color: white; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
+			                        <div class="container"
+			                          style="margin-top: 20px; padding-top: 20px; border-radius: 5px; padding-bottom: 20px;">
+			                          <div class="col-sm-12">
+			                            <canvas id="threeMonthChart" width="100%;"></canvas>
+			                          </div>
+			                        </div>
+			                      </div>
+								</p>
+							</div>
+							<h3 style="border:2px solid #27b2a5">
+								<span style="font: bold 20px a드림고딕4; font-size: 18px;">3개의 상권의 5대 지표 비교 분석</span>
+                        	</h3>
+							<div>
+								<p>
+								  <!-- 메인 방사형, 서브 방사형 지표 -->
+			                      <div class=""
+			                        style="background-color: white; font-family: a드림고딕4; padding: 20px; color: white; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
+			                        <div class="container"
+			                          style="margin-top: 20px; padding-top: 20px; border-radius: 5px; padding-bottom: 20px;">
+			                          <div class="col-sm-12">
+			                            <canvas id="mainRadarChart" width="100%;"></canvas>
+			                          </div>
+			                        </div>
+			                      </div>
+								</p>
+							</div>
+							<h3 style="border:2px solid #27b2a5">
+								<span style="font: bold 20px a드림고딕4; font-size: 18px;">분석	결과 도출된 상권의 예상 매출액 분석</span>
+							</h3>
+							<div>
+								<p>
+								  <div class=""
+			                        style="background-color: white; font-family: a드림고딕4; padding: 20px; color: white; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
+			                        <div class="row" style="margin-top: 20px;">
+			                          <!-- 3개 상권의 예상 매출액 막대형 그래프 -->
+			                          <div class="col-sm-12">
+			                            <canvas id="salesAmountChart" width="100%;"></canvas>
+			                          </div>
+			                        </div>
+			                      </div>
+			                   </p>
+							</div>
+						</div>
+					</div>
+                  </div>
 
                     <!-- 상권 상세 분석 결과 tab -->
-                    <div id="detailAnalysis"
-                      class="card-body bg1-pattern"
-                      style="display: none;">
-                      <div class="container">
-                        <!-- 3개 상권 비교분석 결과 테이블 -->
-                        <div class="row">
-                          <br> <br> <span
-                            style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
-                            style="font: bold 20px a드림고딕4; font-size: 18px;">해당
-                            상권의 부대시설 갯수</span> <br> <br>
-                          <table class="table table-bordered"
-                            style="text-align: center; font-size: 2em; font-weight: bold;">
-                            <tbody>
-                              <tr>
-                                <th style="background-color: #353866;">시설 합계</th>
-                                <th style="background-color: #5e5e5f;">기반시설 및 가구 합계</th>
-                                <th>총 가구수</th>
-                                <th colspan="2">관공서</th>
-                                <th colspan="2">은행</th>
-                              </tr>
-                              <tr>
-                                <td class="facilities"
-                                  style="vertical-align: middle;" rowspan="9">5000</td>
-                                <td class="facilities">4000</td>
-                                <td class="facilities">5000</td>
-                                <td colspan="2" class="facilities">5000</td>
-                                <td colspan="2" class="facilities">5000</td>
-                              </tr>
-                              <tr>
-                                <th style="background-color: #5e5e5f;">의료시설 합계</th>
-                                <th>종합병원</th>
-                                <th colspan="2">일반병원</th>
-                                <th colspan="2">약국</th>
-                                <!-- <th rowspan="2" colspan="2">???</th> -->
-                              </tr>
-                              <tr>
-                                <td class="facilities">2000</td>
-                                <td class="facilities">2000</td>
-                                <td colspan="2" class="facilities">2000</td>
-                                <td colspan="2" class="facilities">2000</td>
-                              </tr>
-                              <tr>
-                                <th style="background-color: #5e5e5f;">교육시설 합계</th>
-                                <th>유치원</th>
-                                <th>초등학교</th>
-                                <th>중학교</th>
-                                <th>고등학교</th>
-                                <th>대학교</th>
-                              </tr>
-                              <tr>
-                                <td class="facilities">5000</td>
-                                <td class="facilities">4000</td>
-                                <td class="facilities">5000</td>
-                                <td class="facilities">2000</td>
-                                <td class="facilities">2000</td>
-                                <td class="facilities">2000</td>
-                              </tr>
-                              <tr>
-                                <th style="background-color: #5e5e5f;">집객시설 및 상가 합계</th>
-                                <th>집객시설</th>
-                                <th>백화점</th>
-                                <th>슈퍼마켓</th>
-                                <th>극장</th>
-                                <th>숙박시설</th>
-                              </tr>
-                              <tr>
-                                <td class="facilities">5000</td>
-                                <td class="facilities">4000</td>
-                                <td class="facilities">5000</td>
-                                <td class="facilities">2000</td>
-                                <td class="facilities">2000</td>
-                                <td class="facilities">2000</td>
-                              </tr>
-                              <tr>
-                                <th style="background-color: #5e5e5f;">교통시설 합계</th>
-                                <th>공항</th>
-                                <th>철도역</th>
-                                <th>버스 터미널</th>
-                                <th>지하철</th>
-                                <th>버스 정거장</th>
-                                <!-- <th rowspan="2"></th> -->
-                              </tr>
-                              <tr>
-                                <td class="facilities">5000</td>
-                                <td class="facilities">4000</td>
-                                <td class="facilities">5000</td>
-                                <td class="facilities">2000</td>
-                                <td class="facilities">2000</td>
-                                <td class="facilities">2000</td>
-                              </tr>
-                            </tbody>
-                          </table>
-                        </div>
-                        <br> <span
-                          style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
-                          style="font: bold 20px a드림고딕4; font-size: 18px;">유동
-                          인구 지표</span>
-
-                        <!-- 유동인구 지표 -->
-                        '
-                        <div class="row">
-                          <!-- 성별 유동인구 -->
-                          <div class="col-sm-6">
-                            <canvas width="100%" id="populationChart"></canvas>
-                          </div>
-                          <!-- 요일별 유동인구 -->
-                          <div class="col-sm-6">
-                            <canvas width="100%" id="dayChart"></canvas>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <!-- 시간대별 유동인구 -->
-                          <div class="col">
-                            <canvas width="100%" id="timeChart"></canvas>
-                          </div>
-                        </div>
-
-                        <div class="row">
-                          <!--  연령대별 유동인구 -->
-                          <div class="col">
-                            <canvas width="100%" id="ageChart"></canvas>
-                          </div>
-                        </div>
-                        <!-- 유동인구 지표 끝 -->
-                        <br>
-
-                        <!--  상주인구 지표 -->
-                        <br> <span
-                          style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
-                          style="font: bold 20px a드림고딕4; font-size: 18px;">상주인구
-                          지표</span>
-                        <div class="row">
-                          <div class="col">
-                            <canvas width="100%" id="liveChart"></canvas>
-                          </div>
-                        </div>
-                        <br>
-                        <!-- 직장인구 지표 -->
-                        <br> <span
-                          style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
-                          style="font: bold 20px a드림고딕4; font-size: 18px;">직장인구
-                          지표</span>
-                        <div class="row">
-                          <div class="col">
-                            <canvas width="100%" id="jobChart"></canvas>
-                          </div>
-                        </div>
-                        <br>
-                        <!-- 지출 지표 -->
-                        <br> <span
-                          style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
-                          style="font: bold 20px a드림고딕4; font-size: 18px;">지출
-                          지표</span>
-                        <div class="row">
-                          <div class="col">
-                            <canvas width="100%" id="lossChart"></canvas>
-                          </div>
-                        </div>
-                        <br> <br>
-                        <div class="row">
-                          <!-- 해당 상권 평균 영업 개월 수 Chart -->
-                          <div class="col-sm-6">
-                            <span
-                              style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
-                              style="font: bold 20px a드림고딕4; font-size: 18px;">해당
-                              상권 평균 영업 개월 수</span>
-                            <canvas id="martRunningTimeChart"></canvas>
-                          </div>
-                          <!-- 2018년 상권 집계 점포 Chart -->
-                          <div class="col-sm-6">
-                            <span
-                              style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
-                              style="font: bold 20px a드림고딕4; font-size: 18px;">2018년
-                              상권 집계 점포</span>
-                            <canvas id="sumMartChart"></canvas>
-                          </div>
-                        </div>
-                        <br> <br>
-                        <!-- 해당 월 점포 개, 폐업 수 Chart -->
-                        <div class="row" style="margin-top: 20px;">
-                          <div class="col">
-                            <span
-                              style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
-                              style="font: bold 20px a드림고딕4; font-size: 18px;">해당
-                              월 점포 개･폐업 수</span>
-                            <canvas id="openCloseChart"></canvas>
-                          </div>
-                        </div>
-                      </div>
+                    <div id="detailAnalysis" class="card-body bg1-pattern" style="display: none;">
+                      <div class="container" style="max-width:1387px;">
+							<div class="ziehharmonika">
+								<h3 style="border:2px solid #27b2a5;">
+									<span style="font: bold 20px a드림고딕4; font-size: 18px;">1. 해당 상권의 부대시설의 갯수</span>
+								</h3>
+								<div>
+									<p>
+										<table class="table table-bordered" style="text-align: center; font-size: 2em; font-weight: bold; font-family: a드림고딕4;">
+				                            <tbody>
+				                              <tr>
+				                                <th style="background-color: #353866;">시설 합계</th>
+				                                <th style="background-color: #5e5e5f;">기반시설 및 가구 합계</th>
+				                                <th>총 가구수</th>
+				                                <th colspan="2">관공서</th>
+				                                <th colspan="2">은행</th>
+				                              </tr>
+				                              <tr>
+				                                <td class="facilities"
+				                                  style="vertical-align: middle;" rowspan="9">5000</td>
+				                                <td class="facilities">4000</td>
+				                                <td class="facilities">5000</td>
+				                                <td colspan="2" class="facilities">5000</td>
+				                                <td colspan="2" class="facilities">5000</td>
+				                              </tr>
+				                              <tr>
+				                                <th style="background-color: #5e5e5f;">의료시설 합계</th>
+				                                <th>종합병원</th>
+				                                <th colspan="2">일반병원</th>
+				                                <th colspan="2">약국</th>
+				                                <!-- <th rowspan="2" colspan="2">???</th> -->
+				                              </tr>
+				                              <tr>
+				                                <td class="facilities">2000</td>
+				                                <td class="facilities">2000</td>
+				                                <td colspan="2" class="facilities">2000</td>
+				                                <td colspan="2" class="facilities">2000</td>
+				                              </tr>
+				                              <tr>
+				                                <th style="background-color: #5e5e5f;">교육시설 합계</th>
+				                                <th>유치원</th>
+				                                <th>초등학교</th>
+				                                <th>중학교</th>
+				                                <th>고등학교</th>
+				                                <th>대학교</th>
+				                              </tr>
+				                              <tr>
+				                                <td class="facilities">5000</td>
+				                                <td class="facilities">4000</td>
+				                                <td class="facilities">5000</td>
+				                                <td class="facilities">2000</td>
+				                                <td class="facilities">2000</td>
+				                                <td class="facilities">2000</td>
+				                              </tr>
+				                              <tr>
+				                                <th style="background-color: #5e5e5f;">집객시설 및 상가 합계</th>
+				                                <th>집객시설</th>
+				                                <th>백화점</th>
+				                                <th>슈퍼마켓</th>
+				                                <th>극장</th>
+				                                <th>숙박시설</th>
+				                              </tr>
+				                              <tr>
+				                                <td class="facilities">5000</td>
+				                                <td class="facilities">4000</td>
+				                                <td class="facilities">5000</td>
+				                                <td class="facilities">2000</td>
+				                                <td class="facilities">2000</td>
+				                                <td class="facilities">2000</td>
+				                              </tr>
+				                              <tr>
+				                                <th style="background-color: #5e5e5f;">교통시설 합계</th>
+				                                <th>공항</th>
+				                                <th>철도역</th>
+				                                <th>버스 터미널</th>
+				                                <th>지하철</th>
+				                                <th>버스 정거장</th>
+				                                <!-- <th rowspan="2"></th> -->
+				                              </tr>
+				                              <tr>
+				                                <td class="facilities">5000</td>
+				                                <td class="facilities">4000</td>
+				                                <td class="facilities">5000</td>
+				                                <td class="facilities">2000</td>
+				                                <td class="facilities">2000</td>
+				                                <td class="facilities">2000</td>
+				                              </tr>
+				                            </tbody>
+			                            </table>
+									</p>
+								</div>
+								<h3 style="border:2px solid #27b2a5;">
+									<span style="font: bold 20px a드림고딕4; font-size: 18px;">2. 유동 인구 지표(성별 통계)</span>
+								</h3>
+								<div>
+									<p>
+										<canvas width="100%" id="populationChart"></canvas>
+									</p>
+								</div>
+								<h3 style="border:2px solid #27b2a5;">
+									<span style="font: bold 20px a드림고딕4; font-size: 18px;">3. 유동 인구 지표(요일별 통계)</span>
+								</h3>
+								<div>
+									<p>
+										<canvas width="100%" id="dayChart"></canvas>									
+									</p>
+								</div>
+								<h3 style="border:2px solid #27b2a5;">
+									<span style="font: bold 20px a드림고딕4; font-size: 18px;">4. 유동 인구 지표(시간대별 통계)</span>
+								</h3>
+								<div>
+									<p>
+										<canvas width="100%" id="timeChart"></canvas>
+									</p>
+								</div>
+								<h3 style="border:2px solid #27b2a5;">
+									<span style="font: bold 20px a드림고딕4; font-size: 18px;">5. 유동 인구 지표(나이별 통계)</span>
+								</h3>
+								<div>
+									<p>
+										<canvas width="100%" id="ageChart"></canvas>
+									</p>
+								</div>
+								<h3 style="border:2px solid #27b2a5;">
+									<span style="font: bold 20px a드림고딕4; font-size: 18px;">6. 상주 인구 지표</span>
+								</h3>
+								<div>
+									<p>
+										<canvas width="100%" id="liveChart"></canvas>
+									</p>
+								</div>
+								<h3 style="border:2px solid #27b2a5;">
+									<span style="font: bold 20px a드림고딕4; font-size: 18px;">7. 직장 인구 지표</span>
+								</h3>
+								<div>
+									<p>
+										<canvas width="100%" id="jobChart"></canvas>
+									</p>
+								</div>
+								<h3 style="border:2px solid #27b2a5;">
+									<span style="font: bold 20px a드림고딕4; font-size: 18px;">8. 지출 지표</span>
+								</h3>
+								<div>
+									<p>
+										<canvas width="100%" id="lossChart"></canvas>
+									</p>
+								</div>
+								<h3 style="border:2px solid #27b2a5;">
+									<span style="font: bold 20px a드림고딕4; font-size: 18px;">9. 해당 상권의 평균 영업 개월 수 차트</span>
+								</h3>
+								<div>
+									<p>
+										<canvas id="martRunningTimeChart"></canvas>
+									</p>
+								</div>
+								<h3 style="border:2px solid #27b2a5;">
+									<span style="font: bold 20px a드림고딕4; font-size: 18px;">10. 2018년 상권 집계 점포 차트</span>
+								</h3>
+								<div>
+									<p>
+										<canvas id="sumMartChart"></canvas>
+									</p>
+								</div>
+								<h3 style="border:2px solid #27b2a5;">
+									<span style="font: bold 20px a드림고딕4; font-size: 18px;">11. 해당 월 점포 개･폐업 수 차트</span>
+								</h3>
+								<div>
+									<p>
+										<canvas id="openCloseChart"></canvas>
+									</p>
+								</div>
+							</div>
+						</div>
                     </div>
                     <!-- 상세 분석 결과 끝 Tag -->
 
@@ -605,7 +598,7 @@
                       <br> <span
                         style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
                         style="font: bold 20px a드림고딕4; font-size: 18px;">해당
-                        상권의 지도(공인중개사 리스트 및 로드뷰)</span>
+                        상권의 지도(공인중개사 리스트 및 로드뷰)</span><br>
                       <div class=""
                         style="background-color: white; font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
                         <div class="row">
@@ -623,6 +616,8 @@
                           </div>
                         </div>
                       </div>
+
+						
 
                       <!-- 부동산 상가 매물 리스트 -->
                       <br> <span
@@ -1407,6 +1402,9 @@
       </div>
       <!-- container 태그 끝 -->
   </section>
+  
+  
+  
   <script type="text/javascript">
 			var Markers = new Array();
 			var InfoWindows = new Array();
@@ -2150,25 +2148,25 @@
 													if ((i % 4) == 0) {
 														$('#filterColumn1')
 																.append(
-																		'<button style="width: 100%;" class="m-b-10 villageBtn">'
+																		'<button style="width: 100%;" class="m-b-10 villageBtn dreamGothic">'
 																				+ village[i]
 																				+ '</button>');
 													} else if ((i % 4) == 1) {
 														$('#filterColumn2')
 																.append(
-																		'<button style="width: 100%;" class="m-b-10 villageBtn">'
+																		'<button style="width: 100%;" class="m-b-10 villageBtn dreamGothic">'
 																				+ village[i]
 																				+ '</button>');
 													} else if ((i % 4) == 2) {
 														$('#filterColumn3')
 																.append(
-																		'<button style="width: 100%;" class="m-b-10 villageBtn">'
+																		'<button style="width: 100%;" class="m-b-10 villageBtn dreamGothic">'
 																				+ village[i]
 																				+ '</button>');
 													} else {
 														$('#filterColumn4')
 																.append(
-																		'<button style="width: 100%;" class="m-b-10 villageBtn">'
+																		'<button style="width: 100%;" class="m-b-10 villageBtn dreamGothic">'
 																				+ village[i]
 																				+ '</button>');
 													}
@@ -2273,8 +2271,7 @@
 																	// 클릭을 했는데 활성화가 되어있으면,
 																	else {
 																		for (var i = 0; i < pageOnes.length; i++) {
-																			console
-																					.log('?');
+																			console.log('?');
 																			if ($(this)[0] === pageOnes[i][0]) {
 																				console
 																						.log(i);
@@ -2344,7 +2341,7 @@
 						target.innerHTML = '직장인이 많은 지역, 회사 밀집 지역을 우선으로 추천합니다';
 						toast();
 					}
-					$('#regionFilter').children().removeClass('active');
+					$('#regionFilter').children().children().removeClass('active');
 					$(this).addClass('active');
 				} else { // 클릭을 했는데 활성화가 되어있으면,
 					$(this).removeClass('active');
@@ -2361,7 +2358,7 @@
 					$('#filterColumn' + i).children().removeClass('active');
 				}
 
-				$('#regionFilter').children().removeClass('active');
+				$('#regionFilter').children().children().removeClass('active');
 				
 				/*
 					초기화를 눌렀을시에 마커 제거
@@ -2409,7 +2406,7 @@
 
 								// 선택한 지역 유형 타입 변수로 저장
 								var regionTypeList = $('#regionFilter')
-										.children();
+										.children().children();
 								var activeRegionType;
 								for (var i = 0; i < regionTypeList.length; i++) {
 									if (regionTypeList[i].classList
@@ -2551,7 +2548,28 @@
 											realestateOwnerList = topThreeList[i].realestateList;
 
 											// 상위 3개의 상권 리스트 배열에서 도로명이 일치하는 배열의 요소를 불러와 해당하는 예상 매출액을 태그의 text로 추가
-											$('#expectedSalesAccount').text(topThreeList[i].mlresult.estmt_SALES);
+											$('#expectedSalesAccount').attr('data-count', topThreeList[i].mlresult.estmt_SALES);
+											$('#expectedSalesPerMonth').attr('data-count', Math.round(topThreeList[i].mlresult.estmt_SALES * 10000 / 4000));
+											$('#expectedSalesPerDay').attr('data-count', Math.round(topThreeList[i].mlresult.estmt_SALES * 10000 / (4000 * 30)));
+											// 예상 매출액 카운트
+											  $('.counter').each(function() {
+												  var $this = $(this),
+												      countTo = $this.attr('data-count');
+												  $({ countNum: $this.text()}).animate({
+												    countNum: countTo
+												  },
+												  {
+												    duration: 8000,
+												    easing:'linear',
+												    step: function() {
+												      $this.text(Math.floor(this.countNum));
+												    },
+												    complete: function() {
+												      $this.text(this.countNum);
+												      //alert('finished');
+												    }
+												  });  
+												});
 											var marker;
 											var infowindow;
 											var geocoder = new daum.maps.services.Geocoder();
@@ -3268,7 +3286,6 @@
 			지도 container의 영역을 재계산하도록 명령할 수 있습니다.
 			 */
 			$("#mamulCertify").on("click", function() {
-				console.log(map2);
 				setTimeout(function() {
 					makeInfos(Markers);
 					map2.relayout();
@@ -3288,11 +3305,12 @@
 				var value;
 				if (tabname === '상권 종합 분석') {
 					value = 'totalAnalysis';
-				} else if (tabname === '상권 상세 분석') {
+				} else if (tabname === '상권 상세 통계') {
 					value = 'detailAnalysis';
 				} else {
 					value = 'landAnalysis';
 				}
+				
 				$('#' + value).css('display', 'block');
 			});
 
@@ -4230,9 +4248,45 @@
 			});
 		</script>
 
-  <script type="text/javascript">
-			
-		</script>
+<script>
+var threeMonthChart = document.getElementById('threeMonthChart').getContext('2d');
+var myChart = new Chart(threeMonthChart, {
+    type: 'line',
+    data: {
+        labels: ["2018년 1월", "2018년 2월","2018년 3월","2018년 4월","2018년 5월","2018년 6월","2018년 7월","2018년 8월", "2018년 9월",],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
   <!--===============================================================================================-->
   <!--===============================================================================================-->
   <script type="text/javascript"
@@ -4274,6 +4328,20 @@
   <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
   <script
     src="${pageContext.request.contextPath}/resources/js/toastMessage.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/ziehharmonika.js"></script>
+  <script>
+	$(document).ready(function() {
+		$('.ziehharmonika').ziehharmonika({
+			collapsible : true,
+			prefix : '●',
+			fontColor: '#27b2a5'
+		});
+	});
+  </script>
+  <script type="text/javascript">
+  
+  </script>
+  
   <!-- 스낵바(토스트 메시지) -->
   <div id="snackbar"></div>
 </body>

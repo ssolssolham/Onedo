@@ -30,7 +30,6 @@
 		// actions
 		if (actionOrSettings == "open") {
 			if (settings.highlander) {
-				$(this).ziehharmonika('forceCloseAll');
 			}
 			var ogThis = $(this);
 			$(this).addClass('active').next('div').slideDown(400, function() {

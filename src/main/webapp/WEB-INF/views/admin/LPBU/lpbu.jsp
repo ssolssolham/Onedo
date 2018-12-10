@@ -360,7 +360,7 @@ desired effect
                                 <td style="text-align:center;">${lpbu.get('REQUESTTIME')}</td>
                                 <td style="text-align:center;">${lpbu.get('RESERVE_TIME')}</td>
                                 <c:if test="${lpbu.get('ISANSWERED') == false}">
-                                <td style="text-align:center;"><button type="button" name="commit" value="${lpbu.get('LPBU_NUM')}">완료하기</button></td>
+                                <td style="text-align:center;"><button type="button" name="commit" value="${lpbu.get('LPBU_NUM')}" class="lpbu_nums">완료하기</button></td>
                                 </c:if>
                                 <c:if test="${lpbu.get('ISANSWERED') == true}">
                                 <td style="text-align:center;"><input type="button" name="complete" disabled>처리완료</td>
@@ -471,16 +471,20 @@ for (i = 0; i < acc.length; i++) {
 
 <!-- 상담완료 버튼  -->
 <script>
+
 var btn = $("button[name=commit]");
-var i;
-for (var i = 0; i < btn.length; i++) {
-	console.log("제발");
-	btn[i].onclick = function(){
-		var lpbuNo = 3;
-		console.log(lpbuNo);
+
+$('.lpbu_nums').click(function(e){
+		console.log(e.currentTarget.offsetParent);
+		for(var i = 0; i <= $('.lpbu_nums').length; i++){
+			if(e.currentTarget === $('.lpbu_nums')[i]){
+				$('tr')[i+1].remove();
+			}
+		}
+		
   	 	$.ajax({
-  	 		type : 'put',
-	        url : '/admin/lpbu' + lpbuNo,
+  	 		type : 'GET',
+	        url : '/admin/lpbu/modify/' + e.currentTarget.value,
 	        // 서버로 값을 성공적으로 넘기면 처리하는 코드부분 입니다.
 	        success : function(data) {
 	            console.log("성공");
@@ -488,11 +492,8 @@ for (var i = 0; i < btn.length; i++) {
 	        error : function(data){
 	        	console.log("비동기 오류");
 	        }
-	    });
-		
-	}
-}
-
+	    });}		
+);
 </script>
 </body>
 </html>
