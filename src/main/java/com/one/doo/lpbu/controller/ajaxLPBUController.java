@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,14 +23,21 @@ import lombok.extern.log4j.Log4j;
 public class ajaxLPBUController {
 	private LPBUService service;
 
-	@DeleteMapping(value = "/{lpbuNo}", produces = { MediaType.TEXT_PLAIN_VALUE })
-	public ResponseEntity<String> cancle(@PathVariable("lpbuNo") int lpbuNo) {
+	@GetMapping("/{lpbuNo}")
+	public String cancle(@PathVariable("lpbuNo") int lpbuNo) {
 		
 		log.info("remove: " + lpbuNo);
+		System.out.println("들어왔어유");
 
-		return service.deleteLPBU(lpbuNo) 
-				? new ResponseEntity<>("success", HttpStatus.OK)
-				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		// 지우기 전에 아이디 저장
+		String userId = service.read(lpbuNo).getUserId();
+		System.out.println(userId);
+		
+		// 지우기
+		service.deleteLPBU(lpbuNo);
+	
+		
+		return "<script>location.href = '/loan/reserveList?userId=" + userId +"'" +"</script>" ;
 	}
 
 }
