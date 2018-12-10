@@ -7,7 +7,7 @@
 	select * 
 	from SalesPerCobb
 	where alleybizcode = #{AlleyBizCode} 
-	      AND spc_date LIKE '201807'
+	      AND spc_date LIKE '201809'
 	      AND COBB_CODE LIKE 'CS100009'
 </select>
 </mapper>

@@ -11,4 +11,6 @@ public interface LogMapper {
 	public int update(@Param("url_no") int url_no,@Param("log_day") String log_day);
 	
 	public int countTodayLog(@Param("url_no") int url_no,@Param("log_day") String log_day);
+	
+	public int logCnt();
 }

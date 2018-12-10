@@ -17,4 +17,10 @@
 		)
 	</insert>
 
+	<select id="loadAdbdCnt" resultType="int">
+	select count(userid) adbd_cnt 
+	from
+	(select userid from adbd where to_date(regdate,'YYYY/MM/dd') 
+	= to_date(sysdate,'YYYY/MM/dd') group by userid)
+	</select>
 </mapper>

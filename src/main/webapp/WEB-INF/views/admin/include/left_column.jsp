@@ -59,13 +59,6 @@
         </li>
         
         <li>
-          <a href="/admin/stats/"><i class="fa fa-bar-chart"></i> <span>사용자 통계 조회</span>
-            <span class="pull-right-container">
-              </span>
-          </a>
-        </li>
-        
-        <li>
           <a href="/admin/loanProduct/"><i class="fa fa-laptop"></i> <span>대출 상품 관리</span>
             <span class="pull-right-container">
               </span>

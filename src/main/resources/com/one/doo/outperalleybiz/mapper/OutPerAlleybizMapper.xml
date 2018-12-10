@@ -7,6 +7,6 @@
 	select * 
 	  from outperalleybiz
 	  where alleybizcode = #{AlleyBizCode} 
-	  		AND OPA_DATE LIKE '201807'
+	  		AND OPA_DATE LIKE '201809'
 	</select>
 </mapper>

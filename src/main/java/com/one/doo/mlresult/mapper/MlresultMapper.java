@@ -29,4 +29,7 @@ public interface MlresultMapper {
 	
 	//오피스 타입에 대한 검색
 	public List<HashMap> fifthStep(@Param("Areas") List<String> Areas);
+	
+	// 매출액 산출
+	public List<Mlresult> readSalesList(@Param("AlleyBizCode") int AlleyBizCode);
 }

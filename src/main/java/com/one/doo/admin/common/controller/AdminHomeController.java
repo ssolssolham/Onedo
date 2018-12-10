@@ -1,38 +1,40 @@
 package com.one.doo.admin.common.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.one.doo.admin.home.service.AdminHomeService;
+
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
 
 /**
  * Handles requests for the application home page.
  */
+@Log4j
 @Controller
 @RequestMapping("/admin")
+@AllArgsConstructor
 public class AdminHomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(AdminHomeController.class);
+	@Inject
+	private AdminHomeService adminHomeService;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping("/")
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("serverTime", formattedDate );
+		List<Object> list = adminHomeService.adminFirstStep();
+		// 	
+		model.addAttribute("statByDay",list);
 		
 		return "admin/index";
 	}

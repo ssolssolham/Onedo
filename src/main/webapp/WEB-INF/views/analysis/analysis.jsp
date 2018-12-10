@@ -114,7 +114,7 @@
                 style="width: 100%; min-height: 670px; margin-left: 22px;">
                 <div class="card-body">
                   <div class="form-group">
-                    <h2 class="card-title fw-b dreamGothic fs-22">Step 1. 구 선택</h2>
+                    <h2 style="display: inline;" class="card-title fw-b dreamGothic fs-22">Step 1. 구 선택</h2>&nbsp;&nbsp;<span class="tooltipMessage" data-tooltip="상권 분석을 진행할 서울특별시 구를 선택해주세요!" data-tooltip-top data-tooltip-mask><img style="margin-bottom: 8px;" alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
                     <select class="form-control dreamGothic" style="font-size:16px; height:40px;" id="districtSelect">
                       <option default>전체</option>
                       <option>강남구</option>
@@ -146,7 +146,7 @@
                   </div>
                   <br>
                   <div class="form-group">
-                    <h2 class="card-title fw-b dreamGothic fs-22">Step 2. 동 선택</h2>
+                    <h2 style="display: inline;" class="card-title fw-b dreamGothic fs-22">Step 2. 동 선택</h2>&nbsp;&nbsp;<span class="tooltipMessage" data-tooltip="구를 선택하셨다면, 분석을 진행할 동을 선택해주세요! 복수 선택 가능합니다!" data-tooltip-top data-tooltip-mask><img style="margin-bottom: 8px;" alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
                     <!-- Filter -->
                     <div class="panel-filter w-full p-t-10">
                       <div
@@ -167,7 +167,7 @@
                     </div>
                   </div>
                   <div class="form-group">
-                    <h2 class="card-title fw-b dreamGothic fs-22">Step 3. 상권 유형 선택</h2>
+                    <h2 style="display: inline;" class="card-title fw-b dreamGothic fs-22">Step 3. 상권 유형 선택</h2>&nbsp;&nbsp;<span class="tooltipMessage" data-tooltip="창업을 희망하는 지역의 특성, 유형을 선택해주세요!" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png" style="margin-bottom: 8px;"></span>
                     <br>
                     <div id="regionFilter">
                     	<div class="col-sm-4">
@@ -187,10 +187,10 @@
                   </div>
                   <div class="form-group">
                     <button type="button"
-                      style="width: 100%; "
+                      style="width: 100%; font-family: a드림고딕4;"
                       id="analysisStartBtn">분석하기</button><br><br>
                     <button type="button"
-                      style="width: 100%; background-color: grey;"
+                      style="width: 100%; font-family: a드림고딕4; background-color: grey;"
                       id="resetFilterBtn">초기화</button>
                   </div>
                 </div>
@@ -263,7 +263,7 @@
                       <div class="container" style="max-width:1387px;">
 							<div class="ziehharmonika">
 								 <!-- 종합 분석 결과 수치 데이터 들어가는 곳 -->
-								<h3 style="border:2px solid #27b2a5">
+								<h3 style="border:2px solid #27b2a5" id="summaryResult">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">종합 분석 결과 요약</span>
 								</h3>
 								<div>
@@ -313,6 +313,7 @@
 							
 							<h3 style="border:2px solid #27b2a5;">
 								<span style="font: bold 20px a드림고딕4; font-size: 18px;">창업 시 고려해야할 5대 지표 점수 분석</span>
+								<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 							</h3>
 							<div>
 								<p><div class="" 
@@ -363,6 +364,7 @@
 							</div>
 							<h3 style="border:2px solid #27b2a5;">
 								<span style="font: bold 20px a드림고딕4; font-size: 18px;">창업 시 고려해야할 5대 지표를 바탕으로 예측한 매출액 추세 그래프</span>
+								<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 							</h3>
 							<div>
 								<p>
@@ -379,6 +381,7 @@
 							</div>
 							<h3 style="border:2px solid #27b2a5">
 								<span style="font: bold 20px a드림고딕4; font-size: 18px;">3개의 상권의 5대 지표 비교 분석</span>
+								<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
                         	</h3>
 							<div>
 								<p>
@@ -396,6 +399,7 @@
 							</div>
 							<h3 style="border:2px solid #27b2a5">
 								<span style="font: bold 20px a드림고딕4; font-size: 18px;">분석	결과 도출된 상권의 예상 매출액 분석</span>
+								<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 							</h3>
 							<div>
 								<p>
@@ -420,6 +424,7 @@
 							<div class="ziehharmonika">
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">1. 해당 상권의 부대시설의 갯수</span>
+									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -508,6 +513,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">2. 유동 인구 지표(성별 통계)</span>
+									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -516,6 +522,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">3. 유동 인구 지표(요일별 통계)</span>
+									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -524,6 +531,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">4. 유동 인구 지표(시간대별 통계)</span>
+									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -532,6 +540,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">5. 유동 인구 지표(나이별 통계)</span>
+									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -540,6 +549,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">6. 상주 인구 지표</span>
+									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -548,6 +558,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">7. 직장 인구 지표</span>
+									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -556,6 +567,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">8. 지출 지표</span>
+									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -564,6 +576,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">9. 해당 상권의 평균 영업 개월 수 차트</span>
+									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -572,6 +585,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">10. 2018년 상권 집계 점포 차트</span>
+									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -580,6 +594,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">11. 해당 월 점포 개･폐업 수 차트</span>
+									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -2530,6 +2545,16 @@
 			// 분석 결과로 나온 버튼 클릭 시, 분석 결과 리포트 부분 활성화
 			$('.resultBtn').click(
 							function(e) {
+								
+								if (e.currentTarget.id === 'firstBtn') {
+									selectedObject = 0;
+								} else if (e.currentTarget.id === 'secondBtn') {
+									selectedObject = 1;
+								} else if (e.currentTarget.id === 'thirdBtn') {
+									selectedObject = 2;
+								}
+								
+								console.log(selectedObject);
 								if ($('#analysisReport').hasClass('dis-none')) { // 보이지 않는 경우면
 									// 클릭한 골목상권 테이블에 뿌리기 위해 파싱 
 									var alleyBizFullName = $(this).text()
@@ -2552,24 +2577,7 @@
 											$('#expectedSalesPerMonth').attr('data-count', Math.round(topThreeList[i].mlresult.estmt_SALES * 10000 / 4000));
 											$('#expectedSalesPerDay').attr('data-count', Math.round(topThreeList[i].mlresult.estmt_SALES * 10000 / (4000 * 30)));
 											// 예상 매출액 카운트
-											  $('.counter').each(function() {
-												  var $this = $(this),
-												      countTo = $this.attr('data-count');
-												  $({ countNum: $this.text()}).animate({
-												    countNum: countTo
-												  },
-												  {
-												    duration: 8000,
-												    easing:'linear',
-												    step: function() {
-												      $this.text(Math.floor(this.countNum));
-												    },
-												    complete: function() {
-												      $this.text(this.countNum);
-												      //alert('finished');
-												    }
-												  });  
-												});
+											  
 											var marker;
 											var infowindow;
 											var geocoder = new daum.maps.services.Geocoder();
@@ -2772,7 +2780,8 @@
 														},
 														options : {
 															tooltips : {
-																enabled : false
+																mode : 'index',
+																intersect : true
 															},
 															legend : {
 																display : false
@@ -2785,7 +2794,8 @@
 																		+ ': '
 																		+ gradeArr[0],
 																position : 'bottom',
-																fontColor : '#000000'
+																fontColor : '#000000',
+																fontSize: 20
 															}
 														}
 													});
@@ -2810,7 +2820,8 @@
 														},
 														options : {
 															tooltips : {
-																enabled : false
+																mode : 'index',
+																intersect : true
 															},
 															legend : {
 																display : false
@@ -2823,7 +2834,8 @@
 																		+ ': '
 																		+ gradeArr[1],
 																position : 'bottom',
-																fontColor : '#000000'
+																fontColor : '#000000',
+																fontSize: 20
 															}
 														}
 													});
@@ -2849,7 +2861,8 @@
 														},
 														options : {
 															tooltips : {
-																enabled : false
+																mode : 'index',
+																intersect : true
 															},
 															legend : {
 																display : false
@@ -2862,7 +2875,8 @@
 																		+ ': '
 																		+ gradeArr[2],
 																position : 'bottom',
-																fontColor : '#000000'
+																fontColor : '#000000',
+																fontSize: 20
 															}
 														}
 													});
@@ -2889,7 +2903,8 @@
 														},
 														options : {
 															tooltips : {
-																enabled : false
+																mode : 'index',
+																intersect : true
 															},
 															legend : {
 																display : false
@@ -2902,7 +2917,8 @@
 																		+ ': '
 																		+ gradeArr[3],
 																position : 'bottom',
-																fontColor : '#000000'
+																fontColor : '#000000',
+																fontSize: 20
 															}
 														}
 													});
@@ -2927,7 +2943,8 @@
 														},
 														options : {
 															tooltips : {
-																enabled : false
+																mode : 'index',
+																intersect : true
 															},
 															legend : {
 																display : false
@@ -2940,7 +2957,8 @@
 																		+ ': '
 																		+ gradeArr[4],
 																position : 'bottom',
-																fontColor : '#000000'
+																fontColor : '#000000',
+																fontSize: 20
 															}
 														}
 													});
@@ -2963,20 +2981,29 @@
 																	topThreeList)
 														},
 														options : {
+															scales : {
+																yAxes : [ {
+																	ticks : {
+																		beginAtZero : true
+																	}
+																} ]
+															},
 															legend : {
 																display : true,
 																position : 'left',
 																labels : {
-																	fontColor : '#000000'
+																	fontColor : '#000000',
+																	fontSize: 20
 																}
 															},
 															circumference : 1 * Math.PI,
 															rotation : 1 * Math.PI,
 															title : {
 																display : true,
-																text : 'MAIN CHART',
+																text : '3개 상권의 창업 5대 지표를 비교한 방사형 차트',
 																position : 'top',
-																fontColor : '#000000'
+																fontColor : '#000000',
+																fontSize: 20
 															}
 														}
 													});
@@ -3009,6 +3036,13 @@
 															} ]
 														},
 														options : {
+															scales : {
+																yAxes : [ {
+																	ticks : {
+																		beginAtZero : true
+																	}
+																} ]
+															},
 															legend : {
 																display : false
 															},
@@ -3016,12 +3050,70 @@
 															rotation : 1 * Math.PI,
 															title : {
 																display : true,
-																text : '매출액',
-																position : 'top'
+																text : '분석 결과로 도출된 상권의 예상 매출액 분석 막대형 차트',
+																position : 'top',
+																fontSize: 20
 															}
 														}
 													}); // 매출액 차트 끝나는 부분
-										
+													console.log(selectedObject);
+													// 매출액 차트 : 호준 
+											var threeMonthChart = document.getElementById('threeMonthChart').getContext('2d');
+											var myChart = new Chart(threeMonthChart, {
+											    type: 'line',
+											    data: {
+											        labels: ["2018년 1월", "2018년 2월","2018년 3월","2018년 4월","2018년 5월","2018년 6월","2018년 7월","2018년 8월", "2018년 9월","2018년 10월","2018년 11월","2018년 12월"],
+											        datasets: [{
+											            label: '# of Votes',
+											            data: [topThreeList[selectedObject].mlresultList[0].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[1].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[2].estmt_SALES, 
+											            	topThreeList[selectedObject].mlresultList[3].estmt_SALES, 
+											            	topThreeList[selectedObject].mlresultList[4].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[5].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[6].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[7].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[8].estmt_SALES],
+											            backgroundColor: [
+											                'rgba(255, 99, 132, 0.8)'
+											            ],
+											            borderColor: [
+											                'rgba(255,99,132,1)'
+											            ],
+											            borderWidth: 1
+											        },{
+											            label: '# of Votes',
+											            data: [topThreeList[selectedObject].mlresultList[0].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[1].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[2].estmt_SALES, 
+											            	topThreeList[selectedObject].mlresultList[3].estmt_SALES, 
+											            	topThreeList[selectedObject].mlresultList[4].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[5].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[6].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[7].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[8].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[9].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[10].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[11].estmt_SALES],
+											            backgroundColor: [
+											                'rgba(54, 162, 235, 0.2)'
+											            ],
+											            borderColor: [
+											                'rgba(54, 162, 235, 1)'
+											            ],
+											            borderWidth: 1
+											        }]
+											    },
+											    options: {
+											        scales: {
+											            yAxes: [{
+											                ticks: {
+											                    beginAtZero:true
+											                }
+											            }]
+											        }
+											    }
+											});
 										}
 									}
 									setTimeout(function() {
@@ -3046,13 +3138,7 @@
 
 									// 선택된 객체 인덱스 저장
 									console.log(e.currentTarget.id);
-									if (e.currentTarget.id === 'firstBtn') {
-										selectedObject = 0;
-									} else if (e.currentTarget.id === 'secondBtn') {
-										selectedObject = 1;
-									} else if (e.currentTarget.id === 'thirdBtn') {
-										selectedObject = 2;
-									}
+									
 
 									updateTable(topThreeList, selectedObject);
 
@@ -3354,7 +3440,8 @@
 						},
 						title : {
 							display : true,
-							text : '성별 유동인구 '
+							text : '성별 유동인구 ',
+							fontSize: 20
 						}
 					}
 				});
@@ -4249,45 +4336,9 @@
 		</script>
 
 <script>
-var threeMonthChart = document.getElementById('threeMonthChart').getContext('2d');
-var myChart = new Chart(threeMonthChart, {
-    type: 'line',
-    data: {
-        labels: ["2018년 1월", "2018년 2월","2018년 3월","2018년 4월","2018년 5월","2018년 6월","2018년 7월","2018년 8월", "2018년 9월",],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
+
 </script>
-  <!--===============================================================================================-->
+   <!--===============================================================================================-->
   <!--===============================================================================================-->
   <script type="text/javascript"
     src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -4316,8 +4367,8 @@ var myChart = new Chart(threeMonthChart, {
   <script type="text/javascript"
     src="${pageContext.request.contextPath}/resources/vendor/parallax100/parallax100.js"></script>
   <script type="text/javascript">
-			$('.parallax100').parallax100();
-		</script>
+         $('.parallax100').parallax100();
+      </script>
   <!--===============================================================================================-->
   <script type="text/javascript"
     src="${pageContext.request.contextPath}/resources/vendor/countdowntime/countdowntime.js"></script>
@@ -4330,16 +4381,35 @@ var myChart = new Chart(threeMonthChart, {
     src="${pageContext.request.contextPath}/resources/js/toastMessage.js"></script>
   <script src="${pageContext.request.contextPath}/resources/js/ziehharmonika.js"></script>
   <script>
-	$(document).ready(function() {
-		$('.ziehharmonika').ziehharmonika({
-			collapsible : true,
-			prefix : '●',
-			fontColor: '#27b2a5'
-		});
-	});
+   $(document).ready(function() {
+      $('.ziehharmonika').ziehharmonika({
+         collapsible : true,
+         prefix : '●',
+         fontColor: '#27b2a5'
+      });
+   });
   </script>
   <script type="text/javascript">
-  
+  $('#summaryResult').click(function() {
+	  $('.counter').each(function() {
+		  var $this = $(this),
+		      countTo = $this.attr('data-count');
+		  $({ countNum: $this.text()}).animate({
+		    countNum: countTo
+		  },
+		  {
+		    duration: 8000,
+		    easing:'linear',
+		    step: function() {
+		      $this.text(Math.floor(this.countNum));
+		    },
+		    complete: function() {
+		      $this.text(this.countNum);
+		      //alert('finished');
+		    }
+		  });  
+		});
+  })
   </script>
   
   <!-- 스낵바(토스트 메시지) -->

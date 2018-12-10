@@ -23,6 +23,11 @@ public class LPBUServiceImpl implements LPBUService {
 	private LPBUMapper mapper;
 
 	@Override
+	public LPBU read(int lpbuNo) {
+		return mapper.read(lpbuNo);
+	};
+	
+	@Override
 	public int insertLPBU(LPBU lpbu) {
 		return mapper.insertLPBU(lpbu);
 	}

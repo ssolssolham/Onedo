@@ -9,11 +9,11 @@
 	from
 	    (select DISTINCT *
 	    from ALLEYBIZ alley 
-	         inner join livingperalleybiz lib on alley.ALLEYBIZCODE = lib.alleybizcode AND lib.lap_date LIKE '201807'
+	         inner join livingperalleybiz lib on alley.ALLEYBIZCODE = lib.alleybizcode AND lib.lap_date LIKE '201809'
 	         inner join areacodes ac on alley.areacode = ac.areacode AND ac.areacode_name IN (#{AreaNames}) 
 	         inner join indexperalleybiz ipb on ipb.alleybizcode = alley.alleybizcode 
-	                    AND ipb.cobb_code LIKE 'CS100009' AND ipbd_DATE LIKE '201807'
-	         inner join riskoffoundation rof on rof.areacode = alley.areacode AND rof.rofpd_date LIKE '201807'   
+	                    AND ipb.cobb_code LIKE 'CS100009' AND ipbd_DATE LIKE '201809'
+	         inner join riskoffoundation rof on rof.areacode = alley.areacode AND rof.rofpd_date LIKE '201809'   
 	    where 
 	          rof.rof_code > 2 AND ipb.stabilityindexcode < 3          
 	    order by ipb.growthindex + ipb.activityindex desc)
@@ -26,11 +26,11 @@
 	from
 	    (select DISTINCT *
 	    from ALLEYBIZ alley 
-	         inner join livingperalleybiz lib on alley.ALLEYBIZCODE = lib.alleybizcode AND lib.lap_date LIKE '201807'
+	         inner join livingperalleybiz lib on alley.ALLEYBIZCODE = lib.alleybizcode AND lib.lap_date LIKE '201809'
 	         inner join areacodes ac on alley.areacode = ac.areacode AND ac.areacode_name IN (#{AreaNames}) 
 	         inner join indexperalleybiz ipb on ipb.alleybizcode = alley.alleybizcode 
-	                    AND ipb.cobb_code LIKE 'CS100009' AND ipbd_DATE LIKE '201807'
-	         inner join riskoffoundation rof on rof.areacode = alley.areacode AND rof.rofpd_date LIKE '201807'   
+	                    AND ipb.cobb_code LIKE 'CS100009' AND ipbd_DATE LIKE '201809'
+	         inner join riskoffoundation rof on rof.areacode = alley.areacode AND rof.rofpd_date LIKE '201809'   
 	    where 
 	          rof.rof_code > 2 AND ipb.stabilityindexcode < 3          
 	    order by ipb.growthindex + ipb.activityindex desc)

@@ -297,7 +297,6 @@ img {
                               <th style="text-align: center;">예약시간</th>
                               <th style="text-align: center;">예약변경</th>
                               <th style="text-align: center;">상세보기</th>
-                              
                            </tr>
                         </thead>
                         <tbody>
@@ -311,7 +310,7 @@ img {
                                   <fmt:formatNumber value="${reserve.get('REQUEST_BM')}" pattern="#,###" /></td>
                                 <td style="text-align:center;">${reserve.get('RESERVE_TIME')}</td>
                               <c:if test="${reserve.get('ISANSWERED') == false}">
-                                <td style="text-align:center;"><button type="button" style="vertical-align: top; height:30px; width: 50%;" class="reserveCancle" id="reserveCancleBtn" >예약취소</button></td>
+                                <td style="text-align:center;"><button type="button" style="vertical-align: top; height:30px; width: 50%;" class="reserveCancle" id="reserveCancleBtn" value="${reserve.LPBU_NUM}">예약취소</button></td>
                               </c:if>
                                 <td style="text-align:center;"><button type="button" style="vertical-align: top; height:30px; width: 50%;" class="reserveOpen" id="reserveOpenBtn" >열람</button>
                                 </td>
@@ -352,7 +351,7 @@ img {
                                       <p><label>( 예약시간 : </label>${reserve.get('RESERVE_TIME')} <label> )</label></p>
                                     </div>
                                     <div class="btn_ex01">
-                                      <span><a href="#" class="opbLayerMessage0_OK">예약취소</a></span>
+                                      <span><a href="/lpbu/${reserve.LPBU_NUM}" class="opbLayerMessage0_OK">예약취소</a></span>
                                       <span><a href="#" class="opbLayerMessage0_NO">창닫기</a></span>
                                     </div>
                                     <div class="pop_close draggable" style="cursor: move;">
@@ -492,7 +491,10 @@ function beforeSubmit() {
 </script>
 
 <script>
-  
+
+var getUrl = '/lpbu/';
+var lpbuNum = 0;
+
 //이름수정 아코디언이벤트	
 var panels = $(".panel"); //아코디언으로 보일영역
 var btns = $(".reserveOpen"); //아코디언이벤트 버튼
@@ -540,7 +542,8 @@ for(i=0; i<panels.length; i++){
  
  for(i=0; i<modals.length; i++){
 	 modals[i].style.display = "none";
-  	 btns[i].addEventListener("click", function() {
+  	 btns[i].addEventListener("click", function(e) {
+  		lpbuNum = e.currentTarget.value;
  	    var panel = this.parentElement.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.firstChild.nextSibling;
  		if(panel.style.display === "none"){
  			panel.style.display = "block";
@@ -567,6 +570,26 @@ for(i=0; i<panels.length; i++){
   		}
   	});
  }
+ 
+ var trs = new Array();
+ for(var i = 0; i < $('tr').length; i++){
+	    if(i % 2 == 1){trs.push($('tr')[i])}
+	    }
+ 
+ $('opbLayerMessage0_OK').on('click',function(){
+	 console.log(3333);
+	 $.ajax({
+		 type: 'GET',
+		 url: getUrl + lpbuNum,
+		 dataType : 'json',
+		 success : function(data){
+			 console.log(1);
+		 },
+		 error : function(error){
+			 console.log(2);
+		 }
+	 });
+ });
 </script>
 </body>
 </html>

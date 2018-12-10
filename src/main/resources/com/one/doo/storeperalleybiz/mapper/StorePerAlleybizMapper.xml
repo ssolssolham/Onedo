@@ -7,7 +7,7 @@
 	select * 
 	from StorePerAlleybiz
 	where alleybizcode = #{AlleyBizCode} 
-	      AND sap_date LIKE '201807'
+	      AND sap_date LIKE '201809'
 	      AND COBB_CODE LIKE 'CS100009'
 </select>
 <select id="readYear" resultType="com.one.doo.storeperalleybiz.domain.StorePerAlleybiz">

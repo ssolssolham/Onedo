@@ -5,7 +5,7 @@
 <mapper namespace="com.one.doo.indexperalleybiz.mapper.IndexPerAlleybizMapper">
 <select id="read" resultType="com.one.doo.indexperalleybiz.domain.IndexPerAlleybiz">
 select * from indexperalleybiz
-where ipbd_date LIKE '201807' AND cobb_code LIKE 'CS100009' AND alleybizcode = #{AlleyBizCode}
+where ipbd_date LIKE '201809' AND cobb_code LIKE 'CS100009' AND alleybizcode = #{AlleyBizCode}
 </select>
 
 </mapper>
