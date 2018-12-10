@@ -97,6 +97,13 @@ FROM    loan_product p
     <result property="securityType" column="security_type"/>
   </resultMap>	
 
+  <resultMap type="java.util.Map" id="bestFiveLoans">
+    <result property="rownum" column="rownum"/>
+    <result property="loanId" column="loan_id"/>
+    <result property="cnt" column="cnt"/>
+    <result property="loanName" column="loan_name"/>
+  </resultMap>	
+  
 	<select id="readLoan" resultMap="loanMap">
 		SELECT *
 		FROM loan_product 
@@ -152,9 +159,22 @@ FROM    loan_product p
 	<select id="getTotalCount" resultType="int">
 		SELECT count(*) FROM loan_product WHERE 
 		<include refid="criteria"></include>
+		<![CDATA[
 		loan_id > 0
+		]]>
 	</select>
 
+	<select id="bestFiveLoans" resultMap="bestFiveLoans">
+	<![CDATA[
+	select rownum,loan_id,cnt,loan_name
+	from
+	(
+	select lb.loan_id,count(lb.loan_id) cnt,lp.LOAN_NAME
+	from lpbu lb inner join loan_product lp 
+	on lb.loan_id = lp.loan_id group by lb.loan_id,lp.LOAN_NAME)
+	where rownum < 6 
+	]]>
+	</select>
 
 	<insert id="insertLoan">
 		INSERT INTO loan_product 

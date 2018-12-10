@@ -25,4 +25,6 @@ public interface LPBUMapper {
 	public List<HashMap<String, Object>> getLPBUListWithPaging(Criteria cri);
 	
 	public int getTotalLPBU(Criteria cri);
+	
+	public int loadLpbuCnt();
 }

@@ -2545,6 +2545,16 @@
 			// 분석 결과로 나온 버튼 클릭 시, 분석 결과 리포트 부분 활성화
 			$('.resultBtn').click(
 							function(e) {
+								
+								if (e.currentTarget.id === 'firstBtn') {
+									selectedObject = 0;
+								} else if (e.currentTarget.id === 'secondBtn') {
+									selectedObject = 1;
+								} else if (e.currentTarget.id === 'thirdBtn') {
+									selectedObject = 2;
+								}
+								
+								console.log(selectedObject);
 								if ($('#analysisReport').hasClass('dis-none')) { // 보이지 않는 경우면
 									// 클릭한 골목상권 테이블에 뿌리기 위해 파싱 
 									var alleyBizFullName = $(this).text()
@@ -2971,6 +2981,13 @@
 																	topThreeList)
 														},
 														options : {
+															scales : {
+																yAxes : [ {
+																	ticks : {
+																		beginAtZero : true
+																	}
+																} ]
+															},
 															legend : {
 																display : true,
 																position : 'left',
@@ -3019,6 +3036,13 @@
 															} ]
 														},
 														options : {
+															scales : {
+																yAxes : [ {
+																	ticks : {
+																		beginAtZero : true
+																	}
+																} ]
+															},
 															legend : {
 																display : false
 															},
@@ -3032,7 +3056,64 @@
 															}
 														}
 													}); // 매출액 차트 끝나는 부분
-										
+													console.log(selectedObject);
+													// 매출액 차트 : 호준 
+											var threeMonthChart = document.getElementById('threeMonthChart').getContext('2d');
+											var myChart = new Chart(threeMonthChart, {
+											    type: 'line',
+											    data: {
+											        labels: ["2018년 1월", "2018년 2월","2018년 3월","2018년 4월","2018년 5월","2018년 6월","2018년 7월","2018년 8월", "2018년 9월","2018년 10월","2018년 11월","2018년 12월"],
+											        datasets: [{
+											            label: '# of Votes',
+											            data: [topThreeList[selectedObject].mlresultList[0].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[1].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[2].estmt_SALES, 
+											            	topThreeList[selectedObject].mlresultList[3].estmt_SALES, 
+											            	topThreeList[selectedObject].mlresultList[4].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[5].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[6].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[7].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[8].estmt_SALES],
+											            backgroundColor: [
+											                'rgba(255, 99, 132, 0.8)'
+											            ],
+											            borderColor: [
+											                'rgba(255,99,132,1)'
+											            ],
+											            borderWidth: 1
+											        },{
+											            label: '# of Votes',
+											            data: [topThreeList[selectedObject].mlresultList[0].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[1].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[2].estmt_SALES, 
+											            	topThreeList[selectedObject].mlresultList[3].estmt_SALES, 
+											            	topThreeList[selectedObject].mlresultList[4].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[5].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[6].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[7].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[8].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[9].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[10].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[11].estmt_SALES],
+											            backgroundColor: [
+											                'rgba(54, 162, 235, 0.2)'
+											            ],
+											            borderColor: [
+											                'rgba(54, 162, 235, 1)'
+											            ],
+											            borderWidth: 1
+											        }]
+											    },
+											    options: {
+											        scales: {
+											            yAxes: [{
+											                ticks: {
+											                    beginAtZero:true
+											                }
+											            }]
+											        }
+											    }
+											});
 										}
 									}
 									setTimeout(function() {
@@ -3057,13 +3138,7 @@
 
 									// 선택된 객체 인덱스 저장
 									console.log(e.currentTarget.id);
-									if (e.currentTarget.id === 'firstBtn') {
-										selectedObject = 0;
-									} else if (e.currentTarget.id === 'secondBtn') {
-										selectedObject = 1;
-									} else if (e.currentTarget.id === 'thirdBtn') {
-										selectedObject = 2;
-									}
+									
 
 									updateTable(topThreeList, selectedObject);
 
@@ -4261,43 +4336,7 @@
 		</script>
 
 <script>
-var threeMonthChart = document.getElementById('threeMonthChart').getContext('2d');
-var myChart = new Chart(threeMonthChart, {
-    type: 'line',
-    data: {
-        labels: ["2018년 1월", "2018년 2월","2018년 3월","2018년 4월","2018년 5월","2018년 6월","2018년 7월","2018년 8월", "2018년 9월",],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
+
 </script>
    <!--===============================================================================================-->
   <!--===============================================================================================-->

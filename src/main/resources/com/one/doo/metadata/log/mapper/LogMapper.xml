@@ -24,4 +24,11 @@
 		from metadata_logs 
 		where url_no = #{url_no} AND log_day LIKE to_date(#{log_day},'yyyy-MM-dd')
 	</select>
+	
+		<!-- 수정 필요! -->
+	<select id="logCnt" resultType="int">
+		select nvl(max(log_cnt||count(1)),0)
+		from metadata_logs where to_date(log_day,'YYYY/MM/dd') 
+		= to_date(sysdate,'YYYY/MM/dd') group by log_cnt 
+	</select>
 </mapper>

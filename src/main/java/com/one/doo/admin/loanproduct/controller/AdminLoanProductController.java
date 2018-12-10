@@ -26,6 +26,6 @@ public class AdminLoanProductController {
 		model.addAttribute("adminLoanList", service.getListWithPaging(cri));
 		model.addAttribute("pageMaker", new Page(cri, total));
 		System.out.println("들어왔니?");
-		return "admin/loanProduct/product";
+		return "admin/loanproduct/productTest";
 	}
 }

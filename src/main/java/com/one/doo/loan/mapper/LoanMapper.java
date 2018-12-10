@@ -2,6 +2,7 @@ package com.one.doo.loan.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.one.doo.board.domain.Board;
 import com.one.doo.board.domain.Criteria;
@@ -12,7 +13,7 @@ public interface LoanMapper {
 	//추천 대출 리스트 가져오기
 	public List<HashMap<String, Object>> getLoanList(Parameter param);
 	
-	
+	public List<HashMap<String,Object>> bestFiveLoans();
 	
 	/* 관리자용 기능 */
 	//새로운 대출상품 등록
