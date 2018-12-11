@@ -312,8 +312,8 @@
 							
 							
 							<h3 style="border:2px solid #27b2a5;">
-								<span style="font: bold 20px a드림고딕4; font-size: 18px;">창업 시 고려해야할 5대 지표 점수 분석</span>
-								<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+								<span style="font: bold 20px a드림고딕4; font-size: 18px;">창업 시 고려해야할 5대 지표 점수 예측 결과 분석</span>
+								<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표 점수를 예측하고, 분석한 파트입니다. 각 상권에 대한 5가지 지표의 점수를 보여주고, AHP 분석을 통해 도출된 가중치 값이 부여된 종합 평가 점수를 확인하실 수 있습니다. " data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 							</h3>
 							<div>
 								<p><div class="" 
@@ -322,11 +322,13 @@
 		                          style="margin-top: 20px; margin-bottom: 20px;">
 		                          <!-- 창업 안전도 차트 -->
 		                          <div class="col-sm-4">
+		                            <span class="fs-13 dreamGothic">안정성 지표란?</span>&nbsp;&nbsp;<span class="tooltipMessage" data-html="true" data-tooltip="해당 상권/업종의 폐업률 및 평균영업개월 수의 결합 지표" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 		                            <canvas id="safeChart" width="100%;"></canvas>
 		                          </div>
 		
 		                          <!-- 성장 가능성 차트 -->
 		                          <div class="col-sm-4">
+		                          	<span class="fs-13 dreamGothic">성장성 지표란?</span>&nbsp;&nbsp;<span class="tooltipMessage" data-html="true" data-tooltip="해당 상권/업종의 매출액증감률 및 점포장 매출액 증감률의 결합지표 입니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 		                            <canvas id="potentialChart" width="100%;"></canvas>
 		                          </div>
 		
@@ -334,7 +336,7 @@
 		                          <div class="col-sm-4 t-center"
 		                            style="font-family: a드림고딕4">
 		                            <div style="font-size: 4.0em;">
-		                              &lt;종합 평가 점수&gt;<br> <span
+		                              &lt;종합 평가 점수&gt;<span class="tooltipMessage" data-html="true" data-tooltip="창업시 고려해야할 5가지 지표 점수를 예측하고,\n분석한 파트입니다.각 상권에 대한 5가지 지표의 점수를 보여주고, AHP 분석을 통해 도출된 가중치 값이 부여된 종합 평가 점수를 확인하실 수 있습니다. " data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span><br> <span
 		                                style="color: #27b2a5;"
 		                                id="expectedTotalEstimateScore"></span>
 		                              점
@@ -346,16 +348,19 @@
 		                        <div class="row">
 		                          <!-- 활성도 차트 -->
 		                          <div class="col-sm-4">
+		                          	<span class="fs-13 dreamGothic">활성도 지표란?</span>&nbsp;&nbsp;<span class="tooltipMessage" data-html="true" data-tooltip="해당 상권/업종의 거래량 및 상대매출액(업종상대활성도)의 결합 지표입니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 		                            <canvas id="activationChart" width="100%;"></canvas>
 		                          </div>
 		
 		                          <!-- 창업위험지수 차트 -->
 		                          <div class="col-sm-4">
+		                          	<span class="fs-13 dreamGothic">창업위험도 지표란?</span>&nbsp;&nbsp;<span class="tooltipMessage" data-html="true" data-tooltip="생활 밀착형 업종의 폐업률 및 3년 생존율의 결합지표로서 자치구 / 행정동별 창업 위험도를 산출합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 		                            <canvas id="dangerChart" width="100%;"></canvas>
 		                          </div>
 		
 		                          <!-- 과밀지수 차트 -->
 		                          <div class="col-sm-4">
+		                          	<span class="fs-13 dreamGothic">과밀 지표란?</span>&nbsp;&nbsp;<span class="tooltipMessage" data-html="true" data-tooltip="상권에 해당 업종의 존재여부에 따라 산출합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 		                            <canvas id="densityChart" width="100%;"></canvas>
 		                          </div>
 		                        </div>
@@ -364,7 +369,7 @@
 							</div>
 							<h3 style="border:2px solid #27b2a5;">
 								<span style="font: bold 20px a드림고딕4; font-size: 18px;">창업 시 고려해야할 5대 지표를 바탕으로 예측한 매출액 추세 그래프</span>
-								<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+								<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 바탕으로 예측한 매출액 추세 그래프입니다. 2018년 1월 ~ 9월의 실측치를 바탕으로 10월, 11월, 12월의 매출액을 예측했습니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 							</h3>
 							<div>
 								<p>
@@ -380,8 +385,8 @@
 								</p>
 							</div>
 							<h3 style="border:2px solid #27b2a5">
-								<span style="font: bold 20px a드림고딕4; font-size: 18px;">3개의 상권의 5대 지표 비교 분석</span>
-								<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+								<span style="font: bold 20px a드림고딕4; font-size: 18px;">3개 상권의 창업 시 고려해야할 5대 지표 비교 분석</span>
+								<span class="tooltipMessage" data-tooltip="분석 결과 나온 3개 상권의 창업 시 고려해야할 5가지 지표를 비교 분석한 파트입니다." data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
                         	</h3>
 							<div>
 								<p>
@@ -398,8 +403,8 @@
 								</p>
 							</div>
 							<h3 style="border:2px solid #27b2a5">
-								<span style="font: bold 20px a드림고딕4; font-size: 18px;">분석	결과 도출된 상권의 예상 매출액 분석</span>
-								<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+								<span style="font: bold 20px a드림고딕4; font-size: 18px;">분석	결과 도출된 3개 상권의 예상 매출액 비교 분석</span>
+								<span class="tooltipMessage" data-tooltip="분석 결과 도출된 3개 상권의 예상 매출액을 비교 분석한 막대형 그래프를 확인하실 수 있습니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 							</h3>
 							<div>
 								<p>
@@ -424,7 +429,7 @@
 							<div class="ziehharmonika">
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">1. 해당 상권의 부대시설의 갯수</span>
-									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+									<span class="tooltipMessage" data-tooltip="해당 상권 주변의 부대시설 갯수에 대한 통계자료 입니다. 클릭하시면, 상세 내용 확인 가능합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -513,7 +518,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">2. 유동 인구 지표(성별 통계)</span>
-									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+									<span class="tooltipMessage" data-tooltip="해당 상권의 성별(남, 여) 유동인구 통계자료 입니다. 클릭하시면 상세내용을 확인가능합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -522,7 +527,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">3. 유동 인구 지표(요일별 통계)</span>
-									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+									<span class="tooltipMessage" data-tooltip="해당 상권의 요일(월 ~ 일)별 유동인구 통계자료 입니다. 클릭하시면 상세내용을 확인가능합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -531,7 +536,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">4. 유동 인구 지표(시간대별 통계)</span>
-									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+									<span class="tooltipMessage" data-tooltip="해당 상권의 시간대별 유동인구 통계자료 입니다. 클릭하시면 상세내용을 확인가능합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -539,8 +544,8 @@
 									</p>
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
-									<span style="font: bold 20px a드림고딕4; font-size: 18px;">5. 유동 인구 지표(나이별 통계)</span>
-									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+									<span style="font: bold 20px a드림고딕4; font-size: 18px;">5. 유동 인구 지표(연령대별 통계)</span>
+									<span class="tooltipMessage" data-tooltip="해당 상권의 연령대별 유동인구 통계자료 입니다. 클릭하시면 상세내용을 확인가능합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -549,7 +554,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">6. 상주 인구 지표</span>
-									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+									<span class="tooltipMessage" data-tooltip="해당 상권의 상주인구 통계자료 입니다. 클릭하시면 상세내용을 확인가능합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -558,7 +563,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">7. 직장 인구 지표</span>
-									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+									<span class="tooltipMessage" data-tooltip="해당 상권주변의 직장인구에 대한 통계자료 입니다. 클릭하시면 상세내용을 확인가능합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -567,7 +572,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">8. 지출 지표</span>
-									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+									<span class="tooltipMessage" data-tooltip="해당 상권의 지출액에 대한 통계자료 입니다. 클릭하시면 상세내용을 확인가능합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -576,7 +581,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">9. 해당 상권의 평균 영업 개월 수 차트</span>
-									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+									<span class="tooltipMessage" data-tooltip="해당 상권의 평균 영업 개월수를 시각화한 차트입니다. 클릭하시면 상세내용을 확인가능합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -585,7 +590,7 @@
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">10. 2018년 상권 집계 점포 차트</span>
-									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+									<span class="tooltipMessage" data-tooltip="2018년 상권 집계 점포 차트입니다. 클릭하시면 상세내용을 확인가능합니다." data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -593,8 +598,8 @@
 									</p>
 								</div>
 								<h3 style="border:2px solid #27b2a5;">
-									<span style="font: bold 20px a드림고딕4; font-size: 18px;">11. 해당 월 점포 개･폐업 수 차트</span>
-									<span class="tooltipMessage" data-tooltip="창업시 고려해야할 5가지 지표를 분석한 파트입니다. 각 항목은 들어가시면 확인 가능 합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
+									<span style="font: bold 20px a드림고딕4; font-size: 18px;">11. 해당 월 개･폐업 점포  수 차트</span>
+									<span class="tooltipMessage" data-tooltip="해당 상권의 월 개･폐업 점포 수에 대한 통계자료 입니다. 클릭하시면 상세내용을 확인가능합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
 								<div>
 									<p>
@@ -613,7 +618,7 @@
                       <br> <span
                         style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
                         style="font: bold 20px a드림고딕4; font-size: 18px;">해당
-                        상권의 지도(공인중개사 리스트 및 로드뷰)</span><br>
+                        상권의 지도(공인중개사 리스트 및 로드뷰)</span><br><br>
                       <div class=""
                         style="background-color: white; font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
                         <div class="row">
@@ -636,21 +641,19 @@
 
                       <!-- 부동산 상가 매물 리스트 -->
                       <br> <span
-                        style="font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
+                        style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
                         style="font: bold 20px a드림고딕4; font-size: 18px;">부동산
-                        매물 리스트</span>
+                        매물 리스트</span><br><br>
                       <div class=""
                         style="background-color: white; font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
                         <div class="row">
-                          <div class="col-sm-12" style="padding: 20px;">
                             <table class="scrolltable" style="width: 100%;">
                               <colgroup>
-                                <col width="25%">
-                                <col width="75%">
+                                <col width="40%">
                               </colgroup>
                               <thead>
                                 <tr>
-                                  <td colspan="2"><br>
+                                  <td colspan="2" style="border-bottom: none;"><br>
                                     <div id="gongin" class="t-center"
                                       style="font-family: a드림고딕4; font-size: 20px;">
                                     </div> <br></td>
@@ -658,14 +661,13 @@
                               </thead>
                               <tbody>
                                 <tr
-                                  style="height: 80px; width: 100%; border: none">
-                                  <td colspan="2">로드맵의 마커를 클릭 하시면,
+                                  style="font-size: 87px; text-align: center; height: 80px; width: 100%; border: none">
+                                  <td colspan="2" style="border-bottom: none;">로드맵의 마커를 클릭 하시면,
                                     해당 공인 중개사의 상가 매물 리스트를 확인하실 수 있습니다.</td>
                                 </tr>
                               </tbody>
                             </table>
-                          </div>
-                        </div>
+                         </div>
                       </div>
 
 
@@ -673,8 +675,8 @@
                         style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span
                         style="font: bold 20px a드림고딕4; font-size: 18px;">선택하신
                         매물의 상세 정보</span><br> <br>
-                      <div class=""
-                        style="font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
+                      <div 
+                        style="font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;" id="mamulInfoTable" class="dis-none">
 
                         <div class="row" id="rowHeight">
                           <div class="col-sm-5">
@@ -824,14 +826,6 @@
                                       </tr>
                                     </tbody>
                                   </table>
-                                  <div class="t-center">
-                                    <br> <br>
-                                    <button type="button"
-                                      style="width: 60%;"
-                                      id="inputInfoBtn">대출 관련
-                                      정보 입력</button>
-                                    <br> <br>
-                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -1012,16 +1006,8 @@
                                           <div class="fs-20">
                                             <b class="dreamGothic">신용등급을
                                               선택해주세요</b> <span
-                                              style="color: orangered;">&nbsp;*</span>
-                                            <div class="tooltip">
-                                              신용등급을 모르시나요 ? <span
-                                                class="tooltiptext">
-                                                * 모든 국민은 매년 무료 3회 신용평가사를
-                                                통해 신용등급을 확인할 수 있습니다.<br>
-                                                <a href="www.naver.com">등급확인하러
-                                                  가기</a>
-                                              </span>
-                                            </div>
+                                              style="color: orangered;">&nbsp;*</span>&nbsp;&nbsp;<span class="tooltipMessage" data-tooltip="* 모든 국민은 매년 무료 3회 신용평가사를
+                                                통해 신용등급을 확인할 수 있습니다." data-tooltip-top data-tooltip-mask><img style="margin-bottom: 8px;" alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
                                           </div>
                                           <select
                                             class="form-control fs-20 dreamGothic"
@@ -1264,13 +1250,8 @@
                                           <div class="fs-20">
                                             <b class="dreamGothic">신용등급을
                                               선택해주세요.</b><span
-                                              style="color: orangered;">&nbsp;*</span>
-                                            <div class="tooltip">
-                                              신용등급을 모르시나요 ?<span
-                                                class="tooltiptext">Tooltip
-                                                text</span>
+                                              style="color: orangered;">&nbsp;*</span>&nbsp;&nbsp;<span class="tooltipMessage" data-tooltip="* 모든 국민은 매년 무료 3회 신용평가사를 통해 신용등급을 확인할 수 있습니다." data-tooltip-top data-tooltip-mask><img style="margin-bottom: 8px;" alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
                                             </div>
-                                          </div>
                                           <select
                                             class="form-control fs-20 dreamGothic"
                                             style="font-size: 18px; height: 40px; display: inline-block;"
@@ -1286,7 +1267,7 @@
                                             <option value="9">9등급</option>
                                             <option value="10">10등급</option>
                                           </select> <br> <br>
-
+										
                                           <form
                                             id="selectSecurityLoanForm"
                                             action="/loan/list"
@@ -1376,7 +1357,7 @@
                                               <br> <input
                                                 type="submit"
                                                 style="width: 40%;"
-                                                value="상품조회"
+                                                value="대출조회"
                                                 id="loanSubmitBtn2">
                                               <input type="button"
                                                 style="width: 40%; background-color: gray;"
@@ -1384,7 +1365,7 @@
                                                 value="초기화">
                                             </div>
                                           </form>
-
+											</div>
                                         </div>
                                       </div>
                                       <!-- innerContent 끝나는 부분 -->
@@ -1392,7 +1373,6 @@
                                     <!-- 신용대출 / 담보대출 관련해서 입력 시, 필터 결과 부분 -->
                                   </div>
                                   <!-- innerWrapper 끝 -->
-
                                 </div>
                               </div>
                             </div>
@@ -1452,12 +1432,12 @@
 			}
 
 			function mainRadarDataSets(dataArr, topThreeList) {
-				var RadarDataSets = [ {
+				var RadarDataSets = [{
 					label : '현재 상권',
 					data : dataArr,
 					backgroundColor : 'rgba(165, 223, 249, 0.3)',
 					borderColor : 'rgba(165, 223, 249)'
-				} ];
+				}];
 				for (var i = 0; i < topThreeList.length; i++) {
 					RadarDataSets.push(mainRadarDataSet(topThreeList, i));
 				}
@@ -1649,16 +1629,22 @@
 			}
 
 			function updateDetail(subindex) {
+				if($('#mamulInfoTable').hasClass('dis-none')) {
+					$('#mamulInfoTable').removeClass('dis-none');
+				}
 				$($('tbody')[2]).children().remove();
 
 				console.log(filter[selectedGongin][subindex]);
 				var resultStr = '';
-
+				
+				resultStr += '<tr style="font-family: a드림고딕4;" >';
+				resultStr += '<td colspan="2" style=\''+ filter[selectedGongin][subindex].img_url +' background-repeat: no-repeat; height: 400px; background-size: 441px 400px;\'>';
+				resultStr += '</td></tr>';
 				resultStr += '<tr style="font-family: a드림고딕4;" >';
 				resultStr += '<td style="color: #27b2a5;" class="fs-18">매물번호</td>'
 				resultStr += '<td><div><span class="fs-20">'
-						+ filter[selectedGongin][subindex].mamul_no
-						+ '</span></div>';
+						  + filter[selectedGongin][subindex].mamul_no
+						  + '</span></div>';
 				resultStr += '</tr><tr style="font-family: a드림고딕4;" > <td style="color: #27b2a5;" class="fs-18">상가 형태</td>';
 				resultStr += '<td><div><span class="fs-20">'
 						+ filter[selectedGongin][subindex].mamul_type
@@ -1709,11 +1695,27 @@
 						+ '</span></div>';
 				resultStr += '</tr><tr style="font-family: a드림고딕4;" ><td style="color: #27b2a5;" class="fs-18">계약면적/전용면적</td>';
 				resultStr += '<td><div><span class="fs-20">'
-						+ filter[selectedGongin][subindex].square
-						+ '</span></div></tr>';
-				
+						  + filter[selectedGongin][subindex].square
+						  + '</span></div></tr>'
+						  + '<tr>'
+						  + '<td colspan="2">'
+						  + '<div class="t-center">'
+                          + '<br><br>'
+                          + '<button type="button" style="width: 60%;" id="inputInfoBtn">대출 관련 정보 입력</button>'
+                          + '<br><br>'      
+                          + '</div>'     
+                          + '</td></tr>';     
 
 				$($('tbody')[2]).append(resultStr);
+				
+				// 대출 관련 정보 입력하기 버튼 클릭 시, 활성화 되는 필터 입력창
+				$('#inputInfoBtn').click(function() {
+					if ($('#inputInfoArea').hasClass('dis-none')) {
+						$('#inputInfoArea').removeClass('dis-none');
+					} else {
+						$('#inputInfoArea').addClass('dis-none');
+					}
+				})
 			}
 
 			var selectedGongin = 0;
@@ -1734,10 +1736,10 @@
 					resultString += '<tr style="width: 100%; height: 80px;" onclick="updateDetail('
 							+ i
 							+ ')" onMouseOver="bgColor=\'#beeee9\'" onMouseOut="bgColor=\'#ffffff\'">';
-					resultString += '<td style=\''+ filter[index][i].img_url +'\'></td>';
-					resultString += '<td><div>매물번호 : <span class="fs-18 mamul_no">'
+					resultString += '<td style=\''+ filter[index][i].img_url +' background-repeat: round;\'></td>';
+					resultString += '<td style="width: 800px;"><div>매물번호 : <span class="fs-18 mamul_no">'
 							+ filter[index][i].mamul_no + '</span></div>';
-					resultString += '<div>상가형태 : <span class="fs-18 mamul_type">'
+					resultString += '<div width: 660px;>상가형태 : <span class="fs-18 mamul_type">'
 							+ filter[index][i].mamul_type + '</span></div>';
 					resultString += '<div><img alt="보증금" src="${pageContext.request.contextPath}/resources/images/icons/bo.png" style="height:32px;">';
 					resultString += '&nbsp;&nbsp;:&nbsp;&nbsp;<span class="fs-20 bozeung">'
@@ -3057,7 +3059,7 @@
 											    data: {
 											        labels: ["2018년 1월", "2018년 2월","2018년 3월","2018년 4월","2018년 5월","2018년 6월","2018년 7월","2018년 8월", "2018년 9월","2018년 10월","2018년 11월","2018년 12월"],
 											        datasets: [{
-											            label: '# of Votes',
+											            label: '2018년 1월 ~ 9월의 매출액 실측치',
 											            data: [topThreeList[selectedObject].mlresultList[0].estmt_SALES,
 											            	topThreeList[selectedObject].mlresultList[1].estmt_SALES,
 											            	topThreeList[selectedObject].mlresultList[2].estmt_SALES, 
@@ -3075,7 +3077,7 @@
 											            ],
 											            borderWidth: 1
 											        },{
-											            label: '# of Votes',
+											            label: '실측치를 바탕으로한 2018년 10월 ~ 12월 매출액 예측치',
 											            data: [topThreeList[selectedObject].mlresultList[0].estmt_SALES,
 											            	topThreeList[selectedObject].mlresultList[1].estmt_SALES,
 											            	topThreeList[selectedObject].mlresultList[2].estmt_SALES, 
@@ -3845,14 +3847,7 @@
 			}
 			/* 담보대출 유효성 검증 끝  */
 
-			// 대출 관련 정보 입력하기 버튼 클릭 시, 활성화 되는 필터 입력창
-			$('#inputInfoBtn').click(function() {
-				if ($('#inputInfoArea').hasClass('dis-none')) {
-					$('#inputInfoArea').removeClass('dis-none');
-				} else {
-					$('#inputInfoArea').addClass('dis-none');
-				}
-			})
+			
 
 			// 신용대출용 ------------------------------------------------------------------------------------------------------------------------
 			$(function() {

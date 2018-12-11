@@ -2039,8 +2039,8 @@ to {
 .scrolltable {
 	width: 100%;
 	height: 450px;
-	display: block;
 	overflow: auto;
+	display: block;
 }
 
 .dreamGothic {
