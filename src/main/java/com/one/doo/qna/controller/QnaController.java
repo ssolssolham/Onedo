@@ -47,7 +47,8 @@ public class QnaController {
 	public String get(@RequestParam("article_num") Long article_num, 
 					 @ModelAttribute("cri") Criteria cri, 
 					 Model model) {
-		log.info("문의게시판 상셉기 요청 컨트롤러");
+		log.info("문의게시판 상세보기기 요청 컨트롤러");
+		log.info("cri값은?"+cri);
 		model.addAttribute("qna", service.get(article_num));
 		log.info("되돌아갑니당");
 		return "qna/qnaDetail";
@@ -70,11 +71,11 @@ public class QnaController {
 		return "redirect:/qna/detail?article_num="+article.getArticle_num();
 	}
 	
-	@GetMapping("/remove")
-	public String remove(@RequestParam("article_num")Long article_num, RedirectAttributes rttr) {
-		log.info("문의삭제요청");
-		service.remove(article_num);
-		rttr.addFlashAttribute("qnaDelRes", "success");
-		return "redirect:/qna/list";
-	}
+//	@GetMapping("/remove")
+//	public String remove(@RequestParam("article_num")Long article_num, RedirectAttributes rttr) {
+//		log.info("문의삭제요청");
+//		service.remove(article_num);
+//		rttr.addFlashAttribute("qnaDelRes", "success");
+//		return "redirect:/qna/list";
+//	}
 }

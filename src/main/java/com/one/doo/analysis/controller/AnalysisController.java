@@ -61,12 +61,6 @@ public class AnalysisController {
 			adbdService.insert(userId, Integer.parseInt(map.get("abz").toString()));
 		}
 		
-		
-		
-/*	for (int i = 0; i < hash.size(); i++) {
-			
-		}*/
-		
 		log.info(hash);
 		return hash;
 	}

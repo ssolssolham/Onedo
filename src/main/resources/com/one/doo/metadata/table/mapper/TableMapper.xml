@@ -34,7 +34,7 @@
 		FROM	metadata_tables tbl
 				LEFT OUTER JOIN metadata_columns col
 				ON tbl.tbl_no = col.tbl_no
-		ORDER BY tbl_no
+		ORDER BY tbl_no ASC, col_no ASC
 	</select>
 
 </mapper>

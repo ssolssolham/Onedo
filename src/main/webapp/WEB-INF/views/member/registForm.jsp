@@ -52,7 +52,7 @@
             <br>
             <div class="form-group">
               <input type="password" name="userpw" id="userpw" class="w-full" 
-              	pattern="^[0-9]{4,12}$"
+              	pattern="^[A-Za-z0-9]{4,12}$"
                 placeholder="PW 입력 (12자 이내의 영문, 숫자 조합)"
                 required="required" style="padding-left: 10px; border-top: none; border-right: none; border-left: none; border-bottom: 2px solid lightgrey" />
             </div>
