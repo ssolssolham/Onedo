@@ -27,4 +27,6 @@ public interface LPBUMapper {
 	public int getTotalLPBU(Criteria cri);
 	
 	public int loadLpbuCnt();
+	
+	public int LPBUCnt();
 }
