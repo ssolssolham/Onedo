@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
-  prefix="sec"%>
+	prefix="sec"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,17 +9,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script
-  src="${pageContext.request.contextPath}/resources/dist/js/Chart.bundle.js"></script>
+	src="${pageContext.request.contextPath}/resources/dist/js/Chart.bundle.js"></script>
 <script
-  src="${pageContext.request.contextPath}/resources/dist/js/utils.js"></script>
+	src="${pageContext.request.contextPath}/resources/dist/js/utils.js"></script>
 <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
 <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
 <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
 <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
 <style>
 canvas {
 	-moz-user-select: none;
@@ -205,500 +205,482 @@ canvas {
 
 <!-- header include 시작 -->
 <jsp:include
-  page="${pageContext.request.contextPath}/resources/includes/headTagConfig.jsp" />
+	page="${pageContext.request.contextPath}/resources/includes/headTagConfig.jsp" />
 <!-- header include 종료 -->
 </head>
 <body class="animsition bg1-pattern">
 
-  <!-- header include 시작 -->
-  <jsp:include
-    page="${pageContext.request.contextPath}/resources/includes/header.jsp" />
-  <!-- header include 종료 -->
+	<!-- header include 시작 -->
+	<jsp:include
+		page="${pageContext.request.contextPath}/resources/includes/header.jsp" />
+	<!-- header include 종료 -->
 
 
-  <section class="section-review">
-    <div class="container" style="max-width: 1500px;">
+	<section class="section-review">
+		<div class="container" style="max-width: 1500px;">
 
-      <div class="card">
-        <div class="card-body menu-title-div">
-          <img
-            src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png"
-            style="width: 35px;">&nbsp;&nbsp;
-          <h3
-            style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">대출
-            상품 확인</h3>
-        </div>
+			<div class="card">
+				<div class="card-body menu-title-div">
+					<img
+						src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png"
+						style="width: 35px;">&nbsp;&nbsp;
+					<h3
+						style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">대출
+						상품 확인</h3>
+				</div>
 
-        <div class="card-body margin-20">
-          <span
-            style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;
-          <span style="font: bold 20px a드림고딕4; font-size: 18px;">
-            회원님의 정보와 일치하는 대출 상품을 확인하시고, 상담 예약을 진행하세요!</span> <br>
+				<div class="card-body margin-20">
+					<span
+						style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;
+					<span style="font: bold 20px a드림고딕4; font-size: 18px;"> 회원님의
+						정보와 일치하는 대출 상품을 확인하시고, 상담 예약을 진행하세요!</span> <br>
 
 
-          <!-- 상품 리스트 출력  -->
-          <div class="row" style="margin-top: 20px;">
-            <div class="col-sm-8">
-              <span
-                style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;
-              <span style="font: bold 20px a드림고딕4; font-size: 18px;">
-                대출 상품 리스트</span> <br> <br>
-              <!--상품목록 -->
-              <c:choose>
-                <c:when test="${loanlist != null}">
-                  <c:forEach items="${loanlist}" var="loan">
-                    <div style="width: 100%;">
-                      <div class="ziehharmonika">
-                        <h3 class="fs-16 dreamGothic">${loan.get('LOAN_NAME')}
-                          <span
-                            style="font-size: 14px; font-weight: bold; color: #27b2a5;">업데이트
-                            날짜 : ${loan.get('UPDATE_DATE')}</span>
-                        </h3>
-                        <div>
+					<!-- 상품 리스트 출력  -->
+					<div class="row" style="margin-top: 20px;">
+						<div class="col-sm-8">
+							<span
+								style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;
+							<span style="font: bold 20px a드림고딕4; font-size: 18px;"> 대출
+								상품 리스트</span> <br> <br>
+							<!--상품목록 -->
+							<c:choose>
+								<c:when test="${loanlist != null}">
+									<c:forEach items="${loanlist}" var="loan">
+										<div style="width: 100%;">
+											<div class="ziehharmonika">
+												<h3 class="fs-16 dreamGothic">${loan.get('LOAN_NAME')}
+													<span
+														style="font-size: 14px; font-weight: bold; color: #27b2a5;">업데이트
+														날짜 : ${loan.get('UPDATE_DATE')}</span>
+												</h3>
+												<div>
 
-                          <c:if
-                            test="${loan.get('LOANCOMP_NAME') == '하나은행'}">
-                            <img
-                              src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png"
-                              style="width: 50px; height: 50px; border: 1px solid #cdcdcd">&nbsp;&nbsp;
+													<c:if test="${loan.get('LOANCOMP_NAME') == '하나은행'}">
+														<img
+															src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png"
+															style="width: 50px; height: 50px; border: 1px solid #cdcdcd">&nbsp;&nbsp;
                   <span
-                              style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">KEB
-                              하나은행</span>
-                          </c:if>
+															style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">KEB
+															하나은행</span>
+													</c:if>
 
-                          <c:if
-                            test="${loan.get('LOANCOMP_NAME') == '하나저축은행'}">
-                            <img
-                              src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png"
-                              style="width: 50px; height: 50px; border: 1px solid #cdcdcd">&nbsp;&nbsp;
+													<c:if test="${loan.get('LOANCOMP_NAME') == '하나저축은행'}">
+														<img
+															src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png"
+															style="width: 50px; height: 50px; border: 1px solid #cdcdcd">&nbsp;&nbsp;
                   <span
-                              style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">하나저축은행</span>
-                          </c:if>
+															style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">하나저축은행</span>
+													</c:if>
 
-                          <c:if
-                            test="${loan.get('LOANCOMP_NAME') == '하나캐피탈'}">
-                            <img
-                              src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png"
-                              style="width: 50px; height: 50px; border: 1px solid #cdcdcd">&nbsp;&nbsp;
+													<c:if test="${loan.get('LOANCOMP_NAME') == '하나캐피탈'}">
+														<img
+															src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png"
+															style="width: 50px; height: 50px; border: 1px solid #cdcdcd">&nbsp;&nbsp;
                   <span
-                              style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">하나캐피탈</span>
-                          </c:if>
+															style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">하나캐피탈</span>
+													</c:if>
 
-                          <table>
-                            <colgroup>
-                              <col width="20%">
-                              <col width="80%">
-                            </colgroup>
-                            <tbody>
-                              <tr>
-                                <td class="fs-16 dreamGothic">1.
-                                  상품명</td>
-                                <td class="fs-16 dreamGothic"><c:out
-                                    value="${loan.get('LOAN_NAME')}" /></td>
-                              </tr>
-                              <tr>
-                                <td class="fs-16 dreamGothic">2.
-                                  상품설명</td>
-                                <td class="fs-16 dreamGothic"><c:out
-                                    value="${loan.get('LOAN_CONTENT')}" /></td>
-                              </tr>
-                              <tr>
-                                <td class="fs-16 dreamGothic">3.
-                                  예상연금리</td>
-                                <td class="fs-16 dreamGothic">평균 +
-                                  3.55%</td>
-                              </tr>
-                              <tr>
-                                <td class="fs-16 dreamGothic">4.
-                                  가입대상</td>
-                                <td class="fs-16 dreamGothic"><c:out
-                                    value="${loan.get('TARGET_DESCRIPTION')}" />
-                                  <c:if
-                                    test="${loan.get('TARGET_DETAIL1') != null}">
-                                    <button class="infoButton_1Fb6y">대출
-                                      상세조건 확인하기</button>
-                                  </c:if></td>
-                              </tr>
-                              <tr>
-                                <td class="fs-16 dreamGothic">5.
-                                  대출한도</td>
-                                <td class="fs-16 dreamGothic"><c:out
-                                    value="${loan.get('CREDITLINE_DESC')}" /></td>
-                              </tr>
-                              <tr>
-                                <td class="fs-16 dreamGothic">6.
-                                  대출상세보기</td>
-                                <td class="fs-16 dreamGothic"><button
-                                    class="infoButton_1Fb6y"
-                                    onclick="location.href='<c:out value="${loan.get('DETAIL_URL')}" />'">대출
-                                    상세 페이지로 이동</button></td>
-                              </tr>
-                            </tbody>
-                          </table>
-                          <br>
-                          <button type="button"
-                            class="float-r calculate" id="calculateBtn"
-                            value="${loan.get('LOAN_ID')}">
-                            금리계산기</button>
-                          <span class="float-r">&nbsp;&nbsp;</span>
-                          <button type="button" class="float-r reserve"
-                            id="loanModalBtn" data-toggle="modal"
-                            data-target="#loanModal1">대출상담 예약</button>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="alert_1cYf2">
-                      <div class="title_2rL02">
-                        <h5>${loan.get('LOAN_NAME')}가입조건</h5>
-                        <a>닫기</a>
-                      </div>
-                      <div class="scrollable_3JZtx">
-                        <div class="content_25dlD">
-                          <div class="wrap_jF18n">
-                            <h2 class="title_9MPwh">가입조건(상세)</h2>
-                            <c:if
-                              test="${loan.get('TARGET_DETAIL1') != null}">
-                              <p class="description_3MBfN">${loan.get('TARGET_DETAIL1')}</p>
-                            </c:if>
-                            <c:if
-                              test="${loan.get('TARGET_DETAIL2') != null}">
-                              <p class="description_3MBfN">${loan.get('TARGET_DETAIL2')}</p>
-                            </c:if>
-                            <c:if
-                              test="${loan.get('TARGET_DETAIL3') != null}">
-                              <p class="description_3MBfN">${loan.get('TARGET_DETAIL3')}</p>
-                            </c:if>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+													<table>
+														<colgroup>
+															<col width="20%">
+															<col width="80%">
+														</colgroup>
+														<tbody>
+															<tr>
+																<td class="fs-16 dreamGothic">1. 상품명</td>
+																<td class="fs-16 dreamGothic"><c:out
+																		value="${loan.get('LOAN_NAME')}" /></td>
+															</tr>
+															<tr>
+																<td class="fs-16 dreamGothic">2. 상품설명</td>
+																<td class="fs-16 dreamGothic"><c:out
+																		value="${loan.get('LOAN_CONTENT')}" /></td>
+															</tr>
+															<tr>
+																<td class="fs-16 dreamGothic">3. 예상연금리</td>
+																<td class="fs-16 dreamGothic">평균 + 3.55%</td>
+															</tr>
+															<tr>
+																<td class="fs-16 dreamGothic">4. 가입대상</td>
+																<td class="fs-16 dreamGothic"><c:out
+																		value="${loan.get('TARGET_DESCRIPTION')}" /> <c:if
+																		test="${loan.get('TARGET_DETAIL1') != null}">
+																		<button class="infoButton_1Fb6y">대출 상세조건 확인하기</button>
+																	</c:if></td>
+															</tr>
+															<tr>
+																<td class="fs-16 dreamGothic">5. 대출한도</td>
+																<td class="fs-16 dreamGothic"><c:out
+																		value="${loan.get('CREDITLINE_DESC')}" /></td>
+															</tr>
+															<tr>
+																<td class="fs-16 dreamGothic">6. 대출상세보기</td>
+																<td class="fs-16 dreamGothic"><button
+																		class="infoButton_1Fb6y"
+																		onclick="location.href='<c:out value="${loan.get('DETAIL_URL')}" />'">대출
+																		상세 페이지로 이동</button></td>
+															</tr>
+														</tbody>
+													</table>
+													<br>
+													<button type="button" class="float-r calculate" style="font-family: a드림고딕4;"
+														id="calculateBtn" value="${loan.get('LOAN_ID')}">
+														금리계산기</button>
+													<span class="float-r">&nbsp;&nbsp;</span>
+													<button type="button" class="float-r reserve" style="font-family: a드림고딕4;"
+														id="loanModalBtn" data-toggle="modal"
+														data-target="#loanModal1">대출상담 예약</button>
+												</div>
+											</div>
+										</div>
+										<div class="alert_1cYf2">
+											<div class="title_2rL02">
+												<h5>${loan.get('LOAN_NAME')}가입조건</h5>
+												<a>닫기</a>
+											</div>
+											<div class="scrollable_3JZtx">
+												<div class="content_25dlD">
+													<div class="wrap_jF18n">
+														<h2 class="title_9MPwh">가입조건(상세)</h2>
+														<c:if test="${loan.get('TARGET_DETAIL1') != null}">
+															<p class="description_3MBfN">${loan.get('TARGET_DETAIL1')}</p>
+														</c:if>
+														<c:if test="${loan.get('TARGET_DETAIL2') != null}">
+															<p class="description_3MBfN">${loan.get('TARGET_DETAIL2')}</p>
+														</c:if>
+														<c:if test="${loan.get('TARGET_DETAIL3') != null}">
+															<p class="description_3MBfN">${loan.get('TARGET_DETAIL3')}</p>
+														</c:if>
+													</div>
+												</div>
+											</div>
+										</div>
 
-                  </c:forEach>
-                </c:when>
-                <c:otherwise>
-                  <div class="container">
-                    <h3>
-                      죄송합니다. 현재 입력해주신 정보로 조회되는 상품이 없습니다. <span
-                        style="font-weight: bold; color: #27b2a5;">바로
-                        상담원 연결</span>
-                    </h3>
-                    <button type="button" class="float-r"
-                      id="loanModalBtn" data-toggle="modal"
-                      data-target="#loanModal1">상담 예약</button>
-                  </div>
-                </c:otherwise>
-              </c:choose>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<div class="container">
+										<h3>
+											죄송합니다. 현재 입력해주신 정보로 조회되는 상품이 없습니다. <span
+												style="font-weight: bold; color: #27b2a5;">바로 상담원 연결</span>
+										</h3>
+										<button type="button" class="float-r" id="loanModalBtn"
+											data-toggle="modal" data-target="#loanModal1">상담 예약</button>
+									</div>
+								</c:otherwise>
+							</c:choose>
 
-              <!--상품목록 끝-->
-            </div>
-            <!-- 금리 계산기 부분 -->
-            <div class="col-sm-4">
-              <span
-                style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;
-              <span style="font: bold 20px a드림고딕4; font-size: 18px;">금리계산기(대출이율
-                계산)</span> <br> <br>
-              <div id="calculator" class="dis-none">
-                <!--  요기에 계산기가 들어와야긋네 -->
-              </div>
+							<!--상품목록 끝-->
+						</div>
+						<!-- 금리 계산기 부분 -->
+						<div class="col-sm-4">
+							<span
+								style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;
+							<span style="font: bold 20px a드림고딕4; font-size: 18px;">금리계산기(대출이율
+								계산)</span> <br> <br>
+							<div id="calculator" class="dis-none">
+								<!--  요기에 계산기가 들어와야긋네 -->
+							</div>
 
-            </div>
-          </div>
+						</div>
+					</div>
+					<br><br>
+					<div class="row">
+						<div class="col-sm-12" style="margin-bottom: 30px;">
+							<div id="canvasDiv" class="dis-none" style="width: 100%; background-color: white;">
+								<button style="width: 260px; font-family: a드림고딕4;" type="button" id="graphView">월 상환금액 그래프로 보기</button>
+								<button style="width: 260px; font-family: a드림고딕4;" type="button" id="tableView">월 상환금액 표로 보기</button>
+								<br><br><br>
+								<div>
+									<canvas id="canvas" style="display: block;"></canvas>
+									<table id="table" style="display: none; width: 100%;">
+										<colgroup>
+											<col width="14%">
+											<col width="14%">
+											<col width="15%">
+											<col width="14%">
+											<col width="15%">
+											<col width="14%">
+											<col width="14%">
+										</colgroup>
+										<thead>
+											<tr>
+												<th style="font-family: a드림고딕4; text-align: center;">납입 차수</th>
+												<th style="font-family: a드림고딕4; text-align: center;">매월 납입액</th>
+												<th style="font-family: a드림고딕4; text-align: center;">월 납입원금</th>
+												<th style="font-family: a드림고딕4; text-align: center;">월 납입이자</th>
+												<th style="font-family: a드림고딕4; text-align: center;">납입원금 누계</th>
+												<th style="font-family: a드림고딕4; text-align: center;">납입이자 누계</th>
+												<th style="font-family: a드림고딕4; text-align: center;">대출 잔액</th>
+											</tr>
+										</thead>
+										<tbody id="cell">
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 
-          <div class="row">
-            <div class="col-sm-12">
-              <div id="canvasDiv" class="dis-none"
-                style="width: 100%; background-color: white;">
-                <canvas id="canvas" style="display: block;">
-                 </canvas>
-                <table id="table" style="display: none">
-                  <thead>
-                    <tr>
-                      <th>납입 차수</th>
-                      <th>매월 납입액</th>
-                      <th>월 납입원금</th>
-                      <th>월 납입이자</th>
-                      <th>납입원금 누계</th>
-                      <th>납입이자 누계</th>
-                      <th>대출 잔액</th>
-                    </tr>
-                  </thead>
-                  <tbody id="cell">
-                  </tbody>
-                </table>
-                <button id="tableView">월 상환금액 표로 보기</button>
-                <button id="graphView">월 상환금액 그래프로 보기</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+	<!-- 금리 계산기 부분  -->
+	<div id="modal-content" style="display: none;">
+		<div class="modal" id="calculatorModal">
+			<div class="modal-header">
+				<h5 class="modal-title" style="color: gray;">
+					<b>대출이율 계산하기</b>
+				</h5>
+				<button type="button" class="close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-footer"></div>
 
-  <!-- 금리 계산기 부분  -->
-  <div id="modal-content">
-    <div class="modal" id="calculatorModal" style="display: none;">
-      <div class="modal-header">
-        <h5 class="modal-title" style="color: gray;">
-          <b>대출이율 계산하기</b>
-        </h5>
-        <button type="button" class="close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-footer"></div>
-
-      <div id="canvasDiv"
-        style="width: 100%; display: none; background-color: white;">
-        <canvas id="canvas" style="display: block;">
+			<div id="canvasDiv"
+				style="width: 100%; display: none; background-color: white; margin-bottom: 30px;">
+				<canvas id="canvas" style="display: block;">
                         </canvas>
-        <table id="table" style="display: none">
-          <thead>
-            <tr>
-              <th>납입 차수</th>
-              <th>매월 납입액</th>
-              <th>월 납입원금</th>
-              <th>월 납입이자</th>
-              <th>납입원금 누계</th>
-              <th>납입이자 누계</th>
-              <th>대출 잔액</th>
-            </tr>
-          </thead>
-          <tbody id="cell">
-          </tbody>
-        </table>
-        <button id="tableView">월 상환금액 표로 보기</button>
-        <button id="graphView">월 상환금액 그래프로 보기</button>
-      </div>
-    </div>
-  </div>
+				<table id="table" style="display: none; margin-bottom: 30px;">
+					<thead>
+						<tr>
+							<th>납입 차수</th>
+							<th>매월 납입액</th>
+							<th>월 납입원금</th>
+							<th>월 납입이자</th>
+							<th>납입원금 누계</th>
+							<th>납입이자 누계</th>
+							<th>대출 잔액</th>
+						</tr>
+					</thead>
+					<tbody id="cell">
+					</tbody>
+				</table>
+				<button id="tableView">월 상환금액 표로 보기</button>
+				<button id="graphView">월 상환금액 그래프로 보기</button>
+			</div>
+		</div>
+	</div>
 
 
-  <div class="modal fade" id="loanModal1" tabindex="-1" role="dialog"
-    aria-labelledby="loanModal1Label" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" style="color: gray;">
-            <b>대출 상담 예약 정보</b>
-          </h5>
-          <button type="button" class="close" data-dismiss="modal"
-            aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="card">
-            <div class="card-body menu-title-div">
-              <img
-                src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png"
-                style="width: 35px;">&nbsp;&nbsp;
-              <h3
-                style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">상담예약</h3>
-            </div>
-            <div class="card-body">
-              <div class="txtArea" id="divAgreeContent">
-                <p class="">고객님의 이메일상담을 처리하기 위해서는 개인정보보호법 제15조 1항 및
-                  제24조 1항에 따라 아래의 내용에 대하여 고객님의 동의가 필요합니다.</p>
-                <ul>
-                  <li><strong>1. 개인정보의 수집,이용목적</strong><br>
-                    서비스 이용에 따른 상담업무 처리를 위한 본인식별, 본인의사확인 및 상담결과 통보</li>
-                  <br>
-                  <li><strong>2.수집하는 개인정보의 항목</strong><br> 성명,
-                    생년월일, 성별, e-mail 주소, 전화번호, 이메일 질문내용</li>
-                  <br>
-                  <li><strong>3. 개인정보의 보유 및 이용 기간</strong><br>
-                    위 개인정보는 수집·이용에 관한 동의일로부터 처리 종료일까지 위 이용목적을 위하여
-                    보유·이용됩니다.<br> 단,(금융)거래 종료일 후에는 금융사고 조사, 분쟁 해결,
-                    민원처리, 법령상 의무이행 및 당행의 리스크 관리업무만을 위하여 보유·이용됩니다.</li>
-                  <br>
-                  <li><strong>4. 고객님은 개인정보 수집 및 이용을 거부할
-                      권리가 있으며 권리행사 시 상담이 거부될 수 있습니다.</strong></li>
-                  <br>
-                </ul>
-              </div>
+	<div class="modal fade" id="loanModal1" tabindex="-1" role="dialog"
+		aria-labelledby="loanModal1Label" aria-hidden="true">
+		<div class="modal-dialog" role="document" style="max-width: 700px;">
+			<div class="modal-content">
+				<div class="modal-header" style="justify-content: center;">
+					<img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">
+					<h3 style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">상담예약</h3>
+				</div>
+				<div class="modal-body">
+					<div class="card">
+						<div class="card-body">
+							<div class="txtArea" id="divAgreeContent">
+								<p class="fs-16 dreamGothic">고객님의 상담을 처리하기 위해서는 개인정보보호법 제15조 1항 및 제24조 1항에
+									따라 아래의 내용에 대하여 고객님의 동의가 필요합니다.</p>
+								<ul>
+									<li class="fs-12 dreamGothic"><strong class="fs-14 dreamGothic">1. 개인정보의 수집,이용목적</strong><br> 서비스 이용에 따른
+										상담업무 처리를 위한 본인식별, 본인의사확인 및 상담결과 통보</li>
+									<br>
+									<li class="fs-12 dreamGothic"><strong class="fs-14 dreamGothic">2.수집하는 개인정보의 항목</strong><br> 성명, 생년월일,
+										성별, e-mail 주소, 전화번호, 이메일 질문내용</li>
+									<br>
+									<li class="fs-12 dreamGothic"><strong class="fs-14 dreamGothic">3. 개인정보의 보유 및 이용 기간</strong><br> 위 개인정보는
+										수집·이용에 관한 동의일로부터 처리 종료일까지 위 이용목적을 위하여 보유·이용됩니다.<br>
+										단,(금융)거래 종료일 후에는 금융사고 조사, 분쟁 해결, 민원처리, 법령상 의무이행 및 당행의 리스크
+										관리업무만을 위하여 보유·이용됩니다.</li>
+									<br>
+									<li class="fs-12 dreamGothic"><strong class="fs-14 dreamGothic">4. 고객님은 개인정보 수집 및 이용을 거부할 권리가 있으며
+											권리행사 시 상담이 거부될 수 있습니다.</strong></li>
+									<br>
+								</ul>
+							</div>
 
-              <div style="font-size: 0.8em; color: darkgray;">
-                <span>개인정보 수집 및 이용 동의</span> <input type="checkbox"
-                  id="checkAgree" />
-              </div>
-              <div
-                style="font-size: 0.8em; color: darkgray; display: none;"
-                id="agreeTab">개인정보 수집 및 이용에 동의하셔야 상담이 가능합니다.</div>
+							<div style="color: darkgray; display: none;"
+								id="agreeTab">개인정보 수집 및 이용에 동의하셔야 상담이 가능합니다.</div>
 
-              <form action="/loan/reserveLoan" method="post"
-                id="reserveForm" onsubmit="return checkAgree()">
-                <table class="table" id="qnaTable"
-                  style="font-size: 0.9em;">
-                  <tr>
-                    <td
-                      style="width: 25%; text-align: center; vertical-align: middle; color: #27b2a5;">
-                      <b>업무선택</b>
-                    </td>
+							<form action="/loan/reserveLoan" method="post" id="reserveForm"
+								onsubmit="return checkAgree()">
+								<table class="table" id="qnaTable" style="font-size: 0.9em;">
+									<tr>
+										<td colspan="2">
+											<div style="height: 24px; color: red;">
+												<span class="fs-16 dreamGothic">개인정보 수집 및 이용 동의 (필수)</span> <input class="fs-16" type="checkbox"
+												id="checkAgree" />
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td
+											style="font-size: 18px; font-family: a드림고딕4; width: 25%; text-align: center; vertical-align: middle; color: #27b2a5;">
+											<b>업무선택</b>
+										</td>
 
-                    <td style="width: 75%;"><select
-                      class="form-control form-control-sm"
-                      style="width: 20%;">
-                        <option>대출</option>
-                    </select></td>
-                  </tr>
+										<td style="width: 75%;"><select
+											class="form-control form-control-sm" style="height: 30px; font-size: 16px; width: 50%;">
+												<option>대출</option>
+										</select></td>
+									</tr>
 
-                  <tr>
-                    <td
-                      style="width: 25%; text-align: center; vertical-align: middle; color: #27b2a5;"><b>성명</b></td>
-                    <td style="width: 75%;"><input
-                      style="text-align: center; width: 50%; height: (1.8125rem+ 2px);"
-                      name="username"
-                      class="form-control form-control-sm" type="text"
-                      value='<sec:authentication property="principal.member.userName"/>'
-                      readonly /></td>
-                  </tr>
+									<tr>
+										<td
+											style="font-size: 18px; font-family: a드림고딕4; width: 25%; text-align: center; vertical-align: middle; color: #27b2a5;"><b>성명</b></td>
+										<td style="width: 75%;"><input
+											style="text-align: center; width: 50%; height: 30px; font-size: 16px;"
+											name="username" class="form-control form-control-sm"
+											type="text"
+											value='<sec:authentication property="principal.member.userName"/>'
+											readonly /></td>
+									</tr>
 
-                  <tr>
-                    <td
-                      style="width: 25%; text-align: center; vertical-align: middle; color: #27b2a5;"><b>생년월일</b></td>
-                    <td style="width: 75%;">
-                      <div class="wrap-inputdate pos-relative  bo-rad-2"
-                        style="width: 50%;">
-                        <input style="height: 31px;"
-                          class="form-control my-calendar bo-rad-2 sizefull p-l-20"
-                          id="birthdate" type="text" name="birthdate">
-                        <i style="padding-left: 20px;"
-                          class="btn-calendar fa fa-calendar ab-r-m hov-pointer m-r-18"
-                          aria-hidden="true"></i>
-                      </div>
-                    </td>
-                  </tr>
+									<tr>
+										<td
+											style="font-size: 18px; font-family: a드림고딕4; width: 25%; text-align: center; vertical-align: middle; color: #27b2a5;"><b>생년월일</b></td>
+										<td style="width: 75%;">
+											<div class="wrap-inputdate pos-relative  bo-rad-2"
+												style="width: 50%;">
+												<input style="height: 31px;"
+													class="form-control my-calendar bo-rad-2 sizefull p-l-20"
+													id="birthdate" type="text" name="birthdate"> <i
+													style="padding-left: 20px;"
+													class="btn-calendar fa fa-calendar ab-r-m hov-pointer m-r-18"
+													aria-hidden="true"></i>
+											</div>
+										</td>
+									</tr>
 
-                  <tr>
-                    <td
-                      style="width: 25%; text-align: center; vertical-align: middle; color: #27b2a5;"><b>연락처</b></td>
-                    <td style="width: 50%;"><select
-                      id="numSelector1"
-                      style="text-align: center; width: 10%; display: inline"
-                      class="form-control form-control-sm">
-                        <option>010</option>
-                        <option>011</option>
-                        <option>017</option>
-                        <option>019</option>
-                    </select> &nbsp;&nbsp;-&nbsp;&nbsp; <input id="numSelector2"
-                      style="text-align: center; width: 20%; display: inline"
-                      maxlength="4" class="form-control form-control-sm"
-                      type="text" /> &nbsp;&nbsp;-&nbsp;&nbsp; <input
-                      id="numSelector3"
-                      style="text-align: center; width: 20%; display: inline"
-                      maxlength="4" class="form-control form-control-sm"
-                      type="text" /></td>
-                  </tr>
+									<tr>
+										<td
+											style=" font-size: 18px; font-family: a드림고딕4; width: 25%; text-align: center; vertical-align: middle; color: #27b2a5;"><b>연락처</b></td>
+										<td style="width: 50%;"><select id="numSelector1"
+											style="text-align: center; width: 20%; display: inline; height: 30px; font-size: 16px;" 
+											class="form-control form-control-sm">
+												<option>010</option>
+												<option>011</option>
+												<option>017</option>
+												<option>019</option>
+										</select> &nbsp;&nbsp;-&nbsp;&nbsp; <input id="numSelector2"
+											style="text-align: center; width: 20%; display: inline; height: 30px; font-size: 16px;"
+											maxlength="4" class="form-control form-control-sm"
+											type="text" /> &nbsp;&nbsp;-&nbsp;&nbsp; <input
+											id="numSelector3"
+											style="text-align: center; width: 20%; display: inline; height: 30px; font-size: 16px;"
+											maxlength="4" class="form-control form-control-sm"
+											type="text" /></td>
+									</tr>
 
-                  <tr>
-                    <td
-                      style="width: 25%; text-align: center; vertical-align: middle; color: #27b2a5;"><b>상담예약일시</b></td>
-                    <td style="width: 50%;"><select
-                      id="reserveTimeSelector"
-                      style="text-align: center; display: inline-block; width: 50%;"
-                      class="form-control form-control-sm">
-                        <option>시간 선택</option>
-                        <option value="1">오전 10:00 - 10:30</option>
-                        <option value="2">오전 10:30 - 11:00</option>
-                        <option value="3">오전 11:00 - 11:30</option>
-                        <option value="4">오전 11:30 - 12:00</option>
-                        <option value="5">오후 14:00 - 14:30</option>
-                        <option value="6">오후 14:30 - 15:00</option>
-                        <option value="7">오후 15:00 - 15:30</option>
-                        <option value="8">오후 15:30 - 16:00</option>
-                        <option value="9">오후 16:00 - 16:30</option>
-                        <option value="10">오후 16:30 - 17:00</option>
-                        <option value="11">오후 17:00 - 17:30</option>
-                        <option value="12">오후 17:30 - 18:00</option>
-                    </select></td>
-                  </tr>
+									<tr>
+										<td
+											style=" font-size: 18px; font-family: a드림고딕4; width: 25%; text-align: center; vertical-align: middle; color: #27b2a5;"><b>상담예약일시</b></td>
+										<td style="width: 50%;"><select id="reserveTimeSelector"
+											style="text-align: center; display: inline-block; width: 45%; height: 30px; font-size: 16px;"
+											class="form-control form-control-sm">
+												<option>시간 선택</option>
+												<option value="1">오전 10:00 - 10:30</option>
+												<option value="2">오전 10:30 - 11:00</option>
+												<option value="3">오전 11:00 - 11:30</option>
+												<option value="4">오전 11:30 - 12:00</option>
+												<option value="5">오후 14:00 - 14:30</option>
+												<option value="6">오후 14:30 - 15:00</option>
+												<option value="7">오후 15:00 - 15:30</option>
+												<option value="8">오후 15:30 - 16:00</option>
+												<option value="9">오후 16:00 - 16:30</option>
+												<option value="10">오후 16:30 - 17:00</option>
+												<option value="11">오후 17:00 - 17:30</option>
+												<option value="12">오후 17:30 - 18:00</option>
+										</select></td>
+									</tr>
 
-                  <tr>
-                    <td
-                      style="width: 25%; text-align: center; vertical-align: middle; color: #27b2a5;"><b>상담내용</b></td>
-                    <td style="width: 50%;">
-                      <ul>
-                        <li><b>대출상품</b> <select id="loanSelector"
-                          style="text-align: center; display: inline-block; width: 30%; text-align: center;"
-                          class="form-control form-control-sm">
-                            <option>상품선택</option>
-                            <c:forEach items="${loanlist}" var="loan">
-                              <option value="${loan.get('LOAN_ID')}">${loan.get('LOAN_NAME')}</option>
-                            </c:forEach>
-                        </select></li>
+									<tr>
+										<td
+											style=" font-size: 18px; font-family: a드림고딕4; width: 25%; text-align: center; vertical-align: middle; color: #27b2a5;"><b>상담내용</b></td>
+										<td style="width: 75%;">
+											<ul>
+												<li><span style="font-size: 16px; font-family: a드림고딕;">대출상품</span> <select id="loanSelector"
+													style="text-align: center; margin-left: 32px; display: inline-block; width: 30%; text-align: center; height: 30px; font-size: 16px;"
+													class="form-control form-control-sm">
+														<option>상품선택</option>
+														<c:forEach items="${loanlist}" var="loan">
+															<option value="${loan.get('LOAN_ID')}">${loan.get('LOAN_NAME')}</option>
+														</c:forEach>
+												</select></li>
+												<br>
+												<li><span style="font-size: 16px; font-family: a드림고딕;">대출희망금액</span> <input
+													style="text-align: center; display: inline-block; width: 30%; height: 30px; font-size: 16px;"
+													name="requestBM" class="form-control form-control-sm"
+													type="text" value="${param.requiredMoney}" /><span style="font-size: 16px; font-family: a드림고딕;">&nbsp;원</span></li>
+												<br>
+												<li><span style="font-size: 16px; font-family: a드림고딕;">자금사용목적</span> <input
+													style="text-align: center; display: inline-block; width: 60%; height: 30px; font-size: 16px;"
+													name="reasonLoan" class="form-control form-control-sm"
+													type="text" /></li>
+											</ul>
+										</td>
+									</tr>
+								</table>
 
-                        <li><b>대출희망금액</b> <input
-                          style="text-align: center; width: 50%; height: (1.8125rem+ 2px);"
-                          name="requestBM"
-                          class="form-control form-control-sm"
-                          type="text" value="${param.requiredMoney}" /><b>만원</b>
-                        </li>
-                        <li><b>자금사용목적</b> <input
-                          style="text-align: center; width: 50%; height: (1.8125rem+ 2px);"
-                          name="reasonLoan"
-                          class="form-control form-control-sm"
-                          type="text" /></li>
-                      </ul>
-                    </td>
-                  </tr>
-                </table>
-
-                <br>
-                <div
-                  style="display: flex; align-items: center; justify-content: center;">
+								<br>
+								<div
+									style="display: flex; align-items: center; justify-content: center;">
 
 
-                  <!-- CREATE LPBU를 위한 인자 전달 -->
-                  <input type="hidden" name="userId"
-                    value='<sec:authentication property="principal.username"/>'>
-                  <input type="hidden" name="reserveTime"> <input
-                    type="hidden" name="loanId"> <input
-                    type="hidden" name="userPhone"> <input
-                    type="hidden" name="${_csrf.parameterName}"
-                    value="${_csrf.token}" />
-                  <!-- 상담 예약 신청, 취소 버튼 -->
-                  <input type="submit" id="consultReserveBtn" value="신청">
-                  &nbsp;&nbsp; <input type="reset" id="consultCancelBtn"
-                    value="취소">
-                  <div id="snackbar"></div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+									<!-- CREATE LPBU를 위한 인자 전달 -->
+									<input type="hidden" name="userId"
+										value='<sec:authentication property="principal.username"/>'>
+									<input type="hidden" name="reserveTime"> <input
+										type="hidden" name="loanId"> <input type="hidden"
+										name="userPhone"> <input type="hidden"
+										name="${_csrf.parameterName}" value="${_csrf.token}" />
+									<!-- 상담 예약 신청, 취소 버튼 -->
+									<input style="font-family: a드림고딕4;" type="submit" id="consultReserveBtn" value="신청">
+									&nbsp;&nbsp;
+									<button style="font-family: a드림고딕4;" type="button" data-dismiss="modal" aria-label="Close">취소</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="snackbar"></div>
 
-  <!-- 금융계산기 생성  -->
-  <script>
+
+	<!-- footer include 시작 -->
+	<jsp:include
+		page="${pageContext.request.contextPath}/resources/includes/footer.jsp" />
+	<!-- footer include 종료 -->
+
+	<!-- 금융계산기 생성  -->
+	<script>
 
 function checkRepay(){
 	$('#cell').children().remove();
 	var interestSum = 0;
 	var principalSum = 0;
 	var body = document.getElementById('cell');  //행을 추가할 테이블
-	var amount_of_loans = $('#principal').val() + "0000";
+	var amount_of_loans = $('#principal').val() * 10000;
 
-body.innerHTML += "<tr><td colspan='6' style='text-align:center;'>"
-              + "상환 개시전"+"</td><td>"
-              + amount_of_loans +"</td></tr>";
+body.innerHTML += "<tr><td colspan='6' style='font-family: a드림고딕4; text-align:center;'>"
+              + "상환 개시전"+"</td><td style='font-family: a드림고딕4; text-align:center; color:#27b2a5; font-weight: bold;'>"
+              + numberWithCommas(amount_of_loans) +"</td></tr>";
 for (var i = 0; i < monthly_installment_plan; i++) {
   interestSum += interests[i];
   principalSum += principals[i];
-  body.innerHTML += "<tr><td>"
-                  + (i+1) + "개월"+"</td><td>"
-                  +repayments[i]+"</td><td>"
-                  +principals[i]+"</td><td>"
-                  +interests[i]+"</td><td>"
-                  +principalSum+"</td><td>"
-                  +interestSum+"</td><td>"
-                  +balances[i]+"</td></tr>";
+  body.innerHTML += "<tr><td style='font-family: a드림고딕4; text-align:center;'>"
+                  + (i+1) + "개월"+"</td><td style='font-family: a드림고딕4; text-align:center;'>"
+                  +numberWithCommas(repayments[i])+"</td><td style=' font-family: a드림고딕4; text-align:center;'>"
+                  +numberWithCommas(principals[i])+"</td><td style='font-family: a드림고딕4; text-align:center;'>"
+                  +numberWithCommas(interests[i])+"</td><td style=' font-family: a드림고딕4; text-align:center;'>"
+                  +numberWithCommas(principalSum) +"</td><td style='; font-family: a드림고딕4; text-align:center;'>"
+                  +numberWithCommas(interestSum)+"</td><td style=' font-family: a드림고딕4; text-align:center;'>"
+                  +numberWithCommas(balances[i])+"</td></tr>";
 }
-body.innerHTML += "<tr><td colspan='5' style='text-align:center;'>"
-  + "총 납입금액 "+"</td><td colspan='2'>"
-  +(interestSum + principalSum)+"원</tr>";
+body.innerHTML += "<tr><td colspan='4' style='font-family: a드림고딕4; text-align:center;'>"
+  + "총 납입금액 "+"</td><td colspan='2' style='font-family: a드림고딕4; color:#27b2a5; text-align:center; font-weight: bold;'>"
+  +numberWithCommas(interestSum + principalSum)+" 원</td><td></td></tr>";
   	
 var chartData = {
     labels: ['2018-01', '2018-02', '2018-03', '2018-04', '2018-05', '2018-06', '2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12'],
@@ -747,7 +729,8 @@ var chartData = {
           responsive: true,
           title: {
             display: true,
-            text: 'Chart.js Combo Bar Line Chart'
+            text: '금리 계산기를 통해 도출된 상환 계획 한눈에 보기',
+            fontSize: 20
           },
           tooltips: {
             mode: 'index',
@@ -758,12 +741,18 @@ var chartData = {
 
   document.getElementById('tableView').addEventListener('click', function(){
     document.getElementById('canvas').style.display = "none";
-    document.getElementById('table').style.display = "block";
+    document.getElementById('table').style.display = null;
+    var target = document.getElementById('snackbar');
+    target.innerHTML = '상환 계획표를 테이블로 확인합니다. 단위는 "원" 입니다!';
+    toast();
     });
     
   document.getElementById('graphView').addEventListener('click', function(){
     document.getElementById('canvas').style.display = "block";
     document.getElementById('table').style.display = "none";
+    var target = document.getElementById('snackbar');
+    target.innerHTML = '상환 계획표를 차트로 확인합니다!';
+    toast();
     });   
 }
 
@@ -986,7 +975,7 @@ checkRepay();
 				    table += "<tr><td><label class='ajaxTL'>연 소득 </label></td><td><input style='width: 50%; display: inline;' type='text' class='form-control w-half' id='salary' name='salary' >&nbsp;&nbsp;<label class='ajaxTL'>만원</label>";
 				    table += "</table>";
 					$("#calculator").html(table);
-					$("#calculator").append("<button type='button' style='background-color: #27b2a5; border-color: #27b2a5;' class='btn btn-primary' id='checkRepayment'>상환계획 조회 </button>");
+					$("#calculator").append("<button type='button' style='width: 100%; font-family:a드림고딕4; background-color: #27b2a5; border-color: #27b2a5;' class='btn btn-primary' id='checkRepayment'>상환계획 조회 </button>");
 					
 					$(function() {
 						if($('#calculator').hasClass('dis-none')) {
@@ -1013,14 +1002,14 @@ checkRepay();
 </script>
 
 
-  <!-- 상품별 금융계산기  -->
-  <script>
+	<!-- 상품별 금융계산기  -->
+	<script>
 
 
 </script>
 
-  <!--대출조건 상세보기 -->
-  <script>
+	<!--대출조건 상세보기 -->
+	<script>
 $(function(){
 $(".infoButton_1Fb6y").each(function(index) {
       $(this).on("click", function(){
@@ -1035,8 +1024,8 @@ $(".infoButton_1Fb6y").each(function(index) {
 </script>
 
 
-  <!-- 상담예약  -->
-  <script>
+	<!-- 상담예약  -->
+	<script>
 function checkAgree(){
 	var target = document.getElementById('snackbar');
 	if($("input:checkbox[id='checkAgree']").is(":checked") == false){
@@ -1177,50 +1166,50 @@ $(function(){
 });   
 </script>
 
-  <!--===============================================================================================-->
-  <script type="text/javascript"
-    src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
-  <!--===============================================================================================-->
-  <script type="text/javascript"
-    src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
-  <!--===============================================================================================-->
-  <script type="text/javascript"
-    src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
-  <script type="text/javascript"
-    src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
-  <!--===============================================================================================-->
-  <script type="text/javascript"
-    src="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.js"></script>
-  <!--===============================================================================================-->
-  <script type="text/javascript"
-    src="${pageContext.request.contextPath}/resources/vendor/daterangepicker/moment.min.js"></script>
-  <script type="text/javascript"
-    src="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.js"></script>
-  <!--===============================================================================================-->
-  <script type="text/javascript"
-    src="${pageContext.request.contextPath}/resources/vendor/slick/slick.min.js"></script>
-  <script type="text/javascript"
-    src="${pageContext.request.contextPath}/resources/js/slick-custom.js"></script>
-  <!--===============================================================================================-->
-  <script type="text/javascript"
-    src="${pageContext.request.contextPath}/resources/vendor/parallax100/parallax100.js"></script>
-  <script type="text/javascript">
+	<!--===============================================================================================-->
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/popper.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/vendor/daterangepicker/moment.min.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/vendor/daterangepicker/daterangepicker.js"></script>
+	<!--===============================================================================================-->
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/vendor/slick/slick.min.js"></script>
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/js/slick-custom.js"></script>
+	<!--===============================================================================================-->
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/vendor/parallax100/parallax100.js"></script>
+	<script type="text/javascript">
 			$('.parallax100').parallax100();
 		</script>
-  <!--===============================================================================================-->
-  <script type="text/javascript"
-    src="${pageContext.request.contextPath}/resources/vendor/countdowntime/countdowntime.js"></script>
-  <!--===============================================================================================-->
-  <script type="text/javascript"
-    src="${pageContext.request.contextPath}/resources/vendor/lightbox2/js/lightbox.min.js"></script>
-  <!--===============================================================================================-->
-  <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
-  <script
-    src="${pageContext.request.contextPath}/resources/js/toastMessage.js"></script>
-  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-  <script
-    src="${pageContext.request.contextPath}/resources/js/ziehharmonika.js"></script>
-  <script>
+	<!--===============================================================================================-->
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/vendor/countdowntime/countdowntime.js"></script>
+	<!--===============================================================================================-->
+	<script type="text/javascript"
+		src="${pageContext.request.contextPath}/resources/vendor/lightbox2/js/lightbox.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/toastMessage.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/resources/js/ziehharmonika.js"></script>
+	<script>
 			$(document).ready(function() {
 				$('.ziehharmonika').ziehharmonika({
 					collapsible : true,
@@ -1228,23 +1217,27 @@ $(function(){
 				});
 			});
 		</script>
-  <script type="text/javascript">
-			var _gaq = _gaq || [];
-			_gaq.push([ '_setAccount', 'UA-36251023-1' ]);
-			_gaq.push([ '_setDomainName', 'jqueryscript.net' ]);
-			_gaq.push([ '_trackPageview' ]);
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push([ '_setAccount', 'UA-36251023-1' ]);
+		_gaq.push([ '_setDomainName', 'jqueryscript.net' ]);
+		_gaq.push([ '_trackPageview' ]);
 
-			(function() {
-				var ga = document.createElement('script');
-				ga.type = 'text/javascript';
-				ga.async = true;
-				ga.src = ('https:' == document.location.protocol ? 'https://ssl'
-						: 'http://www')
-						+ '.google-analytics.com/ga.js';
-				var s = document.getElementsByTagName('script')[0];
-				s.parentNode.insertBefore(ga, s);
-			})();
-		</script>
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+					: 'http://www')
+					+ '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+	</script>
 
 </body>
 </html>

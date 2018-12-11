@@ -3889,23 +3889,16 @@ RESPONSIVE  RESPONSIVE  RESPONSIVE  RESPONSIVE   RESPONSIVE
 
 
 .main-footer {
-	position: sticky;
-
+	position: fixed;
     left: 0;
-
     bottom: 0;
-
     width: 100%;
-
 	text-align: center;
-
 	color: black;
-	
 	background: white;
-	
 	border-top: 3px solid #27b2a5;
-	
 	font-size: 16px;
+	font-family: a드림고딕4;
 }
 
 
