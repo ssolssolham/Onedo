@@ -305,8 +305,12 @@ canvas {
                               <tr>
                                 <td class="fs-16 dreamGothic">3.
                                   예상연금리</td>
-                                <td class="fs-16 dreamGothic">평균 +
-                                  3.55%</td>
+                                <td class="fs-16 dreamGothic">
+                                  <div>
+                                    <p>${param.resultRate}</p>
+                                    <p>최저 ${loan.get('LOAN_CONTENT')} ~ 최고${loan.get('LOAN_CONTENT')} </p>
+                                  </div>
+                                </td>
                               </tr>
                               <tr>
                                 <td class="fs-16 dreamGothic">4.
@@ -325,13 +329,19 @@ canvas {
                                 <td class="fs-16 dreamGothic"><c:out
                                     value="${loan.get('CREDITLINE_DESC')}" /></td>
                               </tr>
-                              <tr>
+                            <tr>
                                 <td class="fs-16 dreamGothic">6.
-                                  대출상세보기</td>
+                                  대출기간</td>
+                                <td class="fs-16 dreamGothic"><c:out
+                                    value="${loan.get('LOANPERIOD_DESC')}" /></td>
+                              </tr>
+                              <tr>
+                                <td class="fs-16 dreamGothic">7.
+                                  상세보기</td>
                                 <td class="fs-16 dreamGothic"><button
                                     class="infoButton_1Fb6y"
-                                    onclick="location.href='<c:out value="${loan.get('DETAIL_URL')}" />'">대출
-                                    상세 페이지로 이동</button></td>
+                                    onclick="location.href='<c:out value="${loan.get('DETAIL_URL')}" />'"> 
+                                    상품 페이지로 이동</button></td>
                               </tr>
                             </tbody>
                           </table>
@@ -347,9 +357,11 @@ canvas {
                         </div>
                       </div>
                     </div>
+                    
+                    <c:if test="${loan.get('TARGET_DETAIL1') != null}">
                     <div class="alert_1cYf2">
                       <div class="title_2rL02">
-                        <h5>${loan.get('LOAN_NAME')}가입조건</h5>
+                        <h5>${loan.get('LOAN_NAME')} 가입조건</h5>
                         <a>닫기</a>
                       </div>
                       <div class="scrollable_3JZtx">
@@ -357,21 +369,23 @@ canvas {
                           <div class="wrap_jF18n">
                             <h2 class="title_9MPwh">가입조건(상세)</h2>
                             <c:if
-                              test="${loan.get('TARGET_DETAIL1') != null}">
+                              test="${loan.get('TARGET_DETAIL1') != 'null'}">
                               <p class="description_3MBfN">${loan.get('TARGET_DETAIL1')}</p>
                             </c:if>
                             <c:if
-                              test="${loan.get('TARGET_DETAIL2') != null}">
+                              test="${loan.get('TARGET_DETAIL2') != 'null'}">
                               <p class="description_3MBfN">${loan.get('TARGET_DETAIL2')}</p>
                             </c:if>
                             <c:if
-                              test="${loan.get('TARGET_DETAIL3') != null}">
+                              test="${loan.get('TARGET_DETAIL3') != 'null'}">
                               <p class="description_3MBfN">${loan.get('TARGET_DETAIL3')}</p>
                             </c:if>
                           </div>
                         </div>
                       </div>
                     </div>
+                    </c:if>
+
 
                   </c:forEach>
                 </c:when>
@@ -1021,17 +1035,29 @@ checkRepay();
 
   <!--대출조건 상세보기 -->
   <script>
-$(function(){
-$(".infoButton_1Fb6y").each(function(index) {
-      $(this).on("click", function(){
-      	$(".alert_1cYf2").show();
-    });
-    
-      $(".title_2rL02 > a").on("click", function(){
-      	$(".alert_1cYf2").hide();
-      });
-	});
-});
+  $(function(){
+        $(".infoButton_1Fb6y").on("click", function(){
+          	$(".alert_1cYf2").show();
+        });
+
+	     $(".title_2rL02 > a").on("click", function(){
+      		$(".alert_1cYf2").hide();
+    	 });
+}); 
+
+/* var acc = document.getElementsByClassName("infoButton_1Fb6y");
+var modal = document.getElementsByClassName("alert_1cYf2");
+
+$('.infoButton_1Fb6y').click(function(e){
+	console.log(e.currentTarget.offsetParent);
+	for(var i = 0; i <= $('.infoButton_1Fb6y').length; i++){
+		if(e.currentTarget === $('.infoButton_1Fb6y')[i]){
+			 modal.show();
+			console.log("커몽커몽");
+			/* $('tr')[i+1].remove(); */
+		}
+	}
+}); */
 </script>
 
 

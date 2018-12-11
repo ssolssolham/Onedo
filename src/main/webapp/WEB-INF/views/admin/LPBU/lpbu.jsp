@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page session="false"%>
 <!DOCTYPE html>
 <!--
@@ -293,8 +294,8 @@ desired effect
           <div class="box box-primary">
             <div class="box-header with-border">
               
-                <button class="accordion">예약상담 관리</button>
-                <div class="panel">
+                <button class="accordion active">예약상담 관리</button>
+                <div class="panel show">
                                     <div class="table-style-2">
                     <div class="table-style-2-heading">
                       <form id='searchForm' action="/admin/lpbu/" method='get'>
@@ -327,15 +328,15 @@ desired effect
                       </label>
                       </form>
                       </div>
-                   <table id="loanList">
+                   <table id="loanList" class="table table-bordered table-hover">
                         <colgroup>
                            <col width="10%" style="text-align: center;">
+                           <col width="20%" style="text-align: center;">
                            <col width="10%" style="text-align: center;">
+                           <col width="15%" style="text-align: center;">
+                           <col width="18%" style="text-align: center;">
+                           <col width="18%" style="text-align: center;">
                            <col width="25%" style="text-align: center;">
-                           <col width="20%" style="text-align: center;">
-                           <col width="10%" style="text-align: center;">
-                           <col width="20%" style="text-align: center;">
-                           <col width="10%" style="text-align: center;">
                            
                         </colgroup>
                         <thead>
@@ -355,15 +356,17 @@ desired effect
                               <tr>
                                 <td style="text-align:center;">${lpbu.get('RN')}</td>
                                 <td style="text-align:center;">${lpbu.get('LOAN_NAME')}</td>
-                                <td style="text-align:cdnter; padding-left: 7px;">${lpbu.get('REQUEST_BM')}</td>
                                 <td style="text-align:center;">${lpbu.get('USERNAME')}</td>
+                                <td style="text-align:cdnter; padding-left: 7px;">₩
+                                <fmt:formatNumber value="${lpbu.get('REQUEST_BM')}" pattern="#,###" />
+                                </td>
                                 <td style="text-align:center;">${lpbu.get('REQUESTTIME')}</td>
                                 <td style="text-align:center;">${lpbu.get('RESERVE_TIME')}</td>
-                                <c:if test="${lpbu.get('ISANSWERED') == false}">
-                                <td style="text-align:center;"><button type="button" name="commit" value="${lpbu.get('LPBU_NUM')}" class="lpbu_nums">완료하기</button></td>
+                                <c:if test="${lpbu.get('ISANSWERED') == '0'}">
+                                <td style="text-align:center;"><button type="button" name="commit" value="${lpbu.get('LPBU_NUM')}" class="lpbu_nums">완료처리</button></td>
                                 </c:if>
-                                <c:if test="${lpbu.get('ISANSWERED') == true}">
-                                <td style="text-align:center;"><input type="button" name="complete" disabled>처리완료</td>
+                                <c:if test="${lpbu.get('ISANSWERED') == '1'}">
+                                <td style="text-align:center;"><input type="button" name="complete" disabled>완료</td>
                                 </c:if>
                               </tr>
                          </c:forEach>
@@ -395,12 +398,10 @@ desired effect
                     </div>
                 </div>
                 
-                <button class="accordion">대출예약 통계</button>
-                <div class="panel">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                      <div id="container"></div>
-                </div>
-                
+
+
+
+
             </div>
             <!-- /.box-header -->
           </div>

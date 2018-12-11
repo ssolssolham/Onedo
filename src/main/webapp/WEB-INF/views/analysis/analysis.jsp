@@ -1014,15 +1014,6 @@
                                             <b class="dreamGothic">신용등급을
                                               선택해주세요</b> <span
                                               style="color: orangered;">&nbsp;*</span>
-                                            <div class="tooltip">
-                                              신용등급을 모르시나요 ? <span
-                                                class="tooltiptext">
-                                                * 모든 국민은 매년 무료 3회 신용평가사를
-                                                통해 신용등급을 확인할 수 있습니다.<br>
-                                                <a href="www.naver.com">등급확인하러
-                                                  가기</a>
-                                              </span>
-                                            </div>
                                           </div>
                                           <select
                                             class="form-control fs-20 dreamGothic"
@@ -1266,11 +1257,6 @@
                                             <b class="dreamGothic">신용등급을
                                               선택해주세요.</b><span
                                               style="color: orangered;">&nbsp;*</span>
-                                            <div class="tooltip">
-                                              신용등급을 모르시나요 ?<span
-                                                class="tooltiptext">Tooltip
-                                                text</span>
-                                            </div>
                                           </div>
                                           <select
                                             class="form-control fs-20 dreamGothic"

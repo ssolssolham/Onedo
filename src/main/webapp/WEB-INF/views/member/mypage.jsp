@@ -245,8 +245,7 @@ img {
 }
 </style>
 </head>
-<body onload="window.open('/noticePop','','width=500px, height=300px, left=0px, top=0px, toolbar=0, status=yes, menubars=0, scrollbars=0, resizable=0, location=0, directories=0')" 
-		class="animsition" style="overflow-y: hidden; overflow-x: hidden;">
+<body class="animsition" style="overflow-y: hidden; overflow-x: hidden;">
 
   <!-- header include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/header.jsp"/>
@@ -282,7 +281,7 @@ img {
                      <table id="MyReserveloanList">
                         <colgroup>
                            <col width="10%" style="text-align: center;">
-                           <col width="20%">
+                           <col width="25%">
                            <col width="10%" style="text-align: center;">
                            <col width="25%" style="text-align: center;">
                            <col width="20%" style="text-align: center;">
@@ -291,7 +290,7 @@ img {
                         </colgroup>
                         <thead>
                            <tr>
-                              <th style="text-align: center;">번호</th>
+                              <th style="text-align: center;">예약번호</th>
                               <th style="text-align: center;">상품명</th>
                               <th style="text-align: center;">대출금액</th>
                               <th style="text-align: center;">예약시간</th>
@@ -305,19 +304,19 @@ img {
                             <c:choose>
                             <c:when test="${list != null}">
                               <tr>
-                                <td style="text-align:center;">1</td>
+                                <td style="text-align:center;">${reserve.get('LPBU_NUM')}</td>
                                 <td style="text-align:cdnter; padding-left: 7px;">${reserve.get('LOAN_NAME')}</td>
                                   <td style="text-align:center;"><label>₩</label>
                                   <fmt:formatNumber value="${reserve.get('REQUEST_BM')}" pattern="#,###" /></td>
                                 <td style="text-align:center;">${reserve.get('RESERVE_TIME')}</td>
-                              <c:if test="${reserve.get('ISANSWERED') == false}">
+                              <c:if test="${reserve.get('ISANSWERED') == '0'}">
                                 <td style="text-align:center;"><button type="button" style="vertical-align: top; height:30px; width: 50%;" class="reserveCancle" id="reserveCancleBtn" >예약취소</button></td>
+                              </c:if>
+                              <c:if test="${reserve.get('ISANSWERED') == '1'}">
+                                <td style="text-align:center;"><button type="button" style="vertical-align: top; height:30px; width: 50%; background-color: gray" disabled>답변완료</button></td>
                               </c:if>
                                 <td style="text-align:center;"><button type="button" style="vertical-align: top; height:30px; width: 50%;" class="reserveOpen" id="reserveOpenBtn" >열람</button>
                                 </td>
-                              <c:if test="${reserve.get('ISANSWERED') == true}">
-                                <td style="text-align:center;"><button type="button" style="vertical-align: top; height:30px; width: 50%; background-color: gray" disabled>답변완료</button></td>
-                              </c:if>
                               </tr>
                               
                               <tr class="panel" style="display:none;">
@@ -326,14 +325,22 @@ img {
                                     <h4>예약하신 대출상품 정보</h4>
                                      <div class="loanDetail">
                                     <ul id="image">
-                                       <li><label>요청시간 : &nbsp;</label> ${reserve.get('REQUESTTIME')}</li>
-                                       <li><label>요청시간 : &nbsp;</label></li>
-                                       <li><label>요청시간 : &nbsp;</label></li>
+                                       <li><label>상담요청시간 : &nbsp;</label>
+                                       <fmt:formatDate value="${reserve.get('REQUESTTIME')}" pattern="yyyy-MM-dd E요일 a hh:mm " type="date"/>
+                                       </li>
                                        <li><label>업무 담당자 : &nbsp;</label>박의수</li>
-                                       <c:if test="${reserve.get('ISANSWERED') == true}"/>
-                                       <li><label>상담완료시간 : &nbsp;</label>값을 넣어야 함.</li>  <!--  관리자가 변경하는 순간 update -->               
-                                       <c:if test="${reserve.get('ISANSWERED') == false}"/>
-                                       <li><label>진행상태 : &nbsp;</label>대기 중</li>
+                                       
+                                       <c:if test="${reserve.get('ISANSWERED') == '1'}">
+                                       <li><label>상담완료시간 : &nbsp;</label>
+                                          <fmt:formatDate value="${reserve.get('ANSWER_TIME')}" pattern="yyyy-MM-dd hh:mm" type="date"/>
+                                      </li>  
+                                      <li><label>진행상태 : &nbsp;</label>완료</li>
+                                      </c:if>
+                                      
+                                      <!--  관리자가 변경하는 순간 update -->               
+                                       <c:if test="${reserve.get('ISANSWERED') == '0'}">
+                                         <li><label>진행상태 : &nbsp;</label>대기 중</li>
+                                         </c:if>
                                        <li><label>상세보기 : &nbsp;</label><a href="${reserve.get('DETAIL_URL')}">상세보기</a></li>
                                     </ul>
                                     </div>
