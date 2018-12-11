@@ -38,9 +38,13 @@ public class AdminHomeServiceImpl implements AdminHomeService{
 	
 	@Override
 	public List<Object> adminFirstStep() {
-		int logCnt  = logMapper.logCnt();
+		int logCnt  = logMapper.logCnt(51);
+		int loginLogCnt  = logMapper.logCnt(1);
+		
 		int adbdCnt = adbdMapper.loadAdbdCnt();
 		int lpbuCnt = lpbuMapper.loadLpbuCnt();
+		int totalLpbuCnt = lpbuMapper.LPBUCnt();
+		int totalADBDCnt = adbdMapper.ADBDCnt();
 		List<Object> list = new ArrayList<Object>();
 		
 		/* 그래프 데이터 */
@@ -51,11 +55,19 @@ public class AdminHomeServiceImpl implements AdminHomeService{
 		/* 월간 베스트 5 상품 */
 		List<HashMap<String,Object>> map = loanMapper.bestFiveLoans();
 		list.add(map);
+		
+		list.add(loginLogCnt);
+		list.add(totalLpbuCnt);
+		list.add(totalADBDCnt);
+		
+		List<HashMap<String,Object>> map2 = adbdMapper.topFiveADBD();
+		list.add(map2);
 		/* 월간 베스트 5 상권 */
 //		List<HashMap<String,Object>> map2 = 
 		
 		
-		
+		log.info(logCnt);
+		log.info(loginLogCnt);
 		
 		return list;
 	}

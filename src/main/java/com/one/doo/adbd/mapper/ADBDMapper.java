@@ -1,5 +1,8 @@
 package com.one.doo.adbd.mapper;
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface ADBDMapper {
@@ -8,4 +11,8 @@ public interface ADBDMapper {
 	public void insert(@Param(value = "userId") String userid, @Param(value="alleybiz") int alleyBizCode);
 	
 	public int loadAdbdCnt();
+	
+	public int ADBDCnt();
+	
+	public List<HashMap<String,Object>> topFiveADBD();
 }

@@ -129,6 +129,10 @@
 	 = to_date(sysdate,'YYYY/MM/dd') group by user_id)
 	</select>
 	
+	<select id="LPBUCnt" resultType="int">
+	select count(*) lpbu_cnt
+	from lpbu
+	</select>
 	<delete id="deleteLPBU"  parameterType="int" >
 		DELETE FROM LPBU WHERE LPBU_NUM = ${lpbuNo}
 	</delete>
