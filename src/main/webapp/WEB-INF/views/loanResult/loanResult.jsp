@@ -299,7 +299,13 @@ canvas {
                                              </tr>
                                              <tr>
                                                 <td class="fs-16 dreamGothic">3. 예상연금리</td>
-                                                <td class="fs-16 dreamGothic">평균 + 3.55%</td>
+                                                <td class="fs-16 dreamGothic"><c:out
+                                                      value="${param.resultRate}"/>%
+                                                               <label>최저</label>${loan.get('INTERESTRATE_MIN')}<label>%</label>
+                                                               <label> ~ 최고</label>${loan.get('INTERESTRATE_MIN')}<label>%</label>
+                                                      <h5>* 예상 연 금리는 은행 내부 신용등급, 고객 기존 대출에 따라 달라질 수 있습니다.</h5>
+                                                      </td>
+                                                      
                                              </tr>
                                              <tr>
                                                 <td class="fs-16 dreamGothic">4. 가입대상</td>
@@ -315,10 +321,15 @@ canvas {
                                                       value="${loan.get('CREDITLINE_DESC')}" /></td>
                                              </tr>
                                              <tr>
-                                                <td class="fs-16 dreamGothic">6. 대출상세보기</td>
+                                                <td class="fs-16 dreamGothic">6. 대출기간</td>
+                                                <td class="fs-16 dreamGothic"><c:out
+                                                      value="${loan.get('LOANPERIOD_DESC')}" /></td>
+                                             </tr>
+                                             <tr>
+                                                <td class="fs-16 dreamGothic">7. 상품상세</td>
                                                 <td class="fs-16 dreamGothic"><button
                                                       class="infoButton_1Fb6y"
-                                                      onclick="location.href='<c:out value="${loan.get('DETAIL_URL')}" />'">대출
+                                                      onclick="location.href='<c:out value="${loan.get('DETAIL_URL')}" />'">
                                                       상세 페이지로 이동</button></td>
                                              </tr>
                                           </tbody>

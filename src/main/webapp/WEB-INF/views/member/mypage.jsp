@@ -272,7 +272,7 @@ img {
                            <col width="20%" style="text-align: center;">
                            <col width="10%" style="text-align: center;">
                            <col width="25%" style="text-align: center;">
-                           <col width="10%" style="text-align: center;">
+                           <col width="15%" style="text-align: center;">
                            <col width="20%" style="text-align: center;">
                            
                         </colgroup>
@@ -319,7 +319,7 @@ img {
                                        
                                        <c:if test="${reserve.get('ISANSWERED') == '1'}">
                                        <li><label>상담완료시간 : &nbsp;</label>
-                                          <fmt:formatDate value="${reserve.get('ANSWER_TIME')}" pattern="yyyy-MM-dd hh:mm" type="date"/>
+                                          <fmt:formatDate value="${reserve.get('ANSWER_TIME')}" pattern="yyyy-MM-dd E요일 a hh:mm" type="date"/>
                                       </li>  
                                       <li><label>진행상태 : &nbsp;</label>완료</li>
                                       </c:if>
@@ -357,8 +357,8 @@ img {
                                   </div>
                                   <div id="opbLayerMessage0OPB_layerNextFocus_generatedByJS" tabindex="0"></div>
                                 </div>
-                                <td>
-                               <tr> 
+                                </td>
+                               </tr> 
                               <!--  -->
                             </c:when>
                             <c:otherwise>
