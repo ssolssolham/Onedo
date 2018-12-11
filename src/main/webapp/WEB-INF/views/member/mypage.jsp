@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>OneDo - 카페상권분석</title>
+<title>One Do - 상담 History</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=2">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -250,42 +250,30 @@ img {
   <!-- header include 시작 -->
   <jsp:include page="${pageContext.request.contextPath}/resources/includes/header.jsp"/>
   <!-- header include 종료 -->
-  
-  <!-- asideMenu include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/asideMenu.jsp"/>
-  <!-- asideMenu include 종료 -->
 
 
       <section class="section-mypage">
-         <div class= "container">
+         <div class= "container" style="max-width: 1500px;">
          <sec:authentication property="principal" var="member"/>
             <div class="card">
                <div class="card-body menu-title-div" >
-                     <img src="images/icons/KEBLogo.png" style="width: 35px;">&nbsp;&nbsp;<h3 style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">마이페이지</h3>
+                     <img src="${pageContext.request.contextPath}/resources/images/icons/KEBLogo.png" style="width: 35px;">&nbsp;&nbsp;<h3 style="font: bold 30px a드림고딕4; vertical-align: middle; display: inline;">내 대출 상담 History 확인하기</h3>
                </div>
-               <br><br>
             <div id="wrapper">
-               <div id="Navigation">
-                  <ul id="primary">
-                     <li><a href="#" class="active">예약 대출 리스트 확인</a></li>
-                     <li><a href="#myAnalysisResult" class="">내 분석 결과 확인</a></li>
-                  </ul>
-               </div>
-            
                <div id="Container">
                   <div id="Content">
                   <!-- 마이페이지 회원 정보 수정 -->
                  <div id="myLoanReserveResult" class="card-boday">
-                     <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;"><label><sec:authentication property="principal.member.userName"/></label>님의 대출상담 예약 목록입니다. </span>
+                     <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;"><label style="color: #27b2a5;"><sec:authentication property="principal.member.userName"/></label> 님의 대출상담 예약 목록입니다. </span><br>
                   <br>
                      <table id="MyReserveloanList">
                         <colgroup>
                            <col width="10%" style="text-align: center;">
-                           <col width="25%">
-                           <col width="10%" style="text-align: center;">
-                           <col width="25%" style="text-align: center;">
                            <col width="20%" style="text-align: center;">
                            <col width="10%" style="text-align: center;">
+                           <col width="25%" style="text-align: center;">
+                           <col width="10%" style="text-align: center;">
+                           <col width="20%" style="text-align: center;">
                            
                         </colgroup>
                         <thead>
@@ -296,7 +284,6 @@ img {
                               <th style="text-align: center;">예약시간</th>
                               <th style="text-align: center;">예약변경</th>
                               <th style="text-align: center;">상세보기</th>
-                              
                            </tr>
                         </thead>
                         <tbody>
@@ -310,7 +297,7 @@ img {
                                   <fmt:formatNumber value="${reserve.get('REQUEST_BM')}" pattern="#,###" /></td>
                                 <td style="text-align:center;">${reserve.get('RESERVE_TIME')}</td>
                               <c:if test="${reserve.get('ISANSWERED') == '0'}">
-                                <td style="text-align:center;"><button type="button" style="vertical-align: top; height:30px; width: 50%;" class="reserveCancle" id="reserveCancleBtn" >예약취소</button></td>
+                                <td style="text-align:center;"><button type="button" style="vertical-align: top; height:30px; width: 50%;" class="reserveCancle" id="reserveCancleBtn" value="${reserve.LPBU_NUM}">예약취소</button></td>
                               </c:if>
                               <c:if test="${reserve.get('ISANSWERED') == '1'}">
                                 <td style="text-align:center;"><button type="button" style="vertical-align: top; height:30px; width: 50%; background-color: gray" disabled>답변완료</button></td>
@@ -359,7 +346,7 @@ img {
                                       <p><label>( 예약시간 : </label>${reserve.get('RESERVE_TIME')} <label> )</label></p>
                                     </div>
                                     <div class="btn_ex01">
-                                      <span><a href="#" class="opbLayerMessage0_OK">예약취소</a></span>
+                                      <span><a href="/lpbu/${reserve.LPBU_NUM}" class="opbLayerMessage0_OK">예약취소</a></span>
                                       <span><a href="#" class="opbLayerMessage0_NO">창닫기</a></span>
                                     </div>
                                     <div class="pop_close draggable" style="cursor: move;">
@@ -383,36 +370,7 @@ img {
                           </c:forEach>
                         </tbody>
                      </table>
-               </div>
-
-               <div id="myAnalysisResult" class="card-boday" style="display: none;">
-                     <span style="margin-left: 20px; font: bold 20px a드림고딕4; color: #27b2a5;">●</span>&nbsp;&nbsp;<span style=" font: bold 20px a드림고딕4; font-size: 18px;">내가 분석했던 결과 리포트를 확인하시고, PDF 다운로드를 진행하세요!</span>
-                  <br>
-                     <table>
-                        <colgroup>
-                           <col width="10%" style="text-align: center;">
-                           <col width="50%">
-                           <col width="20%" style="text-align: center;">
-                           <col width="20%" style="text-align: center;">
-                        </colgroup>
-                        <thead>
-                           <tr>
-                              <th style="text-align: center;">번호</th>
-                              <th style="text-align: center;">이름</th>
-                              <th style="text-align: center;">분석일시</th>
-                              <th style="text-align: center;">PDF 다운</th>
-                           </tr>
-                        </thead>
-                        <br>
-                        <tbody>
-                           <tr>
-                              <td style="text-align:center;">1</td>
-                              <td style="text-align:cdnter; padding-left: 7px;">2018년 11월 25일 bangry 님 분석 리포트</td>
-                              <td style="text-align:center;">2018.11.25</td>
-                              <td style="text-align:center;"><button type="button" style="vertical-align: top; height:30px; width: 50%;" class="" id="reviewSearchBtn" >다운로드</button></td>
-                           </tr>
-                        </tbody>
-                     </table>
+               		</div>
                </div>
             </div>
             </div>
@@ -499,7 +457,10 @@ function beforeSubmit() {
 </script>
 
 <script>
-  
+
+var getUrl = '/lpbu/';
+var lpbuNum = 0;
+
 //이름수정 아코디언이벤트	
 var panels = $(".panel"); //아코디언으로 보일영역
 var btns = $(".reserveOpen"); //아코디언이벤트 버튼
@@ -547,7 +508,8 @@ for(i=0; i<panels.length; i++){
  
  for(i=0; i<modals.length; i++){
 	 modals[i].style.display = "none";
-  	 btns[i].addEventListener("click", function() {
+  	 btns[i].addEventListener("click", function(e) {
+  		lpbuNum = e.currentTarget.value;
  	    var panel = this.parentElement.parentElement.nextSibling.nextSibling.nextSibling.nextSibling.firstChild.nextSibling.firstChild.nextSibling;
  		if(panel.style.display === "none"){
  			panel.style.display = "block";
@@ -574,6 +536,26 @@ for(i=0; i<panels.length; i++){
   		}
   	});
  }
+ 
+ var trs = new Array();
+ for(var i = 0; i < $('tr').length; i++){
+	    if(i % 2 == 1){trs.push($('tr')[i])}
+	    }
+ 
+ $('opbLayerMessage0_OK').on('click',function(){
+	 console.log(3333);
+	 $.ajax({
+		 type: 'GET',
+		 url: getUrl + lpbuNum,
+		 dataType : 'json',
+		 success : function(data){
+			 console.log(1);
+		 },
+		 error : function(error){
+			 console.log(2);
+		 }
+	 });
+ });
 </script>
 </body>
 </html>

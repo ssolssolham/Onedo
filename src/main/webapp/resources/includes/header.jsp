@@ -16,13 +16,13 @@
         
       <div class="welcome" style="margin-top: 6px;">
        <sec:authorize access="isAnonymous()">
-     	<button type="button" style="height:40px; width:100px; border-radius: 50px;" onclick="location.href='/member/loginForm'">로그인</button>&nbsp;&nbsp;
-     	<button type="button" style="height:40px; width:100px; border-radius: 50px;" onclick="location.href='/member/registForm'">회원가입</button>
+     	<button type="button" style="height:40px; font-family: a드림고딕4; width:100px; border-radius: 2px;" onclick="location.href='/member/loginForm'">로그인</button>&nbsp;&nbsp;
+     	<button type="button" style="height:40px; font-family: a드림고딕4; width:100px; border-radius: 2px;" onclick="location.href='/member/registForm'">회원가입</button>
        </sec:authorize>
        <sec:authentication property="principal" var="member"/>
        <sec:authorize access="isAuthenticated()">
-           <h3 style="font-size: 22px; font-family: a드림고딕4; font-weight: bold; display: inline;"> <span style="color: #27b2a5;">${member.username}</span> 님, 환영합니다.</h3>&nbsp;&nbsp;
-           <button type="button" style="height:40px; width:100px;  border-radius: 50px;" onclick="logoutFormSubmit()" id="logoutLink">로그아웃</button>
+           <h3 style="font-size: 22px; font-family: a드림고딕4; font-weight: bold; display: inline;"><span style="color: #27b2a5;"><sec:authentication property="principal.member.userName"/></span> 님, 환영합니다.</h3>&nbsp;&nbsp;
+           <button type="button" style="height:40px; width:100px; font-family: a드림고딕4; border-radius: 2px;" onclick="logoutFormSubmit()" id="logoutLink">로그아웃</button>
        </sec:authorize>
        
    	  </div>
@@ -43,7 +43,7 @@
             <!-- 로그인 안했을 경우 -->
             <!-- 로그인한경우 -->
             <sec:authorize access="isAuthenticated()">
-              <li><a href="/loan/reserveList?userId=${member.username}" id="loanHistory">대출 History</a></li>
+              <li><a href="/loan/reserveList?userId=${member.username}" id="loanHistory">상담 History</a></li>
               <form action="/logout" method="post" id="logoutForm">
               <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
               </form>

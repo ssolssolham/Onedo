@@ -23,7 +23,19 @@
 					</trim>
 			</sql>
 	
-	
+  <resultMap type="com.one.doo.loan.domain.LPBU" id="lpbuMap">
+    <result property="lpbuNo" column="LPBU_NUM"/>
+    <result property="userId" column="USER_ID"/>
+    <result property="loanId" column="LOAN_ID"/>
+    <result property="reserveTime" column="RESERVE_TIME"/>
+    <result property="requestBM" column="REQUEST_BM"/>
+    <result property="rateId" column="RATE_ID"/>
+    <result property="requestTime" column="REQUESTTIME"/>
+    <result property="reasonLoan" column="REASONM"/>
+    <result property="userPhone" column="USER_PHONE"/>
+    <result property="isAnswered" column="ISANSWERED"/>
+    <result property="birthdate" column="BIRTHDATE"/>
+  </resultMap>	
 	<select id="getLPBUList" resultType="Map" parameterType="String">					
 	SELECT	*
 	FROM    LPBU l
@@ -89,6 +101,12 @@
          		ON p.loan_id = l.loan_id
 	WHERE lpbu_num = #{lpbuNo}         		
 	</select>
+	
+	<select id="read" resultMap="lpbuMap">					
+	SELECT	*
+	FROM    LPBU 
+	WHERE lpbu_num = #{lpbuNo}         		
+	</select>
 
 	<update id="answerLPBU">
 		UPDATE LPBU
@@ -104,4 +122,18 @@
 		]]>
 	</select>
 
+	<select id="loadLpbuCnt" resultType="int">
+	select count(user_id) lpbu_cnt
+	from 
+	(select user_id from lpbu where to_date(requesttime,'YYYY/MM/dd')
+	 = to_date(sysdate,'YYYY/MM/dd') group by user_id)
+	</select>
+	
+	<select id="LPBUCnt" resultType="int">
+	select count(*) lpbu_cnt
+	from lpbu
+	</select>
+	<delete id="deleteLPBU"  parameterType="int" >
+		DELETE FROM LPBU WHERE LPBU_NUM = ${lpbuNo}
+	</delete>
 </mapper>

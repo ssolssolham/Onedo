@@ -106,7 +106,7 @@
 	<!-- 관리자: 회원이름수정 -->
 	<update id="updateName">
 		UPDATE	users
-		SET		username = #{userName}
+		SET		username = #{username}
 		WHERE	userid = #{userid}		
 	</update>
 	

@@ -29,7 +29,7 @@
 				</div>
 			    <!-- 후기 게시판 상단 Nav 바 (새글 등록, 검색 기능) -->
 				<div class="card-body m-lr-50" >
-                    <table class="table" style="font-size: 1.9em;">
+                    <table class="table" style="font-size: 1.9em; font-family: a드림고딕4;">
                       <colgroup>
                         <col width="18%">
                         <col width="32%">
@@ -72,7 +72,7 @@
                       <tr>
                         <td colspan="4">
                           <!-- 게시물 내용 동적으로 불러오는 부분 -->
-                          <div id="reviewDetailContent" style="height: 300px;">
+                          <div id="reviewDetailContent" style="margin-top: 15px; height: 300px; margin-left: 75px; margin-right: 75px; margin-bottom: 15px;">
                           ${review.content }
                           </div>
                         </td>
@@ -390,13 +390,10 @@
 		        // replyer와 loginId가 같으면 수정삭제버튼 show, 
 		        var loginId = '${loginId}';
 		        if(reply.replyer == loginId){
-		        	alert("아이디같아");
 		        	modalInputReply.removeAttr("readonly");
 		        	modalModBtn.show();
-		        	// modalRemoveBtn.show();
 		        	$("#replyModal").modal("show");
 		        }else{
-		        	alert("아이디달라");
 		        	modalInputReply.attr("readonly", "readonly");
 		        }
 		        $("#replyModal").modal("show");

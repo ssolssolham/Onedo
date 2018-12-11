@@ -104,4 +104,10 @@
 		where alleybizcode = #{AlleyBizCode}
 		AND mlr_date LIKE '201812'
 	</select>
+	
+		<!-- 결과 반환 -->
+	<select id="readSalesList" resultType="com.one.doo.mlresult.domain.Mlresult">
+		select * from MLResult
+		where alleybizcode = #{AlleyBizCode}
+	</select>
 </mapper>

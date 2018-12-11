@@ -5,6 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * 하나의 테이블객체에 포함되는 컬럼객체
+ * @author siwonPark
+ */
 @Data
 @Setter
 @AllArgsConstructor

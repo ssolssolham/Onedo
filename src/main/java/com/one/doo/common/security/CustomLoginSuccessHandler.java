@@ -112,6 +112,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 	        if((lastLogDate.getTime() / 1000 / 60 / 60 / 24) < (logDate.getTime() / 1000 / 60 / 60 / 24)) {
 	        	// select문으로 일일단위 데이터 여부 확인
 	        	// 서버와 DB 시간 동기화
+	        	
 	        	lastLogDate = logDate;
 	        	// Map 비우기
 	        	members.clear();

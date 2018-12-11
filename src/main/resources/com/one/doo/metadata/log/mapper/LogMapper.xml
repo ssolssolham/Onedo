@@ -8,8 +8,8 @@
 		 날짜 예시 '20141111','20141101'
 	 -->
 	<insert id="insert">
-		insert into METADATA_LOGS(url_no,log_day,log_cnt)
-		values(#{url_no},to_date(#{log_day},'yyyy-MM-dd'),1)
+		insert into METADATA_LOGS(url_no,log_day,log_cnt,log_no)
+		values(#{url_no},to_date(#{log_day},'yyyy-MM-dd'),1,log_seq.nextval)
 	</insert>
 	
 	<!-- LOG 조회수 증가(가져온 url_no) -->
@@ -23,5 +23,13 @@
 		select count(*) 
 		from metadata_logs 
 		where url_no = #{url_no} AND log_day LIKE to_date(#{log_day},'yyyy-MM-dd')
+	</select>
+	
+		<!-- 수정 필요! -->
+	<select id="logCnt" resultType="int">
+	select log_cnt 
+	from metadata_logs
+	where url_no = ${url_no} AND 
+	to_date(log_day,'YYYY-MM-dd') LIKE to_date(sysdate,'YYYY-MM-dd')
 	</select>
 </mapper>

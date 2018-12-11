@@ -643,7 +643,7 @@
                         style="background-color: white; font-family: a드림고딕4; padding: 20px; color: black; max-width: 1400px; margin-right: 20px; margin-left: 20px; border-radius: 5px;">
                         <div class="row">
                           <div class="col-sm-12" style="padding: 20px;">
-                            <table class="scrolltable">
+                            <table class="scrolltable" style="width: 100%;">
                               <colgroup>
                                 <col width="25%">
                                 <col width="75%">
@@ -851,11 +851,10 @@
                                     <div id="innerNavigation">
                                       <ul id="innerPrimary">
                                         <li><a href="#creditLoan"
-                                          class="active dreamGothic">신용
-                                            대출</a></li>
+                                          class="active dreamGothic">신용 대출</a></li>
                                         <li><a
                                           href="#guaranteeLoan"
-                                          class=" dreamGothic">담보 대출</a></li>
+                                          class="dreamGothic">담보 대출</a></li>
                                       </ul>
                                     </div>
 
@@ -1697,11 +1696,8 @@
 				resultStr += '</tr><tr style="font-family: a드림고딕4;" ><td style="color: #27b2a5;" class="fs-18">계약면적/전용면적</td>';
 				resultStr += '<td><div><span class="fs-20">'
 						+ filter[selectedGongin][subindex].square
-						+ '</span></div>';
-				resultStr += '</tr><tr style="font-family: a드림고딕4;" ><td style="color: #27b2a5;" class="fs-18">추천업종</td>';
-				resultStr += '<td><div><span class="fs-20">'
-						+ filter[selectedGongin][subindex].recommand
 						+ '</span></div></tr>';
+				
 
 				$($('tbody')[2]).append(resultStr);
 			}
@@ -1721,7 +1717,7 @@
 					// 부동산 Owner의 순서에 맞게끔
 					var resultString = "";
 
-					resultString += '<tr style="height: 80px;" onclick="updateDetail('
+					resultString += '<tr style="width: 100%; height: 80px;" onclick="updateDetail('
 							+ i
 							+ ')" onMouseOver="bgColor=\'#beeee9\'" onMouseOut="bgColor=\'#ffffff\'">';
 					resultString += '<td style=\''+ filter[index][i].img_url +'\'></td>';
@@ -2531,6 +2527,16 @@
 			// 분석 결과로 나온 버튼 클릭 시, 분석 결과 리포트 부분 활성화
 			$('.resultBtn').click(
 							function(e) {
+								
+								if (e.currentTarget.id === 'firstBtn') {
+									selectedObject = 0;
+								} else if (e.currentTarget.id === 'secondBtn') {
+									selectedObject = 1;
+								} else if (e.currentTarget.id === 'thirdBtn') {
+									selectedObject = 2;
+								}
+								
+								console.log(selectedObject);
 								if ($('#analysisReport').hasClass('dis-none')) { // 보이지 않는 경우면
 									// 클릭한 골목상권 테이블에 뿌리기 위해 파싱 
 									var alleyBizFullName = $(this).text()
@@ -2647,11 +2653,12 @@
 											// 등급 배열 >> 이것 또한 창업위험, 과밀, 활성, 성장, 안전도 순서로 배열에 등급이 들어감
 											var gradeArr = new Array();
 											dataArr = [
-													topThreeList[i].mlresult.estmt_ROF_VALUE,
-													topThreeList[i].mlresult.estmt_OI_VALUE,
-													topThreeList[i].mlresult.estmt_AI_VALUE,
-													topThreeList[i].mlresult.estmt_GI_VALUE,
-													topThreeList[i].mlresult.estmt_SI_VALUE ];
+													topThreeList[i].mlresult.estmt_ROF_VALUE, // 창업위험
+													topThreeList[i].mlresult.estmt_OI_VALUE,  // 과밀
+													topThreeList[i].mlresult.estmt_AI_VALUE,  // 활성
+													topThreeList[i].mlresult.estmt_GI_VALUE,  // 성장
+													topThreeList[i].mlresult.estmt_SI_VALUE   // 안전도
+													];
 											/*
 												workerPerAlleybiz.total_work 없는 경우를 판단하여 다르게 저장
 											 */
@@ -2699,12 +2706,8 @@
 
 											// 종합 평가 점수 구하는 함수
 											var totalEstimatedScore = 0;
-											for (var i = 0; i < dataArr.length; i++) {
-												totalEstimatedScore += dataArr[i];
-											}
-
-											var avgEstimatedScore = totalEstimatedScore
-													/ dataArr.length;
+											totalEstimatedScore = (dataArr[0] * 0.353) + (dataArr[1] * 0.121) + (dataArr[2] * 0.148) + (dataArr[3] * 0.137) + (dataArr[4] * 0.241);
+											var avgEstimatedScore = totalEstimatedScore.toFixed(2);
 											$('#expectedTotalEstimateScore').text(
 													avgEstimatedScore);
 											for (var i = 0; i < 5; i++) {
@@ -2768,7 +2771,7 @@
 																display : true,
 																text : '창업위험지수'
 																		+ ': '
-																		+ gradeArr[0],
+																		+ gradeArr[0] + ' (' + dataArr[0] + '점)',
 																position : 'bottom',
 																fontColor : '#000000',
 																fontSize: 20
@@ -2808,7 +2811,7 @@
 																display : true,
 																text : '과밀지수'
 																		+ ': '
-																		+ gradeArr[1],
+																		+ gradeArr[1] + ' (' + dataArr[1] + '점)', 
 																position : 'bottom',
 																fontColor : '#000000',
 																fontSize: 20
@@ -2849,7 +2852,7 @@
 																display : true,
 																text : '활성도'
 																		+ ': '
-																		+ gradeArr[2],
+																		+ gradeArr[2] + ' (' + dataArr[2] + '점)',
 																position : 'bottom',
 																fontColor : '#000000',
 																fontSize: 20
@@ -2891,7 +2894,7 @@
 																display : true,
 																text : '성장가능성'
 																		+ ': '
-																		+ gradeArr[3],
+																		+ gradeArr[3] + ' (' + dataArr[3] + '점)',
 																position : 'bottom',
 																fontColor : '#000000',
 																fontSize: 20
@@ -2931,7 +2934,7 @@
 																display : true,
 																text : '안전도'
 																		+ ': '
-																		+ gradeArr[4],
+																		+ gradeArr[4] + ' (' + dataArr[4] + '점)',
 																position : 'bottom',
 																fontColor : '#000000',
 																fontSize: 20
@@ -2957,6 +2960,13 @@
 																	topThreeList)
 														},
 														options : {
+															scales : {
+																yAxes : [ {
+																	ticks : {
+																		beginAtZero : true
+																	}
+																} ]
+															},
 															legend : {
 																display : true,
 																position : 'left',
@@ -3005,6 +3015,13 @@
 															} ]
 														},
 														options : {
+															scales : {
+																yAxes : [ {
+																	ticks : {
+																		beginAtZero : true
+																	}
+																} ]
+															},
 															legend : {
 																display : false
 															},
@@ -3018,7 +3035,64 @@
 															}
 														}
 													}); // 매출액 차트 끝나는 부분
-										
+													console.log(selectedObject);
+													// 매출액 차트 : 호준 
+											var threeMonthChart = document.getElementById('threeMonthChart').getContext('2d');
+											var myChart = new Chart(threeMonthChart, {
+											    type: 'line',
+											    data: {
+											        labels: ["2018년 1월", "2018년 2월","2018년 3월","2018년 4월","2018년 5월","2018년 6월","2018년 7월","2018년 8월", "2018년 9월","2018년 10월","2018년 11월","2018년 12월"],
+											        datasets: [{
+											            label: '# of Votes',
+											            data: [topThreeList[selectedObject].mlresultList[0].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[1].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[2].estmt_SALES, 
+											            	topThreeList[selectedObject].mlresultList[3].estmt_SALES, 
+											            	topThreeList[selectedObject].mlresultList[4].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[5].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[6].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[7].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[8].estmt_SALES],
+											            backgroundColor: [
+											                'rgba(255, 99, 132, 0.8)'
+											            ],
+											            borderColor: [
+											                'rgba(255,99,132,1)'
+											            ],
+											            borderWidth: 1
+											        },{
+											            label: '# of Votes',
+											            data: [topThreeList[selectedObject].mlresultList[0].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[1].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[2].estmt_SALES, 
+											            	topThreeList[selectedObject].mlresultList[3].estmt_SALES, 
+											            	topThreeList[selectedObject].mlresultList[4].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[5].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[6].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[7].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[8].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[9].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[10].estmt_SALES,
+											            	topThreeList[selectedObject].mlresultList[11].estmt_SALES],
+											            backgroundColor: [
+											                'rgba(54, 162, 235, 0.2)'
+											            ],
+											            borderColor: [
+											                'rgba(54, 162, 235, 1)'
+											            ],
+											            borderWidth: 1
+											        }]
+											    },
+											    options: {
+											        scales: {
+											            yAxes: [{
+											                ticks: {
+											                    beginAtZero:true
+											                }
+											            }]
+											        }
+											    }
+											});
 										}
 									}
 									setTimeout(function() {
@@ -3043,13 +3117,7 @@
 
 									// 선택된 객체 인덱스 저장
 									console.log(e.currentTarget.id);
-									if (e.currentTarget.id === 'firstBtn') {
-										selectedObject = 0;
-									} else if (e.currentTarget.id === 'secondBtn') {
-										selectedObject = 1;
-									} else if (e.currentTarget.id === 'thirdBtn') {
-										selectedObject = 2;
-									}
+									
 
 									updateTable(topThreeList, selectedObject);
 
@@ -4247,43 +4315,7 @@
 		</script>
 
 <script>
-var threeMonthChart = document.getElementById('threeMonthChart').getContext('2d');
-var myChart = new Chart(threeMonthChart, {
-    type: 'line',
-    data: {
-        labels: ["2018년 1월", "2018년 2월","2018년 3월","2018년 4월","2018년 5월","2018년 6월","2018년 7월","2018년 8월", "2018년 9월",],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero:true
-                }
-            }]
-        }
-    }
-});
+
 </script>
    <!--===============================================================================================-->
   <!--===============================================================================================-->

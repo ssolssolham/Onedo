@@ -31,6 +31,12 @@ public class LoanController{
 	
 	private LoanService service;
 	
+	/**
+	 * 사용자 조건에 맞게 추천된 대출상품 리스트 반환
+	 * @param param
+	 * @param model
+	 * @return 결과페이지
+	 */
 	@RequestMapping(value = "/loan", produces = "application/json; charset=utf8")
 	public @ResponseBody Loan loan(@RequestParam(value="loanId") int loanId) {
 		System.out.println("들어옴");
