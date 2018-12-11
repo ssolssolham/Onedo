@@ -3,6 +3,12 @@
                         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.one.doo.adbd.mapper.ADBDMapper">
 
+	<resultMap type="java.util.Map" id="adbdMap">
+		<result property="Rownum" column="rownum"/>
+		<result property="Cnt" column="cnt"/>
+		<result property="alleybizcodeName" column="alleybizcode_name"/>
+	</resultMap>
+	
 	<insert id="insert" >
 		INSERT INTO ADBD (
 		      abdb_num,
@@ -22,5 +28,23 @@
 	from
 	(select userid from adbd where to_date(regdate,'YYYY/MM/dd') 
 	= to_date(sysdate,'YYYY/MM/dd') group by userid)
+	</select>
+	
+	<select id="ADBDCnt" resultType="int">
+	select count(*)
+	from ADBD
+	</select>
+	
+	<select id="topFiveADBD" resultMap="adbdMap">
+	  <![CDATA[
+	  select rownum,cnt,alleybizcode_name
+	  from
+	  (select count(alleybizcode_name) cnt,alleybizcode_name
+	  from adbd ad inner join alleybiz ab
+	  on ad.alleybizcode = ab.alleybizcode
+	  group by alleybizcode_name
+	  order by cnt desc)
+	  where rownum < 6
+	  ]]>
 	</select>
 </mapper>
