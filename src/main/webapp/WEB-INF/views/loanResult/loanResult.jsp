@@ -403,7 +403,7 @@ canvas {
                         <button style="width: 260px; font-family: a드림고딕4;" type="button" id="graphView">월 상환금액 그래프로 보기</button>
                         <button style="width: 260px; font-family: a드림고딕4;" type="button" id="tableView">월 상환금액 표로 보기</button>
                         <br><br><br>
-                        <div>
+                        <div id="canvasDiv2">
                            <canvas id="canvas" style="display: block;"></canvas>
                            <table id="table" style="display: none; width: 100%;">
                               <colgroup>
@@ -512,8 +512,7 @@ canvas {
                      <div style="color: darkgray; display: none;"
                         id="agreeTab">개인정보 수집 및 이용에 동의하셔야 상담이 가능합니다.</div>
 
-                     <form action="/loan/reserveLoan" method="post" id="reserveForm"
-                        onsubmit="return checkAgree()">
+                     <form action="/loan/reserveLoan" method="post" id="reserveForm">
                         <table class="table" id="qnaTable" style="font-size: 0.9em;">
                            <tr>
                               <td colspan="2">
@@ -669,6 +668,9 @@ canvas {
 
 function checkRepay(){
    $('#cell').children().remove();
+   $('#canvas').remove();
+   
+   $('#canvasDiv2').append($('<canvas id="canvas" style="display: block;"></canvas>'));
    var interestSum = 0;
    var principalSum = 0;
    var body = document.getElementById('cell');  //행을 추가할 테이블
@@ -693,12 +695,35 @@ body.innerHTML += "<tr><td colspan='4' style='font-family: a드림고딕4; text-
   + "총 납입금액 "+"</td><td colspan='2' style='font-family: a드림고딕4; color:#27b2a5; text-align:center; font-weight: bold;'>"
   +numberWithCommas(interestSum + principalSum)+" 원</td><td></td></tr>";
      
+  
+var customlabels = [];
+var yearsForChart = monthly_installment_plan / 12;
+var labelCount = 1;
+var currYear = 2019;
+
+	for(var i = 0; i < yearsForChart; i++){
+    	for(var j = 1; j <= 12; j++){
+    		if(labelCount <= monthly_installment_plan){
+    		var label = currYear + '-';
+        		if(j < 10){
+        			label += '0' + j;
+        		}else{
+        			label += j;
+        		}
+    		customlabels.push(label);
+    		labelCount++;
+    		}
+    	}
+    	currYear++;
+	} 
+	
+	
 var chartData = {
-    labels: ['2018-01', '2018-02', '2018-03', '2018-04', '2018-05', '2018-06', '2018-07', '2018-08', '2018-09', '2018-10', '2018-11', '2018-12'],
+    labels: customlabels,
     datasets:
       [
         {
-        type: 'bar',
+        type: 'line',
         label: '대출잔액',
         borderColor: window.chartColors.blue,
         borderWidth: 2,
@@ -1248,6 +1273,10 @@ $(function(){
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+$('#consultReserveBtn').on('click',function(){
+	return checkAgree();
+})
    </script>
 
 </body>
