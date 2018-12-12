@@ -422,6 +422,20 @@ desired effect
                           </c:if>
               
                         </ul>
+            <!-- page a태그 원래동작 방지 -->
+            <form id="actionForm" action="/admin/lpbu/" method="get">
+              <input type="hidden" name="pageNum"
+                value="${pageMaker.cri.pageNum }"> <input
+                type="hidden" name="amount"
+                value="${pageMaker.cri.amount }">
+              <!-- 검색에서도 페이징처리 -->
+              <input type="hidden" name="type"
+                value="${pageMaker.cri.type }"> <input
+                type="hidden" name="keyword"
+                value="${pageMaker.cri.keyword }">
+            </form>
+                        
+                        
                       </div>
         <!--  end Pagination -->
                     </div>
@@ -487,6 +501,24 @@ Highcharts.chart('container', {
 <!-- REQUIRED JS SCRIPTS -->
 <jsp:include page="${pageContext.request.contextPath}/WEB-INF/views/admin/include/plugin_js.jsp"/>
 <script type="text/javascript" src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
+
+<!-- page -->
+<script type="text/javascript">
+$(document).ready(function() {
+	//page이동
+	var actionForm = $('#actionForm');
+	$('.paginate_button a').on("click", function(e) {
+		e.preventDefault(); //원래 a태그 동작 방지
+		
+		//form태그 내, pageNum은 href속성으로 변경
+		actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+		// 변경후 form제출
+		actionForm.submit();
+	});
+
+});
+</script>
+
 <script>
 var acc = document.getElementsByClassName("accordion");
 var i;

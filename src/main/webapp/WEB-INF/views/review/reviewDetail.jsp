@@ -62,10 +62,11 @@
                         </td>
                         
                         <td style="text-align: center; vertical-align: middle; color: #27b2a5;">
-                          <b>조회수</b>
+                          <b>댓글수</b>
                         </td>
                         <td>
                         <!-- 조회수 동적으로 불러오는 부분 -->
+                        ${review.replycnt}
                         </td>
                       </tr>
                       
