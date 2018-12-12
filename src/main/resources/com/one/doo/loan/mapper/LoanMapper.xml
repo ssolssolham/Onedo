@@ -5,7 +5,7 @@
 	
 	<select id="getLoanList" resultType="Map" parameterType="Map">					
 SELECT loan_id, loan_name, loan_content, loan_division, loan_category, interestRate_category, creditLine_desc,
-           	loanPeriod_desc, repayment_way, detail_url,  target_description, 
+           	loanPeriod_desc, repayment_way, detail_url,  target_description, interestrate_max, interestrate_min,  
            	TO_CHAR(loanUpdate_date, 'MM-DD-YYYY') "UPDATE_DATE", target_detail1,  target_detail2, target_detail3, 
            	holding, holding_min, holding_max, repay1, repay2, repay3, repayM, 
            	t.target_name, c.loancomp_name, c.present_num, c.sub_num, loanperiod_min, loanperiod_max
@@ -172,7 +172,8 @@ FROM    loan_product p
 	select lb.loan_id,count(lb.loan_id) cnt,lp.LOAN_NAME
 	from lpbu lb inner join loan_product lp 
 	on lb.loan_id = lp.loan_id group by lb.loan_id,lp.LOAN_NAME)
-	where rownum < 6 
+	where rownum < 4 
+	order by cnt desc
 	]]>
 	</select>
 

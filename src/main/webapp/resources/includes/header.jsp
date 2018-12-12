@@ -31,7 +31,6 @@
           <nav class="menu" style="display: inline-flex;">
             <ul class="main_menu">
               <li><a href="/">Home</a></li>
-              <li><a href="/guide">이용 안내</a></li>
               <sec:authorize access="isAnonymous()">
                 <li><a href="/member/loginForm">상권분석</a></li>
               </sec:authorize>

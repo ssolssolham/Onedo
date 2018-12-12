@@ -74,16 +74,16 @@ desired effect
           </div>
           <!-- /.box-header -->
           <!-- form start -->
-          <form action="/admin/notice/register" method="get">
+          <form action="/admin/notice/modify" method="get">
             <div class="box-body">
               <div class="form-group">
                 <label for="exampleInputEmail1">제목</label> 
-                <input name="title" type="text" class="form-control" value="${notice.title }">
+                <input name="title" type="text" class="form-control" value="${notice.title }" required="required">
               </div><br>
 
  			<div class="form-group">
               <label for="exampleInputPassword1">내용</label>
-              <textarea name="content" class="form-control" cols="30" rows="5" >${notice.content }</textarea>
+              <textarea name="content" class="form-control" cols="30" rows="5" required="required">${notice.content }</textarea>
 			</div><br>
 
 			<input type="hidden" name="article_pw" value="">
@@ -93,8 +93,7 @@ desired effect
 						
               <div>
                 <input type="submit" style="margin: 10px;"
-                  class="btn btn-primary btn-flat" value="공지 수정"
-                  onclick="location.href = '/admin/notice/modify' " />
+                  class="btn btn-primary btn-flat" value="공지 수정"/>
               </div>
 
             </div>

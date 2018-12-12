@@ -36,7 +36,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <section class="content container-fluid">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">로그인 ~ 대출상담 예약</h3>
+            <h3 class="box-title" style="font-weight: bold;">일별 로그인 ~ 대출상담 예약</h3>
             <div class="box-body">
               <div class="chart-body">
                 <canvas id="myChart" width="200px" height="50px"></canvas>
@@ -102,7 +102,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           </div>
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">분석상품 BEST 5</h3>
+              <h3 class="box-title" style="font-weight: bold;">월별 분석상품 BEST 5</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -140,7 +140,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- /.box-body -->
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">대출상품 BEST 5</h3>
+              <h3 class="box-title" style="font-weight: bold;">월별 대출상품 BEST 3</h3>
               <div class="box-body">
 
                 <table id="example3"
@@ -268,7 +268,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 	$('.badge.bg-green')[2].innerText = (analysisPos * 100).toFixed() + "%";
 	$('.badge.bg-red')[2].innerText = (loginAnalysisE * 100).toFixed() + "%";
 	
-	$($('.progress-bar.progress-bar-success')[3]).css('width', (analysisPos * 100).toFixed() + "%");
+	$($('.progress-bar.progress-bar-success')[3]).css('width', (reservePos * 100).toFixed() + "%");
 	$('.badge.bg-green')[3].innerText = (reservePos * 100).toFixed() + "%";
 	$('.badge.bg-red')[3].innerText = (analysisReserveE * 100).toFixed() + "%";
 	

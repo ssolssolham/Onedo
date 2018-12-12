@@ -71,12 +71,12 @@ desired effect
             <div class="box-body">
               <div class="form-group">
                 <label for="exampleInputEmail1">제목</label> 
-                <input name="title" type="text" class="form-control" placeholder="제목">
+                <input name="title" type="text" class="form-control" placeholder="제목" required="required">
               </div><br>
 
  			<div class="form-group">
               <label for="exampleInputPassword1">내용</label>
-              <textarea name="content" class="form-control" cols="15" rows="5" placeholder="내용"></textarea>
+              <textarea name="content" class="form-control" cols="15" rows="5" placeholder="내용" required="required"></textarea>
 			</div><br>
 
 			<input type="hidden" name="article_pw" value="">
@@ -85,8 +85,7 @@ desired effect
 						
               <div>
                 <input type="submit" style="margin: 10px;"
-                  class="btn btn-primary btn-flat" value="공지 등록"
-                  onclick="location.href = '/admin/notice/enrollForm' " />
+                  class="btn btn-primary btn-flat" value="공지 등록"/>
               </div>
 
             </div>

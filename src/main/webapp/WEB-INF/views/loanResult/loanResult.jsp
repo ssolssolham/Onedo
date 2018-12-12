@@ -301,8 +301,10 @@ canvas {
                                                 <td class="fs-16 dreamGothic">3. 예상연금리</td>
                                                 <td class="fs-16 dreamGothic"><c:out
                                                       value="${param.resultRate}"/>%
-                                                               <label>최저</label>${loan.get('INTERESTRATE_MIN')}<label>%</label>
-                                                               <label> ~ 최고</label>${loan.get('INTERESTRATE_MIN')}<label>%</label>
+                                                               <label>(최저</label>${loan.get('INTERESTRATE_MIN')}<label>%</label>
+                                                               <c:if test="${loan.get('INTERESTRATE_MAX') != null}">
+                                                               <label> ~ 최고</label>${loan.get('INTERESTRATE_MAX')}<label>%)</label>
+                                                               </c:if>
                                                       <h5>* 예상 연 금리는 은행 내부 신용등급, 고객 기존 대출에 따라 달라질 수 있습니다.</h5>
                                                       </td>
                                                       
@@ -328,8 +330,8 @@ canvas {
                                              <tr>
                                                 <td class="fs-16 dreamGothic">7. 상품상세</td>
                                                 <td class="fs-16 dreamGothic"><button
-                                                      class="infoButton_1Fb6y"
-                                                      onclick="location.href='<c:out value="${loan.get('DETAIL_URL')}" />'">
+                                                      class="infoButton_1Fb6y" onclick="window.open('<c:out value="${loan.get('DETAIL_URL')}" />');">
+                                                      <%-- onclick="location.href='<c:out value="${loan.get('DETAIL_URL')}" />'"> --%>
                                                       상세 페이지로 이동</button></td>
                                              </tr>
                                           </tbody>

@@ -28,6 +28,7 @@
 	<select id="getList" resultType="com.one.doo.article.domain.Article">
 		SELECT * FROM articles
 		WHERE bno = #{bno}
+		ORDER BY updatedate DESC
 	</select>
 	
 	<!-- (게시판번호를 통해)->받아서 넣는거 못해서 걍 정적으로 넣음 게시글 리스트를 페이지네이션과 함께 가져옴 -->

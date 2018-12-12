@@ -162,7 +162,7 @@ desired effect
                         </div>
                         <div class="form-group">
                           <label>수정할 이름</label> <input type="text"
-                            class="form-control" name="userid">
+                            class="form-control" name="userid" required="required">
                         </div>
                         <input type="submit" class="btn btn-primary"
                           value="변경">

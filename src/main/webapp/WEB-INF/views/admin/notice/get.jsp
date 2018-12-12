@@ -101,9 +101,9 @@ desired effect
 		<br>
 		<div style="margin: 10px;">
 		<a href="/admin/notice/" class="btn btn-primary">목록</a>
-		<a href="/admin/notice/modifyView?article_num=${notice.article_num }" class="btn btn-primary">공지내용수정</a>
 		<c:set var="enabled" value="Y"/>
 		<c:if test="${notice.enabled eq enabled}">
+		<a href="/admin/notice/modifyView?article_num=${notice.article_num }" class="btn btn-primary">공지내용수정</a>
 		<a href="/admin/notice/withdraw?article_num=${notice.article_num }" class="btn btn-primary">공지내리기</a>
 		</c:if>
 		</div>

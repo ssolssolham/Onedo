@@ -78,7 +78,7 @@ public class MemberController{
 	public String regist(@ModelAttribute("member") Member member, BindingResult bindingResult, Model model) {
 		log.info("--------regist------------");
 			memberService.regist(member);
-			return "index";
+			return "redirect:/member/loginForm";
 	}
 	
 	//아이디 중복체크

@@ -56,6 +56,10 @@ public class AnalysisController {
 		
 		List<HashMap<String,Object>> hash = analysisService.firstStep(arrayParams, regionType);
 		
+		if ( hash == null ) {
+			return null;
+		}
+		
 		for (int i = 0; i < hash.size(); i++) {
 			Map<String, Object> map = hash.get(i);
 			adbdService.insert(userId, Integer.parseInt(map.get("abz").toString()));

@@ -176,7 +176,7 @@
                         </div>
                         
                     	<div class="col-sm-4">
-                    		<button style="width: 100px; height: 100px; border-radius: 50%;" class="m-b-10 villageBtn dreamGothic">대학가</button>
+                    		<button style="width: 100px; height: 100px; border-radius: 50%;" class="m-b-10 villageBtn dreamGothic">학생가</button>
                     		<button style="width: 100px; height: 100px; border-radius: 50%;" class="m-b-10 villageBtn dreamGothic">역세권</button>
                     	</div>
                     	
@@ -579,7 +579,7 @@
 										<canvas width="100%" id="lossChart"></canvas>
 									</p>
 								</div>
-								<h3 style="border:2px solid #27b2a5;">
+								<!-- <h3 style="border:2px solid #27b2a5;">
 									<span style="font: bold 20px a드림고딕4; font-size: 18px;">9. 해당 상권의 평균 영업 개월 수 차트</span>
 									<span class="tooltipMessage" data-tooltip="해당 상권의 평균 영업 개월수를 시각화한 차트입니다. 클릭하시면 상세내용을 확인가능합니다" data-tooltip-top data-tooltip-mask><img alt="questionMark" src="${pageContext.request.contextPath}/resources/images/icons/qmark.png"></span>
 								</h3>
@@ -605,7 +605,7 @@
 									<p>
 										<canvas id="openCloseChart"></canvas>
 									</p>
-								</div>
+								</div> -->
 							</div>
 						</div>
                     </div>
@@ -2337,9 +2337,9 @@
 						var target = document.getElementById('snackbar');
 						target.innerHTML = '거주인구가 많은 지역을 우선으로 추천합니다';
 						toast();
-					} else if ($(this).text() === '대학가') {
+					} else if ($(this).text() === '학생가') {
 						var target = document.getElementById('snackbar');
-						target.innerHTML = '대학가 근처 및 20대가 많은 지역을 우선으로 추천합니다';
+						target.innerHTML = '학교 근처 지역을 우선으로 추천합니다';
 						toast();
 					} else if ($(this).text() === '유흥가') {
 						var target = document.getElementById('snackbar');
@@ -2733,21 +2733,21 @@
 														'rgba(255, 255, 255, 0)',
 														'rgba(255, 255, 255, 0)' ];
 												if (0 <= dataArr[i]
-														&& dataArr[i] <= 25) {
+														&& dataArr[i] < 40) {
 													backCol[0] = 'rgba(255, 99, 132)';
 													gradeArr.push("매우위험");
 												}
-												if (26 <= dataArr[i]
-														&& dataArr[i] <= 50) {
+												if (40 <= dataArr[i]
+														&& dataArr[i] < 50) {
 													backCol[1] = 'rgba(255,166,80)';
 													gradeArr.push("위험");
 												}
-												if (51 <= dataArr[i]
-														&& dataArr[i] <= 75) {
+												if (50 <= dataArr[i]
+														&& dataArr[i] < 60) {
 													backCol[2] = 'rgba(86,232,164)';
 													gradeArr.push("보통");
 												}
-												if (76 <= dataArr[i]
+												if (60 <= dataArr[i]
 														&& dataArr[i] <= 100) {
 													backCol[3] = 'rgba(43,143,239)';
 													gradeArr.push("좋음");
@@ -3722,9 +3722,11 @@
 					makeLiveChart(topThreeList, liveWishList);
 					makeJobChart(topThreeList, jobWishList);
 					makeLossChart(topThreeList, lossWishList);
+					/*
 					makeMartChart(topThreeList, survivalWishList);
 					makeSumMartChart(topThreeList);
 					makeOpenMartChart(topThreeList, selectedObject);
+					*/
 				}, 800);
 
 			}
