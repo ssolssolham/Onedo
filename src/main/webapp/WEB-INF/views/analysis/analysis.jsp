@@ -2534,10 +2534,29 @@
 												/* 차트 만들기 */
 												makeAllChart();
 												$("#firstBtn").focus();
+												if(topThreeList.length == 0){
+													var target = document.getElementById('snackbar');
+													target.innerHTML = '기준에 맞는 분석결과가 없습니다. 다르게 검색하세요';
+													toast();
+													
+													setTimeout(function() {
+													toast();
+													}, 1000);
+													
+													setTimeout(function() {
+														toast();
+														}, 1300);
+													
+													setTimeout(function() {
+														toast();
+													}, 1600);
+												}
 											},
 											error : function(error) {
 											}
 										});
+								
+
 							})
 
 			// 분석 결과로 나온 버튼 클릭 시, 분석 결과 리포트 부분 활성화
@@ -3370,7 +3389,28 @@
 				setTimeout(function() {
 					makeInfos(Markers);
 					map2.relayout();
+					
+					if(Markers.length == 0){
+						console.log('들어옴');
+						var target = document.getElementById('snackbar');
+						target.innerHTML = '주변에 매물이 없습니다. 다른 상권을 찾아보세요.';
+						toast();
+						
+						setTimeout(function() {
+						toast();
+						}, 1000);
+						
+						setTimeout(function() {
+							toast();
+							}, 1300);
+						
+						setTimeout(function() {
+							toast();
+						}, 1600);
+					}
 				}, 350);
+
+				
 			});
 		</script>
   <!--===============================================================================================-->
