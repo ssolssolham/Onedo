@@ -118,10 +118,6 @@
 	  </div>
   </div>
 </section>
-  <!-- footer include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/footer.jsp"/>
-  <!-- footer include 종료 -->
-
 
   <!-- 후기 수정 Modal HTML -->
   <div id="updateReviewModal" class="modal fade">
@@ -227,10 +223,6 @@
     </div>
    </div>
 
-  <!-- footer include 시작 -->
-  <jsp:include page="${pageContext.request.contextPath}/resources/includes/footer.jsp"/>
-  <!-- footer include 종료 -->
-    
 
 <!-- 댓글처리 관련 js파일 추가 by sw -->
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/reply.js"></script>
