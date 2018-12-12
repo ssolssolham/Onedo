@@ -237,6 +237,35 @@ div.panel.show {
   stroke-dasharray: 2, 2;
   stroke-width: 2px;
 }
+
+.btn-secondary {
+    background-color: #3c8c;
+    border-color: #3c8c;
+    color : white;
+    font-weight: bold;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
 </style>
 
 </head>
@@ -354,7 +383,7 @@ desired effect
                         
                           <c:forEach items="${list}" var="lpbu">
                               <tr>
-                                <td style="text-align:center;">${lpbu.get('RN')}</td>
+                                <td style="text-align:center;">${lpbu.get('LPBU_NUM')}</td>
                                 <td style="text-align:center;">${lpbu.get('LOAN_NAME')}</td>
                                 <td style="text-align:center;">${lpbu.get('USERNAME')}</td>
                                 <td style="text-align:cdnter; padding-left: 7px;">₩
@@ -363,7 +392,7 @@ desired effect
                                 <td style="text-align:center;">${lpbu.get('REQUESTTIME')}</td>
                                 <td style="text-align:center;">${lpbu.get('RESERVE_TIME')}</td>
                                 <c:if test="${lpbu.get('ISANSWERED') == '0'}">
-                                <td style="text-align:center;"><button type="button" name="commit" value="${lpbu.get('LPBU_NUM')}" class="lpbu_nums">완료처리</button></td>
+                                <td style="text-align:center; font-weight: bold"><button type="button" name="commit" value="${lpbu.get('LPBU_NUM')}" class="btn btn-secondary btn-flat">완료처리</button></td>
                                 </c:if>
                                 <c:if test="${lpbu.get('ISANSWERED') == '1'}">
                                 <td style="text-align:center;"><input type="button" name="complete" disabled>완료</td>

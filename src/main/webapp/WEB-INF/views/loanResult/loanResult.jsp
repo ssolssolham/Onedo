@@ -201,6 +201,26 @@ canvas {
    overflow-y: scroll;
    max-height: 150px;
 }
+
+.infoButton_2Fb6y {
+   width: 170px;
+   height: 23px;
+   background: #27b2a5;
+   color: white;
+   border-radius: 2px;
+   font-size: 14px;
+   vertical-align: inherit
+}
+
+.infoButton_2Fb6y:hover {
+   width: 170px;
+   height: 23px;
+   background: #268f84;
+   color: white;
+   border-radius: 2px;
+   font-size: 14px;
+   vertical-align: inherit
+}
 </style>
 
 <!-- header include 시작 -->
@@ -314,7 +334,7 @@ canvas {
                                                 <td class="fs-16 dreamGothic"><c:out
                                                       value="${loan.get('TARGET_DESCRIPTION')}" /> <c:if
                                                       test="${loan.get('TARGET_DETAIL1') != null}">
-                                                      <button class="infoButton_1Fb6y">대출 상세조건 확인하기</button>
+                                                      <!-- <button class="infoButton_1Fb6y">대출 상세조건 확인하기</button> -->
                                                    </c:if></td>
                                              </tr>
                                              <tr>
@@ -330,7 +350,7 @@ canvas {
                                              <tr>
                                                 <td class="fs-16 dreamGothic">7. 상품상세</td>
                                                 <td class="fs-16 dreamGothic"><button
-                                                      class="infoButton_1Fb6y detail" onclick="window.open('<c:out value="${loan.get('DETAIL_URL')}" />');">
+                                                      class="infoButton_2Fb6y detail" onclick="window.open('<c:out value="${loan.get('DETAIL_URL')}" />');">
                                                       <%-- onclick="location.href='<c:out value="${loan.get('DETAIL_URL')}" />'"> --%>
                                                       상세 페이지로 이동</button></td>
                                              </tr>
@@ -616,10 +636,7 @@ canvas {
                                        class="form-control form-control-sm">
                                           <option>상품선택</option>
                                           <c:forEach items="${loanlist}" var="loan">
-                                            <c:if test="${lonalist != null}">
                                              <option value="${loan.get('LOAN_ID')}">${loan.get('LOAN_NAME')}</option>
-                                            </c:if>
-                                            
                                           </c:forEach>
                                     </select></li>
                                     <br>
@@ -654,6 +671,7 @@ canvas {
                            &nbsp;&nbsp;
                            <button style="font-family: a드림고딕4;" type="button" data-dismiss="modal" aria-label="Close">취소</button>
                         </div>
+                           <div id="snackbar"></div>
                      </form>
                   </div>
                </div>
@@ -661,7 +679,7 @@ canvas {
          </div>
       </div>
    </div>
-   <div id="snackbar"></div>
+
 
 
    <!-- footer include 시작 -->
@@ -1014,7 +1032,6 @@ checkRepay();
                    table += "<input type='radio' name='repay' value='3'><label for='3' class='ajaxTL'>원금균등상환</label><br>";
                 };
                 table += "</td></tr>";
-                table += "<tr><td><label class='ajaxTL'>연 소득 </label></td><td><input style='width: 50%; display: inline;' type='text' class='form-control w-half' id='salary' name='salary' >&nbsp;&nbsp;<label class='ajaxTL'>만원</label>";
                 table += "</table>";
                $("#calculator").html(table);
                $("#calculator").append("<button type='button' style='width: 100%; font-family:a드림고딕4; background-color: #27b2a5; border-color: #27b2a5;' class='btn btn-primary' id='checkRepayment'>상환계획 조회 </button>");

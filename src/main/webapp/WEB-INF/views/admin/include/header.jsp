@@ -7,7 +7,8 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini" style="background-color: #222d32;"><img src="${pageContext.request.contextPath}/resources/images/KEBLogo.png" style="width: 50px;" /><!-- <b>KEB</b>하나 --></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><img src="${pageContext.request.contextPath}/resources/images/KEBLogo.png" style="width: 50px;" /><b>&nbsp;KEB</b>하나은행</span>
+      <span class="logo-lg"><img
+            src="${pageContext.request.contextPath}/resources/images/icons/logo.png" style="height:50px;" alt="IMG-LOGO" data-logofixed="${pageContext.request.contextPath}/resources/images/icons/logo.png"></span>
     </a>
 
     <!-- Header Navbar -->

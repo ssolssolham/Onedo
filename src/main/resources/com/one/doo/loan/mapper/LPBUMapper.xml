@@ -87,9 +87,10 @@
 						<include refid="criteria"></include>
 					<![CDATA[
 					rownum <= #{pageNum} * #{amount} AND ISANSWERED = '0'
-					)
+							ORDER BY requesttime DESC)
 				WHERE rn > (#{pageNum} -1) * #{amount}
 					]]>
+
 	</select>
 	
 	<select id="readLPBU" resultType="Map" parameterType="Map">					
