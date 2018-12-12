@@ -330,7 +330,7 @@ canvas {
                                              <tr>
                                                 <td class="fs-16 dreamGothic">7. 상품상세</td>
                                                 <td class="fs-16 dreamGothic"><button
-                                                      class="infoButton_1Fb6y" onclick="window.open('<c:out value="${loan.get('DETAIL_URL')}" />');">
+                                                      class="infoButton_1Fb6y detail" onclick="window.open('<c:out value="${loan.get('DETAIL_URL')}" />');">
                                                       <%-- onclick="location.href='<c:out value="${loan.get('DETAIL_URL')}" />'"> --%>
                                                       상세 페이지로 이동</button></td>
                                              </tr>
@@ -378,8 +378,9 @@ canvas {
                                  죄송합니다. 현재 입력해주신 정보로 조회되는 상품이 없습니다. <span
                                     style="font-weight: bold; color: #27b2a5;">바로 상담원 연결</span>
                               </h3>
-                              <button type="button" class="float-r" id="loanModalBtn"
-                                 data-toggle="modal" data-target="#loanModal1">상담 예약</button>
+                                  <button type="button" class="float-r reserve" style="font-family: a드림고딕4;"
+                                          id="loanModalBtn" data-toggle="modal"
+                                          data-target="#loanModal1">대출상담 예약</button>
                            </div>
                         </c:otherwise>
                      </c:choose>
@@ -615,7 +616,10 @@ canvas {
                                        class="form-control form-control-sm">
                                           <option>상품선택</option>
                                           <c:forEach items="${loanlist}" var="loan">
+                                            <c:if test="${lonalist != null}">
                                              <option value="${loan.get('LOAN_ID')}">${loan.get('LOAN_NAME')}</option>
+                                            </c:if>
+                                            
                                           </c:forEach>
                                     </select></li>
                                     <br>
